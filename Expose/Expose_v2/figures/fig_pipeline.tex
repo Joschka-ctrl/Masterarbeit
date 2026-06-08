@@ -1,0 +1,48 @@
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+  node distance=0.45cm,
+  pbox/.style={
+    draw, rounded corners=3pt,
+    minimum width=2.15cm, minimum height=1.1cm,
+    align=center, inner sep=4pt,
+    font=\small\bfseries, fill=orange!12
+  },
+  exlbl/.style={font=\scriptsize, text=gray!70, align=center},
+  arr/.style={-{Stealth[length=5pt,width=4pt]}, thick, gray!55}
+]
+
+%% Pipeline boxes
+\node[pbox] (e1) {Entity\\Extraction};
+\node[pbox, right=of e1] (e2) {Seed-\\Lookup};
+\node[pbox, right=of e2] (e3) {Graph-\\Traversal};
+\node[pbox, right=of e3] (e4) {Ranking\\\& Filter};
+\node[pbox, right=of e4] (e5) {Seriali-\\sierung};
+
+%% Arrows between boxes
+\draw[arr] (e1) -- (e2);
+\draw[arr] (e2) -- (e3);
+\draw[arr] (e3) -- (e4);
+\draw[arr] (e4) -- (e5);
+
+%% Input / output labels above
+\node[exlbl, above=5pt of e1] {\textit{Aufgabe}};
+\node[exlbl, above=5pt of e5] {\textit{Kontext-Block}};
+
+%% Example row below
+\node[exlbl, below=8pt of e1] {\glqq{}fix cart\\checkout\grqq{}};
+\node[exlbl, below=8pt of e2] {\{checkout,\\cart, Cart\}};
+\node[exlbl, below=8pt of e3] {32 Knoten,\\2 Hops};
+\node[exlbl, below=8pt of e4] {Top 15,\\sortiert};
+\node[exlbl, below=8pt of e5] {Markdown\\+~Pfad-Audit};
+
+%% Dotted separator line
+\draw[dotted, gray!50]
+  ([xshift=-0.3cm, yshift=-0.35cm]e1.south west) --
+  ([xshift= 0.3cm, yshift=-0.35cm]e5.south east);
+
+\end{tikzpicture}
+\caption{Fünfstufige Context-Assembly-Pipeline (\texttt{get\_context}). Die untere Zeile
+zeigt ein Beispiel für die Aufgabe \emph{,,fix cart checkout``}.}
+\label{fig:pipeline}
+\end{figure}

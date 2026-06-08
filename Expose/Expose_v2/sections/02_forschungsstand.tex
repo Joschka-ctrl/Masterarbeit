@@ -1,0 +1,180 @@
+\section{Stand der Forschung}
+
+\subsection*{Agentische Ansätze für Software Engineering}
+
+SWE-bench ist ein Datensatz aus 2\,294 realen GitHub-Issues mit zugehörigen
+Codebase-Snapshots, Pull Requests und Test-Suites aus 12 Python-Repositories
+\parencite{jimenez2024swebench}.
+Der Agent erhält ein Issue und muss einen Patch generieren,
+der die zugehörigen fail-to-pass-Tests besteht.
+Die Aufgaben erfordern Änderungen in mehreren Dateien, komplexes Reasoning
+und Interaktion mit Ausführungsumgebungen.
+Klassische Sprachmodelle ohne Werkzeuge schaffen das nicht.
+
+\textcite{yang2024sweagent} zeigen mit SWE-agent, dass ein spezialisiertes
+Agent-Computer Interface (ACI, eine strukturierte Schnittstelle zwischen
+Modell und Dateisystem) die Lösungsrate auf SWE-bench
+von 3,8\,\% (bisherige RAG-Baseline) auf 12,5\,\% anhebt.
+SWE-agent steht für den reaktiven Ansatz.
+Der Agent entscheidet autonom, welche Dateien er liest,
+welche Suchen er ausführt und welche Schritte er unternimmt.
+
+Einen gegensätzlichen Ansatz verfolgt \textcite{xia2024agentless} mit Agentless.
+Statt autonomer Exploration verwendet ein dreiphasiger, extern verwalteter Prozess
+(Lokalisierung, Patchgenerierung, Testvalidierung) strukturierte Kontextzusammenstellung.
+Auf SWE-bench Lite (einer 300-Aufgaben-Teilmenge des vollen SWE-bench)
+erreicht Agentless 32\,\% bei nur 0,70\,USD pro Fix.
+Das zeigt, dass prozedurale Kontextvorbereitung autonome Agentenexploration schlagen kann.
+
+
+\subsection*{Wissensgraph-basierte Ansätze}
+
+\textcite{ouyang2024repograph} stellen 2025 RepoGraph vor,
+ein Plug-in-Modul zu bestehenden Software-Engineering-Agenten.
+Es analysiert den Quellcode via AST (Abstract Syntax Tree,
+ein automatisch erstellter Syntaxbaum)
+und baut daraus einen Repository-Graphen aus Referenz- und Definitionsknoten
+mit Aufruf- und Enthaltensrelationen.
+Als Plug-in steigert RepoGraph die Lösungsrate von vier Baselines
+(RAG, Agentless, AutoCodeRover, SWE-agent) auf SWE-bench Lite
+um durchschnittlich 32,8\,\% relativ gegenüber der jeweiligen Baseline,
+ohne die Kernsysteme zu verändern.
+
+\textcite{yang2025kgcompass} entwickeln den graphbasierten Ansatz mit KGCompass weiter. Der Wissensgraph verknüpft nicht nur Code-Struktur,
+sondern auch Issues und Pull Requests als Knoten im selben Graphen.
+Dadurch lässt sich von einer natürlichsprachigen Bug-Beschreibung
+direkt über Mehr-Hop-Pfade zu den relevanten Codestellen traversieren.
+KGCompass erreicht 58,3\,\% auf SWE-bench Lite
+und eine Fehlerlokalisierungsgenauigkeit von 56,0\,\%.
+89,7\,\% der korrekt reparierten Patches erfordern dabei
+Mehr-Hop-Verbindungen im Graphen.
+Diese Codestellen sind im ursprünglichen Issue nicht direkt erwähnt,
+sondern nur über mehrere Abhängigkeitsstufen erreichbar.
+
+\subsection*{Proaktive versus reaktive Kontextbereitstellung}
+
+Die Spannung zwischen proaktiver Vorbereitung und reaktiver Exploration
+ist ein eigenständiges Forschungsthema.
+\textcite{suri2026codescout} zeigen mit CodeScout,
+dass proaktive Kontextanreicherung vor der Agentausführung
+der reaktiven Eigenexploration überlegen ist.
+Letztere neigt zu Über-Exploration und repetitiven Fix-Mustern,
+während CodeScout durch strukturierte Vorab-Exploration präziseren Kontext liefert.
+
+Ergänzend dokumentieren \textcite{li2026contextbench} mit ContextBench
+auf 1\,136 Issue-Aufgaben aus 66 Repositories in acht Programmiersprachen:
+Aktuelle Coding Agents priorisieren systematisch Recall über Präzision
+(es wird mehr abgerufen als nötig),
+und es bestehen erhebliche Lücken zwischen dem explorierten
+und dem tatsächlich genutzten Kontext.
+Komplexere Agent-Architekturen verbessern die Kontextabrufqualität dabei nur marginal.
+
+Das von \textcite{liu2023lostmiddle} dokumentierte Lost-in-the-Middle-Phänomen
+gibt diesem Befund eine modellseitige Erklärung.
+Selbst als Long-Context-tauglich beworbene Modelle nutzen Informationen
+in der Mitte langer Eingaben deutlich schlechter als an Anfang und Ende.
+Proaktive, strukturell geordnete Kontextzusammenstellung ist daher
+nicht nur eine Effizienzfrage, sondern eine Voraussetzung für zuverlässige Modellnutzung.
+
+\subsection*{Statische Kontext-Dateien als Agenten-Baseline}
+
+Eine weitere Herangehensweise untersucht den Wert manuell gepflegter Kontext-Dateien
+(\texttt{CLAUDE.md}, \texttt{AGENTS.md}, \texttt{copilot-instructions.md})
+für Coding Agents.
+\textcite{gloaguen2026agentsmd} zeigen in einer systematischen Studie auf SWE-bench
+(AGENTbench, 138 Aufgaben aus 12 Repositories),
+dass vom Entwickler verfasste \texttt{AGENTS.md}-Dateien
+die Lösungsrate um durchschnittlich 4\,\% verbessern.
+LLM-generierte Dateien dagegen senken sie um 3\,\%.
+Beide Varianten erhöhen die Inferenzkosten um mehr als 20\,\%.
+\textcite{lulla2026agentsmd} ergänzen auf Basis von 124 Pull Requests aus 10 Repositories,
+dass \texttt{AGENTS.md}-Dateien die mediane Bearbeitungszeit um 28,6\,\%
+und den Output-Token-Verbrauch um 16,6\,\% reduzieren. 
+Das bedeutet, dass Agenten mit besserem Kontext weniger Schritte benötigen, um eine Aufgabe zu lösen.
+
+Diese Befunde belegen: Statische Entwickler-Dokumentation hat einen messbaren,
+aber begrenzten Effekt auf Lösungsrate und Effizienz.
+Die dargestellten Studien zu Kontext-Dateien vergleichen diese
+ausschließlich mit einer Baseline ohne Kontext-Dateien.
+Ein direkter Vergleich zwischen statischen Kontext-Dateien
+und graphbasierter Kontextzusammenstellung findet sich
+in der hier zitierten Literatur nicht.
+
+\subsection*{Transparenz von Coding Agents}
+
+Eine weitere offene Frage betrifft die Inspizierbarkeit agentischer Prozesse.
+\textcite{agentstepper2026} stellen AgentStepper vor,
+einen interaktiven Debugger für Coding Agents (SWE-agent, ExecutionAgent, RepairAgent),
+der Entwicklern ermöglicht, Ausführungs-Trajektorien
+(die Abfolge aller Schritte, die ein Agent bei einer Aufgabe durchführt)
+schrittweise zu durchsuchen, Prompt-Verläufe einzusehen
+und Agenten-Entscheidungen nachzuverfolgen.
+In einer kontrollierten Studie mit 12 Teilnehmenden
+stieg die Bug-Erkennungsrate von 17\,\% auf 60\,\%.
+Diese Arbeit belegt, dass Einblick in die Ausführungsschritte
+die Fähigkeit von Entwicklern zur Fehlerkorrektur messbar verbessert.
+
+AgentStepper zeigt, welche Tool-Calls der Agent ausgeführt hat
+und welche Ergebnisse sie lieferten.
+Das im Rahmen dieser Arbeit zu entwickelnde System würde damit
+auch über AgentStepper inspizierbar sein,
+da seine Ergebnisse explizite Begründungen der Kontextauswahl enthalten.
+Warum wurde genau diese Codestelle inkludiert?
+Über welche Graph-Kante wurde sie erreicht?
+Warum wurde eine andere Stelle ausgeschlossen?
+KGCompass bettet Entscheidungspfade als Prompt-Kontext ein,
+um die Patch-Generierung des LLM zu verbessern \parencite{yang2025kgcompass}.
+Die Pfade dienen der Modellqualität, nicht der Entwicklerkontrolle.
+Ob ein Entwickler die Kontextauswahl vor der Agentausführung bewerten
+und korrigieren kann, wird nicht untersucht.
+
+
+\subsection*{Integrationsinfrastruktur: MCP}
+
+Im November 2024 hat Anthropic das Model Context Protocol (MCP)
+als offenen Standard veröffentlicht \parencite{anthropic2024mcp}.
+MCP definiert ein JSON-RPC-basiertes Protokoll zwischen einem Client (z.\,B. Claude Code)
+und einem Server, der Kontext bereitstellt.
+Ein Server kann drei Typen von Primitiven anbieten:
+ausführbare Funktionen (Tools),
+Datenquellen wie Dateiinhalte oder Datenbankrecords (Resources)
+und wiederverwendbare Prompt-Templates auf dem Server (Prompts).
+Für diese Arbeit ist MCP die natürliche Integrationsschicht:
+Der Living-Knowledge-Graph-Server stellt seinen \texttt{get\_context}-Aufruf
+als MCP-Tool bereit und ist damit ohne Änderung am Agent
+in Claude Code, Cursor und kompatible Clients einbindbar.
+
+\subsection*{Was diese Arbeit untersucht}
+
+Die dargestellten Arbeiten belegen:
+Graphbasierte Kontextzusammenstellung verbessert die Agent-Performance messbar.
+Proaktive Kontextbereitstellung schlägt reaktive Exploration in Präzision und Effizienz.
+Statische Entwickler-Dokumentation hat einen messbaren, aber begrenzten Effekt.
+Diese Befunde basieren ausnahmslos auf Benchmark-Evaluationen auf SWE-bench.
+SWE-bench-Aufgaben basieren auf eingefrorenen Codebase-Snapshots mit vorgefertigten Testsuiten.
+Der Mehrwert eines kontinuierlich synchronisierten Wissensgraphen lässt sich dort nicht messen.
+Laufende Hochschulprojekte werden aktiv weiterentwickelt, haben keine vollständige Testabdeckung
+und involvieren menschliche Entwickler mit unterschiedlichem Erfahrungsstand.
+Ob ein Living Knowledge Graph auch unter diesen Bedingungen einen messbaren Mehrwert liefert,
+ist bislang nicht untersucht.
+
+Daraus ergeben sich drei Fragen:
+
+Wie lässt sich ein Wissensgraph dauerhaft mit einer aktiv weiterentwickelten
+Codebase synchron halten?
+Bestehende Systeme analysieren das Repository zum Aufgabenzeitpunkt;
+eine inkrementelle, commit-getriebene Aktualisierung fehlt.
+
+Verbessert ein Living Knowledge Graph die Arbeitseffizienz von Studierenden
+an realen Softwareprojekten messbar,
+verglichen mit reaktiver Exploration und statischer Dokumentation?
+
+Ermöglicht die explizite Graph-Pfad-Begründung im MCP-Response Entwicklern,
+Kontextentscheidungen des Agenten vor der Ausführung zu bewerten
+und bei Bedarf zu korrigieren?
+
+Die vorliegende Arbeit beantwortet diese Fragen mit einem Living Knowledge Graph,
+der inkrementell mit der Codebase synchronisiert wird
+und als MCP-Server in Claude Code, Cursor und kompatible Umgebungen einbindbar ist.
+Jeder gelieferte Kontext enthält einen expliziten Entscheidungspfad,
+sodass Entwickler die Kontextauswahl nachvollziehen und bei Bedarf eingreifen können.

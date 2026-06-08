@@ -1,0 +1,36 @@
+\section{Zeitplan}
+
+Die Bearbeitung ist auf 24 Wochen angelegt. Die ersten sechs Wochen sind Grundlagen und Systemkern gewidmet, sodass ab Woche 7 ein laufendes System existiert, das iterativ auf den Hochschulprojekten verfeinert wird.
+
+\begin{tabularx}{\linewidth}{@{}lXl@{}}
+  \toprule
+  \textbf{Wochen} & \textbf{Phase / Aktivität} & \textbf{Meilenstein} \\
+  \midrule
+  W01--W02 & Literaturvertiefung; Absprache Hochschulprojekte; DSR-Design finalisieren & M1: Design final \\
+  W03--W04 & tree-sitter Parser für Python + TypeScript/JavaScript; Neo4j-Schema & M2: Parser läuft\textsuperscript{*} \\
+  W05--W06 & Graph-Builder (Ingestion Layer); Erstbefüllung eines Hochschulprojekts & M3: Graph befüllt\textsuperscript{*} \\
+  W07--W08 & Git post-commit Hook; inkrementelle Synchronisation (Living Layer) & M4: Living Graph aktiv \\
+  W09--W10 & Context Assembly: Traversal-Strategien, Ranking, Serialisierung & M5: Assembly läuft\textsuperscript{*} \\
+  W11--W12 & MCP-Server; Integration in Claude Code; erster End-to-End-Test & M6: MCP integriert\textsuperscript{*} \\
+  W13--W15 & Transparenz-Features: Entscheidungspfade, Subgraph-Visualisierung & M7: Transparenz fertig \\
+  W16--W18 & Evaluation auf allen Hochschulprojekten; Datenerhebung B1 vs.\ B2 vs.\ B3 & M8: Daten erhoben \\
+  W19--W21 & Datenanalyse (quantitativ + qualitativ); Iteration am System & M9: Ergebnisse konsolidiert \\
+  W22--W24 & Verschriftlichung; Review; Korrekturen; Abgabe & M10: Abgabe \\
+  \bottomrule
+\end{tabularx}
+
+\noindent\textsuperscript{*} Im Rahmen der Einarbeitungsphase für TypeScript/WebshopTemplate bereits abgeschlossen (siehe Abschnitt~4).
+
+\subsection*{Risikobetrachtung}
+
+\begin{description}
+  \item[R1: Parser-Abdeckungslücken] tree-sitter-Grammatiken decken nicht alle Python- und TypeScript-Konstrukte vollständig ab. \emph{Gegenmaßnahme:} Frühzeitiger Test auf den Ziel-Projekten in W03--W04; Fallback auf vereinfachtes Kanten-Set.
+
+  \item[R2: Zugang zu Hochschulprojekten] Nicht alle Projekte sind sofort zugänglich. \emph{Gegenmaßnahme:} Frühzeitige Abstimmung in W01; paralleles Arbeiten mit dem eigenen WebshopTemplate als Ersatz-Lab.
+
+  \item[R3: Neo4j-Performance bei großen Graphen] Bei Projekten mit mehr als 50\,000 Knoten können Traversal-Anfragen langsam werden. \emph{Gegenmaßnahme:} Indexierung kritischer Felder ab W06; Subgraph-Caching für häufige Queries.
+
+  \item[R4: Modell-Updates] Anbieterseitige Änderungen an Claude Code oder der API können Evaluationsergebnisse beeinflussen. \emph{Gegenmaßnahme:} Modellversion und API-Version für die gesamte Erhebungsphase fixieren und dokumentieren.
+
+  \item[R5: Token- und API-Kosten] Wiederholte agentische Läufe für B1--B3 können das Budget überschreiten. \emph{Gegenmaßnahme:} Vorabkalkulation pro Bedingung; Priorisierung der aussagekräftigsten Aufgaben-Typ-Kombinationen.
+\end{description}

@@ -1,0 +1,21 @@
+\section{Forschungsfragen und Hypothesen}
+
+\subsection*{Forschungsfragen}
+
+\begin{description}
+  \item[HF1] Verbessert proaktiv graph-assemblierter Kontext die Effizienz von Coding Agents (gemessen an Token-Verbrauch, Iterationsanzahl und Erstkorrektheit, d.\,h. Rechenkosten, Agentenschritten und Erstlösungsqualität) gegenüber reaktiver Agent-Eigenexploration (B1) und gegenüber statischer Entwickler-Dokumentation (B2)?
+
+  \item[HF2] Welche Graph-Traversal-Strategien (strukturell-deklarativ, historisch, testbasiert) liefern für welche Aufgabentypen (isolierte Bugfixes, Multi-File-Refactorings, neue Feature-Implementierungen) den präzisesten Kontext?
+
+  \item[HF3] Erhöht die transparente Visualisierung der Kontextauswahl die Fähigkeit von Entwicklern, Fehler im Agent-Output zu erkennen und gezielt zu korrigieren?
+\end{description}
+
+\subsection*{Hypothesen}
+
+\begin{description}
+  \item[H1] Graph-basiert proaktiv assemblierter Kontext reduziert Token-Verbrauch und Iterationsanzahl gegenüber reaktiver Exploration und gegenüber statischer Entwickler-Dokumentation. Diese Hypothese stützt sich auf drei komplementäre Befunde: \textcite{li2026contextbench} dokumentieren, dass reaktive Agents erheblich mehr Kontext abrufen als sie nutzen und vorher besuchte Dateien wiederholt aufsuchen. \textcite{xia2024agentless} zeigen, dass prozedurale Kontextvorbereitung reaktive Agentenexploration auf SWE-bench Lite mit 32\,\% und nur 0,70\,USD pro Fix übertrifft. \textcite{gloaguen2026agentsmd} zeigen, dass statische Kontext-Dateien zwar die Lösungsrate um 4\,\% verbessern, die Inferenzkosten aber um mehr als 20\,\% erhöhen, was nahelegt, dass aufgabenspezifisch gefilterte Kontextzusammenstellung effizienter sein kann. Ein strukturell aufgebauter Graph, der nur den direkt abhängigen Teilgraphen ausliefert, sollte dieses Effizienzpotenzial ausschöpfen.
+
+  \item[H2] Multi-Hop-Graphtraversierung über Aufruf- und Abhängigkeitskanten liefert für Multi-File-Aufgaben präziseren Kontext als flaches Dateisuchen. Diese Hypothese basiert auf dem zentralen KGCompass-Befund: 89,7\,\% der korrekt reparierten Patches erfordern Mehr-Hop-Verbindungen im Graphen und betreffen Codestellen, die reine LLMs ohne Graphtraversierung systematisch übersehen \parencite{yang2025kgcompass}. Der relative Leistungsgewinn von RepoGraph über bestehende Systeme (+32,8\,\%) bestätigt den Mehrwert struktureller Repräsentation \parencite{ouyang2024repograph}.
+
+  \item[H3] Entwickler, denen die \emph{Retrieval-Transparenz} (also welche Graph-Knoten warum in den Kontext aufgenommen wurden) als inspizierbarer Entscheidungspfad präsentiert wird, erkennen mehr Agent-Fehler und benötigen weniger Korrekturiterationen als Entwickler ohne diese Information. Die Hypothese ist explorativ. Verwandte Arbeiten zeigen, dass Transparenz über Ausführungs-Trajektorien die Fehlererkennungsrate messbar verbessert \parencite{agentstepper2026}; die vorgelagerte Frage der Retrieval-Transparenz ist bislang empirisch unerforscht. Ergänzend zeigt \textcite{liu2023lostmiddle}, dass fehlerhafte Kontextpositionierung zu Modellfehlern führt, was nahelegt, dass sichtbarer Kontext Entwicklern gezielteren Eingriff ermöglicht.
+\end{description}

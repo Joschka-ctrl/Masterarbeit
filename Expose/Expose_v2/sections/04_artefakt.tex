@@ -1,0 +1,89 @@
+\section{Das Artefakt: Living Knowledge Graph}
+
+Das zentrale Artefakt dieser Arbeit ist ein System, das eine Codebase als strukturierten Wissensgraphen repräsentiert und diesen als proaktive Kontextinfrastruktur für Coding Agents bereitstellt. \emph{Living} bezeichnet dabei die Eigenschaft, dass der Graph nach jedem Commit automatisch aktualisiert wird und damit dauerhaft den aktuellen Codestand abbildet (siehe Schicht~2). Das System gliedert sich in drei Schichten; Abbildung~\ref{fig:architecture} gibt einen Überblick.
+
+\input{figures/fig_architecture}
+
+\subsection*{Schicht 1: Ingestion und Graph-Aufbau}
+
+Ein auf \emph{tree-sitter} basierender Parser verarbeitet Python-, JavaScript- und TypeScript-Quellcode und extrahiert daraus einen strukturierten Graphen in Neo4j:
+
+\begin{tabularx}{\linewidth}{@{}lX@{}}
+  \toprule
+  \textbf{Knotentyp} & \textbf{Bedeutung} \\
+  \midrule
+  \texttt{File}      & Quellcode-Datei mit Pfad und Sprache \\
+  \texttt{Function}  & Funktion oder Methode mit Signatur und Zeilenbereich \\
+  \texttt{Class}     & Klasse oder Interface \\
+  \texttt{TestCase}  & Testfunktion mit Referenz zum getesteten Symbol \\
+  \texttt{Schema}    & Daten- oder API-Schema (z.\,B. Sanity- oder Pydantic-Schema) \\
+  \bottomrule
+\end{tabularx}
+
+\vspace{0.5em}
+
+\begin{tabularx}{\linewidth}{@{}lX@{}}
+  \toprule
+  \textbf{Kantentyp} & \textbf{Bedeutung} \\
+  \midrule
+  \texttt{IMPORTS}   & Datei importiert ein Symbol aus einer anderen Datei \\
+  \texttt{CALLS}     & Funktion ruft eine andere Funktion auf \\
+  \texttt{EXTENDS}    & Klasse erbt von einer anderen Klasse \\
+  \texttt{DEFINED\_IN} & Funktion oder Klasse ist in einer bestimmten Datei definiert \\
+  \texttt{TESTS}     & Testfunktion testet ein bestimmtes Symbol \\
+  \texttt{DOCUMENTS} & Docstring oder Kommentar dokumentiert ein Symbol \\
+  \bottomrule
+\end{tabularx}
+
+\vspace{0.5em}
+
+Ergänzend werden Git-History-Metriken als Knotenattribute gespeichert: Änderungshäufigkeit und letzte Commit-Nachricht. Diese ermöglichen risikogewichtetes Ranking: Häufig modifizierte Dateien werden bei gleicher Hop-Distanz bevorzugt.
+
+\subsection*{Schicht 2: Living Graph mit inkrementeller Git-Synchronisation}
+
+Ein Git post-commit Hook analysiert nach jedem Commit, welche Dateien sich verändert haben. Nur die betroffenen Knoten und ihre direkten Kanten werden neu geparst und aktualisiert; ein vollständiger Rebuild entfällt. Damit bleibt der Graph dauerhaft synchron mit dem Codestand, ohne dass manuelle Wartung nötig ist. Dies ist die \emph{Living}-Eigenschaft des Systems: Der Wissensgraph ist kein statisches Dokument, sondern ein kontinuierlich aktualisiertes Abbild der Codebase.
+
+\subsection*{Schicht 3: Proaktive Context Assembly}
+
+Für eine eingehende Aufgabenbeschreibung läuft folgende Pipeline:
+
+\begin{enumerate}
+  \item \textbf{Entity Extraction:} Aus dem Aufgabentext werden genannte Funktionsnamen, Dateinamen und Schlüsselbegriffe extrahiert (via kleinem LLM-Call oder Regex-Matching).
+  \item \textbf{Seed-Node-Identifikation:} Die extrahierten Entitäten werden im Graphen als Startknoten lokalisiert.
+  \item \textbf{Graph-Traversal:} Von den Startknoten aus wird der Graph in konfigurierbarer Hop-Tiefe traversiert. Unterschiedliche Traversal-Strategien sind wählbar: Strukturell (Aufruf- und Importkanten), historisch (häufig co-modifizierte Knoten) und testbasiert (zugehörige Testknoten).
+  \item \textbf{Ranking und Filterung:} Knoten werden nach Relevanz geordnet (Hop-Distanz, Testabdeckung, Risikogewicht) und auf ein konfigurierbares Tokenbudget begrenzt.
+  \item \textbf{Serialisierung:} Der Teilgraph wird als strukturierter Kontext-Block (Markdown oder JSON) ausgegeben, inklusive expliziter Angaben, \emph{warum} jeder Knoten aufgenommen wurde.
+\end{enumerate}
+
+\input{figures/fig_pipeline}
+
+\subsection*{Transparenz als First-Class-Feature}
+
+Jeder ausgelieferte Kontext-Block enthält einen \emph{Entscheidungspfad}: Eine maschinenlesbare Begründung, über welche Kanten jeder Knoten erreicht wurde (\texttt{checkout() aufgenommen via CALLS-Kante von cart.ts, Zeile 42}). Entwickler können diesen Teilgraphen vor Agentausführung inspizieren und gezielt erweitern oder beschneiden. Nach Abschluss der Aufgabe dient der Entscheidungspfad als Audit-Trail.
+
+\subsection*{Integration via MCP}
+
+Das System wird als \emph{MCP-Server} implementiert und stellt drei Tools bereit:
+
+\begin{description}
+  \item[\texttt{get\_context(task)}] Assembliert und gibt den Kontext-Block für eine Aufgabenbeschreibung zurück.
+  \item[\texttt{inspect\_graph(node\_id)}] Gibt den direkten Nachbarschaft-Subgraphen eines Knotens zurück.
+  \item[\texttt{update\_graph()}] Triggert manuell eine Graph-Aktualisierung (außerhalb des automatischen Git-Hooks).
+\end{description}
+
+Claude Code, Cursor und andere MCP-kompatible Clients können diese Tools direkt aufrufen. Damit ist das System ohne Änderung am Agent selbst nutzbar.
+
+\subsection*{Stand der Vorarbeiten}
+
+\begin{tcolorbox}[colback=blue!4!white, colframe=blue!40!black, title=Proof-of-Concept bereits implementiert, fonttitle=\bfseries]
+Im Rahmen der Einarbeitungsphase wurde ein funktionsfähiger Proof-of-Concept für die TypeScript-Komponente entwickelt und auf dem eigenen WebshopTemplate-Projekt validiert:
+
+\begin{itemize}[noitemsep]
+  \item \textbf{Parser (M2):} tree-sitter-Parser für TypeScript/TSX extrahiert Datei-, Funktions- und Klassenknoten sowie IMPORTS-, CALLS-, EXTENDS- und DEFINED\_IN-Kanten.
+  \item \textbf{Graph (M3):} Neo4j-Instanz mit 59 Dateiknoten, 64 Funktionsknoten und 25 aufgelösten CALLS-Kanten; Git-History-Metriken (\texttt{commitCount}, \texttt{lastCommitMessage}) als Knotenattribute; Performance-Indexe.
+  \item \textbf{Context Assembly (M5):} Fünfstufige Pipeline (\texttt{get\_context}) mit Entity Extraction, Seed-Node-Identifikation, konfigurierbarer Graphtraversierung, Relevanz-Ranking und Markdown-Serialisierung inklusive Entscheidungspfad.
+  \item \textbf{MCP-Server (M6):} Drei Tools (\texttt{get\_context}, \texttt{inspect\_graph}, \texttt{update\_graph}) als MCP-Server implementiert und in Claude Code registriert.
+\end{itemize}
+
+Die Living-Eigenschaft (automatischer Git-Hook, M4) und die Python-Komponente sind in der eigentlichen Masterarbeit zu entwickeln.
+\end{tcolorbox}

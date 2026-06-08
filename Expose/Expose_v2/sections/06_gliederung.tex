@@ -1,0 +1,21 @@
+\section{Vorläufige Gliederung der Arbeit}
+
+\begin{description}
+  \item[1. Einleitung] Motivation, Problemstellung, Zielsetzung und Aufbau der Arbeit.
+
+  \item[2. Grundlagen] Große Sprachmodelle für Code; agentische Architekturen (ReAct, Werkzeugnutzung); Wissensgraphen und Graphdatenbanken; Kontext- und Prompt-Engineering; Model Context Protocol.
+
+  \item[3. Stand der Forschung] Agentische Ansätze für Software Engineering (SWE-agent, Agentless); graphbasierte Kontextrepräsentation (RepoGraph, KGCompass); proaktive vs.\ reaktive Kontextbereitstellung (CodeScout, ContextBench); statische Kontext-Dateien als Agenten-Baseline (AGENTS.md-Literatur); Ableitung der Forschungslücke.
+
+  \item[4. Systemarchitektur] Detaillierte Beschreibung der drei Schichten: Ingestion (tree-sitter, Parser-Design), Living Graph (Neo4j-Schema, Git-Synchronisation) und Context Assembly (Traversal-Strategien, Ranking, Serialisierung); MCP-Integration; Transparenzkonzept.
+
+  \item[5. Implementierung] Technische Umsetzung in Python und TypeScript; Deployment auf den Hochschulprojekten; Logging-Pipeline; Aufgabenkatalog.
+
+  \item[6. Ergebnisse] Quantitative Befunde (B1 vs.\ B2 vs.\ B3 nach Aufgabentyp und Metrik); qualitative Beobachtungen aus Agent-Logs; Transparenz-Feedback der Entwickler.
+
+  \item[7. Diskussion] Interpretation der Ergebnisse; Rückbezug auf Hypothesen; Traversal-Strategien im Vergleich; Grenzen des Ansatzes; praktische Implikationen für Kontext-Engineering.
+
+  \item[8. Fazit und Ausblick] Zusammenfassung der Beiträge; offene Forschungsfragen; mögliche Erweiterungen (weitere Sprachen, automatische Traversal-Parametrisierung, LLM-gestützte Graphanreicherung).
+
+  \item[Anhang] Aufgabenkatalog; Graph-Schemata; Prompt-Templates; auszugsweise Roh-Logs; ergänzende Tabellen.
+\end{description}

@@ -1,0 +1,40 @@
+\begin{figure}[htbp]
+\centering
+\renewcommand{\arraystretch}{2.2}
+\begin{tabular}{|>{\centering\arraybackslash}m{2.8cm}%
+                |>{\centering\arraybackslash}m{3.2cm}%
+                |>{\centering\arraybackslash}m{3.2cm}%
+                |>{\centering\arraybackslash}m{3.2cm}|}
+\hline
+\rowcolor{gray!22}
+\textbf{Bedingung}
+  & \textbf{T1: Bugfixes}
+  & \textbf{T2: Refactorings}
+  & \textbf{T3: Features} \\
+\hline
+\cellcolor{gray!12}{\small\textbf{B1\newline Reaktive\newline Exploration}}
+  & \cellcolor{red!5}{\small Baseline}
+  & \cellcolor{red!5}{\small Baseline}
+  & \cellcolor{red!5}{\small Baseline} \\
+\hline
+\cellcolor{gray!12}{\small\textbf{B2\newline Statisch\newline (CLAUDE.md)}}
+  & \cellcolor{yellow!18}{\small HF1}
+  & \cellcolor{yellow!18}{\small HF1}
+  & \cellcolor{yellow!18}{\small HF1} \\
+\hline
+\cellcolor{gray!12}{\small\textbf{B3\newline Living\newline Knowledge Graph}}
+  & \cellcolor{green!10}{\small HF1 $\cdot$ HF2}
+  & \cellcolor{green!10}{\small HF1 $\cdot$ HF2}
+  & \cellcolor{green!16}{\small HF1 $\cdot$ HF2 $\cdot$ \textbf{HF3}} \\
+\hline
+\end{tabular}
+
+\smallskip
+{\footnotesize\textit{Metriken je Zelle: Token-Verbrauch, Iterationsanzahl, Erstkorrektheit,
+Kontextpräzision. HF3 (Retrieval-Transparenz) wird über alle B3-Zellen erhoben; T3 ist der
+primäre Messkontext.}}
+
+\caption{Evaluationsdesign: drei Versuchsbedingungen (B1 bis B3) gekreuzt mit drei
+Aufgabentypen (T1 bis T3). Jede Zelle steht für einen Messdurchlauf.}
+\label{fig:evaluation}
+\end{figure}

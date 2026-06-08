@@ -1,0 +1,84 @@
+\section{Problemstellung und Motivation}
+
+Coding Agents sind in der professionellen Softwareentwicklung angekommen.
+Coding Agents wie SWE-agent übernehmen nicht länger nur Autovervollständigung,
+sondern planen Aufgaben, rufen Werkzeuge auf, lesen Dateien
+und koordinieren Änderungen über mehrere Module hinweg~\parencite{yang2024sweagent}.
+Kommerzielle Werkzeuge wie Claude Code, Cursor und GitHub Copilot Workspace
+setzen dieses Paradigma mittlerweile im Produktiveinsatz um.
+An der Literatur lässt sich ein messbarer Produktivitätsgewinn belegen:
+Entwicklerinnen und Entwickler schließen abgegrenzte Aufgaben mit AI-Unterstützung
+bis zu 55,8\,\% schneller ab als ohne \parencite{peng2023copilot}.
+Der SWE-bench-Benchmark zeigt, dass selbst State-of-the-Art-Modelle
+an realen Repository-Aufgaben nahezu vollständig scheitern:
+Das beste getestete Modell (Claude~2) löst lediglich 1,96\,\% der Issues~\parencite{jimenez2024swebench},
+weil die Aufgaben Multi-File-Koordination, lange Kontexte und komplexes Reasoning erfordern.
+
+Ein wesentliches Hindernis liegt dabei nicht allein im Modell,
+sondern in der Kontextbereitstellung:
+Was ein Coding Agent über eine Codebase weiß
+(welche Dateien er gelesen hat, welche Abhängigkeiten er kennt,
+welche Konventionen ihm vertraut sind)
+bestimmt entscheidend, ob er eine Aufgabe korrekt löst
+oder in produktionsfremden Mustern halluziniert~\parencite{li2026contextbench}.
+
+\subsection*{Das Reaktivitätsproblem moderner Coding Agents}
+
+Aktuelle Coding Agents explorieren Codebases reaktiv.
+Das bedeutet, dass der Agent eigenständig Dateien öffnet und nach relevanten Funktionen sucht,
+wenn er eine konkrete Aufgabe erhält.
+Diese Strategie ist teuer und fehleranfällig.
+\Textcite{li2026contextbench} dokumentieren, dass Coding Agents systematisch
+mehr Kontext abrufen als sie tatsächlich nutzen,
+und dabei vorher besuchte Dateien wiederholt aufsuchen
+(ein Muster redundanter Exploration).
+\Textcite{suri2026codescout} zeigen, dass Agents bei unklaren Aufgabenbeschreibungen
+in eine ziellose Überexploration geraten.
+Ein schlecht formulierter Bug-Report führt in ihren Experimenten
+zu 21 Suchschritten ohne Ergebnis.
+Mit einer strukturierten Aufgabenbeschreibung löst derselbe Agent
+das gleiche Problem in sechs Schritten.
+
+Es gibt bereits proaktive Ansätze, die Kontext vor der Agentausführung aufbereiten.
+\textcite{xia2024agentless} lokalisiert Fehlerstellen in einem vorgelagerten Dreiphasen-Prozess.
+\textcite{suri2026codescout} reichert die Aufgabenbeschreibung
+durch eine Vorab-Exploration des Repositories an.
+Beide Systeme analysieren die Codebase aufgabenbezogen
+und zum Zeitpunkt der jeweiligen Anfrage.
+Eine fortlaufende Synchronisation mit einer aktiv weiterentwickelten Codebase
+ist nicht vorgesehen.
+
+\subsection*{Das Transparenzproblem}
+
+Neben dem Reaktivitätsproblem stellt sich die Frage der Inspizierbarkeit.
+Wenn ein Coding Agent eine falsche Lösung produziert,
+kann der Entwickler nicht nachvollziehen,
+welcher Kontext zu welcher Entscheidung geführt hat.
+Kontext ist eine Black Box.
+Fehlt einer Funktion die Kenntnis ihrer Aufrufer?
+Hat der Agent das zugehörige Schema nicht gelesen?
+Ohne Antwort auf diese Fragen bleibt die Fehlersuche schwer nachvollziehbar.
+Erste Ansätze zur Agenten-Transparenz, etwa AgentStepper~\parencite{agentstepper2026},
+helfen Entwicklern, Ausführungstrajektorien nachzuvollziehen.
+Die Inspizierbarkeit der Kontextauswahl selbst
+findet dabei bislang kaum Beachtung.
+
+\subsection*{Zielsetzung}
+
+Ziel dieser Arbeit ist die Entwicklung und Evaluation eines Living Knowledge Graph
+als Kontextinfrastruktur für Coding Agents.
+Das System repräsentiert eine Codebase als strukturierten,
+automatisch synchronisierten Graphen aus Dateien, Funktionen, Abhängigkeiten
+und Testergebnissen.
+Erhält das System eine Aufgabe, sucht es anhand des Living Knowledge Graph selbstständig die passenden Code-Abschnitte heraus
+und gibt sie dem Agenten weiter.
+Es erklärt dabei, warum jede Stelle ausgewählt wurde.
+Das System lässt sich direkt in bestehende Werkzeuge wie Claude Code und Cursor einbinden.
+
+Die Evaluation erfolgt an laufenden Hochschulprojekten,
+um den Mehrwert im realen Entwicklungsalltag zu messen.
+Diese Arbeit soll zeigen, dass Coding Agents durch den Living Knowledge Graph
+weniger Zeit damit verbringen, sich in einer Codebase zu orientieren,
+und weniger unnötige Dateien in ihren Kontext aufnehmen.
+Außerdem sollen Entwickler besser nachvollziehen können,
+warum ein Agent eine bestimmte Lösung vorschlägt.

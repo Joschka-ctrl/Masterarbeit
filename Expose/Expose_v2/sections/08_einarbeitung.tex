@@ -1,0 +1,101 @@
+\section{Einarbeitungshinweise}
+
+Dieser Abschnitt dokumentiert die Einarbeitungsphase (W01--W02), deren praktische Ergebnisse als Proof-of-Concept in Abschnitt~4 beschrieben sind. Die Ressourcen sind nach Priorität geordnet.
+
+% -----------------------------------------------------------------------
+\subsection*{1. tree-sitter: Code-Parser}
+
+tree-sitter ist der technische Kern der Ingestion-Schicht. Priorität: \textbf{hoch}.
+
+\begin{description}
+  \item[Einstieg] Offizielle Dokumentation: \url{https://tree-sitter.github.io/tree-sitter/using-parsers}. Den Abschnitt \emph{„Using Parsers"} und \emph{„The Node API"} vollständig lesen.
+
+  \item[Python-Bindings] Paket \texttt{tree-sitter} + \texttt{tree-sitter-python} und \texttt{tree-sitter-typescript} installieren. Ein kleines Skript schreiben, das eine Python-Datei parst und alle Funktionsnamen + Signaturen ausgibt; das ist der Kern-Use-Case für diese Arbeit.
+
+  \item[Übung] Aus einem echten Python-Projekt (z.\,B. dem WebshopTemplate) alle \texttt{import}-Statements extrahieren und als Kantenliste ausgeben: \texttt{datei\_a.py IMPORTS symbol\_x FROM datei\_b.py}.
+
+  \item[Wichtig zu verstehen] Der Unterschied zwischen einem \emph{Syntax-Tree} (was tree-sitter liefert) und einem \emph{Scope-Tree} (was für Aufrufkanten nötig ist). Für einfache Aufrufkanten reicht tree-sitter; für präzises Cross-File-Calling ist zusätzliche Auflösung nötig.
+\end{description}
+
+% -----------------------------------------------------------------------
+\subsection*{2. Neo4j: Graphdatenbank}
+
+Neo4j ist die Persistenzschicht. Priorität: \textbf{hoch}.
+
+\begin{description}
+  \item[Kurs] Neo4j GraphAcademy (kostenlos): \url{https://graphacademy.neo4j.com}. Dort die Kurse \emph{„Neo4j Fundamentals"} und \emph{„Cypher Fundamentals"} absolvieren. Zusammen ca.\ 4 Stunden.
+
+  \item[Lokaler Start] Neo4j Desktop herunterladen oder AuraDB Free Tier (Cloud, kein Setup): \url{https://neo4j.com/cloud/platform/aura-graph-database/}. AuraDB empfiehlt sich für den Einstieg.
+
+  \item[Python-Driver] \texttt{neo4j} Python-Paket. Eine kleine Pipeline schreiben, die den tree-sitter-Output in Neo4j-Knoten und -Kanten überführt.
+
+  \item[Wichtige Cypher-Abfragen üben:]
+    \begin{itemize}
+      \item Alle Funktionen die eine bestimmte Funktion aufrufen (eingehende CALLS-Kanten)
+      \item n-Hop-Nachbarschaft eines Knotens (\texttt{MATCH path = (n)-[*1..3]->(m)})
+      \item Kürzester Pfad zwischen zwei Knoten
+    \end{itemize}
+\end{description}
+
+% -----------------------------------------------------------------------
+\subsection*{3. Pflichtlektüre: Kernpaper}
+
+Diese Paper sollten vor dem Beginn der Implementierung gelesen werden, in dieser Reihenfolge:
+
+\begin{enumerate}
+  \item \textbf{KGCompass} \parencite{yang2025kgcompass}: Direkt verwandter Ansatz; Graph-Schema und Multi-Hop-Traversal genau analysieren. Besonders: Abschnitte zu Graph-Konstruktion und Fault-Localization.
+
+  \item \textbf{RepoGraph} \parencite{ouyang2024repograph}: Zeigt, wie ein Code-Graph als Plug-in-Modul funktioniert; Ego-Graph-Konzept ist relevant für die Context-Assembly-Schicht.
+
+  \item \textbf{SWE-agent} \parencite{yang2024sweagent}: Zeigt wie reaktive Agent-Computer-Interfaces funktionieren; Grundlage für Bedingung B1 in der Evaluation.
+
+  \item \textbf{Agentless} \parencite{xia2024agentless}: Zeigt, dass prozedurale Kontextvorbereitung reaktive Exploration schlagen kann; wichtig für die Argumentation in HF1.
+
+  \item \textbf{ContextBench} \parencite{li2026contextbench}: Empirische Grundlage für das Over-Retrieval-Problem; Benchmark-Design studieren für eigene Evaluation.
+\end{enumerate}
+
+% -----------------------------------------------------------------------
+\subsection*{4. Model Context Protocol (MCP)}
+
+MCP ist die Integrationsschicht. Priorität: \textbf{mittel} (nach W10).
+
+\begin{description}
+  \item[Dokumentation] \url{https://modelcontextprotocol.io}: Abschnitte \emph{„Introduction"}, \emph{„Architecture"} und \emph{„Building Servers"} lesen.
+
+  \item[Python-SDK] \url{https://github.com/modelcontextprotocol/python-sdk}: Das offizielle Tutorial \emph{„Building a simple MCP server"} vollständig durcharbeiten. Ein MCP-Server der ein einziges Tool (\texttt{hello\_world}) bereitstellt, in unter einer Stunde gebaut.
+
+  \item[Integration in Claude Code] In Claude Code: \texttt{/mcp} Kommando zum Registrieren eigener Server. Der eigene MCP-Server kann damit direkt in der Entwicklungsumgebung getestet werden, ohne eine separate App.
+\end{description}
+
+% -----------------------------------------------------------------------
+\subsection*{5. Design Science Research}
+
+Für die methodische Einbettung der Arbeit. Priorität: \textbf{mittel}.
+
+\begin{description}
+  \item[Grundlagentext] \textcite{hevner2004dsr}: \emph{„Design Science in Information Systems Research"}, MIS Quarterly 28(1), 2004. Besonders die drei Design-Science-Zyklen (\emph{Relevance Cycle}, \emph{Design Cycle}, \emph{Rigor Cycle}) internalisieren; das ist das Gerüst für Kapitel 5 der Arbeit.
+
+  \item[Praxisorientierter Einstieg] Peffers, K. et al.\ (2007): \emph{„A Design Science Research Methodology for Information Systems Research"}, JMIS 24(3). Gibt eine konkrete sechsstufige Prozessstruktur, die sich direkt auf diese Arbeit mappen lässt.
+\end{description}
+
+% -----------------------------------------------------------------------
+\subsection*{6. Empfohlene GitHub-Repositories zum Erkunden}
+
+\begin{description}
+  \item[\texttt{tree-sitter/tree-sitter}] \url{https://github.com/tree-sitter/tree-sitter}: Hauptrepository; Grammar-Dateien für Python und TypeScript.
+  \item[\texttt{modelcontextprotocol/python-sdk}] \url{https://github.com/modelcontextprotocol/python-sdk}: MCP Python-SDK mit Beispielen.
+  \item[SWE-agent] \url{https://github.com/SWE-agent/SWE-agent}: Referenzimplementierung reaktiver Agent-Computer-Interfaces; für das Verständnis von B1.
+  \item[Agentless] \url{https://github.com/OpenAutoCoder/Agentless}: Referenzimplementierung prozeduraler Kontextzusammenstellung; für das Verständnis des proaktiven Ansatzes.
+\end{description}
+
+% -----------------------------------------------------------------------
+\subsection*{7. Abgeschlossene erste praktische Schritte}
+
+\begin{enumerate}
+  \item tree-sitter installieren und das WebshopTemplate parsen: Alle TypeScript-Funktionen und ihre Imports als JSON ausgeben.
+  \item Diesen Output in eine Neo4j-AuraDB-Instanz schreiben: Knoten für Dateien und Funktionen, Kanten für IMPORTS.
+  \item Eine Cypher-Abfrage schreiben: \emph{„Welche Funktionen werden von \texttt{CartContext.tsx} aufgerufen?"} Das ist der Proof-of-Concept für den Kern des Systems.
+  \item Einen minimalen MCP-Server bauen, der diese Cypher-Abfrage als Tool bereitstellt, und ihn in Claude Code registrieren.
+\end{enumerate}
+
+Diese vier Schritte wurden im Rahmen der Einarbeitungsphase abgeschlossen und belegen, dass die technischen Kernkomponenten zusammenspielen. Sie bilden die Grundlage des in Abschnitt~4 beschriebenen Proof-of-Concept.

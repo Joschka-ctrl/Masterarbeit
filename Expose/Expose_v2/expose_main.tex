@@ -1,0 +1,94 @@
+% expose_main.tex — Exposé Masterarbeit Joschka Peeters
+% Thema: Living Knowledge Graph für Coding Agents
+
+\documentclass[12pt,a4paper]{scrartcl}
+\usepackage[ngerman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[style=authoryear-comp,backend=biber,maxcitenames=2,maxbibnames=6]{biblatex}
+\usepackage{csquotes}
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{microtype}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{enumitem}
+\usepackage{parskip}
+\usepackage[most]{tcolorbox}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning}
+\usepackage{colortbl}
+
+\geometry{top=2.5cm, bottom=2.5cm, left=3cm, right=2.5cm}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=black,
+  citecolor=blue!70!black,
+  urlcolor=blue!70!black
+}
+
+\addbibresource{bibliography.bib}
+\onehalfspacing
+
+\begin{document}
+
+% ---------------------------------------------------------------------------
+% Titelseite
+% ---------------------------------------------------------------------------
+\begin{titlepage}
+  \centering
+
+  \large{HTWG Konstanz}
+
+  \vfill
+
+  {\LARGE\bfseries Ein lebender Wissensgraph für Coding Agents:\\[0.4em]
+  Kontexttransparenz und strukturelle Context Assembly\\[0.4em]
+  in der agentischen Softwareentwicklung\par}
+
+  \vspace{1.2cm}
+
+  {\large Exposé zur Masterarbeit}\\[0.4em]
+  {\normalsize Betreuer-Ausschreibung: \textit{„Mehr Effizienz mit Coding Agents? Kontexttransparenz und Kontext-Engineering"}}
+
+  \vspace{2cm}
+
+  {\large Joschka Peeters}\\[0.5em]
+  {\normalsize Matrikelnummer: 301750}\\[0.5em]
+  {\normalsize \today}
+
+  \vfill
+
+  \textit{Betreuer: Prof. Dr. Rainer Müller}
+
+\end{titlepage}
+
+% ---------------------------------------------------------------------------
+% Inhaltsverzeichnis
+% ---------------------------------------------------------------------------
+\tableofcontents
+\newpage
+
+% ---------------------------------------------------------------------------
+% Sektionen
+% ---------------------------------------------------------------------------
+\input{sections/01_problemstellung}
+\input{sections/02_forschungsstand}
+\input{sections/03_forschungsfragen}
+\input{sections/04_artefakt}
+\input{sections/05_methodik}
+\input{sections/06_gliederung}
+\input{sections/07_zeitplan}
+\newpage
+\input{sections/08_einarbeitung}
+
+% ---------------------------------------------------------------------------
+% Literaturverzeichnis
+% ---------------------------------------------------------------------------
+\newpage
+\printbibliography[heading=bibintoc, title={Literaturverzeichnis}]
+
+\end{document}

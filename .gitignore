@@ -1,0 +1,15 @@
+# LaTeX build artifacts
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.run.xml
+*.toc
+*.out
+*.synctex.gz
+
+# Keep PDFs that are outputs
+# (pdfLiteratur and expose_main.pdf are intentionally tracked)

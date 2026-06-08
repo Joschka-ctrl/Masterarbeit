@@ -1,0 +1,56 @@
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+  node distance=0.65cm,
+  mybox/.style={
+    draw, rounded corners=3pt,
+    minimum width=12cm, align=center,
+    inner sep=9pt, font=\small
+  },
+  arr/.style={-{Stealth[length=5pt,width=4pt]}, thick, gray!55},
+  lbl/.style={font=\scriptsize\itshape, text=gray!65}
+]
+
+\node[mybox, fill=blue!8] (codebase) {%
+  \textbf{Quellcode-Repositories}\quad
+  \texttt{.ts}\;/\;\texttt{.tsx}\;/\;\texttt{.py}\;/\;\texttt{.js}};
+
+\node[mybox, fill=orange!10, below=of codebase] (s1) {%
+  \textbf{Schicht 1: Ingestion (tree-sitter)}\\[3pt]
+  Knoten:\enspace\texttt{File},\enspace\texttt{Function},\enspace\texttt{Class}%
+  \qquad
+  Kanten:\enspace\texttt{IMPORTS},\enspace\texttt{CALLS},\enspace\texttt{EXTENDS},\enspace\texttt{DEFINED\_IN}};
+
+\node[mybox, fill=orange!14, below=of s1] (s2) {%
+  \textbf{Schicht 2: Living Graph (Neo4j)}\\[3pt]
+  Git post-commit Hook\enspace$\cdot$\enspace
+  inkrementelle Synchronisation\enspace$\cdot$\enspace
+  Git-History-Metriken};
+
+\node[mybox, fill=orange!19, below=of s2] (s3) {%
+  \textbf{Schicht 3: Context Assembly}\\[3pt]
+  Entity Extraction\;$\to$\;Seed-Lookup\;$\to$\;
+  Graph-Traversal\;$\to$\;Ranking\;$\to$\;Entscheidungspfad};
+
+\node[mybox, fill=teal!10, below=of s3] (mcp) {%
+  \textbf{MCP-Server}\quad
+  \texttt{get\_context(task)}\enspace
+  \texttt{inspect\_graph(node\_id)}\enspace
+  \texttt{update\_graph()}};
+
+\node[mybox, fill=green!8, below=of mcp] (agent) {%
+  \textbf{Coding Agent}\quad
+  Claude Code\;$\cdot$\;Cursor\;$\cdot$\;weitere MCP-kompatible Clients};
+
+\draw[arr] (codebase) -- node[lbl, right=5pt]{tree-sitter Parser} (s1);
+\draw[arr] (s1)       -- node[lbl, right=5pt]{Graph aufbauen} (s2);
+\draw[arr] (s2)       -- node[lbl, right=5pt]{Graphabfrage via Cypher} (s3);
+\draw[arr] (s3)       -- node[lbl, right=5pt]{MCP JSON-RPC} (mcp);
+\draw[arr] (mcp)      -- node[lbl, right=5pt]{Kontext-Block und Entscheidungspfad} (agent);
+
+\end{tikzpicture}
+\caption{Systemarchitektur des \emph{Living Knowledge Graph}. Der Coding Agent erhält
+über den MCP-Server proaktiv assemblierten, aufgabenspezifischen Kontext, ohne die
+Codebase reaktiv zu explorieren.}
+\label{fig:architecture}
+\end{figure}

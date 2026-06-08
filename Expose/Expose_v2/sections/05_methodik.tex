@@ -1,0 +1,46 @@
+\section{Methodisches Vorgehen}
+
+\subsection*{Forschungsrahmen: Design Science Research}
+
+Die Arbeit folgt dem \emph{Design Science Research} (DSR)-Paradigma nach \textcite{hevner2004dsr}. DSR ist für informatiknahe Masterarbeiten geeignet, die ein nützliches Artefakt entwickeln und dessen Wirksamkeit empirisch nachweisen. Der Zyklus umfasst drei Phasen: \emph{Relevance} (das Problem ist real und praxisrelevant), \emph{Design} (das Artefakt wird iterativ entwickelt und verfeinert) und \emph{Rigor} (die Evaluation ist methodisch fundiert). Für diese Arbeit bedeutet das: Das System wird nicht einmalig gebaut und dann evaluiert, sondern über mehrere Build-Evaluate-Zyklen iteriert.
+
+\subsection*{Evaluation: Drei Versuchsbedingungen}
+
+Die Evaluation vergleicht drei Bedingungen:
+
+\begin{description}
+  \item[B1: Reaktive Exploration] Der Coding Agent erhält nur die Aufgabenbeschreibung und exploriert die Codebase selbständig (Baseline, entspricht dem aktuellen Stand der Praxis).
+  \item[B2: Statischer Kontext] Der Agent erhält zusätzlich eine statisch gepflegte \texttt{CLAUDE.md} mit Architekturhinweisen und Konventionen. Diese Bedingung entspricht dem heutigen Best-Practice und ist empirisch fundiert: Entwickler-geschriebene Kontext-Dateien verbessern die Lösungsrate um durchschnittlich 4\,\%, reduzieren aber die Inferenzeffizienz \parencite{gloaguen2026agentsmd,lulla2026agentsmd}.
+  \item[B3: Living Knowledge Graph] Der Agent erhält den durch das System assemblierten, aufgabenspezifischen Kontext-Block inklusive Entscheidungspfad (das neue Artefakt).
+\end{description}
+
+\input{figures/fig_evaluation}
+
+\subsection*{Versuchsumgebungen}
+
+Die Evaluation wird auf zwei bis drei laufenden Hochschulprojekten des Betreuers durchgeführt, also aktiv weiterentwickelten Python- und TypeScript-Projekten mit gewachsener Codebasis. Diese Umgebungen bieten realistische, nicht konstruierte Aufgaben und ermöglichen die Beteiligung von Studierenden als Probanden. Während industrielle Studien wie \textcite{hula2024} Coding Agents auf realen Projekten evaluieren und dabei Durchsatz und Akzeptanzraten messen, steht bei dieser Arbeit die Fähigkeit der Entwicklenden im Vordergrund, die Kontextauswahl des Agenten zu verstehen und gezielt zu korrigieren, eine Dimension, die in bestehenden Feldevaluationen bislang kaum erfasst wird.
+
+Pro Projekt werden Aufgaben dreier Typen bearbeitet:
+\begin{description}
+  \item[T1: Isolierte Bugfixes] Lokal begrenzte Korrekturen.
+  \item[T2: Multi-File-Refactorings] Strukturelle Änderungen mit dateiübergreifenden Auswirkungen.
+  \item[T3: Feature-Entwicklungen] Neue Funktionalität mit Architektur- und Konventionsbedarf.
+\end{description}
+
+\subsection*{Metriken}
+
+\begin{tabularx}{\linewidth}{@{}lXl@{}}
+  \toprule
+  \textbf{Dimension} & \textbf{Operationalisierung} & \textbf{Erhebung} \\
+  \midrule
+  Effizienz       & Iterationsanzahl bis zur akzeptierten Lösung & Logging \\
+  Token-Verbrauch & Input- und Output-Tokens pro Aufgabe & API-Logs \\
+  Erstkorrektheit & Anteil Aufgaben, die im ersten Durchlauf alle Tests bestehen & Test-Suite \\
+  Kontextpräzision & Anteil relevanter zu insgesamt ausgelieferter Kontext-Tokens & Annotierung \\
+  Transparenz & Entwickler-Bewertung der Verständlichkeit des Entscheidungspfads & Kurzumfrage \\
+  \bottomrule
+\end{tabularx}
+
+\subsection*{Validität und Abgrenzung}
+
+Die interne Validität wird durch reproduzierbare Aufgaben, fixierte Modellversionen und mehrfache Wiederholungen je Bedingung gesichert. Die externe Validität ergibt sich aus der Nutzung realer, aktiv betreuter Hochschulprojekte statt konstruierter Benchmarks. Eine Einschränkung ist die Beschränkung auf die Sprachen Python, JavaScript und TypeScript sowie auf MCP-kompatible Coding Agents.
