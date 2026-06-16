@@ -1,0 +1,119 @@
+% mini_expose_v3_kurz.tex — Kurzfassung (max. 2 A4-Seiten)
+% Kernaussage: Was will ich machen und warum.
+
+\documentclass[11pt,a4paper]{scrartcl}
+\usepackage[ngerman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{csquotes}
+\usepackage{microtype}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage[top=1.8cm,bottom=1.8cm,left=2.2cm,right=2.2cm]{geometry}
+
+\hypersetup{colorlinks=true,linkcolor=black,urlcolor=blue!70!black}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.45em}
+\setlist[itemize]{leftmargin=1.3em,topsep=0.2em,itemsep=0.15em}
+\setlist[enumerate]{leftmargin=1.5em,topsep=0.2em,itemsep=0.15em}
+
+% kompaktere Überschriften
+\usepackage{titlesec}
+\titlespacing*{\section}{0pt}{0.7em}{0.25em}
+\titleformat{\section}{\normalfont\large\bfseries}{\thesection.}{0.5em}{}
+
+\newcommand{\code}[1]{\texttt{#1}}
+
+\begin{document}
+
+\begin{center}
+  {\Large\bfseries Mini-Exposé: Kontexttransparenz für Coding Agents}\\[0.3em]
+  {\small Inspizierbares, graphbasiertes Kontext-Engineering und seine Wirkung auf
+  Effizienz und Entwicklerkontrolle \\
+  Ausschreibung: \enquote{Mehr Effizienz mit Coding Agents? Kontexttransparenz und
+  Kontext-Engineering}}
+\end{center}
+
+\vspace{0.2em}
+\hrule
+\vspace{0.4em}
+
+% ---------------------------------------------------------------------------
+\section{Warum: das Problem}
+
+Bei Coding Agents (Claude Code, Cursor) entscheidet die \textbf{Kontextbereitstellung} über
+Erfolg oder Halluzination (Gloaguen et al.\ 2026). Zwei Probleme bleiben offen:
+
+\begin{itemize}
+  \item \textbf{Ineffizient.} Agents explorieren Codebases reaktiv und rufen systematisch mehr
+    Kontext ab als sie nutzen (ContextBench, 2026). Statische Kontext-Dateien (\code{CLAUDE.md})
+    helfen kaum: handgeschrieben nur {\raise.17ex\hbox{$\scriptstyle\sim$}}4\,\% bessere
+    Lösungsrate, generiert sogar schlechter, beide ${>}\,20\,\%$ teurer (Gloaguen et al.\ 2026).
+  \item \textbf{Intransparent.} Löst der Agent falsch, sieht der Entwickler nicht, \emph{welcher
+    Kontext} zu \emph{welcher Entscheidung} führte; Kontext ist eine Black Box. Werkzeuge
+    setzen erst \emph{während} der Ausführung an (AgentStepper). Ob man die Kontextauswahl
+    \textbf{vor} dem Start bewerten und korrigieren kann und ob das die Qualität verbessert,
+    ist bislang kaum systematisch untersucht, obwohl Entwickler diese präventive Kontrolle
+    nachweislich suchen (Dhanorkar et al.\ 2026).
+\end{itemize}
+
+% ---------------------------------------------------------------------------
+\section{Was wird Technisch umgesetzt:}
+
+Ein MCP-Server, der den Kontext für eine Aufgabe nicht nur automatisch assembliert,
+ sondern auch die Auswahl vor der Agentausführung inspizier- und korrigierbar macht. 
+ Eine Codebase wird als Wissensgraph (Neo4j, Tree-Sitter für Python/TypeScript, 
+ lokale Embeddings) repräsentiert. Es gibt drei Funktionen.
+
+\begin{enumerate}
+  \item \textbf{Context Assembly (hybrid).} Seed-Knoten über semantische Embedding-Ähnlichkeit
+    \emph{und} exakte Namens-/Pfad-Treffer; Expansion per Graph-Traversal (strukturell,
+    historisch über Git/Issues, testbasiert) zu einem aufgabenspezifischen Kontext-Block.
+  \item \textbf{Entscheidungspfad.} Pro Knoten eine nachvollziehbare Begründung: Score und
+    Query-Token-Überlappung für Seeds, konkrete Graph-Kante und Traversal-Kette für den Rest.
+  \item \textbf{Inspektions- und Korrektur-Interface.} Ein browserbasiertes Review-UI zeigt den
+    geplanten Teilgraphen samt Retrieval-Trace. Der Entwickler sieht \emph{warum} jeder Knoten
+    drin ist, kann Knoten entfernen/ergänzen, die Anfrage editieren und neu abfeuern: Kontext
+    als editierbarer Vorschlag statt Black Box.
+\end{enumerate}
+
+Der eigentliche Beitrag ist nicht der Graph (Stand der Technik), 
+sondern die Retrieval-Transparenz als Eingriffspunkt sowie deren empirische Messung im Feld. 
+Reines Embedding-Retrieval liefert lediglich eine Rangliste. 
+Die explizite Graphstruktur begründet die Auswahl und macht sie korrigierbar.
+
+% ---------------------------------------------------------------------------
+\section{Forschungsfragen}
+
+\begin{itemize}
+  \item \textbf{HF1 (Effizienz):} Verbessert graph-assemblierter Kontext die Effizienz
+    (Iterationen, Dauer, Erstkorrektheit) gegenüber reaktiver Exploration, statischer
+    \code{CLAUDE.md} und manuell ausgewählten Snippets?
+  \item \textbf{HF2 (Transparenz):} Hilft ein expliziter Entscheidungspfad Entwicklern,
+    fehlerhafte Kontextauswahlen \emph{vor} dem Lauf zu erkennen?
+  \item \textbf{HF3 (Intervention, explorativ):} Führt die Korrektur der Kontextauswahl vor der
+    Ausführung zu besseren Agent-Ergebnissen?
+\end{itemize}
+
+% ---------------------------------------------------------------------------
+\section{Wie: Methodik}
+
+Design Science Research mit iterativen Build-Evaluate-Zyklen, zwei Studien:
+\textbf{Studie 1 (HF1)} vergleicht vier Kontextbedingungen (B1 nur Aufgabe, B2 \code{CLAUDE.md},
+B3 manuelle Snippets, B4 Graph) über Bugfix-, Refactoring- und Feature-Aufgaben; Metriken werden
+automatisch geloggt. \textbf{Studie 2 (HF2/HF3)} ist eine kontrollierte Studie am Review-Interface
+mit gezielt verfälschten Kontextauswahlen (seeded errors). \textbf{Feldumgebung:} aktiv
+entwickelte Projekte (Python/TypeScript), Pilot ist ein realer Webshop; der Wert von
+Transparenz ist auf eingefrorenen Benchmark-Snapshots prinzipiell nicht messbar.
+
+\textbf{Umsetzung und Stand (Juni 2026):} Die vollständige Umsetzung des Artefakts ist
+konstruktiver Bestandteil der Arbeit. Ein lauffähiger Prototyp (Parser, Graph, hybride
+Assembly-Pipeline, MCP-Server \emph{und} ein erstes interaktives Review-Interface) belegt
+bereits die Machbarkeit; eine erste Eval zeigt brauchbare Kontextabdeckung. Im Verlauf der
+Arbeit werden Artefakt und Interface zur Studienreife ausgebaut und anschließend empirisch
+untersucht.
+
+\end{document}

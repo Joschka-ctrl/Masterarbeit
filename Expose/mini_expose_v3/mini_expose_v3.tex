@@ -1,0 +1,311 @@
+% mini_expose_v3.tex — Mini-Exposé (v3) Masterarbeit Joschka Peeters
+% Thema: Kontexttransparenz für Coding Agents
+% Eigenständig kompilierbar (pdflatex), keine externe .bib nötig.
+
+\documentclass[12pt,a4paper]{scrartcl}
+\usepackage[ngerman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{csquotes}
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{microtype}
+\usepackage{enumitem}
+\usepackage{parskip}
+\usepackage{xcolor}
+\usepackage{hyperref}
+
+\geometry{top=2.5cm, bottom=2.5cm, left=3cm, right=2.5cm}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=black,
+  citecolor=blue!70!black,
+  urlcolor=blue!70!black,
+  pdftitle={Mini-Exposé v3 — Kontexttransparenz für Coding Agents},
+  pdfauthor={Joschka Peeters}
+}
+
+\onehalfspacing
+\setlist[itemize]{leftmargin=1.4em}
+
+% Kürzel
+\newcommand{\code}[1]{\texttt{#1}}
+
+\begin{document}
+
+% ---------------------------------------------------------------------------
+% Kopf
+% ---------------------------------------------------------------------------
+\begin{center}
+  {\LARGE\bfseries Mini-Exposé (v3): Kontexttransparenz für Coding Agents\par}
+\end{center}
+
+\vspace{0.6em}
+
+\noindent\textbf{Arbeitstitel:} Kontexttransparenz für Coding Agents: Inspizierbares,
+graphbasiertes Kontext-Engineering und seine Wirkung auf Effizienz und Entwicklerkontrolle
+
+\smallskip
+
+\noindent\textbf{Bezug zur Ausschreibung:} \enquote{Mehr Effizienz mit Coding Agents?
+Kontexttransparenz und Kontext-Engineering}
+
+\hrulefill
+
+% ---------------------------------------------------------------------------
+% 1 Problemstellung
+% ---------------------------------------------------------------------------
+\section{Problemstellung}
+
+Coding Agents (Claude Code, Cursor, SWE-agent) planen Aufgaben, lesen Dateien und
+koordinieren Änderungen über mehrere Module hinweg. Ihr Erfolg hängt entscheidend von der
+\textbf{Kontextbereitstellung} ab: Was der Agent über die Codebase weiß, bestimmt, ob er
+korrekt löst oder halluziniert.
+
+Dabei bestehen zwei offene Probleme:
+
+\textbf{Ineffizientes Kontext-Engineering.} Agents explorieren Codebases reaktiv und dabei
+nachweislich verschwenderisch: Sie rufen systematisch mehr Kontext ab als sie nutzen und
+besuchen Dateien wiederholt (ContextBench, Li et al.\ 2026). Statische Kontext-Dateien
+(\code{CLAUDE.md}, \code{AGENTS.md}) helfen nur begrenzt: handgeschriebene verbessern die
+Lösungsrate um {\raise.17ex\hbox{$\scriptstyle\sim$}}4\,\%, LLM-generierte verschlechtern sie
+sogar, beide erhöhen die Inferenzkosten um ${>}\,20\,\%$ (Gloaguen et al.\ 2026).
+
+\textbf{Intransparente Kontextauswahl.} Produziert ein Agent eine falsche Lösung, kann der
+Entwickler nicht nachvollziehen, \emph{welcher Kontext} zu \emph{welcher Entscheidung}
+geführt hat. Kontext ist eine Black Box. Bestehende Transparenz-Werkzeuge setzen auf
+Trajektorien-Ebene an: AgentStepper (2026) ermöglicht schrittweises Debugging laufender
+Agent-Trajektorien (Breakpoints, Live-Editing von Prompts und Tool-Aufrufen), adressiert damit
+aber Fehler in der Agent-Implementierung, nicht die Bewertung der Kontextauswahl
+\textbf{vor} dem Start. Ob Entwickler die Kontextauswahl vor der Agentausführung bewerten und
+korrigieren können und ob das die Ergebnisqualität verbessert, ist bislang kaum
+systematisch untersucht. Der Bedarf ist dabei dokumentiert: Eine Beobachtungsstudie mit 19 Entwicklern
+identifiziert fehlendes projektspezifisches Wissen des Agenten als Haupthindernis im
+Praxiseinsatz, und eine Interviewstudie mit 17 Entwicklern (Dhanorkar et al.\ 2026) zeigt,
+dass Entwickler präventive Kontrolle über Agents (\enquote{a priori control}, Co-Planning)
+bereits zu praktizieren versuchen, ihnen dafür aber Werkzeuge fehlen; genau hier braucht es
+einen kontrollierbaren Eingriffspunkt.
+
+% ---------------------------------------------------------------------------
+% 2 Forschungslücke
+% ---------------------------------------------------------------------------
+\section{Forschungslücke und Abgrenzung}
+
+Graphbasierte Kontextzusammenstellung ist Stand der Technik: RepoGraph, KGCompass, CodexGraph
+und MCP-basierte Code-Knowledge-Graphen (Codebase-Memory, 2026) zeigen auf SWE-bench deutliche
+Verbesserungen. \textbf{Diese Arbeit beansprucht den Graphaufbau nicht als Beitrag}, sondern
+setzt darauf auf. Die Lücke liegt eine Ebene höher:
+
+\begin{enumerate}[leftmargin=1.6em]
+  \item Alle genannten Systeme werden auf \textbf{eingefrorenen Benchmark-Snapshots} evaluiert,
+    nicht im realen Entwicklungsalltag mit menschlichen Entwicklern.
+  \item Keines untersucht \textbf{Retrieval-Transparenz als Interaktionsschnittstelle}: die
+    Möglichkeit, die Kontextauswahl vor der Ausführung zu inspizieren und zu korrigieren.
+\end{enumerate}
+
+\noindent\textbf{Abgrenzung zu existierenden Transparenz- und Interventionsansätzen.} Einzelne
+Bausteine dieser Lücke sind besetzt, ihre Kombination ist es nicht:
+
+\begin{itemize}
+  \item \emph{Kontexttransparenz als Designeigenschaft:} AOCI (Liu et al.\ 2026) führt
+    \enquote{Context transparency and editability} explizit als Qualitätsdimension von
+    Kontext-Repräsentationen ein, allerdings nur als Eigenschaft eines statischen
+    Plain-Text-Index. Es gibt weder ein Inspektions-Interface noch eine Nutzerstudie;
+    evaluiert wird rein computational.
+  \item \emph{Intervention in Nachbardomänen:} Memory Sandbox (Huang et al.\ 2023) und Memolet
+    (Yen \& Zhao 2024) machen Konversations-Memory einsehbar und editierbar; RAGViz
+    (Wang et al.\ 2024) erlaubt das Zu-/Abschalten abgerufener Dokumente in RAG-QA. Cocoa
+    (Feng et al.\ 2026) und WaitGPT (2024) lassen Nutzer auf Plan- bzw.\ Code-Ebene eingreifen.
+    Keiner adressiert jedoch unmittelbar die aufgabenspezifische Kontextauswahl für Coding
+    Agents; der Effekt von Nutzerkorrekturen auf das Aufgabenergebnis bleibt dort weitgehend
+    offen.
+  \item \emph{Intervention in Produkten:} Sourcegraph Cody zeigt den intendierten Kontext vor
+    dem Absenden als löschbare Context-Chips; GitHub Copilot Edits lässt Nutzer ein Working Set
+    kuratieren und schlägt verwandte Dateien vor (VS Code v1.96, 2024). Beides sind flache
+    Dateilisten \textbf{ohne Begründung der Auswahl}, und beide sind bislang kaum empirisch
+    evaluiert.
+\end{itemize}
+
+Offen bleibt damit die Kombination aus (1) automatisch assembliertem, aufgabenspezifischem
+Kontext für Coding Agents, (2) begründeter Auswahl (Entscheidungspfad), (3) Inspektion und
+Korrektur vor der Ausführung und (4) empirischer Messung von Fehlererkennung (HF2) und
+Ergebniswirkung (HF3). Insbesondere der Loop \enquote{Entwickler korrigiert Kontextauswahl
+$\rightarrow$ Agent-Ergebnis} ist bislang kaum systematisch untersucht.
+
+Der Graph ist dabei das \emph{Mittel}, nicht der Zweck: Die Kontextauswahl entsteht aus einer
+\textbf{hybriden Pipeline}: semantische Embeddings und exakte Namens-/Pfad-Treffer liefern
+Seed-Knoten, die explizite Graphstruktur expandiert sie entlang nachvollziehbarer Kanten
+(\enquote{\code{checkout()} aufgenommen via CALLS-Kante von \code{cart.ts}}). Entscheidend ist,
+dass \emph{jeder} Schritt inspizierbar wird: Seed-Scores, Schwellwert und Near-Misses ebenso
+wie die Traversal-Kanten. Reines Embedding-Retrieval liefert dagegen nur eine opake Rangliste
+ohne Begründung. Das, nicht eine weitere Benchmark-Verbesserung, ist das Argument für den
+graphzentrierten, inspizierbaren Ansatz.
+
+% ---------------------------------------------------------------------------
+% 3 Forschungsfragen
+% ---------------------------------------------------------------------------
+\section{Forschungsfragen und Hypothesen}
+
+\begin{itemize}
+  \item \textbf{HF1 (Effizienz):} Verbessert proaktiv graph-assemblierter Kontext (B4) die
+    Effizienz von Coding Agents (Token-Verbrauch, Iterationsanzahl, Erstkorrektheit) gegenüber
+    reaktiver Eigenexploration (B1), statischer Entwickler-Dokumentation (B2) und manuell
+    kuratiertem Code-Kontext (B3)?\\
+    \emph{H1: Ja, gestützt auf ContextBench (Überexploration reaktiver Agents), Agentless
+    (prozedurale Kontextvorbereitung schlägt Exploration) und die begrenzten Effekte statischer
+    Kontext-Dateien.}
+  \item \textbf{HF2 (Transparenz):} Ermöglicht ein expliziter Entscheidungspfad (Begründung
+    jeder Kontextaufnahme über Graph-Kanten) Entwicklern, fehlerhafte Kontextauswahlen vor der
+    Agentausführung zu erkennen?\\
+    \emph{H2: Entwickler mit Entscheidungspfad erkennen mehr eingebaute Kontextfehler als
+    Entwickler, die nur die Kontextliste sehen.}
+  \item \textbf{HF3 (Intervention):} Führt die Korrektur der Kontextauswahl durch Entwickler
+    vor der Ausführung zu besseren Agent-Ergebnissen (Erstkorrektheit, weniger
+    Korrekturiterationen)?\\
+    \emph{H3: Explorativ; der Loop \enquote{Entwickler editiert Kontext $\rightarrow$ Agent
+    läuft} ist bislang kaum systematisch untersucht.}
+\end{itemize}
+
+% ---------------------------------------------------------------------------
+% 4 Artefakt
+% ---------------------------------------------------------------------------
+\section{Artefakt}
+
+Ein \textbf{MCP-Server}, der eine Codebase als Wissensgraphen (Neo4j mit Vektorindex,
+tree-sitter-Parsing für Python/TypeScript, lokale Embeddings via Ollama/\code{nomic-embed-text})
+repräsentiert und drei Funktionen bereitstellt:
+
+\begin{enumerate}[leftmargin=1.6em]
+  \item \textbf{Context Assembly:} Für eine Aufgabenbeschreibung werden zunächst Seed-Knoten
+    über eine \textbf{hybride Suche} (semantische Embedding-Ähnlichkeit \emph{und} exakte
+    Namens-/Pfad-Treffer) gefunden und anschließend per Graph-Traversal (strukturell,
+    historisch über Git-Commits und GitHub-Issues/PRs, testbasiert) zu einem
+    aufgabenspezifischen Kontext-Block expandiert, begrenzt auf ein Tokenbudget.
+  \item \textbf{Entscheidungspfad als First-Class-Output:} Jeder Kontext-Block enthält eine
+    maschinen- und menschenlesbare Begründung pro Knoten: Ähnlichkeitsscore und
+    überlappende Query-Tokens für Seeds bzw.\ die konkrete Graph-Kante und Traversal-Kette für
+    expandierte Knoten (\code{decisionPath[]} inkl.\ Neo4j-Browser-Links).
+  \item \textbf{Inspektions- und Korrektur-Interface:} Vor der Agentausführung öffnet sich ein
+    browserbasiertes Review-UI (interaktiver Graph), das den geplanten Teilgraphen samt
+    Retrieval-Trace zeigt. Der Entwickler kann jeden Knoten inspizieren (\emph{warum}
+    aufgenommen, mit Score bzw.\ Kante), Knoten entfernen oder ergänzen, die Suchanfrage
+    editieren und neu abfeuern und den Retrieval-Vorgang Schritt für Schritt nachvollziehen
+    (Kontext als editierbarer Vorschlag statt Black Box).
+\end{enumerate}
+
+Die automatische Synchronisation per Git-Hook (inkrementelles Re-Parsing geänderter Dateien)
+ist notwendige Infrastruktur für den Einsatz an aktiven Projekten, wird aber als
+Implementierungsdetail behandelt; sie ist in existierenden Tools bereits gelöst.
+
+\noindent\textbf{Umsetzung und Stand (Juni 2026):} Die vollständige Umsetzung des Artefakts ist
+expliziter, konstruktiver Bestandteil der Arbeit. Ein lauffähiger Prototyp belegt bereits die
+Machbarkeit: Parser (tree-sitter, Python/TypeScript), Neo4j-Graph mit Vektorindex, die
+fünfstufige hybride Context-Assembly-Pipeline, der global registrierte MCP-Server sowie ein
+erstes interaktives Review-Interface (\code{get\_context\_interactive}). Eine erste
+Embedding-Auswertung zeigt brauchbare Kontextabdeckung (Context Recall 2-Hop im Mittel
+0,66 über fünf Aufgaben; ein Commit-Boost hebt Precision@3 von 0,07 auf 0,27). Im Verlauf der
+Arbeit werden Artefakt und Inspektions-Interface zur Studienreife ausgebaut (inkl.\
+Living-Graph-Synchronisation und automatischem Session-Logging) und anschließend empirisch
+untersucht.
+
+% ---------------------------------------------------------------------------
+% 5 Methodik
+% ---------------------------------------------------------------------------
+\section{Methodik}
+
+\noindent\textbf{Rahmen:} Design Science Research (Hevner et al.\ 2004), iterative
+Build-Evaluate-Zyklen.
+
+\smallskip
+
+\noindent\textbf{Evaluation in zwei Studien:}
+
+\begin{itemize}
+  \item \textbf{Studie 1 (HF1, Effizienz):} Vier Kontextbedingungen an realen Aufgaben:
+    \textbf{B1} nur Aufgabenbeschreibung (reaktive Exploration), \textbf{B2} zusätzlich
+    statische \code{CLAUDE.md}, \textbf{B3} zusätzlich manuell ausgewählte Code-Snippets,
+    \textbf{B4} \code{CLAUDE.md} plus strukturierter Graph-Kontext. Aufgabentypen: isolierte
+    Bugfixes (T1), Multi-File-Refactorings (T2), Feature-Entwicklung (T3). Metriken:
+    Iterationsanzahl, Dauer, MCP-/Tool-Aufrufe und Erstkorrektheit; für die Graph-Bedingung
+    automatisch über Claude-Code-Hooks als JSONL je Session geloggt und ausgewertet.
+  \item \textbf{Studie 2 (HF2/HF3, Transparenz):} Kontrollierte Studie mit Studierenden,
+    durchgeführt am implementierten Review-Interface (\code{get\_context\_interactive}).
+    Aufgaben mit teilweise \textbf{gezielt verfälschten Kontextauswahlen} (seeded errors);
+    gemessen wird die Erkennungsrate mit vs.\ ohne Entscheidungspfad (HF2) sowie der Effekt von
+    Kontextkorrekturen (Knoten entfernen/ergänzen, Query editieren) auf das Agent-Ergebnis
+    (HF3). Methodisch angelehnt an die AgentStepper-Studie, nur vor statt nach der
+    Ausführung.
+\end{itemize}
+
+\noindent\textbf{Versuchsumgebung:} Aktiv entwickelte Hochschulprojekte (Python/TypeScript).
+Als Pilot- und Referenzumgebung dient ein realer Webshop (Next.js + Sanity + Shopify),
+perspektivisch ergänzt um weitere Projekte des Betreuers. Der Feldcharakter ist bewusst
+gewählt: Der Wert von Transparenz und projektspezifischem Kontext ist auf eingefrorenen
+SWE-bench-Snapshots prinzipiell nicht messbar.
+
+% ---------------------------------------------------------------------------
+% 6 Beitrag
+% ---------------------------------------------------------------------------
+\section{Erwarteter Beitrag}
+
+\begin{enumerate}[leftmargin=1.6em]
+  \item \textbf{Empirisch:} Eine der ersten systematischen Untersuchungen von
+    Retrieval-Transparenz und Pre-Execution-Kontextkorrektur bei Coding Agents;
+    Effizienzvergleich vierer
+    Kontext-Engineering-Strategien im Feldeinsatz statt auf Benchmarks.
+  \item \textbf{Konstruktiv:} Ein offenes, MCP-kompatibles Artefakt, das Kontextauswahl
+    erklärbar und editierbar macht.
+  \item \textbf{Praktisch:} Handlungsempfehlungen, wann sich graphbasiertes
+    Kontext-Engineering gegenüber statischen Kontext-Dateien lohnt.
+\end{enumerate}
+
+% ---------------------------------------------------------------------------
+% Quellen
+% ---------------------------------------------------------------------------
+\section*{Quellen zur Abgrenzung (Recherche-Stand: 11.06.2026)}
+\addcontentsline{toc}{section}{Quellen zur Abgrenzung}
+
+\begin{itemize}[leftmargin=1.4em]
+  \item \textbf{AgentStepper:} Interactive Debugging of Software Development Agents.
+    \href{https://arxiv.org/abs/2602.06593}{arXiv:2602.06593} (2026). Trajektorien-Debugging
+    mit Breakpoints und Live-Editing; Nutzerstudie n=12.
+  \item \textbf{AOCI:} Liu et al.: Symbolic-Semantic Indexing for Practical Repository-Scale
+    Code Understanding with LLMs. \href{https://arxiv.org/abs/2605.02421}{arXiv:2605.02421}
+    (2026). Benennt \enquote{Context transparency and editability} als Dimension (Tab.~1),
+    ohne Interface/Nutzerstudie.
+  \item \textbf{Dhanorkar et al.:} Human Oversight of Agentic Systems in Practice.
+    \href{https://arxiv.org/abs/2606.05391}{arXiv:2606.05391} (2026). Interviewstudie n=17;
+    identifiziert \enquote{a priori control} als Oversight-Form ohne Werkzeugunterstützung.
+  \item \textbf{Memory Sandbox:} Huang et al.,
+    \href{https://dl.acm.org/doi/10.1145/3586182.3615796}{UIST~'23 Adjunct} /
+    \href{https://arxiv.org/abs/2308.01542}{arXiv:2308.01542}. Konversations-Memory ansehen,
+    editieren, löschen; Design-Probe ohne summative Studie.
+  \item \textbf{Memolet:} Yen \& Zhao,
+    \href{https://dl.acm.org/doi/10.1145/3654777.3676388}{UIST~'24}. Konversations-Memories
+    als interaktive, wiederverwendbare Objekte.
+  \item \textbf{RAGViz:} Wang et al., EMNLP 2024 (Demo),
+    \href{https://arxiv.org/abs/2411.01751}{arXiv:2411.01751}. Attention-Visualisierung +
+    Dokument-Toggling in RAG-QA; Diagnose-Werkzeug ohne Ergebnisstudie.
+  \item \textbf{Cocoa:} Feng et al., CHI 2026,
+    \href{https://arxiv.org/abs/2412.10999}{arXiv:2412.10999}. Interaktive Pläne
+    (Co-Planning/Co-Execution); Intervention auf Plan-, nicht Kontextebene.
+  \item \textbf{WaitGPT:} \href{https://dl.acm.org/doi/10.1145/3654777.3676374}{UIST~'24},
+    \href{https://arxiv.org/abs/2408.01703}{arXiv:2408.01703}. Monitoring/Steering von
+    LLM-generiertem Analyse-Code während der Ausführung; n=12.
+  \item \textbf{ContextBench:} A Benchmark for Context Retrieval in Coding Agents.
+    \href{https://arxiv.org/abs/2602.05892}{arXiv:2602.05892} (2026). Misst
+    Überexploration reaktiver Agents; Pre-Submission-Kontextdeklaration durch den \emph{Agenten},
+    nicht den Nutzer.
+  \item \textbf{Sourcegraph Cody:}
+    \href{https://sourcegraph.com/docs/cody/core-concepts/context}{Context-Dokumentation}.
+    Context-Chips vor dem Absenden löschbar/ersetzbar; flache Dateiliste ohne Begründung,
+    unevaluiert.
+  \item \textbf{GitHub Copilot Edits:}
+    \href{https://code.visualstudio.com/updates/v1_96}{VS Code v1.96 Release Notes} (Dez.~2024).
+    Working-Set-Kuration mit Related-Files-Vorschlägen (Git-Co-Change-Heuristik),
+    unevaluiert.
+\end{itemize}
+
+\end{document}
