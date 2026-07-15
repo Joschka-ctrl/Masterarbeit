@@ -1,0 +1,118 @@
+% mini_expose_v3_politik.tex — Kurzfassung (max. 2 A4-Seiten)
+% Kernaussage: Was will ich machen und warum.
+
+\documentclass[11pt,a4paper]{scrartcl}
+\usepackage[ngerman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{csquotes}
+\usepackage{microtype}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage[top=1.8cm,bottom=1.8cm,left=2.2cm,right=2.2cm]{geometry}
+
+\hypersetup{colorlinks=true,linkcolor=black,urlcolor=blue!70!black}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.45em}
+\setlist[itemize]{leftmargin=1.3em,topsep=0.2em,itemsep=0.15em}
+\setlist[enumerate]{leftmargin=1.5em,topsep=0.2em,itemsep=0.15em}
+
+% kompaktere Überschriften
+\usepackage{titlesec}
+\titlespacing*{\section}{0pt}{0.7em}{0.25em}
+\titleformat{\section}{\normalfont\large\bfseries}{\thesection.}{0.5em}{}
+
+\newcommand{\code}[1]{\texttt{#1}}
+
+\begin{document}
+
+\begin{center}
+  {\Large\bfseries Mini-Exposé: Transparenz politischer Entscheidungsprozesse}\\[0.3em]
+  {\small Nachvollziehbarkeit von Gesetzgebung als inspizierbarer Prozess und ihre Wirkung
+  auf Vertrauen und demokratische Kontrolle \\
+  Themenfeld: \enquote{Mehr Legitimität durch offene Verfahren? Transparenz und
+  Beteiligung im politischen Willensbildungsprozess}}
+\end{center}
+
+\vspace{0.2em}
+\hrule
+\vspace{0.4em}
+
+% ---------------------------------------------------------------------------
+\section{Warum: das Problem}
+
+In modernen Demokratien entscheidet die \textbf{Nachvollziehbarkeit politischer Verfahren}
+über Vertrauen oder Entfremdung der Bürger. Zwei Probleme bleiben offen:
+
+\begin{itemize}
+  \item \textbf{Intransparent.} Zwischen Gesetzentwurf und Verabschiedung liegen zahllose
+    Ausschusssitzungen, Anhörungen und Lobbykontakte, die für Außenstehende kaum sichtbar
+    sind. Wer welche Formulierung eingebracht hat und \emph{warum} eine Regelung so und nicht
+    anders lautet, lässt sich nachträglich selten rekonstruieren; der politische Prozess ist
+    eine Black Box.
+  \item \textbf{Wirkungslos beteiligend.} Formale Beteiligungsformate (Bürgerdialoge,
+    Konsultationen) setzen oft erst \emph{nach} den entscheidenden Weichenstellungen an. Ob
+    Bürger die Entstehung einer Regelung \textbf{vor} der Abstimmung bewerten und beeinflussen
+    können und ob das die wahrgenommene Legitimität erhöht, ist bislang kaum systematisch
+    untersucht, obwohl Bürger diese frühe Kontrolle nachweislich einfordern.
+\end{itemize}
+
+% ---------------------------------------------------------------------------
+\section{Was wird umgesetzt:}
+
+Ein digitales Verfahren, das den Weg eines Gesetzes nicht nur automatisch dokumentiert,
+sondern die einzelnen Entscheidungsschritte vor der finalen Abstimmung inspizier- und
+kommentierbar macht. Ein Gesetzgebungsprozess wird als nachvollziehbarer Entscheidungsgraph
+(Akteure, Änderungsanträge, Begründungen, Abstimmungen) repräsentiert. Es gibt drei Bausteine.
+
+\begin{enumerate}
+  \item \textbf{Prozess-Rekonstruktion.} Verknüpfung von Entwurfsversionen, Ausschussprotokollen
+    und Abstimmungsergebnissen über Zeit; jede Textänderung wird ihrem Anlass (Anhörung,
+    Antrag, Stellungnahme) zugeordnet.
+  \item \textbf{Entscheidungspfad.} Pro Regelung eine nachvollziehbare Begründung: welcher
+    Akteur welche Formulierung einbrachte, mit welcher Begründung und welchem Abstimmungsverhalten.
+  \item \textbf{Inspektions- und Beteiligungs-Interface.} Eine öffentliche Ansicht zeigt den
+    geplanten Entscheidungspfad samt Begründungsspur. Bürger sehen \emph{warum} eine Regelung
+    ihre Form annimmt, können einzelne Schritte kommentieren, Alternativen vorschlagen und den
+    Stand verfolgen: Gesetzgebung als offener Vorschlag statt Black Box.
+\end{enumerate}
+
+Der eigentliche Beitrag ist nicht die Dokumentation (bereits verbreitet), sondern die
+\textbf{Prozess-Transparenz als Eingriffspunkt} sowie deren empirische Messung im Feld. Reine
+Veröffentlichung von Ergebnissen liefert lediglich ein Endprodukt. Die explizite Prozessstruktur
+begründet die Entscheidung und macht sie kommentierbar.
+
+% ---------------------------------------------------------------------------
+\section{Forschungsfragen}
+
+\begin{itemize}
+  \item \textbf{HF1 (Vertrauen):} Erhöht ein nachvollziehbar dargestellter Entscheidungspfad das
+    Vertrauen in politische Verfahren gegenüber bloßer Ergebnisveröffentlichung?
+  \item \textbf{HF2 (Transparenz):} Hilft ein expliziter Entscheidungspfad Bürgern, strittige
+    oder einseitig geprägte Regelungen \emph{vor} der Abstimmung zu erkennen?
+  \item \textbf{HF3 (Beteiligung, explorativ):} Führt frühe Kommentierung des Prozesses zu einer
+    höheren wahrgenommenen Legitimität des Ergebnisses?
+\end{itemize}
+
+% ---------------------------------------------------------------------------
+\section{Wie: Methodik}
+
+Design Science Research mit iterativen Build-Evaluate-Zyklen, zwei Studien:
+\textbf{Studie 1 (HF1)} vergleicht vier Transparenzbedingungen (B1 nur Ergebnis, B2 Endtext plus
+Begründung, B3 vollständiges Protokoll, B4 interaktiver Entscheidungspfad) über verschiedene
+Politikfelder; Vertrauens- und Verständnismaße werden per Befragung erhoben. \textbf{Studie 2
+(HF2/HF3)} ist eine kontrollierte Studie am Interface mit gezielt verzerrten Darstellungen
+(seeded bias). \textbf{Feldumgebung:} laufende Gesetzgebungs- oder Satzungsverfahren (z.\,B.\
+kommunale Ebene); der Wert von Transparenz ist an abgeschlossenen, geglätteten Fällen prinzipiell
+nicht messbar.
+
+\textbf{Umsetzung und Stand (Juli 2026):} Der Aufbau des Verfahrens ist konstruktiver Bestandteil
+der Arbeit. Ein lauffähiger Prototyp (Datenmodell, Prozess-Rekonstruktion, Begründungsspur
+\emph{und} ein erstes interaktives Beteiligungs-Interface) belegt bereits die Machbarkeit; eine
+erste Auswertung zeigt brauchbare Nachvollziehbarkeit. Im Verlauf der Arbeit werden Artefakt und
+Interface zur Studienreife ausgebaut und anschließend empirisch untersucht.
+
+\end{document}
