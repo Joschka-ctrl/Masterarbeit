@@ -1,0 +1,90 @@
+
+\section{Methodisches Vorgehen}
+\label{sec:methodik}
+
+Die Arbeit folgt dem Paradigma der gestaltungsorientierten Forschung \parencite{hevner2004dsr}: Sie entwickelt ein Artefakt und prüft es anschließend gegen die Probleme, aus denen es hervorgegangen ist. Die Evaluation ist in vier Stufen gegliedert, die nach abnehmender Unabhängigkeit von externen Voraussetzungen angeordnet sind. Drei der vier Stufen kommen ohne Versuchspersonen aus und sind beliebig wiederholbar; nur die vierte erhebt Daten mit Probanden.
+
+\subsection{Untersuchungsgegenstand und Bedingungen}
+\label{subsec:bedingungen}
+
+Untersucht wird das in Abschnitt~1.4 beschriebene System in seiner schrittweisen Ausprägung, bei der das Retrieval in mehreren vom Entwickler bestätigten Zügen abläuft. Als Studiengegenstand dient ein TypeScript-Projekt aus der Lehre der Hochschule, für das ein Codegraph aufgebaut wird.
+
+Verglichen werden fünf Bedingungen, die sich in der Art der Kontextbereitstellung unterscheiden. Tabelle~\ref{tab:bedingungen} fasst sie zusammen.
+
+\begin{table}[htbp]
+  \centering
+  \small
+  \begin{tabularx}{\textwidth}{@{}lX@{}}
+    \toprule
+    & Kontextbereitstellung \\
+    \midrule
+    A & Standardwerkzeuge des Agenten, reaktive Exploration ohne Graph \\
+    B & Automatisches graphbasiertes Retrieval, Übergabe als flache Liste \\
+    C & Automatisches graphbasiertes Retrieval, strukturierte Übergabe des Subgraphen \\
+    D & Schrittweise kuratiertes Retrieval, Auswahl durch den Entwickler \\
+    D$'$ & Wie D, jedoch Auswahl automatisch gegen den Referenzkontext optimiert \\
+    \bottomrule
+  \end{tabularx}
+  \caption{Bedingungen der Untersuchung}
+  \label{tab:bedingungen}
+\end{table}
+
+Bedingung A bildet den in Abschnitt~2.1 beschriebenen reaktiven Fall ab und dient als Ausgangspunkt. Die Bedingungen B und C unterscheiden sich ausschließlich in der Darstellungsform bei identischem Knotensatz und isolieren damit den Effekt der Strukturerhaltung. Bedingung D$'$ ist keine reale Nutzungsform, sondern eine rechnerisch erzeugte Vergleichsgröße: Sie bildet ab, was eine Kuratierung unter Kenntnis des Referenzkontextes leisten würde, und liefert damit sowohl die Obergrenze des Verfahrens als auch den Bezugspunkt, an dem sich die Auswahl realer Entwickler in FF2 messen lässt.
+
+Über alle Bedingungen hinweg werden Modellversion, Temperatur, Seed-Parameter des Retrievals, Traversierungstiefe, Systemprompt und der Ausgangszustand der Codebase konstant gehalten und je Durchlauf protokolliert.
+
+\subsection{Aufgaben und Referenzkontext}
+
+Für die Studie werden drei Aufgaben auf der Studien-Codebase entwickelt, die typische Wartungstätigkeiten abbilden. Damit die Kuratierung überhaupt wirksam werden kann, müssen die Aufgaben vier Eigenschaften erfüllen. Erstens ist die Problembeschreibung unscharf gehalten und benennt die betroffenen Codestellen nicht; dies entspricht dem von \textcite{suri2026codescout} beschriebenen Fall, in dem eine ungenaue Aufgabenstellung die Suche ausufern lässt. Zweitens enthält die Codebase zu jeder Aufgabe semantisch ähnliche, sachlich aber unbeteiligte Codestellen, an denen sich ein zu breiter Abruf zeigen kann. Drittens liegt ein Teil des benötigten Codes mindestens zwei Kanten vom naheliegenden Einstiegspunkt entfernt, sodass die Traversierung eine Rolle spielt. Viertens erstreckt sich die Lösung über mehrere Dateien.
+
+Zu jeder Aufgabe wird ein Referenzkontext festgelegt, der die für die Lösung tatsächlich benötigten Dateien und Funktionen benennt. Er dient als Bezugsgröße für alle Maße der Kontextgüte und als Grundlage für die Bildung von Bedingung D$'$. Da sämtliche Aussagen über die Kontextgüte an ihm hängen, wird sein Zustandekommen offengelegt. Die Aufgaben werden aus der Versionsgeschichte des Studienprojekts abgeleitet: Ein abgeschlossener Änderungsvorgang liefert den Ausgangszustand der Codebase, die Aufgabenstellung und mit den darin geänderten Stellen den Kern des Referenzkontextes. Ergänzt werden jene Stellen, die zum Verständnis der Aufgabe erforderlich sind, ohne selbst geändert zu werden; sie werden bei der eigenen Bearbeitung der Aufgabe protokolliert. Der Referenzkontext wird versioniert abgelegt, bevor das Retrieval auf der betreffenden Aufgabe erstmals ausgeführt wird, sodass eine nachträgliche Anpassung an beobachtete Ergebnisse ausgeschlossen ist. Für mindestens eine Aufgabe beurteilt der Betreuer den Referenzkontext unabhängig; der Grad der Übereinstimmung wird berichtet.
+
+Die Akzeptanzkriterien jeder Aufgabe werden so formuliert, dass sie maschinell überprüfbar sind, da eine manuelle Prüfung bei der Zahl der automatisierten Durchläufe nicht praktikabel wäre.
+
+\subsection{Evaluationsstufen}
+
+\paragraph{Stufe 1: Bestimmung der Obergrenze.} Zunächst wird geprüft, welchen Spielraum die Kuratierung überhaupt besitzt. Dazu wird der automatisch abgerufene Subgraph unter Kenntnis des Referenzkontextes bereinigt und ergänzt und der Agent auf dieser optimierten Auswahl laufen gelassen. Die Optimierung wird zusätzlich in ihre Bestandteile zerlegt, indem jeweils nur entfernt, nur ergänzt oder nur umsortiert wird. Damit lässt sich unterscheiden, ob eine mögliche Verbesserung auf einer höheren Genauigkeit, einer höheren Vollständigkeit oder allein auf der Reihenfolge beruht. Letzteres wäre ein unmittelbarer Beleg für die in Abschnitt~2.4 beschriebene Positionsabhängigkeit \parencite{liu2023lostmiddle,wu2025positionbias}.
+
+Diese Stufe steht bewusst am Anfang. Zeigt sich hier kein Spielraum, so wäre auch von der Erhebung mit Probanden kein Effekt zu erwarten, und das Aufgabenmaterial ist anzupassen, solange dafür noch Zeit bleibt.
+
+\paragraph{Stufe 2: Abrufgüte auf externem Material.} Um die Aussagen nicht allein auf eine selbst gewählte Codebase zu stützen, wird die Güte des Abrufs zusätzlich auf Instanzen aus SWE-bench Verified gemessen. Als Referenzkontext dienen dabei die im hinterlegten Lösungspatch geänderten Dateien und Funktionen. Gemessen wird ausschließlich der Abruf; die Aufgaben werden nicht gelöst und keine Tests ausgeführt. Als Vergleichsmaßstab dient eine reine Ähnlichkeitssuche ohne Traversierung, wodurch sich der Beitrag der Graphstruktur isolieren lässt.
+
+Um den Aufwand des Graphaufbaus zu begrenzen, werden wenige Repositories mit jeweils mehreren Instanzen ausgewählt statt vieler einzelner Instanzen aus verschiedenen Repositories.
+
+\paragraph{Stufe 3: Automatisierte Durchläufe.} Die drei Aufgaben werden unter den Bedingungen A, B, C und D$'$ jeweils mehrfach automatisiert bearbeitet. Mehrfachdurchläufe sind erforderlich, da Agentenläufe auch bei gleicher Eingabe erheblich streuen. Erhoben werden die Erfüllung der Akzeptanzkriterien, die Zahl der Bearbeitungsschritte, der Tokenverbrauch und die Bearbeitungsdauer sowie die Güte des jeweils übergebenen Kontextes.
+
+\paragraph{Stufe 4: Nutzerstudie.} Die kuratierte Bedingung D wird mit Probanden erhoben und der automatischen Bedingung C gegenübergestellt. Sie ist als einzige Bedingung nicht automatisiert wiederholbar und daher in Stufe 3 nicht enthalten. Die Agentenmaße für D entstammen folglich Einzeldurchläufen je Person und Aufgabe; sie werden nicht mit den mehrfach besetzten Zellen der Stufe 3 zusammengefasst, sondern diesen gegenübergestellt. Um für D dennoch eine wiederholbare Messung zu erhalten, werden die in der Nutzerstudie erzeugten Auswahlen aufgezeichnet und anschließend unter den Bedingungen der Stufe 3 mehrfach nachgefahren. Damit lässt sich die Streuung der Agentenläufe von der Streuung zwischen den Teilnehmenden trennen.
+
+\subsection{Ablauf der Nutzerstudie}
+
+Vorgesehen sind fünf bis zehn Teilnehmende aus einem Kurs des betreuenden Professors. Das Design ist als Messwiederholung angelegt: Jede Person bearbeitet zwei der drei Aufgaben, eine unter Bedingung C und eine unter Bedingung D. Aufgabe, Bedingung und Reihenfolge werden über die Teilnehmenden hinweg ausbalanciert. Bei kleiner Stichprobe ist dieses Vorgehen einer Aufteilung in getrennte Gruppen vorzuziehen, da jede Person als ihre eigene Kontrolle dient und die erhebliche Streuung zwischen Individuen dadurch nicht in den Vergleich eingeht.
+
+Eine Sitzung dauert etwa 60 Minuten und gliedert sich in Einwilligung und Erhebung der Vorerfahrung, eine Einführung in Codebase und Werkzeug samt einer Übungsaufgabe, die beiden eigentlichen Aufgaben mit lautem Denken und Bildschirmaufzeichnung sowie einen Abschluss mit Fragebögen und einem halbstrukturierten Interview. Die Übungsaufgabe ist notwendig, damit die erste gewertete Aufgabe nicht überwiegend die Einarbeitung in die Oberfläche misst.
+
+Neben den Verhaltensdaten werden die wahrgenommene Beanspruchung \parencite{hart1988tlx}, das Vertrauen in das System \parencite{jian2000trust} und die Gebrauchstauglichkeit \parencite{brooke1996sus} über etablierte Instrumente erhoben.
+
+\subsection{Messgrößen}
+
+Die Güte des übergebenen Kontextes wird als Genauigkeit und Vollständigkeit gegenüber dem Referenzkontext bestimmt, getrennt für Datei- und Funktionsebene. Ergänzend wird festgehalten, über wie viele Kanten die zutreffend abgerufenen Knoten erreicht wurden; ein hoher Anteil von Treffern jenseits der unmittelbaren Einstiegspunkte belegt den Beitrag der Traversierung.
+
+Für die kuratierte Bedingung wird zusätzlich erfasst, welche Knoten der Entwickler zutreffend beziehungsweise fälschlich entfernt oder ergänzt hat. Als zentrales Maß für FF2 dient der Anteil des Spielraums, den die Kuratierung ausschöpft: die Verbesserung der Kontextgüte gegenüber dem automatischen Ausgangszustand, bezogen auf die unter Bedingung D$'$ überhaupt erreichbare Verbesserung. Fällt diese erreichbare Verbesserung auf einer Aufgabe gering aus, so ist FF2 auf ihr nicht sinnvoll zu beantworten; dies wird bereits in Stufe 1 sichtbar. Als Aufwandsmaße dienen die Dauer der Kuratierung, die Zahl der Eingriffe und der Anteil unverändert bestätigter Vorschläge.
+
+Auf Seiten des Agenten werden die Zahl der Bearbeitungsschritte, der Tokenverbrauch, die Laufzeit und der Anteil erfüllter Akzeptanzkriterien erhoben. Vorrangige Zielgröße ist der Anteil erfüllter Akzeptanzkriterien; die übrigen Maße werden nachgeordnet und nur bei vergleichbarer Lösungsqualität als Effizienzgewinn gedeutet.
+
+\subsection{Auswertung}
+
+Die Stufen 1 bis 3 liefern beliebig wiederholbare Messungen und werden über Lage- und Streuungsmaße sowie gepaarte Vergleiche je Aufgabe ausgewertet. Für Stufe 2 werden Konfidenzintervalle über Resampling gebildet.
+
+Für die Nutzerstudie ist bei fünf bis zehn Teilnehmenden keine belastbare Inferenzstatistik zu erwarten. Die Auswertung erfolgt daher deskriptiv und qualitativ; ein Rangtest für verbundene Stichproben wird ergänzend berichtet, trägt die Aussage aber nicht. Die Interviews werden transkribiert und thematisch codiert. Der quantitative Nachweis stützt sich auf die Stufen 1 bis 3, während die Nutzerstudie das Verhalten der Entwickler und dessen Begründungen erschließt.
+
+\subsection{Gültigkeitsgrenzen}
+
+Vier Einschränkungen sind bereits jetzt absehbar und werden in der Arbeit ausgewiesen.
+
+Erstens sind die Teilnehmenden Studierende eines Masterstudiengangs der Softwaretechnik. Sie bringen die fachlichen Grundlagen mit, ihre Berufserfahrung streut jedoch und entspricht nicht der eines eingespielten Entwicklungsteams auf einer über Jahre gewachsenen Produktivcodebase. Für den in Abschnitt~\ref{sec:forschungsfragen} angenommenen Wirkmechanismus ist ohnehin weniger die allgemeine Programmiererfahrung entscheidend als die Vertrautheit mit der Studien-Codebase: Das Aussortieren offensichtlich unbeteiligter Codestellen und das Vorgeben der Suchrichtung setzen vor allem den Aufgabentext voraus, während der Beitrag aus Projektkenntnis bei dieser Gruppe nur teilweise zum Tragen kommt. Beides wird über den Fragebogen zur Vorerfahrung erhoben und in der Auswertung berücksichtigt. Ein gemessener Effekt ist insoweit als untere Schranke zu lesen; eine Übertragung auf professionelle Entwicklungsteams ist nicht ohne Weiteres zulässig. Da die Teilnehmenden zudem einem Kurs des betreuenden Professors entstammen, werden Freiwilligkeit und die Entkopplung von jeder Leistungsbewertung schriftlich zugesichert.
+
+Zweitens ist der Referenzkontext eine untere Schranke. Die in einem Lösungspatch geänderten Stellen sind nicht deckungsgleich mit dem Code, den man zum Verständnis einer Aufgabe benötigt. Die Vollständigkeit wird dadurch systematisch unterschätzt, allerdings über alle Bedingungen hinweg in gleicher Weise.
+
+Drittens hängt die Wirksamkeit der Kuratierung von der Größe des Suchraums ab. In einer kleinen Codebase findet bereits das automatische Retrieval nahezu alles Relevante, sodass für eine Verbesserung wenig Raum bleibt. Ein in dieser Untersuchung gemessener Effekt wäre daher eher als konservative Schätzung zu lesen.
+
+Viertens trifft die Arbeit keine Aussage über die Lösungsrate auf etablierten Benchmarks. Auf externem Material wird ausschließlich die Güte des Abrufs gemessen; Agentenläufe und Testausführung finden dort aus Aufwandsgründen nicht statt. Sämtliche Aussagen zur Wirkung auf die Aufgabenlösung stützen sich damit auf die drei kontrollierten Aufgaben der Studien-Codebase. Deren Aufgabenstellungen, Akzeptanzkriterien und Referenzkontexte stammen aus derselben Hand; die in Abschnitt~5.2 beschriebene Ableitung aus der Versionsgeschichte und die unabhängige Zweitbeurteilung begrenzen diesen Umstand, heben ihn aber nicht auf. Eine Übertragung auf Benchmarkergebnisse ist nicht zulässig.

@@ -1,0 +1,100 @@
+
+\section{Forschungsfragen}
+\label{sec:forschungsfragen}
+
+Aus den drei in Abschnitt~1 dargelegten Problemen und der daraus abgeleiteten Zielsetzung ergibt sich die folgende Leitfrage:
+
+\begin{quote}
+Wie wirkt sich eine transparente, schrittweise vom Entwickler kuratierte graphbasierte Kontextbereitstellung gegenüber einem rein automatischen Retrieval auf die Kontextgüte und die Aufgabenlösung eines Coding-Agents aus, und welcher Interaktionsaufwand entsteht dabei?
+\end{quote}
+
+Die Leitfrage zerfällt in sechs Teilfragen. Die erste ist konstruktiver Natur und betrifft die Gestaltung des Artefakts; die übrigen fünf sind empirisch und werden über die in Abschnitt~\ref{sec:methodik} beschriebenen Vergleiche beantwortet.
+
+\subsection{Gestaltung des Artefakts}
+
+Das Transparenzproblem verlangt, dass der Entwickler nicht nur das Ergebnis des Abrufs sieht, sondern dessen Zustandekommen. Daraus folgt:
+
+\begin{quote}
+\textbf{FF1:} Wie ist ein graphbasiertes Retrieval zu gestalten, das zu jedem abgerufenen Knoten den Auswahlgrund offenlegt und die Auswahl vor der Übergabe an den Agenten schrittweise modifizierbar macht?
+\end{quote}
+
+Als Auswahlgrund gelten der Ähnlichkeitswert des Knotens, die wirksame Schnittgrenze, im Ablehnungsfall der Grund der Verwerfung, der eingebettete Beschreibungstext sowie der Traversierungspfad, über den der Knoten erreicht wurde.
+
+Konstruktionsfragen werden nicht über einen Bedingungsvergleich beantwortet. Das gestaltungsorientierte Vorgehen verlangt jedoch, dass ein Artefakt an vorab benannten Entwurfszielen geprüft wird \parencite{hevner2004dsr}; ohne solche Ziele bliebe FF1 eine Anforderungsliste ohne Kriterium für ihre Erfüllung. Für das hier entwickelte System gelten drei:
+
+\begin{description}[leftmargin=2.2em,style=nextline,itemsep=0.2em]
+  \item[E1] Zu jedem Knoten des übergebenen Subgraphen ist der Auswahlgrund im oben genannten Umfang abrufbar, einschließlich der Gründe für verworfene Knoten.
+  \item[E2] Jede Entscheidung des Abrufs --- Einstiegspunkte, verfolgte Kanten, Traversierungstiefe, Auswahl und Gewichtung --- ist vor der Übergabe an den Agenten veränderbar.
+  \item[E3] Die offengelegten Begründungen werden bei der Kuratierung tatsächlich herangezogen.
+\end{description}
+
+E1 und E2 sind Eigenschaften der Konstruktion und werden durch die Beschreibung des Systems belegt. E3 ist es nicht: Ob die Offenlegung genutzt wird oder lediglich vorhanden ist, entscheidet sich am Verhalten der Entwickler. Dieses Ziel wird daher empirisch geprüft, über das Kuratierungsprotokoll, das laute Denken und den Interviewleitfaden der Nutzerstudie. Werden Ähnlichkeitswert und Traversierungspfad durchgängig übergangen, ist E3 verfehlt --- ein Befund, der für die Gestaltung solcher Werkzeuge aufschlussreicher wäre als seine Bestätigung.
+
+\subsection{Wirkung der menschlichen Beteiligung}
+
+Ob Offenlegung allein genügt, ist eine empirische Frage. \textcite{romerolauro2025raggy} berichten, dass Teilnehmende ihrer Studie von sich aus nach Begründungen für abgerufene Elemente verlangten; ob solche Begründungen dann auch zu besseren Urteilen führen, bleibt dort offen.
+
+Dass ein Entwickler die automatisch erzeugte Auswahl überhaupt verbessern kann, ist dabei eine Annahme, die vorab zu benennen ist. Sie versteht sich nicht von selbst: Das Retrieval verfügt über Ähnlichkeitswerte, typisierte Kanten und den vollständigen Graphen, während der Entwickler nur einen Ausschnitt und wenige Minuten Zeit hat. Ein Beitrag ist deshalb nicht allgemein zu erwarten, sondern an zwei bestimmten Stellen.
+
+Der erste liegt im Aussortieren. Zu erkennen, dass eine Codestelle der Aufgabenbeschreibung zwar ähnelt, sachlich aber nichts mit ihr zu tun hat, ist eine Wiedererkennungsleistung: Sie setzt den Aufgabentext und die Beschreibung des Knotens voraus, nicht die genaue Kenntnis des Projekts. Genau dort liegt zugleich der in Abschnitt~\ref{subsec:grenzen} belegte Hebel, denn dem Modell schadet weniger das Fehlende als das Mitgeführte \parencite{liu2023lostmiddle,du2025contextlength}. Zu erwarten ist daher, dass die Kuratierung vor allem über das Entfernen wirkt und weniger über das Ergänzen.
+
+Der zweite liegt in der Richtung der Suche. Der Entwickler bestimmt Einstiegspunkte, verfolgte Kanten und Traversierungstiefe. Dafür genügt ein grobes Verständnis davon, in welchem Teil des Systems die Aufgabe angesiedelt ist; einzelne Relevanzentscheidungen muss er dafür nicht treffen. Dieser Eingriff unterscheidet den hier verfolgten Ansatz von der bloßen An- und Abwahl bereits abgerufener Elemente.
+
+Absicht und Projektkenntnis, die nicht in der Einbettung des Aufgabentextes stehen, kommen als dritter Beitrag hinzu, werden hier jedoch bewusst nachrangig angesetzt. Nicht die fachliche Qualifikation der Teilnehmenden ist dafür ausschlaggebend, sondern ihre Vertrautheit mit der konkreten Studien-Codebase, die allenfalls teilweise gegeben ist. Ein gemessener Effekt ist damit als untere Schranke dessen zu lesen, was auf vertrautem Code erreichbar wäre.
+
+Diese Annahme bleibt prüfbar. Die in Abschnitt~\ref{sec:methodik} beschriebene Zerlegung der optimierten Auswahl in Entfernen, Ergänzen und Umsortieren zeigt bereits vor der Erhebung, welcher Eingriff überhaupt wirkt. Wirkt allein das Ergänzen, ist der hier unterstellte Mechanismus widerlegt, und die menschliche Beteiligung wäre an einer anderen Stelle des Verfahrens anzusetzen. Daraus ergeben sich zwei Fragen:
+
+\begin{quote}
+\textbf{FF2:} Wie nah kommt die Auswahl, die Entwickler anhand der offengelegten Begründungen treffen, an eine gegen den Referenzkontext optimierte Auswahl heran?
+
+\textbf{FF3:} Verändert die schrittweise Kuratierung die Güte des übergebenen Kontextes gegenüber einem automatischen graphbasierten Retrieval?
+\end{quote}
+
+FF2 ist bewusst als Annäherungsfrage formuliert. Der Referenzkontext ist eine begründete Festlegung darüber, welche Codestellen eine Aufgabe erfordert, und kein von der Untersuchung unabhängiges Maß der Relevanz; eine an ihm optimierte Auswahl ist daher per Konstruktion optimal und nicht als empirischer Befund zu lesen. Gemessen wird folglich nicht die Richtigkeit menschlicher Relevanzurteile, sondern der Anteil des Spielraums, den Entwickler ausschöpfen: Bezugspunkte sind der automatisch abgerufene Ausgangszustand einerseits und die daran optimierte Auswahl andererseits. FF3 misst die Veränderung der Kontextgüte gegenüber dem unkuratierten Ausgangszustand.
+
+\subsection{Wirkung auf den Agenten}
+
+Eine verbesserte Kontextauswahl ist nur dann von Wert, wenn sie sich auf die Arbeit des Agenten überträgt. Getrennt davon steht die Frage nach der Übergabeform, die dem Strukturproblem entspringt:
+
+\begin{quote}
+\textbf{FF4:} In welchem Umfang schlägt sich eine veränderte Kontextgüte auf einer kontrollierten Aufgabenmenge in Lösungsqualität, Schrittzahl und Tokenverbrauch des Agenten nieder?
+
+\textbf{FF5:} Wirkt sich eine strukturierte Übergabe des Subgraphen gegenüber einer flachen Liste desselben Knotensatzes auf die Aufgabenlösung aus?
+\end{quote}
+
+Der Zuschnitt von FF4 auf eine kontrollierte Aufgabenmenge ist keine Abschwächung, sondern eine Angabe der Reichweite. Auf externem Material wird in dieser Arbeit ausschließlich die Güte des Abrufs gemessen; Lösungsraten auf etablierten Benchmarks gehören nicht zum Untersuchungsumfang. Da Lösungsqualität, Schrittzahl und Tokenverbrauch zudem gegenläufig ausfallen können, wird der Anteil erfüllter Akzeptanzkriterien vorab als vorrangige Zielgröße festgelegt; Schrittzahl und Tokenverbrauch werden nachgeordnet betrachtet und nur bei vergleichbarer Lösungsqualität als Effizienzgewinn gedeutet. Andernfalls ließe sich ein sparsamer Lauf nicht von einem vorzeitig abgebrochenen unterscheiden.
+
+FF5 ist bewusst so geschnitten, dass der Knotensatz zwischen den verglichenen Bedingungen identisch bleibt und sich ausschließlich die Darstellungsform unterscheidet. Nur unter dieser Bedingung lässt sich der von \textcite{pusch2026hitlkgqa} beschriebene Effekt des Einebnens der Graphstruktur isoliert prüfen, ohne ihn mit Unterschieden im Abruf zu vermischen.
+
+\subsection{Kosten der Kuratierung}
+
+Menschliche Beteiligung ist nicht kostenlos. Ein Verfahren, das die Lösungsqualität geringfügig hebt, dafür aber erhebliche Entwicklerzeit bindet, ist im Arbeitsalltag nicht tragfähig. Daher:
+
+\begin{quote}
+\textbf{FF6:} Welcher Interaktionsaufwand entsteht durch die Kuratierung, und wie bewerten Entwickler Nachvollziehbarkeit, Kontrolle und Vertrauenswürdigkeit des Verfahrens?
+\end{quote}
+
+\subsection{Zuordnung}
+
+Tabelle~\ref{tab:ff} ordnet jeder Teilfrage den Vergleich zu, über den sie beantwortet wird. Die Bezeichnungen der Bedingungen A bis D$'$ werden in Abschnitt~\ref{subsec:bedingungen} eingeführt.
+
+\begin{table}[htbp]
+  \centering
+  \small
+  \begin{tabularx}{\textwidth}{@{}lXll@{}}
+    \toprule
+    & Frage & Vergleich & Stufe \\
+    \midrule
+    FF1 & Gestaltung des transparenten, modifizierbaren Retrievals & Artefakt, E1--E3 & 4 \\
+    FF2 & Nähe der Entwicklerauswahl zur optimierten Auswahl & D vs.\ D$'$ & 4 \\
+    FF3 & Veränderung der Kontextgüte durch Kuratierung & C vs.\ D, C vs.\ D$'$ & 1, 4 \\
+    FF4 & Wirkung auf Lösungsqualität, Schritte, Tokenverbrauch & A/B/C/D$'$; C vs.\ D & 3, 4 \\
+    FF5 & Strukturierte gegenüber flacher Übergabe & B vs.\ C & 3 \\
+    FF6 & Interaktionsaufwand und subjektive Bewertung & Nutzerstudie & 4 \\
+    \bottomrule
+  \end{tabularx}
+  \caption{Teilfragen und die zugehörigen Vergleiche}
+  \label{tab:ff}
+\end{table}
+
+FF3 und FF5 zusammen erfüllen einen methodischen Zweck, der über die Einzelfragen hinausgeht. Der in dieser Arbeit vorgeschlagene Ansatz verbindet drei Bestandteile: das graphbasierte Retrieval, die Erhaltung der Struktur bei der Übergabe und die menschliche Kuratierung. Würden diese Bestandteile nur gemeinsam gegen einen Standardagenten geprüft, ließe sich ein beobachteter Unterschied keinem von ihnen zuordnen. Die getrennten Vergleiche stellen sicher, dass der Beitrag jedes Bestandteils einzeln ausgewiesen werden kann.
