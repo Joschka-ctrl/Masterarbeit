@@ -64,7 +64,7 @@ Eine verbesserte Kontextauswahl ist nur dann von Wert, wenn sie sich auf die Arb
 
 Der Zuschnitt von FF4 auf eine kontrollierte Aufgabenmenge ist keine Abschwächung, sondern eine Angabe der Reichweite. Auf externem Material wird in dieser Arbeit ausschließlich die Güte des Abrufs gemessen; Lösungsraten auf etablierten Benchmarks gehören nicht zum Untersuchungsumfang. Da Lösungsqualität, Schrittzahl und Tokenverbrauch zudem gegenläufig ausfallen können, wird der Anteil erfüllter Akzeptanzkriterien vorab als vorrangige Zielgröße festgelegt; Schrittzahl und Tokenverbrauch werden nachgeordnet betrachtet und nur bei vergleichbarer Lösungsqualität als Effizienzgewinn gedeutet. Andernfalls ließe sich ein sparsamer Lauf nicht von einem vorzeitig abgebrochenen unterscheiden.
 
-FF5 ist bewusst so geschnitten, dass der Knotensatz zwischen den verglichenen Bedingungen identisch bleibt und sich ausschließlich die Darstellungsform unterscheidet. Nur unter dieser Bedingung lässt sich der von \textcite{pusch2026hitlkgqa} beschriebene Effekt des Einebnens der Graphstruktur isoliert prüfen, ohne ihn mit Unterschieden im Abruf zu vermischen.
+FF5 ist bewusst so geschnitten, dass der Knotensatz zwischen den verglichenen Bedingungen identisch bleibt und sich ausschließlich die Darstellungsform unterscheidet. \textcite{pusch2026hitlkgqa} beschreiben das Einebnen der Graphstruktur zwar als Problem, prüfen es aber nicht für sich genommen; ihre Beobachtung stammt zudem aus Dokumentgraphen und allgemeinen Frage-Antwort-Aufgaben, nicht aus dem Umgang mit Quellcode. Die in Abschnitt~\ref{subsec:graphbasiert} angeführten Systeme verändern stets Abruf und Übergabeform zugleich, sodass sich der Anteil der Darstellung an einem beobachteten Unterschied dort nicht ablesen lässt. Nur bei identischem Knotensatz lässt sich der Effekt isoliert prüfen, ohne ihn mit Unterschieden im Abruf zu vermischen.
 
 \subsection{Kosten der Kuratierung}
 
@@ -73,6 +73,10 @@ Menschliche Beteiligung ist nicht kostenlos. Ein Verfahren, das die Lösungsqual
 \begin{quote}
 \textbf{FF6:} Welcher Interaktionsaufwand entsteht durch die Kuratierung, und wie bewerten Entwickler Nachvollziehbarkeit, Kontrolle und Vertrauenswürdigkeit des Verfahrens?
 \end{quote}
+
+In FF6 steckt ein Zielkonflikt, der über die Messung von Zeit hinausgeht. Wer einen Agenten einsetzt, will Arbeit abgeben und gerade nicht jeden Schritt nachvollziehen; die Kuratierung verlangt aber genau diese Aufmerksamkeit. Ihr steht ein möglicher Nebennutzen gegenüber: Wer den Kontext selbst zusammenstellt, setzt sich dabei mit der Codebase auseinander und kennt sie hinterher womöglich besser. Ob die Teilnehmenden den Aufwand als Last oder als Gewinn beschreiben, ist deshalb Teil der Frage und nicht allein aus den Aufwandsmaßen abzulesen.
+
+Die Kuratierung verschiebt den Eingriff zudem nach vorn. Statt ein Ergebnis im Nachhinein über Tests und Korrekturen zu berichtigen, wird die Arbeitsgrundlage vorab festgelegt. Dieselbe Abwägung ist aus der Zusammenarbeit menschlicher Entwicklungsteams vertraut, wo eine Einweisung zu Beginn dem späteren Nachbessern gegenübersteht. Ob dieser Vergleich trägt, wird im weiteren Verlauf anhand der Literatur zu Delegation und Einarbeitung geprüft.
 
 \subsection{Zuordnung}
 
@@ -98,3 +102,5 @@ Tabelle~\ref{tab:ff} ordnet jeder Teilfrage den Vergleich zu, über den sie bean
 \end{table}
 
 FF3 und FF5 zusammen erfüllen einen methodischen Zweck, der über die Einzelfragen hinausgeht. Der in dieser Arbeit vorgeschlagene Ansatz verbindet drei Bestandteile: das graphbasierte Retrieval, die Erhaltung der Struktur bei der Übergabe und die menschliche Kuratierung. Würden diese Bestandteile nur gemeinsam gegen einen Standardagenten geprüft, ließe sich ein beobachteter Unterschied keinem von ihnen zuordnen. Die getrennten Vergleiche stellen sicher, dass der Beitrag jedes Bestandteils einzeln ausgewiesen werden kann.
+
+Ebenso ist vorab festzulegen, welches Ergebnis gegen die Annahme dieser Arbeit spräche. Bleibt der in Abschnitt~\ref{sec:methodik} beschriebene Ausschöpfungsgrad nahe null und zeigt die kuratierte Bedingung gegenüber der automatischen keinen Vorteil beim Anteil erfüllter Akzeptanzkriterien, so gilt die Annahme, dass menschliche Kuratierung die Kontextbereitstellung verbessert, als nicht gestützt. Dieser Fall wird als Ergebnis berichtet und nicht durch nachträgliche Änderung der Auswertung umgangen. Die Aussagen zum Beitrag der Struktur (FF5) und zum Interaktionsaufwand (FF6) bleiben davon unberührt.

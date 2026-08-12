@@ -1,0 +1,44 @@
+
+\section{Zeitplan und Voraussetzungen}
+\label{sec:zeitplan}
+
+Die Bearbeitungszeit beträgt drei bis vier Monate. Tabelle~\ref{tab:zeitplan} verteilt die in Abschnitt~\ref{sec:methodik} beschriebenen Arbeitsschritte auf fünfzehn Wochen, gerechnet ab der Anmeldung der Arbeit. Die Verschriftlichung läuft ab der ersten Woche durchgehend mit; der Theorieteil liegt mit diesem Exposé bereits weitgehend vor.
+
+\begin{table}[ht]
+  \centering
+  \small
+  \begin{tabularx}{\textwidth}{@{}p{1.1cm}Xp{5.2cm}@{}}
+    \toprule
+    Woche & Hauptstrang & Parallel \\
+    \midrule
+    1 & Studien-Codebase prüfen, Graph aufbauen, Übergabeform für B und C festlegen, Änderungsvorgänge als Aufgabenkandidaten sichten & Messumgebung für Stufe 2 aufbauen \\
+    2 & Artefakt härten: Protokollierung der Kuratierungsschritte, Export der Auswahl, Antwortzeiten & Stufe 2 (Abruf auf externem Material) \\
+    3 & Drei Aufgaben auswählen und ausformulieren & Stufe 2 auswerten; Einwilligungsunterlagen einreichen \\
+    4 & Referenzkontexte festlegen und versionieren, maschinelle Akzeptanzprüfungen & Automatisierung der Agentendurchläufe \\
+    5 & Zweitbeurteilung der Referenzkontexte; \textbf{Stufe 1 (Obergrenze)} & Erzeugung der optimierten Varianten \\
+    6 & Stufe 3 vorbereiten und starten & Rekrutierung der Teilnehmenden \\
+    7 & Stufe 3 abschließen, Zwischenauswertung & Studienmaterial und Fragebögen \\
+    8 & Pilotdurchlauf mit ein bis zwei Personen, Nachbesserung & \\
+    9--10 & \textbf{Stufe 4 (Nutzerstudie)} & laufende Transkription \\
+    11 & Erhobene Auswahlen unter den Bedingungen der Stufe 3 nachfahren & \\
+    12 & Auswertung, quantitativ und qualitativ & \\
+    13--15 & Verschriftlichung, Puffer & \\
+    \bottomrule
+  \end{tabularx}
+  \caption{Zeitliche Planung der Arbeitsschritte}
+  \label{tab:zeitplan}
+\end{table}
+
+\subsection{Kritischer Pfad und Entscheidungspunkte}
+
+Studien-Codebase, Aufgaben mit Referenzkontexten, Stufe~1, Stufe~3 und Nutzerstudie bauen aufeinander auf; eine Verzögerung an einer dieser Stellen verschiebt alle nachfolgenden. Stufe~2 hängt dagegen an keinem der übrigen Schritte und dient als zeitlicher Puffer.
+
+Zwei Entscheidungspunkte sind vorgesehen. In Woche~1 wird geprüft, ob die Studien-Codebase Größe, Verknüpfungsdichte und Beschreibungsgüte aufweist, die ein graphbasiertes Retrieval überhaupt sinnvoll machen; andernfalls ist die Codebase zu wechseln, bevor Aufgaben entstehen. In Woche~5 entscheidet Stufe~1 darüber, ob die Aufgaben überhaupt Spielraum für eine Kuratierung lassen. Zeigt sich dort keiner, werden die Aufgaben angepasst, solange dafür Zeit bleibt; die geänderte Fassung wird dokumentiert und die ursprüngliche im Anhang ausgewiesen. Ab Woche~11 findet keine weitere Datenerhebung statt.
+
+Gerät der Zeitplan in Verzug, wird die Zahl der Aufgaben von drei auf zwei gesenkt, nicht die Zahl der Wiederholungen je Bedingung: Ohne Wiederholungen ließe sich die erhebliche Streuung der Agentendurchläufe nicht von einem Effekt der Bedingung trennen. Sagen weniger als vier Personen zu, wird Stufe~4 als Fallstudie mit zwei bis drei Teilnehmenden geführt; die Aussagekraft der Arbeit ruht dann auf den Stufen~1 bis~3, die ohne Versuchspersonen auskommen.
+
+\subsection{Voraussetzungen}
+
+Ein Teil der benötigten Zuarbeit liegt außerhalb der eigenen Planung und ist deshalb frühzeitig zu klären. Vom Betreuer werden benötigt: der Zugang zur Studien-Codebase samt Versionsgeschichte, die schriftliche Zustimmung zu ihrer Verwendung, die Klärung, ob Codeausschnitte in der Arbeit abgedruckt werden dürfen, sowie die unabhängige Zweitbeurteilung eines Referenzkontextes in Woche~5. Die Einwilligungsunterlagen und der Umgang mit den Aufzeichnungen sind vorab mit der Hochschule abzustimmen. Die Ansprache der Teilnehmenden erfolgt aus den in Abschnitt~\ref{sec:methodik} genannten Gründen nicht durch den Betreuer selbst und beginnt in Woche~6, damit fehlende Zusagen noch vor dem Pilotdurchlauf auffallen.
+
+Auf technischer Seite müssen vor Stufe~3 die Übergabeformen der Bedingungen B und C denselben Knotensatz liefern, die Kuratierungsschritte maschinenlesbar protokolliert und einzelne Auswahlen exportier- und wieder einspielbar sein. Die Durchläufe der Stufen~1 und~3 sowie das Nachfahren in Woche~11 summieren sich auf rund einhundert Agentendurchläufe, deren Kosten vorab abzuschätzen sind.
