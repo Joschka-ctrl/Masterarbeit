@@ -1,0 +1,105 @@
+% thesis_main.tex — Masterarbeit Joschka Peeters
+% Thema: Interaktive Kontextkuratierung für Coding Agents
+%
+% Kompilieren (PowerShell, TeX Live 2025):
+%   $env:PATH = "C:\texlive\2025\bin\windows;$env:PATH"
+%   pdflatex -interaction=nonstopmode thesis_main.tex
+%   biber thesis_main
+%   pdflatex -interaction=nonstopmode thesis_main.tex
+%   pdflatex -interaction=nonstopmode thesis_main.tex
+
+\documentclass[12pt,a4paper,oneside,numbers=noenddot,bibliography=totoc]{scrreprt}
+
+\usepackage[ngerman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[style=authoryear-comp,backend=biber,maxcitenames=2,maxbibnames=6,uniquename=false,uniquelist=false]{biblatex}
+\usepackage{csquotes}
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{microtype}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{enumitem}
+\usepackage{parskip}
+\usepackage{graphicx}
+\usepackage[most]{tcolorbox}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning}
+\usepackage{colortbl}
+\usepackage{hyperref} % hyperref zuletzt laden
+
+% Offene Punkte sichtbar im Satzbild, damit sie nicht in einer Nebenliste untergehen.
+% VOR DER ABGABE ENTFERNEN: Umgebung hier loeschen, dann meldet der Compiler jede
+% verbliebene Fundstelle als Fehler statt sie stillschweigend mitzudrucken.
+\newtcolorbox{offen}{
+  colback=yellow!18, colframe=orange!75!black, boxrule=0.7pt,
+  left=5pt, right=5pt, top=4pt, bottom=4pt,
+  before skip=8pt, after skip=8pt, fontupper=\small
+}
+
+\geometry{top=2.5cm, bottom=2.5cm, left=3cm, right=2.5cm}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=black,
+  citecolor=blue!70!black,
+  urlcolor=blue!70!black
+}
+
+\addbibresource{bibliography.bib}
+\onehalfspacing
+
+\begin{document}
+
+% ---------------------------------------------------------------------------
+% Titelei
+% ---------------------------------------------------------------------------
+\input{frontmatter/titelseite}
+
+\pagenumbering{roman}
+\input{frontmatter/kurzfassung}
+
+\tableofcontents
+
+% Bei Bedarf aktivieren, sobald Abbildungen/Tabellen existieren:
+% \listoffigures
+% \listoftables
+% \input{frontmatter/abkuerzungen}
+
+\cleardoublepage
+\pagenumbering{arabic}
+
+% ---------------------------------------------------------------------------
+% Kapitel
+% ---------------------------------------------------------------------------
+% Gliederung nach codebase-graph/docs/notizen/"Zeitplan und Gliederung 2026-10-19.md"
+% (Stand 26.10.2026, nach Termin mit Rainer). Budget: 81 S. + 9 S. Reserve.
+\input{chapters/01_einleitung}
+\input{chapters/02_grundlagen}
+\input{chapters/03_stand_der_forschung}
+\input{chapters/04_werkzeug}
+\input{chapters/05_vormessungen}
+\input{chapters/06_studiendesign}
+\input{chapters/07_ergebnisse}
+\input{chapters/08_diskussion}
+\input{chapters/09_fazit}
+
+% ---------------------------------------------------------------------------
+% Literaturverzeichnis
+% ---------------------------------------------------------------------------
+\printbibliography[title={Literaturverzeichnis}]
+
+% ---------------------------------------------------------------------------
+% Anhang
+% ---------------------------------------------------------------------------
+\appendix
+\input{appendix/anhang}
+
+% ---------------------------------------------------------------------------
+% Erklärung
+% ---------------------------------------------------------------------------
+\input{frontmatter/erklaerung}
+
+\end{document}

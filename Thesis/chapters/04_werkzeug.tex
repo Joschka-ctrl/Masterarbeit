@@ -1,0 +1,202 @@
+% Kapitel 4 — Budget: 12 Seiten — Schreiben: 26.10.–13.11. (fertig 13.11., interner Meilenstein)
+% Konzeption und Umsetzung getrennt (Beschluss 26.10.).
+% Zwei Abbildungen: Pipeline mit Eingriffspunkten (-> 4.2), Graphschema (-> 4.3).
+% Module, Werkzeuge und Konfiguration als Tabelle, keine Codebeschreibung.
+%
+% Schreibreihenfolge (Plan 27.10.): 4.3 -> 4.4 -> 4.5 -> 4.2 -> 4.1 -> 4.6
+%
+% SCHREIB-WORKFLOW (siehe codebase-graph\docs\textnotizen-2026-09-09-werkzeug-und-vormessungen.md):
+% - Hauptquelle ist Teil 0 + Teil A der Textnotizen (geprüfte Formulierungen),
+%   die Stichpunkte hier sind nur die Verteilung auf die Abschnitte.
+%   Zuordnung: A1/A2 -> 4.2/4.3, A3 (Pipeline in vier Stufen) -> 4.4,
+%   A4 (drei Betriebsmodi) + A5 (Technik tabellarisch) -> 4.5, A6 (Grenzen) -> 4.6.
+% - Schreibregeln: Teil E der Textnotizen (verbotene Formulierungen E1,
+%   Kennzeichnungspflichten E2, Nachweise in den Anhang E3, Validität mit
+%   Zahlen E4).
+% - Nach Erstfassung: Prüfagenten-Runde abschnittsweise gegen Quellen und
+%   Code (Muster wie Prüfprotokoll Teil F, 09.09.).
+% Erzähllinie Konzeption/Umsetzung: In 4.2 nur das One-Shot-HITL-Konzept als
+% Konzeption erzählen; Stepwise ist Iteration nach Erfahrung und kommt in 4.5
+% ("aus den Erfahrungen entstand der Stepwise-Modus").
+
+\chapter{Das Werkzeug}
+\label{chap:werkzeug}
+
+\section{Überblick, Ziel und Grundbegriffe}% 2 S. — ZULETZT schreiben (nimmt Kapitel vorweg)
+\label{sec:werkzeug-ueberblick}
+% Inhalt: Graph, Knoten und Kanten, Einbettung, Seeds, Traversierung, Hop,
+% Kontextblock; Textnotizen Teil 0.2.
+% NOTIZEN:
+% - Grundbegriffe nur so weit einführen, wie Kapitel 2 (Grundlagen) sie nicht
+%   schon abdeckt — vor dem Schreiben gegen 02_grundlagen.tex abgleichen.
+% - Kurzer Rundflug über das Werkzeug: was es ist (MCP-Server + Neo4j-Graph +
+%   Review-UI), was es leistet, Verweis auf die folgenden Abschnitte.
+
+\section{Konzeption}% 2 S. — nach der Umsetzung schreiben
+\label{sec:konzeption}
+% Inhalt: geplante Architektur, Verfahren, Werkzeuge und Informationsquellen.
+% Nur das WARUM und WAS — keine Technik, keine Implementierungsdetails.
+%
+% NOTIZEN — Grundidee / Motivation:
+% - Coding-Agenten (Claude Code) bekommen Kontext bisher über Datei-Suche
+%   (grep, Glob) — textbasiert, kennt die Struktur des Codes nicht.
+% - Kernidee: Codebasis als semantischen Graphen in Neo4j abbilden und dem
+%   Agenten über einen MCP-Server strukturellen + semantischen Kontext liefern.
+% - Zweite Kernidee (die eigentliche These): Retrieval-Prozess nicht als
+%   Blackbox, sondern sichtbar und editierbar — Human-in-the-Loop: der Mensch
+%   prüft und korrigiert den Kontext, bevor der Agent damit arbeitet.
+%
+% NOTIZEN — Architektur auf Blockdiagramm-Ebene (drei Stufen):
+% - Parse -> Import -> Serve; hier nur als Überblick, Details in 4.3–4.5.
+% - ABBILDUNG 1 hier: Pipeline mit Eingriffspunkten.
+%
+% NOTIZEN — Designprinzipien:
+% - Alles lokal (Neo4j, Ollama, Review-Server auf 127.0.0.1) — kein Code
+%   verlässt die Maschine; relevant für Studie/Datenschutz.
+% - Embeddings einmalig lokal vorrechnen; bei Anfrage wird nur der
+%   Anfragetext embedded — Abfrage kostet keine bis kaum Tokens.
+% - Ein globaler Server für beliebige Projekte; Konfiguration pro Projekt
+%   über .env.local.
+% - Automatisches Retrieval nutzt dieselben Stufen wie die manuelle
+%   Pipeline — der Mensch kann nur zusätzlich eingreifen/ändern.
+%
+% NOTIZEN — HITL-Konzept (vision.md, Juni 2026) — hier als KONZEPT, Umsetzung in 4.5:
+% - Vision: der komplette Retrieval-Prozess wird als interaktiver Graph im
+%   Browser sichtbar — Seeds, Hops pro Schritt, Scores/Gewichte,
+%   Ranking-Begründung und verworfene Kandidaten mit Grund (unter
+%   Schwellwert, Duplikat, Cap).
+% - Der Agent blockiert und wartet; der Mensch wählt Knoten ab/zu, fügt per
+%   Suche (Name oder semantisch) Knoten hinzu, justiert Parameter (hopDepth,
+%   Threshold, Gewichte) nach; erst nach "Kontext bestätigen" arbeitet der
+%   Agent weiter.
+% - Timeout-Konzept: läuft die Review-Frist ab, wird der unbearbeitete
+%   Kontext automatisch übernommen — der Agent bleibt nie dauerhaft hängen.
+% - Replay-Timeline als Erklärbarkeits-Feature (Entities -> Seeds ->
+%   Hop 1..N -> Ranking -> Final).
+% - Netter Erzählpunkt: die Pipeline produzierte die Trace-Daten größtenteils
+%   schon, sie wurden nur nicht aufbewahrt (ein Satz).
+% - Browser-UI statt VS-Code-Extension: keine Bindung an einen Editor
+%   (ein Halbsatz reicht).
+%
+% Quellen zum Nachlesen: git show c89bf2c:vision.md (HITL-Konzept),
+% git show 4842033:README.md (ursprüngliche Architektur), docs/decisions/.
+
+\section{Umsetzung: Codegraph -- Aufbau, Import und Entscheidungen}% 2 S. — ZUERST schreiben
+\label{sec:codegraph}
+% Inhalt: Datenbank je Projekt, JSX als Aufrufe.
+% OFFENER PUNKT vor dem Schreiben: im Repo nachschauen, welche Sprachen
+% tree-sitter zu welchem Grad abdeckt.
+%
+% NOTIZEN — Parse (parse.js):
+% - tree-sitter läuft über den Quellcode, extrahiert Dateien, Funktionen,
+%   Klassen, Imports und Aufrufe in eine AST-JSON-Zwischendatei
+%   (.codebase-graph/ts-ast.json).
+% - Zunächst TypeScript/JavaScript; Erweiterbarkeit auf weitere Sprachen
+%   angelegt (Python via Subprozess, C#, Java).
+%
+% NOTIZEN — Graphschema (ABBILDUNG 2 hier):
+% - Knotentypen: File, Function, Class; GitHub-Anbindung mit Issue und
+%   PullRequest; Knoten tragen Git-Metadaten (commitCount, letzte
+%   Commit-Message) und Beschreibungen.
+% - Kantentypen: IMPORTS, IMPORTS_SYMBOL, DEFINED_IN, CALLS, EXTENDS, TESTS;
+%   GitHub-Kanten LINKED_TO, MODIFIES, CLOSES.
+% - Idee: Code-Struktur, Testabdeckung, Git-Historie und Projektwissen
+%   (Issues/PRs) in einem Graphen vereinen.
+%
+% NOTIZEN — Import (import.js):
+% - Baut aus dem AST den Neo4j-Graphen; erzeugt pro Knoten ein
+%   Ollama-Embedding (lokal, nomic-embed-text, 768-dim — ein Satz reicht)
+%   und legt Vektorindizes an.
+%   ERGÄNZUNG 27.10.: Der Text nennt den Endstand qwen3-embedding:0.6b
+%   (1024-dim), nomic war das Ausgangsmodell; der Wechsel (B6, 20.08.) wird
+%   in Kapitel 5 erzählt. Ebenso Symboltext mit Rumpf (B5) als Endstand.
+% - Datenbank je Projekt (spätere Entscheidung, hier erwähnen).
+% - JSX-Elemente werden als Aufrufe behandelt (Entscheidung, kurz begründen).
+
+Das Werkzeug durchläuft zwei Phasen mit unterschiedlicher Lebensdauer. In der Build-Phase wird eine Codebasis einmal vollständig in den Graphen überführt und danach nach jedem Commit für die geänderten Dateien nachgeführt. Die Kette führt dabei von den Quelldateien über \texttt{parse.js} in ein Zwischenformat und von dort über \texttt{import.js} nach Neo4j.
+Angestoßen wird das durch einen Git-Hook. In der Query-Phase wird bei jeder Coding-Aufgabe der Aufgabentext eingegeben und ein Kontextblock ausgegeben.
+Der vollständige Build ist damit eine seltene Operation, der Abruf eine bei jeder Aufgabe wiederkehrende, die Sekunden dauert. Dieser Abschnitt beschreibt die Build-Phase, Abschnitt~\ref{sec:abrufpipeline} die Query-Phase.
+
+Den ersten Schritt der Build-Phase übernimmt \texttt{parse.js}. Es läuft mit tree-sitter, einer Parserbibliothek mit Grammatiken für viele Sprachen, über den Quellcode und extrahiert je Datei die enthaltenen Funktionen und Klassen, die Importe und die Aufrufe. Das Ergebnis wird als Zwischendatei im Projektverzeichnis abgelegt (\texttt{.codebase-graph/ts-ast.json}). Abgedeckt sind TypeScript und JavaScript einschließlich TSX, Python, C\# und Java. TypeScript, JavaScript, C\# und Java werden direkt im Prozess mit den jeweiligen tree-sitter-Grammatiken verarbeitet, Python über ein eigenes Skript als Unterprozess, das den Parser der Python-Standardbibliothek nutzt und dasselbe Zwischenformat liefert. Bei C\# entstehen keine dateiübergreifenden Kanten, weil \texttt{using}-Direktiven Namensräume nennen, die anders als Java-Pakete oder Python-Module keiner Verzeichnisstruktur entsprechen und sich deshalb nicht eindeutig einer Datei zuordnen lassen. Für alle Sprachen gilt dieselbe Entwurfsregel. Was sich nicht eindeutig auflösen lässt, erhält keine Kante, denn eine geratene Kante lenkt die spätere Traversierung in die Irre, eine fehlende lässt nur eine Lücke.
+
+\begin{figure}[htbp]
+  \centering
+  \fbox{\parbox{0.9\linewidth}{\centering\vspace{3cm}[KLÄREN: Abbildung Graphschema, TikZ-Entwurf folgt]\vspace{3cm}}}
+  \caption{Graphschema des Codegraphen. Knotentypen \texttt{File}, \texttt{Function}, \texttt{Class}, \texttt{Issue} und \texttt{PullRequest} mit den neun Kantentypen. Die Issue- und Pull-Request-Schicht wird nicht von der Import-Pipeline befüllt.}
+  \label{fig:graphschema}
+\end{figure}
+
+Aus der Zwischendatei baut \texttt{import.js} im zweiten Schritt den Graphen auf, Abbildung~\ref{fig:graphschema} zeigt dessen Schema. Der Graph kennt die Codeknoten \texttt{File}, \texttt{Function} und \texttt{Class} sowie die Projektwissen-Knoten \texttt{Issue} und \texttt{PullRequest}. Sechs Kantentypen verbinden die Codeknoten. \texttt{DEFINED\_IN} hängt jede Funktion und Klasse an ihre Datei, \texttt{IMPORTS} verbindet Datei mit Datei, \texttt{IMPORTS\_SYMBOL} eine Datei mit der importierten Funktion oder Klasse, \texttt{CALLS} Funktion mit Funktion, \texttt{EXTENDS} Klasse mit Oberklasse und \texttt{TESTS} eine am Namensmuster erkannte Testdatei mit den Dateien, die sie importiert. Drei weitere Kantentypen tragen die GitHub-Schicht. Ein Issue ist per \texttt{LINKED\_TO} mit einer Datei verbunden, ein Pull Request per \texttt{MODIFIES} mit den geänderten Dateien und per \texttt{CLOSES} mit dem Issue, das er schließt. Jeder Dateiknoten trägt zusätzlich Git-Metadaten, nämlich die Zahl der Commits und die letzte Commit-Nachricht, und jeder Codeknoten einen Beschreibungstext samt Einbettung. Die Idee hinter diesem Schema ist, Codestruktur, Testzuordnung, Git-Metadaten und Projektwissen in einem einzigen Graphen zusammenzuführen. Die Issue- und Pull-Request-Schicht ist im Schema angelegt, wird aber nicht von der Import-Pipeline befüllt, sondern von einem projektspezifischen Skript außerhalb der hier beschriebenen Kette.
+
+Zwei Entscheidungen in der Build-Kette betreffen die Frage, wann eine Kante entsteht. Die erste ist die Importauflösung. Eine Importanweisung nennt selten den echten Dateipfad. Ein Alias wie \texttt{@/lib/utils} wird je Projekt in der Konfiguration definiert, und ein Python-Import wie \texttt{app.models} ist ein Modulname, dessen Wurzelverzeichnis das Projekt festlegt. Der MCP-Server wird einmal installiert und kann für beliebige Repositories genutzt werden, er darf deshalb keine feste Verzeichnisstruktur voraussetzen. Es liest stattdessen die Projektkonfiguration aus, leitet daraus mögliche Dateipfade ab und prüft, ob einer davon unter den geparsten Dateien vorkommt. Nur dann entsteht eine Importkante. Bibliotheken von Dritten erhalten damit keinen Knoten im Graphen. Eine dateiübergreifende Aufrufkante entsteht nur, wenn die aufrufende Datei das aufgerufene Symbol importiert, der Aufruf wird also über die \texttt{IMPORTS\_SYMBOL}-Kante zu seiner Zielfunktion aufgelöst. Ohne Importkanten zerfällt der Graph deshalb in unverbundene Dateien. Die zweite Entscheidung betrifft JSX. In React wird eine Komponente als Element \texttt{<Button/>} geschrieben, was zur Laufzeit dennoch ein Funktionsaufruf ist. Der Parser erkannte zunächst nur die klassische Aufrufschreibweise, in einer React-Codebasis fehlten dadurch die meisten Aufrufkanten zwischen Komponenten. Der Parser zählt deshalb jedes JSX-Element mit großgeschriebenem Namen, also jede eigene Komponente im Unterschied zu einem HTML-Element, als Aufruf.
+
+Beim Anlegen jedes Knotens erzeugt \texttt{import.js} außerdem dessen Einbettung. Grundlage der Einbettung ist nicht der Quelltext allein, sondern ein je Knoten zusammengesetzter Beschreibungstext, der Quelltextanteile mit Metadaten und Kommentaren verbindet. Für eine Datei besteht er aus Dateiname und Pfad, den Namen der exportierten und internen Funktionen, den importierten Symbolen und deren Herkunft, dem Dokumentationskommentar am Dateikopf, der letzten Commit-Nachricht, den dreißig häufigsten Bezeichnern des Quelltexts ohne Schlüsselwörter der Sprache und bis zu 400 Zeichen aus den übrigen Kommentaren. Die Absicht dahinter ist, dass der Vektor trägt, wofür eine Datei da ist, und nicht, wie sie syntaktisch aussieht. Anders als im Graphen bleiben Bibliotheksimporte im Beschreibungstext erhalten, denn auf welchem Framework eine Datei aufbaut, sagt viel darüber, wofür sie da ist. Für Funktionen und Klassen besteht der Text aus Signatur, Dekoratoren, Docstring und dem Rumpf bis zu 1200 Zeichen. Die Vektoren erzeugt ein lokal laufendes Ollama, eine Laufzeitumgebung für Sprachmodelle, mit dem Modell \texttt{qwen3-embedding:0.6b} bei 1024 Dimensionen. Lokal heißt, dass kein Quellcode die Maschine verlässt. Je Knotentyp wird ein Vektorindex angelegt, dazu ein Volltextindex über Name, Pfad und Beschreibung. Fällt der Einbettungsdienst aus, läuft der Import ohne Vektoren weiter, und der Abruf stützt sich auf die namens- und stichwortbasierten Suchzweige aus Abschnitt~\ref{sec:abrufpipeline}.
+
+Zwei spätere Entscheidungen betreffen den Betrieb des Graphen. Die erste ist die Datenbank je Projekt. Ursprünglich lagen alle Projekte in einer gemeinsamen Datenbank und unterschieden sich nur durch eine Projekteigenschaft an jedem Knoten. Ein Vektorindex in Neo4j umfasst jedoch alle Knoten eines Typs unabhängig von deren Projekteigenschaft, und die Vektorabfrage lässt sich nicht vorab auf ein Projekt einschränken. Die inhaltliche Suche holte deshalb die global nächsten Kandidaten und filterte erst danach auf das Projekt, sodass Treffer aus fremden Projekten die eigenen verdrängten. Seit August 2026 legt \texttt{import.js} daher für jedes Projekt eine eigene Datenbank an, deren Name aus dem Projektnamen abgeleitet wird. Mehrere Datenbanken je Instanz setzen die Enterprise-Ausgabe von Neo4j voraus, die Neo4j Desktop mit einer kostenlosen Entwicklerlizenz mitliefert. Die zweite Entscheidung betrifft den inkrementellen Lauf. Geänderte Dateien werden nicht aktualisiert, sondern mit ihren Funktionen und Klassen gelöscht und neu angelegt, damit keine veralteten Symbolknoten einer Datei zurückbleiben. Die internen Knoten-IDs sind deshalb über Neubauten hinweg nicht stabil. Alles, was Knoten über Läufe hinweg vergleicht, identifiziert sie deshalb über Pfad und Name.
+
+\section{Umsetzung: Abrufpipeline in vier Stufen}% 2,5 S. — als ZWEITES schreiben
+\label{sec:abrufpipeline}
+% NOTIZEN — die vier Stufen (get_context):
+% 1. Seeds: Task-Text wird per Ollama embedded -> Vektorsuche: Top-Files +
+%    Top-Functions über Schwellwert als Seeds; Fallback auf
+%    Keyword-Extraktion, wenn Ollama nicht erreichbar oder keine Treffer;
+%    spätere Iteration: Hybrid-Seed-Suche mit BM25 (aus Stepwise-Arbeit).
+% 2. Traversierung: von den Seeds aus bis hopDepth über alle Kantentypen.
+% 3. Ranking: Dedupe, Ranking nach Hop-Distanz (später geboostet durch
+%    Commit-Historie und Import-Grad), Cap bei N Nachbarn.
+% 4. Rückgabe: strukturierter Kontextblock plus decisionPath — pro Knoten
+%    die Begründungskette (nodeChain/edgeChain); Nachvollziehbarkeit von
+%    Anfang an eingeplant -> das ist das Erklärbarkeits-Argument, betonen.
+%
+% KONFIGURATIONSTABELLE hier (Parameter NICHT in den Fließtext):
+% - EMBED_THRESHOLD 0.6; Top-5 Files + Top-5 Functions als Seeds;
+%   hopDepth default 2; Cap 30 Nachbarn; (weitere Parameter aus .env.local
+%   beim Schreiben ergänzen).
+
+\section{Umsetzung: drei Betriebsmodi, Oberfläche und Rückgabeform}% 2,5 S. — als DRITTES schreiben, bisher 4.4 + 4.5
+\label{sec:betriebsmodi}
+% Inhalt: mit Studienseite; JSON, Entscheidung 24.09.
+%
+% NOTIZEN — die drei Modi:
+% - get_context: automatischer Pfad.
+% - get_context_interactive: One-Shot-Review — Agent blockiert, Mensch
+%   editiert den fertigen Kontext, bestätigt, Agent arbeitet weiter.
+% - get_context_stepwise (August 2026): Eingriff pro Pipeline-Stufe
+%   (Seeds -> Traversierung -> Ranking) statt nur am Ende — als Iteration
+%   aus den Erfahrungen erzählen, nicht als ursprüngliche Konzeption.
+% - Der Nutzer steuert per Prompt, welcher Modus gilt.
+%
+% NOTIZEN — Oberfläche (Review-UI im Browser):
+% - Knoten ab-/zuwählen, manuell per Suche (Name oder semantisch) hinzufügen,
+%   Retrieval-Parameter nachjustieren und neu rechnen lassen,
+%   "Kontext bestätigen"-Schritt.
+% - Timeout mit Countdown und Verlängern-Button; danach automatische
+%   Übernahme des unbearbeiteten Kontexts.
+% - Replay-Timeline: Retrieval-Ablauf Schritt für Schritt nachvollziehen.
+% - open_in_neo4j: Subgraph des gelieferten Kontexts mit einem Klick im
+%   Neo4j Browser öffnen — der Mensch sieht, was der Agent bekommen hat.
+% - Eigener Kontext-Renderer (aus Stepwise-Iteration).
+%
+% NOTIZEN — ein Absatz Technik, der argumentativ tragend ist:
+% - MCP läuft über stdio -> stdout darf nicht verschmutzt werden (Logging
+%   ausschließlich stderr); Blocking über awaited Promise +
+%   In-Memory-Session-Map; MCP-Keepalive über notifications/progress alle
+%   10 s, damit der Client-Timeout nicht zuschlägt — als größtes technisches
+%   Risiko identifiziert und vorab validiert.
+% - GESTRICHEN (zu tief, höchstens Fußnote): node:http statt Express,
+%   Cytoscape vendored ohne Build-Step, SSE statt WebSocket, Zustände als
+%   CSS-Klassen.
+%
+% WERKZEUGTABELLE hier: die 9 MCP-Tools mit Einzeiler-Beschreibung —
+% get_context, get_context_interactive, get_context_stepwise, inspect_graph,
+% find_importers, find_exported_functions, find_reachable_functions,
+% find_issues_for_file, find_prs_for_file, update_graph, open_in_neo4j
+% (Liste beim Schreiben gegen den aktuellen Stand im Repo prüfen).
+%
+% NOTIZEN — Rückgabeform:
+% - Strukturierter Markdown-Kontextblock; Umstellung auf JSON
+%   (Entscheidung 24.09.) — kurz begründen.
+
+\section{Grenzen}% 1 S. — zum Schluss schreiben
+\label{sec:werkzeug-grenzen}
+% Inhalt: dazu Agentenanfrage 08.10. (Trainingswissen).
