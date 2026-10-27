@@ -13,3 +13,5 @@
 
 # Keep PDFs that are outputs
 # (pdfLiteratur and expose_main.pdf are intentionally tracked)
+
+.claude/
