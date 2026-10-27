@@ -121,8 +121,42 @@ Den ersten Schritt der Build-Phase übernimmt \texttt{parse.js}. Es läuft mit t
 
 \begin{figure}[htbp]
   \centering
-  \fbox{\parbox{0.9\linewidth}{\centering\vspace{3cm}[KLÄREN: Abbildung Graphschema, TikZ-Entwurf folgt]\vspace{3cm}}}
-  \caption{Graphschema des Codegraphen. Knotentypen \texttt{File}, \texttt{Function}, \texttt{Class}, \texttt{Issue} und \texttt{PullRequest} mit den neun Kantentypen. Die Issue- und Pull-Request-Schicht wird nicht von der Import-Pipeline befüllt.}
+  \begin{tikzpicture}[
+    node distance=20mm and 18mm,
+    every loop/.style={min distance=9mm, looseness=7, -{Latex[length=2.2mm]}},
+    knoten/.style={draw, rounded corners=2pt, minimum width=24mm, minimum height=8mm, font=\small\ttfamily, fill=white},
+    gh/.style={knoten, dashed, draw=gray!70, text=gray!60!black},
+    kante/.style={-{Latex[length=2.2mm]}, semithick},
+    ghkante/.style={kante, dashed, draw=gray!70},
+    lbl/.style={font=\scriptsize\ttfamily, fill=white, inner sep=1.5pt},
+    ghlbl/.style={lbl, text=gray!60!black}
+  ]
+    % Codeknoten
+    \node[knoten] (file) {File};
+    \node[knoten, below left=of file] (func) {Function};
+    \node[knoten, below right=of file] (class) {Class};
+    % Projektwissen-Knoten
+    \node[gh, right=of file, xshift=30mm] (issue) {Issue};
+    \node[gh, below=of issue] (pr) {PullRequest};
+    \node[draw, dashed, draw=gray!70, rounded corners=3pt, minimum width=32mm, minimum height=48mm,
+          label={[font=\scriptsize, text=gray!60!black, align=center]below:Projektwissen, nicht von der\\Import-Pipeline befüllt}]
+          at ([yshift=-10mm]issue.south) {};
+
+    % Kanten zwischen Codeknoten
+    \draw[kante] (func) to[bend left=20] node[lbl, sloped, above] {DEFINED\_IN} (file);
+    \draw[kante] (file) to[bend left=20] node[lbl, sloped, below] {IMPORTS\_SYMBOL} (func);
+    \draw[kante] (class) to[bend right=20] node[lbl, sloped, above] {DEFINED\_IN} (file);
+    \draw[kante] (file) to[bend right=20] node[lbl, sloped, below] {IMPORTS\_SYMBOL} (class);
+    \draw[kante] (file) to[loop above] node[lbl] {IMPORTS, TESTS} (file);
+    \draw[kante] (func) to[loop below] node[lbl] {CALLS} (func);
+    \draw[kante] (class) to[loop below] node[lbl] {EXTENDS} (class);
+
+    % Kanten der Projektwissen-Schicht
+    \draw[ghkante] (issue) -- node[ghlbl, above] {LINKED\_TO} (file);
+    \draw[ghkante] (pr) -- node[ghlbl, above, sloped, pos=0.22] {MODIFIES} (file);
+    \draw[ghkante] (pr) -- node[ghlbl, right] {CLOSES} (issue);
+  \end{tikzpicture}
+  \caption{Graphschema des Codegraphen. Knotentypen \texttt{File}, \texttt{Function}, \texttt{Class}, \texttt{Issue} und \texttt{PullRequest} mit den neun Kantentypen. Schleifen stehen für Kanten zwischen zwei Knoten desselben Typs, etwa einem Aufruf von Funktion zu Funktion. Die Issue- und Pull-Request-Schicht wird nicht von der Import-Pipeline befüllt.}
   \label{fig:graphschema}
 \end{figure}
 
