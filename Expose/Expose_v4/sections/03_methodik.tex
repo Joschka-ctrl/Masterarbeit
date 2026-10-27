@@ -19,7 +19,7 @@ Verglichen werden fünf Bedingungen, die sich in der Art der Kontextbereitstellu
     & Kontextbereitstellung \\
     \midrule
     A & Standardwerkzeuge des Agenten, reaktive Exploration ohne Graph \\
-    B & Automatisches graphbasiertes Retrieval, Übergabe als flache Liste \\
+    B & Automatisches graphbasiertes Retrieval, flache Übergabe bei gleichem Feldbestand und gleicher Kantenmenge wie C \\
     C & Automatisches graphbasiertes Retrieval, strukturierte Übergabe des Subgraphen \\
     D & Schrittweise kuratiertes Retrieval, Auswahl durch den Entwickler \\
     D$'$ & Wie D, jedoch Auswahl automatisch gegen den Referenzkontext optimiert \\
@@ -29,7 +29,11 @@ Verglichen werden fünf Bedingungen, die sich in der Art der Kontextbereitstellu
   \label{tab:bedingungen}
 \end{table}
 
-Bedingung A bildet den in Abschnitt~2.1 beschriebenen reaktiven Fall ab und dient als Ausgangspunkt. Die Bedingungen B und C unterscheiden sich ausschließlich in der Darstellungsform bei identischem Knotensatz und isolieren damit den Effekt der Strukturerhaltung. Bedingung D$'$ ist keine reale Nutzungsform, sondern eine rechnerisch erzeugte Vergleichsgröße: Sie bildet ab, was eine Kuratierung unter Kenntnis des Referenzkontextes leisten würde, und liefert damit sowohl die Obergrenze des Verfahrens als auch den Bezugspunkt, an dem sich die Auswahl realer Entwickler in FF2 messen lässt.
+Bedingung A bildet den in Abschnitt~2.1 beschriebenen reaktiven Fall ab und dient als Ausgangspunkt. Die Bedingungen B und C tragen denselben Knotensatz, denselben Feldbestand je Knoten und dieselbe Kantenmenge; sie unterscheiden sich allein darin, ob die Knoten nach Traversierungsdistanz gruppiert und geordnet sind. Damit isolieren sie den Effekt der Anordnung, ohne ihn mit einem Unterschied im Informationsgehalt oder in der Kontextlänge zu vermischen.
+
+\begin{offen}
+\textbf{OFFEN -- Bedingung B ist so noch nicht gebaut.} Das Werkzeug kennt heute drei Ausgabeformen, und keine davon entspricht dem hier beschriebenen B: Die flache Fassung (\texttt{outputFormat: "summary"}) führt weder Dateipfad noch Zeilenspanne noch Beschreibung und ist damit nicht formgleich, sondern informationsärmer -- gemessen 530 gegenüber 3.350 Token bei identischem Knotensatz. Die kuratierte Fassung trägt als einzige die vollständige Kantenmenge, die der gruppierten Fassung fehlt. B im obigen Sinne (Feldbestand und Kanten wie C, nur ungeordnet und ungruppiert) muss vor der Erhebung erst implementiert werden; ebenso ist die Kantenmenge in C nachzuziehen. Andernfalls vergleicht FF5 Informationsgehalt statt Form und der Hauptvergleich C gegen D trennt vier Faktoren statt zwei. Stand und Umsetzungsplan: \texttt{docs/befund-2026-08-20-uebergabeform.md}, Arbeitspaket AP9.
+\end{offen} Bedingung D$'$ ist keine reale Nutzungsform, sondern eine rechnerisch erzeugte Vergleichsgröße: Sie bildet ab, was eine Kuratierung unter Kenntnis des Referenzkontextes leisten würde, und liefert damit sowohl die Obergrenze des Verfahrens als auch den Bezugspunkt, an dem sich die Auswahl realer Entwickler in FF2 messen lässt.
 
 Über alle Bedingungen hinweg werden Modellversion, Temperatur, Seed-Parameter des Retrievals, Traversierungstiefe, Systemprompt und der Ausgangszustand der Codebase konstant gehalten und je Durchlauf protokolliert.
 

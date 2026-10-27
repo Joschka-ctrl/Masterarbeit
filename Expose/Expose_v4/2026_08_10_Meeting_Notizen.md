@@ -40,8 +40,9 @@
 
 ### Sofort
 - [ ] Mail mit Zusammenfassung schicken (Entwurf unten)
-- [ ] Am 17.08. Arbeit anmelden
-- [ ] Offene Fragen an Rainer **vor** dem 24.08. stellen, danach 3 Wochen Funkstille
+- [x] Am 17.08. Arbeit anmelden (erledigt, Simon muss die Anmeldung noch akzeptieren)
+- [x] Offene Fragen an Rainer **vor** dem 24.08. stellen, danach 3 Wochen Funkstille
+      (versendet am 18.08.2026, finale Fassung unten)
 
 ### Exposé anpassen
 - [ ] Codebase auf Django/Python und `teamable-backend` umschreiben (Rahmenbedingungen, Vorabprüfung, Parser)
@@ -70,14 +71,16 @@
 - [ ] Gibt es Tests im Projekt, oder baue ich die Akzeptanzkriterien selbst?
 
 **Studie**
-- [ ] Wer spricht die Teamprojekt-Gruppe an? Sollte nicht er sein wegen Abhängigkeit
-- [ ] Ab wann darf ich fragen?
+- [x] Wer spricht die Teamprojekt-Gruppe an? (gefragt, ob ich selbst vorwarnen darf;
+      die Begründung mit der Abhängigkeit habe ich weggelassen)
+- [x] Ab wann darf ich fragen?
 - [ ] Ca. 30 Min von ihm in ~Woche 5: unabhängig beurteilen, welche Codestellen für eine Aufgabe relevant sind. Wichtig, damit die Referenzliste nicht nur von mir kommt
 
 **Organisatorisches**
-- [ ] Ansprechpartner Datenschutz / Einwilligungserklärung an der HTWG?
+- [x] Einwilligungserklärung: als Frage nach seiner Erfahrung aus früheren Arbeiten
+      gestellt, nicht als Frage nach dem HTWG-Ansprechpartner
 - [ ] API-Kosten für ca. 100 Agentenläufe: wer zahlt?
-- [ ] Zweitprüfer?
+- [x] Zweitprüfer: Simon
 - [ ] Liest er das Exposé bis zum 16.09.?
 
 ---
@@ -121,32 +124,40 @@ Joschka
 
 ---
 
-## E-Mail-Entwurf 2: offene Fragen
+## E-Mail an Rainer, versendet am 18.08.2026
 
-> Muss **vor dem 24.08.** raus, sonst hängt alles bis Mitte September.
-> Am besten erst abschicken, wenn das Exposé angepasst ist und du weißt, was du wirklich brauchst.
-
-**Betreff:** Ein paar Fragen vor deinem Urlaub
+> Ersetzt den früheren Entwurf 2. Inhaltlich verschoben: Der Fokus liegt jetzt auf
+> Jira-Zugang, dem Frontend-Repo und der Ansprache des Teams. Die Fragen zu Aufgaben
+> aus Commits, Tests, Repo-Freigabe und API-Kosten sind bewusst nicht mitgegangen und
+> stehen für den 16.09. offen.
 
 Hallo Rainer,
 
-ich will die drei Wochen nutzen und so viel wie möglich vorbereiten. Dafür bräuchte ich ein paar Antworten von dir. Der erste Block ist der wichtige, der Rest kann bis zum 16.09. warten.
+wie besprochen, habe ich die Masterarbeit gestern angemeldet. Simon muss als Zweitkorrektor noch als Erstes die Anmeldung akzeptieren, das steht aktuell noch aus.
 
-**Wichtig vor dem 24.08.**
+Bei unserer Planung hatten wir gar nicht berücksichtigt, dass Simon eventuell im Urlaub sein könnte. Weißt du zufällig, ob er gerade da ist? Bei Discord habe ich ihm schon geschrieben. Bisher habe ich aber noch keine Antwort bekommen.
 
-- Aufgaben: Ich will die drei Studienaufgaben aus echten Commits oder Pull Requests im Repo ableiten. Der Stand davor wird der Startpunkt, die Beschreibung wird die Aufgabenstellung. Passt dir das? Und fallen dir Änderungen ein, die sich eignen würden?
-- Tests: Gibt es im Projekt Tests, an denen ich automatisch prüfen kann, ob eine Aufgabe gelöst ist? Oder baue ich die selbst?
-- Teamprojekt-Gruppe: Wer fragt die Leute wegen der Teilnahme? Ich würde das ungern über dich laufen lassen, damit niemand das Gefühl hat, es hänge an der Note. Und ab wann darf ich auf sie zugehen?
-- Datenschutz: Wer ist an der HTWG zuständig für Einwilligungserklärung und Bildschirmaufzeichnungen? Ich weiß nicht, wie lange so etwas dauert, deshalb frage ich lieber früh.
+Ich hätte außerdem noch ein paar Punkte, die ich gerne klären würde, bevor du in den Urlaub fährst.
 
-**Kann bis zum 16.09. warten**
+Zum einen hätte ich gerne Zugriff auf die Informationen zur Masterarbeit in Jira. Bei dem Gespräch mit Tobias Mohr hatte er erwähnt, dass es von dir dazu einen Leitfaden gibt.
 
-- Brauche ich von dir eine schriftliche Freigabe für die Nutzung des Repos, oder reicht es, dass es öffentlich ist?
-- Dürfen Codeausschnitte in der Thesis abgedruckt werden?
-- Die automatisierten Läufe kosten API-Budget, ich rechne mit rund hundert Agentenläufen. Läuft das über die Hochschule oder über mich?
-- Steht der Zweitprüfer schon fest?
+Der zweite Punkt betrifft die Nutzerstudie. Ich bin gerade dabei, das Benchmarking zu testen, habe aber leider noch nicht die Ergebnisse erzielt, auf die ich gehofft hatte. Je größer ein Repository wird, desto schwammiger werden die Ergebnisse meines Tools. Ich bin deshalb gerade dabei, die Logik für das Finden der Startknoten und die Traversierung nachzuziehen und zu verbessern.
 
-Noch eine Vorwarnung: Ich bräuchte Mitte September etwa eine halbe Stunde von dir. Für eine der drei Aufgaben hätte ich gern deine unabhängige Einschätzung, welche Codestellen dafür wirklich gebraucht werden. Ich lege meine Liste vorher fest. Wenn eine zweite Person das gegenliest, steht die ganze Auswertung deutlich sicherer. Das würde gut in unseren Termin am 16.09. passen.
+Für die Nutzerstudie würde ich gerne das Projekt des Teams verwenden. Du hattest mir bisher nur das Repository für das Backend geschickt. Ich habe noch einmal nachgeschaut und gesehen, dass es auch ein Repository für das Frontend gibt. Nur das Backend wäre zu klein und damit nicht aussagekräftig genug. Mit Backend und Frontend zusammen sollte das Projekt vermutlich gerade groß genug sein, damit das Tool sinnvoll eingesetzt werden kann und die Entwickler anschließend ihre persönlichen Einschätzungen zu den Ergebnissen abgeben können.
+
+Ob das Projekt tatsächlich groß genug ist, wird sich aber auch durch meine Benchmarking-Ergebnisse in den nächsten Wochen nochmal besser zeigen. Für die allgemeine Frage, wie gut das Tool mit größeren Codebases funktioniert, muss ich deshalb unabhängig davon weiter am Benchmark arbeiten.
+
+Nach meiner jetzigen Planung versuche ich, damit bis zum 14.09.26 fertig zu sein, um dir im nächsten Meeting echte Benchmarkzahlen vorzeigen zu können.
+
+Hier noch einmal meine Fragen:
+
+- Weißt du, ob Simon gerade im Urlaub ist bzw. wann er wieder da ist?
+- Könntest du mir Zugriff auf die Informationen zur Masterarbeit in Jira geben und mir den Link zu dem Leitfaden schicken?
+- Arbeitet das Team sowohl am Backend als auch am Frontend, sodass ich für die Nutzerstudie beide Repositories zusammen betrachten kann?
+- Kann ich das Team schon einmal vorwarnen und fragen, ob sie grundsätzlich bereit wären, bei meiner Masterarbeit bzw. der Nutzerstudie mitzumachen?
+- Kann ich das Team dafür über Discord erreichen? Wenn ja, in welchem Raum?
+- Für die Nutzerstudie würde ich Bildschirm und Interviews aufzeichnen. Hattest du das bei früheren betreuten Arbeiten schon einmal? Falls ja, gab es dafür eine Vorlage für die Einwilligungserklärung oder haben die Studierenden diese selbst erstellt?
+- Ist dir die asynchrone Kommunikation über Discord oder per Mail lieber?
 
 Viele Grüße
 Joschka
