@@ -13,3 +13,112 @@
 \section{Token und Kontextfenster als relevante Währung}% 2 S., neu schreiben
 % Inhalt: was die Zahl x Token genau bedeutet; teils aus bisherigem 2.2 und 2.4.
 \label{sec:token-kontextfenster}
+
+\section{Semantische und lexikalische Suche}% ca. 0,75 S., neu (Beschluss 30.10.)
+% ===== WARUM DIESER ABSCHNITT =====
+% Kapitel 4 benutzt Suchbegriffe aus dem Information Retrieval, die ein Leser
+% ohne IR-Hintergrund nicht kennt. Bisher erklärt Kapitel 4 sie nebenbei im
+% Fließtext (vor allem 4.4), das bläht 4.4 auf (Stand 30.10.: ca. 4 S. statt
+% 2,5 S. Budget). Ziel: Begriffe hier EINMAL allgemein erklären, Kapitel 4
+% verweist nur noch mit Abschnitt~\ref{sec:suche-grundlagen} zurück und
+% beschreibt dort nur noch, WIE das Werkzeug sie einsetzt.
+% Der erste Gebrauch liegt schon in 4.3 (sec:codegraph, Absatz "Beim Anlegen
+% jedes Knotens erzeugt import.js dessen Einbettung ..."), nicht erst in 4.4.
+% Kapitel 2 kommt vor 4.3, also muss hier alles stehen, was 4.3 und 4.4
+% voraussetzen.
+% Kapitel 3: in sec:graphbasiert prüfen, ob die dort besprochenen Arbeiten
+% (RepoGraph, CodexGraph, KGCompass usw.) Einbettungen oder BM25 nutzen. Falls
+% ja, dort ebenfalls hierher verweisen. Noch NICHT geprüft.
+%
+% ===== REGELN FÜR DEN TEXT =====
+% - Nur allgemein erklären, nichts Werkzeugspezifisches (kein Modellname,
+%   keine Schwellwerte, kein Neo4j). Das bleibt in Kapitel 4.
+% - Jeder Begriff nur so tief, wie Kapitel 4 ihn braucht (Mut zur Lücke).
+%   Keine Formeln außer höchstens der Cosinus-Formel.
+% - Reihenfolge so, dass jeder Begriff auf dem vorigen aufbaut:
+%   Einbettung -> Cosinus-Ähnlichkeit -> Vektorindex -> lexikalische Suche/BM25
+%   -> Rangfusion.
+% - Zitate stehen dann HIER, nicht mehr in 4.4 (TODO.md, Block Kapitel 2).
+%
+% ===== DIE BEGRIFFE (je: was erklären, wo gebraucht, was in Kap. 4 wegfällt) =====
+% 1. Einbettung (Embedding)
+%    Erklären: Ein Einbettungsmodell wandelt einen Text in einen Vektor fester
+%    Länge um. Texte mit ähnlicher Bedeutung erhalten Vektoren mit ähnlicher
+%    Richtung. Deutscher Begriff "Einbettung", englisch einmal in Klammern.
+%    Gebraucht: 4.3 (Einbettung jedes Knotens aus dem Beschreibungstext),
+%    4.4 Stufe 1 ("nur die Aufgabenbeschreibung des Agenten eingebettet"),
+%    4.4 semantischer Zweig, 4.4 Stufe 3/4.
+%    In Kap. 4 danach: Begriff ohne Erklärung verwenden.
+% 2. Cosinus-Ähnlichkeit
+%    Erklären: vergleicht die Richtung zweier Vektoren, 1 = gleiche Richtung
+%    und damit sehr ähnlicher Inhalt, nahe 0 = kein inhaltlicher Zusammenhang.
+%    Quelle: Manning, Raghavan und Schütze 2008, Introduction to Information
+%    Retrieval, Kap. 6 (Angaben prüfen, siehe TODO).
+%    Gebraucht: 4.4 semantischer Zweig (Schnitt mit Delta und Mindestwert),
+%    Stufe 3 (Ähnlichkeit jedes erreichten Knotens), Stufe 4 (Ranking).
+%    In Kap. 4 danach streichen: im Absatz "Der erste, semantische Zweig ..."
+%    die Sätze "Als Maß dient die Cosinus-Ähnlichkeit [KLÄREN ...]. Sie
+%    vergleicht ... Ein Wert von 1 bedeutet ..." -> ersetzen durch kurzen
+%    Verweis, z.B. "Maß ist die Cosinus-Ähnlichkeit
+%    (Abschnitt~\ref{sec:suche-grundlagen})".
+% 3. Vektorindex
+%    Erklären: Datenstruktur, die zu jedem Eintrag dessen Vektor speichert und
+%    zu einem Anfragevektor schnell die ähnlichsten Einträge findet
+%    (nächste Nachbarn). Keine Details zu Verfahren wie HNSW.
+%    Gebraucht: 4.3 (je ein Vektorindex für File, Function, Class; Absatz zur
+%    Datenbank je Projekt), 4.4 semantischer Zweig.
+%    In Kap. 4 danach streichen: Satz "Ein Vektorindex speichert zu jedem
+%    Knoten dessen Vektor und findet schnell die Knoten, ..." im Absatz
+%    "Der erste, semantische Zweig ...".
+% 4. Lexikalische Suche, Volltextindex, BM25
+%    Erklären: Suche nach Wörtern statt nach Bedeutung. Ein Volltextindex
+%    verzeichnet, welche Wörter in welchen Einträgen vorkommen, und erlaubt
+%    auch Präfixanfragen (Einträge, die mit einem Wort beginnen). BM25 ordnet
+%    Treffer nach Stichworten und gewichtet seltene Begriffe höher als häufige.
+%    Kontrast zur Einbettung: lexikalisch trifft exakte Namen, semantisch trifft
+%    Umschreibungen. Genau deshalb kombiniert das Werkzeug beide.
+%    Quelle BM25: Robertson und Zaragoza 2009 (siehe TODO).
+%    Gebraucht: 4.3 (Volltextindex über Name, Pfad, Beschreibung), 4.4
+%    lexikalischer Zweig (Präfixanfrage) und BM25-Zweig.
+%    In Kap. 4 danach streichen: im Absatz "Der dritte, lexikalische Zweig ..."
+%    den Satz "Sie sucht nach Einträgen, die mit dem Bezeichner beginnen.";
+%    im Absatz "Der vierte Zweig, im Folgenden BM25-Zweig, ..." den
+%    Nebensatz "ein stichwortbasiertes Rangverfahren, das seltene Begriffe
+%    höher gewichtet als häufige [KLÄREN ...]" -> Verweis.
+% 5. Rangfusion (Reciprocal Rank Fusion)
+%    Erklären: Mehrere Trefferlisten, deren Werte nicht vergleichbar sind,
+%    werden über die Plätze zusammengeführt. Jeder Eintrag bekommt aus jeder
+%    Liste Punkte nach seinem Platz, die Punkte werden addiert. Wer in mehreren
+%    Listen weit oben steht, gewinnt.
+%    Quelle: Cormack, Clarke und Buettcher 2009 (siehe TODO).
+%    Hier allgemein mit Konstante k: Punkte = 1/(k + r), r = Rangplatz.
+%    Gebraucht: 4.4 Absatz "Nach den vier Zweigen liegen vier Listen vor ..."
+%    und der folgende Absatz zur Sonderregel des exakten Zweigs.
+%    In Kap. 4 danach: den Satz "Vergleichen lässt sich aber der Rangplatz ..."
+%    und die allgemeine Erklärung durch Verweis ersetzen. BLEIBEN muss in 4.4:
+%    warum die Werte nicht addierbar sind (Ähnlichkeit 0-1, BM25 offen, exakte
+%    Liste ohne Werte), die Formel mit dem konkreten Wert k = 60 und das
+%    Rechenbeispiel (2/63 gegen 1/61), der ganze Absatz zur Sonderregel des
+%    exakten Zweigs (Ersatz-Plätze 1/3/6/20, Aufschlag für häufige Namen,
+%    Gewicht 1,2). Das ist Werkzeugentscheidung. Konkrete Werte bleiben im Text
+%    (Stilregel seit 30.10.).
+%
+% ===== NICHT IN DIESEN ABSCHNITT =====
+% - Graph, Knoten, Kante, Hop, Seeds, Traversierung: werkzeugspezifisch, werden
+%   in 4.1 (sec:werkzeug-ueberblick) eingeführt.
+% - tree-sitter, AST, Parser: der Halbsatz in 4.3 reicht.
+% - Neo4j, Ollama, Modellname, Parameterwerte: gehören zu Kapitel 4.
+%
+% ===== BUDGET =====
+% Kapitel 2 hat 4 S., 2.1 und 2.2 sind mit je 2 S. verplant. Die 0,75 S.
+% müssen dort eingespart werden oder das Kapitelbudget steigt. Mit dem Nutzer
+% klären, bevor geschrieben wird. Ersparnis in 4.4 etwa 150-200 Wörter.
+%
+% ===== NACH DEM SCHREIBEN =====
+% 1. In 4.3/4.4 die oben unter "In Kap. 4 danach" genannten Stellen kürzen und
+%    Verweise auf sec:suche-grundlagen setzen. Stellen über den zitierten
+%    Satzanfang suchen, nicht über Zeilennummern (die verschieben sich).
+% 2. KLÄREN-Marker für Cosinus, BM25 und RRF aus 4.4 entfernen, die Zitate
+%    stehen dann hier.
+% 3. TODO.md: beide Punkte im Block "Kapitel 2" abhaken.
+\label{sec:suche-grundlagen}
