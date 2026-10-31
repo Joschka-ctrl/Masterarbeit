@@ -1,123 +1,81 @@
 % !TEX root = ../thesis_main.tex
-% Kapitel 4 — Budget: 12 Seiten — Schreiben: 26.10.–13.11. (fertig 13.11., interner Meilenstein)
-% Konzeption und Umsetzung getrennt (Beschluss 26.10.).
-% Zwei Abbildungen: Pipeline mit Eingriffspunkten (-> 4.2), Graphschema (-> 4.3).
-% Module, Werkzeuge und Konfiguration als Tabelle, keine Codebeschreibung.
-%
-% Schreibreihenfolge (Plan 27.10.): 4.3 -> 4.4 -> 4.5 -> 4.2 -> 4.1 -> 4.6
-%
-% SCHREIB-WORKFLOW (siehe codebase-graph\docs\textnotizen-2026-09-09-werkzeug-und-vormessungen.md):
-% - Hauptquelle ist Teil 0 + Teil A der Textnotizen (geprüfte Formulierungen),
-%   die Stichpunkte hier sind nur die Verteilung auf die Abschnitte.
-%   Zuordnung: A1/A2 -> 4.2/4.3, A3 (Pipeline in vier Stufen) -> 4.4,
-%   A4 (drei Betriebsmodi) + A5 (Technik tabellarisch) -> 4.5, A6 (Grenzen) -> 4.6.
-% - Schreibregeln: Teil E der Textnotizen (verbotene Formulierungen E1,
-%   Kennzeichnungspflichten E2, Nachweise in den Anhang E3, Validität mit
-%   Zahlen E4).
-% - Nach Erstfassung: Prüfagenten-Runde abschnittsweise gegen Quellen und
-%   Code (Muster wie Prüfprotokoll Teil F, 09.09.).
-% Erzähllinie Konzeption/Umsetzung: In 4.2 nur das One-Shot-HITL-Konzept als
-% Konzeption erzählen; Stepwise ist Iteration nach Erfahrung und kommt in 4.5
-% ("aus den Erfahrungen entstand der Stepwise-Modus").
 
 \chapter{Das Werkzeug}
 \label{chap:werkzeug}
+\begin{offen}
+Kapitel 4 — Budget: 12 Seiten — Schreiben: 26.10.–13.11. (fertig 13.11., interner Meilenstein)\par
+Konzeption und Umsetzung getrennt (Beschluss 26.10.).\par
+Zwei Abbildungen: Pipeline mit Eingriffspunkten ($\rightarrow$ 4.2), Graphschema ($\rightarrow$ 4.3).\par
+Module, Werkzeuge und Konfiguration als Tabelle, keine Codebeschreibung.\par
+Schreibreihenfolge (Plan 27.10.): 4.3 $\rightarrow$ 4.4 $\rightarrow$ 4.5 $\rightarrow$ 4.2 $\rightarrow$ 4.1 $\rightarrow$ 4.6\par
+\textbf{SCHREIB-WORKFLOW (siehe codebase-graph\textbackslash{}docs\textbackslash{}textnotizen-2026-09-09-werkzeug-und-vormessungen.md):}\par
+\textbullet\ Hauptquelle ist Teil 0 + Teil A der Textnotizen (geprüfte Formulierungen), die Stichpunkte hier sind nur die Verteilung auf die Abschnitte. Zuordnung: A1/A2 $\rightarrow$ 4.2/4.3, A3 (Pipeline in vier Stufen) $\rightarrow$ 4.4, A4 (drei Betriebsmodi) + A5 (Technik tabellarisch) $\rightarrow$ 4.5, A6 (Grenzen) $\rightarrow$ 4.6.\par
+\textbullet\ Schreibregeln: Teil E der Textnotizen (verbotene Formulierungen E1, Kennzeichnungspflichten E2, Nachweise in den Anhang E3, Validität mit Zahlen E4).\par
+\textbullet\ Nach Erstfassung: Prüfagenten-Runde abschnittsweise gegen Quellen und Code (Muster wie Prüfprotokoll Teil F, 09.09.).\par
+Erzähllinie Konzeption/Umsetzung: In 4.2 nur das One-Shot-HITL-Konzept als Konzeption erzählen; Stepwise ist Iteration nach Erfahrung und kommt in 4.5 (\glqq{}aus den Erfahrungen entstand der Stepwise-Modus\grqq{}).
+\end{offen}
 
 \section{Überblick, Ziel und Grundbegriffe}% 2 S. — ZULETZT schreiben (nimmt Kapitel vorweg)
 \label{sec:werkzeug-ueberblick}
-% Inhalt: Graph, Knoten und Kanten, Einbettung, Seeds, Traversierung, Hop,
-% Kontextblock; Textnotizen Teil 0.2.
-% NOTIZEN:
-% - Grundbegriffe nur so weit einführen, wie Kapitel 2 (Grundlagen) sie nicht
-%   schon abdeckt — vor dem Schreiben gegen 02_grundlagen.tex abgleichen.
-% - Kurzer Rundflug über das Werkzeug: was es ist (MCP-Server + Neo4j-Graph +
-%   Review-UI), was es leistet, Verweis auf die folgenden Abschnitte.
+\begin{offen}
+Inhalt: Graph, Knoten und Kanten, Einbettung, Seeds, Traversierung, Hop,\par
+Kontextblock; Textnotizen Teil 0.2.\par
+\textbf{NOTIZEN:}\par
+\textbullet\ Grundbegriffe nur so weit einführen, wie Kapitel 2 (Grundlagen) sie nicht schon abdeckt — vor dem Schreiben gegen 02\_grundlagen.tex abgleichen.\par
+\textbullet\ Kurzer Rundflug über das Werkzeug: was es ist (MCP-Server + Neo4j-Graph + Review-UI), was es leistet, Verweis auf die folgenden Abschnitte.
+\end{offen}
 
 \section{Konzeption}% 2 S. — nach der Umsetzung schreiben
 \label{sec:konzeption}
-% Inhalt: geplante Architektur, Verfahren, Werkzeuge und Informationsquellen.
-% Nur das WARUM und WAS — keine Technik, keine Implementierungsdetails.
-%
-% NOTIZEN — Grundidee / Motivation:
-% - Coding-Agenten (Claude Code) bekommen Kontext bisher über Datei-Suche
-%   (grep, Glob) — textbasiert, kennt die Struktur des Codes nicht.
-% - Kernidee: Codebasis als semantischen Graphen in Neo4j abbilden und dem
-%   Agenten über einen MCP-Server strukturellen + semantischen Kontext liefern.
-% - Zweite Kernidee (die eigentliche These): Retrieval-Prozess nicht als
-%   Blackbox, sondern sichtbar und editierbar — Human-in-the-Loop: der Mensch
-%   prüft und korrigiert den Kontext, bevor der Agent damit arbeitet.
-%
-% NOTIZEN — Architektur auf Blockdiagramm-Ebene (drei Stufen):
-% - Parse -> Import -> Serve; hier nur als Überblick, Details in 4.3–4.5.
-% - ABBILDUNG 1 hier: Pipeline mit Eingriffspunkten.
-%
-% NOTIZEN — Designprinzipien:
-% - Alles lokal (Neo4j, Ollama, Review-Server auf 127.0.0.1) — kein Code
-%   verlässt die Maschine; relevant für Studie/Datenschutz.
-% - Embeddings einmalig lokal vorrechnen; bei Anfrage wird nur der
-%   Anfragetext embedded — Abfrage kostet keine bis kaum Tokens.
-% - Ein globaler Server für beliebige Projekte; Konfiguration pro Projekt
-%   über .env.local.
-% - Automatisches Retrieval nutzt dieselben Stufen wie die manuelle
-%   Pipeline — der Mensch kann nur zusätzlich eingreifen/ändern.
-%
-% NOTIZEN — HITL-Konzept (vision.md, Juni 2026) — hier als KONZEPT, Umsetzung in 4.5:
-% - Vision: der komplette Retrieval-Prozess wird als interaktiver Graph im
-%   Browser sichtbar — Seeds, Hops pro Schritt, Scores/Gewichte,
-%   Ranking-Begründung und verworfene Kandidaten mit Grund (unter
-%   Schwellwert, Duplikat, Cap).
-% - Der Agent blockiert und wartet; der Mensch wählt Knoten ab/zu, fügt per
-%   Suche (Name oder semantisch) Knoten hinzu, justiert Parameter (hopDepth,
-%   Threshold, Gewichte) nach; erst nach "Kontext bestätigen" arbeitet der
-%   Agent weiter.
-% - Timeout-Konzept: läuft die Review-Frist ab, wird der unbearbeitete
-%   Kontext automatisch übernommen — der Agent bleibt nie dauerhaft hängen.
-% - Replay-Timeline als Erklärbarkeits-Feature (Entities -> Seeds ->
-%   Hop 1..N -> Ranking -> Final).
-% - Netter Erzählpunkt: die Pipeline produzierte die Trace-Daten größtenteils
-%   schon, sie wurden nur nicht aufbewahrt (ein Satz).
-% - Browser-UI statt VS-Code-Extension: keine Bindung an einen Editor
-%   (ein Halbsatz reicht).
-%
-% Quellen zum Nachlesen: git show c89bf2c:vision.md (HITL-Konzept),
-% git show 4842033:README.md (ursprüngliche Architektur), docs/decisions/.
+\begin{offen}
+Inhalt: geplante Architektur, Verfahren, Werkzeuge und Informationsquellen.\par
+Nur das WARUM und WAS — keine Technik, keine Implementierungsdetails.\par
+\textbf{NOTIZEN — Grundidee / Motivation:}\par
+\textbullet\ Coding-Agenten (Claude Code) bekommen Kontext bisher über Datei-Suche (grep, Glob) — textbasiert, kennt die Struktur des Codes nicht.\par
+\textbullet\ Kernidee: Codebasis als semantischen Graphen in Neo4j abbilden und dem Agenten über einen MCP-Server strukturellen + semantischen Kontext liefern.\par
+\textbullet\ Zweite Kernidee (die eigentliche These): Retrieval-Prozess nicht als Blackbox, sondern sichtbar und editierbar — Human-in-the-Loop: der Mensch prüft und korrigiert den Kontext, bevor der Agent damit arbeitet.\par
+\textbf{NOTIZEN — Architektur auf Blockdiagramm-Ebene (drei Stufen):}\par
+\textbullet\ Parse $\rightarrow$ Import $\rightarrow$ Serve; hier nur als Überblick, Details in 4.3–4.5.\par
+\textbullet\ ABBILDUNG 1 hier: Pipeline mit Eingriffspunkten.\par
+\textbf{NOTIZEN — Designprinzipien:}\par
+\textbullet\ Alles lokal (Neo4j, Ollama, Review-Server auf 127.0.0.1) — kein Code verlässt die Maschine; relevant für Studie/Datenschutz.\par
+\textbullet\ Embeddings einmalig lokal vorrechnen; bei Anfrage wird nur der Anfragetext embedded — Abfrage kostet keine bis kaum Tokens.\par
+\textbullet\ Ein globaler Server für beliebige Projekte; Konfiguration pro Projekt über .env.local.\par
+\textbullet\ Automatisches Retrieval nutzt dieselben Stufen wie die manuelle Pipeline — der Mensch kann nur zusätzlich eingreifen/ändern.\par
+\textbf{NOTIZEN — HITL-Konzept (vision.md, Juni 2026) — hier als KONZEPT, Umsetzung in 4.5:}\par
+\textbullet\ Vision: der komplette Retrieval-Prozess wird als interaktiver Graph im Browser sichtbar — Seeds, Hops pro Schritt, Scores/Gewichte, Ranking-Begründung und verworfene Kandidaten mit Grund (unter Schwellwert, Duplikat, Cap).\par
+\textbullet\ Der Agent blockiert und wartet; der Mensch wählt Knoten ab/zu, fügt per Suche (Name oder semantisch) Knoten hinzu, justiert Parameter (hopDepth, Threshold, Gewichte) nach; erst nach \glqq{}Kontext bestätigen\grqq{} arbeitet der Agent weiter.\par
+\textbullet\ Timeout-Konzept: läuft die Review-Frist ab, wird der unbearbeitete Kontext automatisch übernommen — der Agent bleibt nie dauerhaft hängen.\par
+\textbullet\ Replay-Timeline als Erklärbarkeits-Feature (Entities $\rightarrow$ Seeds $\rightarrow$ Hop 1..N $\rightarrow$ Ranking $\rightarrow$ Final).\par
+\textbullet\ Netter Erzählpunkt: die Pipeline produzierte die Trace-Daten größtenteils schon, sie wurden nur nicht aufbewahrt (ein Satz).\par
+\textbullet\ Browser-UI statt VS-Code-Extension: keine Bindung an einen Editor (ein Halbsatz reicht).\par
+Quellen zum Nachlesen: git show c89bf2c:vision.md (HITL-Konzept),\par
+git show 4842033:README.md (ursprüngliche Architektur), docs/decisions/.
+\end{offen}
 
 \section{Umsetzung: Build-Phase vom Quellcode zum Codegraphen}% 2 S. — ZUERST schreiben
 \label{sec:codegraph}
-% Inhalt: Datenbank je Projekt, JSX als Aufrufe.
-% OFFENER PUNKT vor dem Schreiben: im Repo nachschauen, welche Sprachen
-% tree-sitter zu welchem Grad abdeckt.
-%
-% NOTIZEN — Parse (parse.js):
-% - tree-sitter läuft über den Quellcode, extrahiert Dateien, Funktionen,
-%   Klassen, Imports und Aufrufe in eine AST-JSON-Zwischendatei
-%   (.codebase-graph/ts-ast.json).
-% - Zunächst TypeScript/JavaScript; Erweiterbarkeit auf weitere Sprachen
-%   angelegt (Python via Subprozess, C#, Java).
-%
-% NOTIZEN — Graphschema (ABBILDUNG 2 hier):
-% - Knotentypen: File, Function, Class; GitHub-Anbindung mit Issue und
-%   PullRequest; Knoten tragen Git-Metadaten (commitCount, letzte
-%   Commit-Message) und Beschreibungen.
-% - Kantentypen: IMPORTS, IMPORTS_SYMBOL, DEFINED_IN, CALLS, EXTENDS, TESTS;
-%   GitHub-Kanten LINKED_TO, MODIFIES, CLOSES.
-% - Idee: Code-Struktur, Testabdeckung, Git-Historie und Projektwissen
-%   (Issues/PRs) in einem Graphen vereinen.
-%
-% NOTIZEN — Import (import.js):
-% - Baut aus dem AST den Neo4j-Graphen; erzeugt pro Knoten ein
-%   Ollama-Embedding (lokal, nomic-embed-text, 768-dim — ein Satz reicht)
-%   und legt Vektorindizes an.
-%   ERGÄNZUNG 27.10.: Der Text nennt den Endstand qwen3-embedding:0.6b
-%   (1024-dim), nomic war das Ausgangsmodell; der Wechsel (B6, 20.08.) wird
-%   in Kapitel 5 erzählt. Ebenso Symboltext mit Rumpf (B5) als Endstand.
-% - Datenbank je Projekt (spätere Entscheidung, hier erwähnen).
-% - JSX-Elemente werden als Aufrufe behandelt (Entscheidung, kurz begründen).
+% \begin{offen}
+% Inhalt: Datenbank je Projekt, JSX als Aufrufe.\par
+% \textbf{OFFENER PUNKT vor dem Schreiben:} im Repo nachschauen, welche Sprachen\par
+% tree-sitter zu welchem Grad abdeckt.\par
+% \textbf{NOTIZEN — Parse (parse.js):}\par
+% \textbullet\ tree-sitter läuft über den Quellcode, extrahiert Dateien, Funktionen, Klassen, Imports und Aufrufe in eine AST-JSON-Zwischendatei (.codebase-graph/ts-ast.json).\par
+% \textbullet\ Zunächst TypeScript/JavaScript; Erweiterbarkeit auf weitere Sprachen angelegt (Python via Subprozess, C\#, Java).\par
+% \textbf{NOTIZEN — Graphschema (ABBILDUNG 2 hier):}\par
+% \textbullet\ Knotentypen: File, Function, Class; GitHub-Anbindung mit Issue und PullRequest; Knoten tragen Git-Metadaten (commitCount, letzte Commit-Message) und Beschreibungen.\par
+% \textbullet\ Kantentypen: IMPORTS, IMPORTS\_SYMBOL, DEFINED\_IN, CALLS, EXTENDS, TESTS; GitHub-Kanten LINKED\_TO, MODIFIES, CLOSES.\par
+% \textbullet\ Idee: Code-Struktur, Testabdeckung, Git-Historie und Projektwissen (Issues/PRs) in einem Graphen vereinen.\par
+% \textbf{NOTIZEN — Import (import.js):}\par
+% \textbullet\ Baut aus dem AST den Neo4j-Graphen; erzeugt pro Knoten ein Ollama-Embedding (lokal, nomic-embed-text, 768-dim — ein Satz reicht) und legt Vektorindizes an. ERGÄNZUNG 27.10.: Der Text nennt den Endstand qwen3-embedding:0.6b (1024-dim), nomic war das Ausgangsmodell; der Wechsel (B6, 20.08.) wird in Kapitel 5 erzählt. Ebenso Symboltext mit Rumpf (B5) als Endstand.\par
+% \textbullet\ Datenbank je Projekt (spätere Entscheidung, hier erwähnen).\par
+% \textbullet\ JSX-Elemente werden als Aufrufe behandelt (Entscheidung, kurz begründen).
+% \end{offen}
 
-Das Werkzeug durchläuft zwei Phasen mit unterschiedlicher Lebensdauer. In der Build-Phase wird eine Codebasis einmal vollständig in den Graphen überführt und danach nach jedem Commit für die geänderten Dateien nachgeführt. Die Kette führt dabei von den Quelldateien über \texttt{parse.js} zu einer JSON-Datei und von dort über \texttt{import.js} nach Neo4j. Die JSON-Datei enthält je Quelldatei einen Eintrag mit Pfad, Importen, Funktionen, Klassen und Aufrufen. Den ersten vollständigen Build startet entweder der Entwickler von der Kommandozeile oder der Agent über zwei dafür vorgesehene MCP-Werkzeuge. Die Nachführung stößt ein Git-Hook an, der nach jedem Commit dieselben zwei Skripte aufruft. In der Query-Phase übergibt der Agent bei jeder Coding-Aufgabe den Aufgabentext an den Server. Die Antwort ist ein Kontextblock, der die zur Aufgabe passenden Dateien, Funktionen und Klassen samt ihren Beziehungen enthält.
-Der vollständige Build ist damit der rechenintensive Teil, weil jede Datei geparst und jeder Knoten eingebettet wird. Er fällt einmal je Projekt an, die Nachführung danach nur für die geänderten Dateien. Der Abruf dagegen kehrt bei jeder Aufgabe wieder und dauert Sekunden. Dieser Abschnitt beschreibt die Build-Phase, Abschnitt~\ref{sec:abrufpipeline} die Query-Phase.
+Das Werkzeug durchläuft zwei Phasen mit unterschiedlicher Lebensdauer. In der Build-Phase wird eine Codebasis einmal vollständig in den Graphen überführt. Nach jedem Commit werden die geänderten Dateien in den Graph nachgeführt. Die Kette führt dabei von den Quelldateien über \texttt{parse.js} zu einer JSON-Datei. Die JSON-Datei enthält je Quelldatei einen Eintrag mit Pfad, Importen, Funktionen, Klassen und Aufrufen. Von dort wird sie über \texttt{import.js} in die Graphdatenbank Neo4j importiert~[KLÄREN: Quelle Neo4j, Vorschlag: Neo4j Documentation, neo4j.com/docs]. Den ersten vollständigen Build startet entweder der Entwickler aus der Kommandozeile oder der Agent über zwei dafür vorgesehene MCP-Werkzeuge~[KLÄREN: Quelle MCP, vorhanden in der Bib: anthropic2024mcp, alternativ Verweis auf Kapitel~2]. Die Nachführung stößt ein Git-Hook an, der nach jedem Commit dieselben zwei Skripte aufruft. In der zweiten Phase, der Query-Phase, übergibt der Agent bei jeder Coding-Aufgabe die Aufgabenbeschreibung und die Nutzeranfrage an den MCP-Server. Der Server antwortet mit einem Kontextblock, der die zur Aufgabe passenden Dateien, Funktionen und Klassen samt ihren Beziehungen enthält.
+Der vollständige Build ist damit der rechenintensive Teil, weil jede Datei geparst und jeder Knoten eingebettet wird. Er fällt einmal je Projekt an, die Nachführung danach nur für die geänderten Dateien. Der Abruf dagegen kehrt bei jeder Aufgabe wieder. Er dauert Sekunden. Der folgende Abschnitt beschreibt die Build-Phase, Abschnitt~\ref{sec:abrufpipeline} die Query-Phase.
 
-Den ersten Schritt der Build-Phase übernimmt \texttt{parse.js}. Es läuft mit tree-sitter, einer Parserbibliothek mit Grammatiken für viele Sprachen, über den Quellcode und extrahiert je Datei die enthaltenen Funktionen und Klassen, die Importe und die Aufrufe. Das Ergebnis ist die oben genannte JSON-Datei im Projektverzeichnis (\texttt{.codebase-graph/ts-ast.json}). Abgedeckt sind TypeScript und JavaScript einschließlich TSX, Python, C\# und Java. TypeScript, JavaScript, C\# und Java verarbeitet \texttt{parse.js} direkt mit den jeweiligen tree-sitter-Grammatiken. Python-Dateien analysiert ein von \texttt{parse.js} aufgerufenes Python-Skript mit dem Parser der Standardbibliothek. Es liefert Einträge mit denselben Feldern wie die tree-sitter-Pfade, sodass die JSON-Datei für alle Sprachen gleich aufgebaut ist. Für alle Sprachen gilt dabei dieselbe Regel. Was sich nicht eindeutig auf eine Datei oder ein Symbol auflösen lässt, erhält keine Kante, denn eine geratene Kante lenkt die spätere Traversierung in die Irre, eine fehlende hinterlässt nur eine Lücke. Aus diesem Grund entstehen bei C\# keine dateiübergreifenden Kanten. Die \texttt{using}-Direktiven nennen Namensräume, die anders als Java-Pakete oder Python-Module keiner Verzeichnisstruktur entsprechen und sich deshalb nicht eindeutig einer Datei zuordnen lassen.
+Den ersten Schritt der Build-Phase übernimmt \texttt{parse.js}. Es läuft mit tree-sitter, einer Parserbibliothek mit Grammatiken für viele Sprachen~[KLÄREN: Quelle tree-sitter, Vorschlag: Brunsfeld, Tree-sitter, tree-sitter.github.io], über den Quellcode und extrahiert je Datei die enthaltenen Funktionen und Klassen, die Importe und die Aufrufe. Das Ergebnis ist die oben genannte JSON-Datei im Projektverzeichnis (\texttt{.codebase-graph/ts-ast.json}). Abgedeckt sind TypeScript und JavaScript einschließlich TSX, Python, C\# und Java. TypeScript, JavaScript, C\# und Java verarbeitet \texttt{parse.js} direkt mit den jeweiligen tree-sitter-Grammatiken. Python-Dateien analysiert ein von \texttt{parse.js} aufgerufenes Python-Skript mit dem Parser der Standardbibliothek~[KLÄREN: Quelle Python-Parser, Vorschlag: Python Documentation, Modul ast]. Es liefert Einträge mit denselben Feldern wie die tree-sitter-Pfade, sodass die JSON-Datei für alle Sprachen gleich aufgebaut ist. Für alle Sprachen gilt dabei dieselbe Regel. Was sich nicht eindeutig auf eine Datei oder ein Symbol auflösen lässt, erhält keine Kante. Eine geratene Kante lenkt die spätere Traversierung in die Irre und wiegt damit schwerer als eine fehlende, die lediglich eine Lücke hinterlässt. Aus diesem Grund entstehen bei C\# keine dateiübergreifenden Kanten. Die \texttt{using}-Direktiven nennen Namensräume, die anders als Java-Pakete oder Python-Module keiner Verzeichnisstruktur entsprechen und sich deshalb nicht eindeutig einer Datei zuordnen lassen.
 
 \begin{figure}[htbp]
   \centering
@@ -160,79 +118,168 @@ Den ersten Schritt der Build-Phase übernimmt \texttt{parse.js}. Es läuft mit t
   \label{fig:graphschema}
 \end{figure}
 
-Aus der von \texttt{parse.js} erzeugten JSON-Datei baut \texttt{import.js} im zweiten Schritt den Graphen auf, Abbildung~\ref{fig:graphschema} zeigt dessen Schema. Der Graph kennt die Codeknoten \texttt{File}, \texttt{Function} und \texttt{Class} sowie die GitHub-Knoten \texttt{Issue} und \texttt{PullRequest}. Sechs Kantentypen, in Abbildung~\ref{fig:graphschema} durchgezogen gezeichnet, verbinden die Codeknoten. \texttt{DEFINED\_IN} hängt jede Funktion und Klasse an ihre Datei, \texttt{IMPORTS} verbindet Datei mit Datei, \texttt{IMPORTS\_SYMBOL} eine Datei mit der importierten Funktion oder Klasse, \texttt{CALLS} Funktion mit Funktion, \texttt{EXTENDS} Klasse mit Oberklasse und \texttt{TESTS} eine Testdatei mit den Dateien, die sie importiert. Als Testdatei gilt, was \texttt{.test} oder \texttt{.spec} im Dateinamen trägt oder in einem Testverzeichnis liegt. Eine Kante von einer Methode zu ihrer Klasse gibt es nicht, Methoden sind im Graphen gewöhnliche Funktionsknoten der Datei und die Zugehörigkeit zur Klasse steht nur in deren Beschreibungstext. Diese Lücke wurde während der Entwicklung übersehen, Abschnitt~\ref{sec:werkzeug-grenzen} nimmt sie als Grenze auf. Drei weitere Kantentypen, in der Abbildung gestrichelt gezeichnet, tragen die GitHub-Schicht. Ein Issue ist per \texttt{LINKED\_TO} mit einer Datei verbunden, ein Pull Request per \texttt{MODIFIES} mit den geänderten Dateien und per \texttt{CLOSES} mit dem Issue, das er schließt. Jeder Dateiknoten trägt zusätzlich Git-Metadaten, nämlich die Zahl der Commits und die letzte Commit-Nachricht, und jeder Codeknoten einen Beschreibungstext samt Einbettung, beide werden weiter unten in diesem Abschnitt erläutert. Die Idee hinter diesem Schema ist, Codestruktur, Testzuordnung, Git-Metadaten und Projektwissen in einem einzigen Graphen zusammenzuführen. Die GitHub-Schicht ist im Schema angelegt, wird aber nicht von \texttt{import.js} befüllt, sondern von einem eigenen Skript, das Issues und Pull Requests über die GitHub-API abruft. Sie wurde nur prototypisch erprobt und wird im weiteren Verlauf der Arbeit nicht genutzt.
+Aus der von \texttt{parse.js} erzeugten JSON-Datei baut \texttt{import.js} im zweiten Schritt den Graphen auf, Abbildung~\ref{fig:graphschema} zeigt dessen Schema. Der Graph kennt die Codeknoten \texttt{File}, \texttt{Function} und \texttt{Class} sowie die GitHub-Knoten \texttt{Issue} und \texttt{PullRequest}. Sechs Kantentypen, in Abbildung~\ref{fig:graphschema} durchgezogen gezeichnet, verbinden die Codeknoten. \texttt{DEFINED\_IN} hängt jede Funktion und Klasse an ihre Datei, \texttt{IMPORTS} verbindet Datei mit Datei, \texttt{IMPORTS\_SYMBOL} eine Datei mit der importierten Funktion oder Klasse, \texttt{CALLS} Funktion mit Funktion, \texttt{EXTENDS} Klasse mit Oberklasse und \texttt{TESTS} eine Testdatei mit den Dateien, die sie importiert. Als Testdatei gilt, was \texttt{.test} oder \texttt{.spec} im Dateinamen trägt oder in einem Testverzeichnis liegt. Eine Kante von einer Methode zu ihrer Klasse gibt es nicht, Methoden sind im Graphen gewöhnliche Funktionsknoten der Datei und die Zugehörigkeit zur Klasse steht nur in deren Beschreibungstext. Abschnitt~\ref{sec:werkzeug-grenzen} nimmt diese Lücke als Grenze auf. Drei weitere Kantentypen, in der Abbildung gestrichelt gezeichnet, tragen die GitHub-Schicht. Ein Issue ist per \texttt{LINKED\_TO} mit einer Datei verbunden, ein Pull Request per \texttt{MODIFIES} mit den geänderten Dateien und per \texttt{CLOSES} mit dem Issue, das er schließt. Jeder Dateiknoten trägt zusätzlich Git-Metadaten, nämlich die Zahl der Commits und die letzte Commit-Nachricht, und jeder Codeknoten einen Beschreibungstext samt Einbettung, beide werden weiter unten in diesem Abschnitt erläutert. Die Idee hinter diesem Schema ist, Codestruktur, Testzuordnung, Git-Metadaten und Projektwissen in einem einzigen Graphen zusammenzuführen. Die GitHub-Schicht ist im Schema angelegt, wird aber nicht von \texttt{import.js} befüllt, sondern von einem eigenen Skript, das Issues und Pull Requests über die GitHub-API abruft~[KLÄREN: Quelle GitHub-API, Vorschlag: GitHub REST API Documentation, docs.github.com/rest]. Sie wurde nur prototypisch erprobt und wird im weiteren Verlauf der Arbeit nicht genutzt.
 
-Zwei Entscheidungen in der Build-Phase betreffen die Frage, wann eine Kante entsteht. Die erste ist die Importauflösung. Eine Importanweisung nennt selten den echten Dateipfad. Ein Alias wie \texttt{@/lib/utils} wird je Projekt in der Konfiguration definiert, und ein Python-Import wie \texttt{app.models} ist ein Modulname, dessen Wurzelverzeichnis das Projekt festlegt. Das Werkzeug wird einmal installiert und für beliebige Repositories genutzt, \texttt{import.js} darf deshalb keine feste Verzeichnisstruktur voraussetzen. Es liest stattdessen die Projektkonfiguration aus, leitet daraus mögliche Dateipfade ab und prüft, ob einer davon unter den geparsten Dateien vorkommt. Nur dann entsteht eine Importkante. Bibliotheken von Dritten erhalten damit keinen Knoten im Graphen. Eine dateiübergreifende Aufrufkante entsteht nur, wenn die aufrufende Datei das aufgerufene Symbol importiert. Der Aufruf wird über die \texttt{IMPORTS\_SYMBOL}-Kante zu seiner Zielfunktion aufgelöst. Ohne Importkanten gibt es damit auch keine dateiübergreifenden Aufrufkanten, der Graph zerfällt in unverbundene Dateien. Die zweite Entscheidung betrifft JSX. In React wird eine Komponente als Element \texttt{<Button/>} geschrieben, zur Laufzeit ist das ein Funktionsaufruf. Ein Parser, der nur die klassische Aufrufschreibweise erkennt, übersieht in einer React-Codebasis die meisten Aufrufe zwischen Komponenten. Der Parser zählt deshalb jedes JSX-Element mit großgeschriebenem Namen als Aufruf. Die Großschreibung unterscheidet in JSX eine eigene Komponente von einem HTML-Element.
+Zwei Entscheidungen in der Build-Phase betreffen die Frage, wann eine Kante entsteht. Die erste ist die Importauflösung. Eine Importanweisung nennt selten den echten Dateipfad. Ein Alias wie \texttt{@/lib/utils} wird je Projekt in der Konfiguration definiert, und ein Python-Import wie \texttt{app.models} ist ein Modulname, dessen Wurzelverzeichnis das Projekt festlegt. Das Werkzeug wird einmal installiert und für beliebige Repositories genutzt, \texttt{import.js} darf deshalb keine feste Verzeichnisstruktur voraussetzen. Es liest stattdessen die Projektkonfiguration aus, leitet daraus mögliche Dateipfade ab und prüft, ob einer davon unter den geparsten Dateien vorkommt. Nur dann entsteht eine Importkante. Bibliotheken von Dritten erhalten damit keinen Knoten im Graphen. Eine dateiübergreifende Aufrufkante entsteht nur, wenn die aufrufende Datei das aufgerufene Symbol importiert, denn der Aufruf wird über die \texttt{IMPORTS\_SYMBOL}-Kante zu seiner Zielfunktion aufgelöst. Lässt sich ein Import nicht auflösen, fehlt deshalb auch die Aufrufkante, und die betroffenen Dateien bleiben im Graphen unverbunden.
 
-Beim Anlegen jedes Knotens erzeugt \texttt{import.js} außerdem dessen Einbettung. Grundlage der Einbettung ist nicht der Quellcode allein, sondern ein je Knoten zusammengesetzter Beschreibungstext, der Quellcodeanteile mit Metadaten und Kommentaren verbindet. Für eine Datei besteht er aus Dateiname und Pfad, den Namen der exportierten und internen Funktionen, den importierten Symbolen und deren Herkunft, dem Dokumentationskommentar am Dateikopf, der letzten Commit-Nachricht, den dreißig häufigsten aussagekräftigen Bezeichnern des Quellcodes ohne Schlüsselwörter der Sprache und bis zu 400 Zeichen aus den übrigen Kommentaren. Die Absicht dahinter ist, dass der Vektor den Zweck einer Datei abbildet und nicht ihre Syntax. Anders als im Graphen bleiben Bibliotheksimporte im Beschreibungstext erhalten, denn das verwendete Framework ist ein starker Hinweis auf diesen Zweck. Für Funktionen und Klassen besteht der Text aus Signatur, Dekoratoren, Docstring und dem Rumpf bis zu 1200 Zeichen. Die Vektoren erzeugt ein lokal laufendes Ollama, eine Laufzeitumgebung für Sprachmodelle, mit dem Modell \texttt{qwen3-embedding:0.6b} bei 1024 Dimensionen. Lokal bedeutet, dass kein Quellcode die Maschine verlässt. Für \texttt{File}, \texttt{Function} und \texttt{Class} wird je ein Vektorindex angelegt, dazu ein Volltextindex über Name, Pfad und Beschreibung. Fällt der Einbettungsdienst aus, läuft der Import ohne Vektoren weiter, und der Abruf stützt sich auf die namens- und stichwortbasierten Suchzweige aus Abschnitt~\ref{sec:abrufpipeline}.
+Die zweite Entscheidung betrifft JSX. In React wird eine Komponente als Element \texttt{<Button/>} geschrieben, zur Laufzeit ist das ein Funktionsaufruf. Ein Parser, der nur die klassische Aufrufschreibweise erkennt, übersieht in einer React-Codebasis die meisten Aufrufe zwischen Komponenten. Der Parser zählt deshalb jedes JSX-Element mit großgeschriebenem Namen als Aufruf. Die Großschreibung unterscheidet in JSX eine eigene Komponente von einem HTML-Element~\cite{reactdocs}.
 
-Zwei weitere Entscheidungen betreffen den Betrieb des Graphen. Die erste ist die Datenbank je Projekt. Ein Vektorindex in Neo4j umfasst alle Knoten eines Typs, und die Vektorabfrage lässt sich nicht vorab auf ein Projekt einschränken. In einer gemeinsamen Datenbank liefert die inhaltliche Suche deshalb die global nächsten Kandidaten und filtert erst danach auf das Projekt, Treffer aus fremden Projekten verdrängen dann die eigenen. \texttt{import.js} legt daher für jedes Projekt eine eigene Datenbank an, deren Name aus dem Projektnamen abgeleitet wird. Mehrere Datenbanken je Instanz setzen die Enterprise-Ausgabe von Neo4j voraus. Die zweite Entscheidung betrifft die Nachführung. Geänderte Dateien werden nicht aktualisiert, sondern mit ihren Funktionen und Klassen gelöscht und neu angelegt, damit keine veralteten Symbolknoten einer Datei zurückbleiben. Die internen Knoten-IDs sind damit über Neubauten hinweg nicht stabil. Das Werkzeug identifiziert Knoten über Läufe hinweg deshalb über Pfad und Name, nicht über die ID.
+Beim Anlegen jedes Knotens erzeugt \texttt{import.js} dessen Einbettung. Grundlage der Einbettung ist nicht der Quellcode allein, sondern ein je Knoten zusammengesetzter Beschreibungstext, der Quellcodeanteile mit Metadaten und Kommentaren verbindet. Für eine Datei besteht er aus Dateiname und Pfad, den Namen der exportierten und internen Funktionen, den importierten Symbolen und deren Herkunft, dem Dokumentationskommentar am Dateikopf, der letzten Commit-Nachricht, den dreißig häufigsten aussagekräftigen Bezeichnern des Quellcodes ohne Schlüsselwörter der Sprache und bis zu 400 Zeichen aus den übrigen Kommentaren. Die Absicht dahinter ist, dass der Vektor den Zweck einer Datei abbildet und nicht ihre Syntax. Anders als im Graphen bleiben Bibliotheksimporte im Beschreibungstext erhalten, denn das verwendete Framework ist ein starker Hinweis auf diesen Zweck. Für Funktionen und Klassen besteht der Text aus Signatur, Dekoratoren, Docstring und dem Rumpf bis zu 1200 Zeichen. Die Vektoren erzeugt ein lokal laufendes Ollama, eine Laufzeitumgebung für Sprachmodelle~\cite{ollama}, mit dem Modell \texttt{qwen3-embedding:0.6b} bei 1024 Dimensionen~[KLÄREN: Quelle Qwen3-Embedding, Vorschlag: Zhang et al.\ 2025, Qwen3 Embedding: Advancing Text Embedding and Reranking Through Foundation Models, arXiv:2506.05176]. Lokal bedeutet, dass kein Quellcode die Maschine verlässt und keine API-Kosten anfallen. Für \texttt{File}, \texttt{Function} und \texttt{Class} wird je ein Vektorindex angelegt, dazu ein Volltextindex über Name, Pfad und Beschreibung~[KLÄREN: Quelle Neo4j-Indizes, Vorschlag: Neo4j Cypher Manual, Abschnitte Vector indexes und Full-text indexes]. Fällt der Einbettungsdienst aus, läuft der Import ohne Vektoren weiter, und der Abruf stützt sich auf die namens- und stichwortbasierten Suchzweige aus Abschnitt~\ref{sec:abrufpipeline}.
+
+Beim Betrieb des Graphen ist die erste Entscheidung die Datenbank je Projekt. \texttt{import.js} legt für jedes Projekt eine eigene Datenbank an, deren Name aus dem Projektnamen abgeleitet wird. Eine gemeinsame Datenbank für alle Projekte läge nahe, weil der Graph dann Wissen über Projektgrenzen hinweg verbinden könnte. Ein Vektorindex in Neo4j umfasst jedoch alle Knoten eines Typs, und die Vektorabfrage lässt sich nicht vorab auf ein Projekt einschränken~[KLÄREN: Quelle Neo4j-Vektorindex, Vorschlag: Neo4j Cypher Manual, Abschnitt Vector indexes]. In einer gemeinsamen Datenbank liefert die semantische Suche deshalb die global nächsten Kandidaten und filtert erst danach auf das Projekt, Treffer aus fremden Projekten verdrängen dann die eigenen. Mehrere Datenbanken je Instanz setzen die Enterprise-Ausgabe von Neo4j voraus~[KLÄREN: Quelle Neo4j-Editionen, Vorschlag: Neo4j Operations Manual, Abschnitt Databases bzw.\ Editions]. Die zweite Entscheidung betrifft die Nachführung. Geänderte Dateien werden nicht aktualisiert, sondern mit ihren Funktionen und Klassen gelöscht und neu angelegt, damit keine veralteten Symbolknoten einer Datei zurückbleiben. Die internen Knoten-IDs sind damit über Neubauten hinweg nicht stabil. Das Werkzeug identifiziert Knoten über Läufe hinweg deshalb über Pfad und Name, nicht über die ID.
 
 \section{Umsetzung: Abrufpipeline in vier Stufen}% 2,5 S. — als ZWEITES schreiben
 \label{sec:abrufpipeline}
-% NOTIZEN — die vier Stufen (get_context):
-% 1. Seeds: Task-Text wird per Ollama embedded -> Vektorsuche: Top-Files +
-%    Top-Functions über Schwellwert als Seeds; Fallback auf
-%    Keyword-Extraktion, wenn Ollama nicht erreichbar oder keine Treffer;
-%    spätere Iteration: Hybrid-Seed-Suche mit BM25 (aus Stepwise-Arbeit).
-% 2. Traversierung: von den Seeds aus bis hopDepth über alle Kantentypen.
-% 3. Ranking: Dedupe, Ranking nach Hop-Distanz (später geboostet durch 
-%    Commit-Historie und Import-Grad), Cap bei N Nachbarn.
-% 4. Rückgabe: strukturierter Kontextblock plus decisionPath — pro Knoten
-%    die Begründungskette (nodeChain/edgeChain); Nachvollziehbarkeit von
-%    Anfang an eingeplant -> das ist das Erklärbarkeits-Argument, betonen.
-%
-% KONFIGURATIONSTABELLE hier (Parameter NICHT in den Fließtext):
-% - EMBED_THRESHOLD 0.6; Top-5 Files + Top-5 Functions als Seeds;
-%   hopDepth default 2; Cap 30 Nachbarn; (weitere Parameter aus .env.local
-%   beim Schreiben ergänzen).
+% \begin{offen}
+% \textbf{NOTIZEN — die vier Stufen (get\_context):}\par
+% 1. Seeds: Task-Text wird per Ollama embedded $\rightarrow$ Vektorsuche: Top-Files + Top-Functions über Schwellwert als Seeds; Fallback auf Keyword-Extraktion, wenn Ollama nicht erreichbar oder keine Treffer; spätere Iteration: Hybrid-Seed-Suche mit BM25 (aus Stepwise-Arbeit).\par
+% 2. Traversierung: von den Seeds aus bis hopDepth über alle Kantentypen.\par
+% 3. Ranking: Dedupe, Ranking nach Hop-Distanz (später geboostet durch Commit-Historie und Import-Grad), Cap bei N Nachbarn.\par
+% 4. Rückgabe: strukturierter Kontextblock plus decisionPath — pro Knoten die Begründungskette (nodeChain/edgeChain); Nachvollziehbarkeit von Anfang an eingeplant $\rightarrow$ das ist das Erklärbarkeits-Argument, betonen.\par
+% \textbf{KONFIGURATIONSTABELLE hier (Übersicht aller Parameter). Konkrete Werte DÜRFEN in den Fließtext, wenn sie eine Aussage nachvollziehbar machen, statt vage zu bleiben (Beschluss 30.10.):}\par
+% \textbullet\ Fußnoten-Kandidat Stufe 3 (30.10., bewusst nicht im Text): Im stufenweisen Modus wird jeder Knoten nur beim ersten Erreichen erfasst (expandOneHop), die Zahl der Seeds, die ihn erreichen, ist dort immer 1 (retrieval.js, Kommentar in stageRanking). Ohne Wirkung, solange NBR\_W\_SUP im Standard 0 ist.\par
+% \textbullet\ Stand 30.10.: EMBED\_THRESHOLD 0,5; SEED\_CAP 7 Seeds; hopDepth 2; Obergrenze 30 Knoten gesamt, Seeds zuerst; vollständig in Tabelle tab:abrufparameter. Stichpunkte 1.--4.\ oben sind teils veraltet (Seeds jetzt vier Zweige + RRF, Ranking über gedämpfte Cosinus-Ähnlichkeit), maßgeblich ist der Text.
+% \end{offen}
 
-\section{Umsetzung: drei Betriebsmodi, Oberfläche und Rückgabeform}% 2,5 S. — als DRITTES schreiben, bisher 4.4 + 4.5
+In der Query-Phase übergibt der Agent die Aufgabenbeschreibung und, falls vorhanden, die Nutzeranfrage an das Werkzeug \texttt{get\_context} und erhält den Kontextblock zurück. Dazwischen durchläuft der Server vier Stufen. Die erste zieht Bezeichner aus beiden Texten. Die zweite bestimmt aus diesen Bezeichnern und aus der Aufgabenbeschreibung die Seeds, die Knoten, an denen die Suche im Graphen ansetzt. Die dritte traversiert von den Seeds aus durch den Graphen, die vierte ordnet die gefundenen Knoten und schneidet die Liste ab. Jede Stufe ist eine eigenständig aufrufbare Funktion mit festgelegter Ein- und Ausgabe. Der automatische Modus ruft die vier Funktionen nacheinander auf. Der stufenweise Modus aus Abschnitt~\ref{sec:betriebsmodi} hält zwischen den Stufen an, rechnet aber mit denselben Funktionen. Nur die Traversierung läuft dort anders. Er beginnt ohne Nachbarn, und jeder Hop wird über eine eigene Funktion einzeln nachgeladen. Diese Zerlegung ist die technische Voraussetzung für den stufenweisen Modus. Abbildung~\ref{fig:pipeline} in Abschnitt~\ref{sec:konzeption} zeigt die Stufen mit ihren Eingriffspunkten. Tabelle~\ref{tab:abrufparameter} fasst die Parameter der vier Stufen mit ihren Standardwerten zusammen.
+
+Die erste Stufe erhält zwei Eingabetexte. Der eine ist die wörtliche Anfrage des Nutzers an den Agenten, der andere die Aufgabenbeschreibung, die der Agent daraus in eigenen Worten formuliert. Dabei bringt er sein gelerntes Wissen ein, etwa über verwendete Bibliotheken, und was er bereits über das Projekt weiß. In beiden Texten sucht die erste Stufe nach Bezeichnern. Das sind Namen von Dateien, Funktionen oder Klassen, die im Code vorkommen könnten. Für den semantischen Zweig der zweiten Stufe wird dagegen nur die Aufgabenbeschreibung des Agenten eingebettet. Sie ist sauberer formuliert und enthält das Wissen, das der Agent ergänzt hat. Ist die Nutzeranfrage unsauber formuliert, etwa ein hastig geschriebener Fehlerbericht, verfälscht sie so die semantische Suche nicht. Die Datei- und Funktionsnamen, die sie nennt, gehen trotzdem in die Bezeichnersuche ein.
+
+Als Bezeichner erkennt die Suche Dateipfade mit Quellcodeendung, bloße Dateinamen, Text in Backticks, Namen in PascalCase oder camelCase und als Rückfallebene jedes Wort ab drei Zeichen. Erkannte Pfade werden vorher aus dem Text entfernt, damit ihre Segmente wie \texttt{src} oder \texttt{apps} nicht als eigene Suchbegriffe auftauchen. Eine feste Stoppwortliste blockiert Füllwörter wie Artikel und Präpositionen sowie Wörter, die den Bericht statt den Code beschreiben, etwa \emph{fix} oder \emph{bug}. Wörter mit Großbuchstaben im Inneren, Ziffern oder Unterstrich passieren den Filter immer, da sie mit hoher Wahrscheinlichkeit Namen aus dem Code sind.
+
+Für jeden so gefundenen Bezeichner steht noch nicht fest, ob er tatsächlich auf Code verweist. Zu jedem Bezeichner wird deshalb festgehalten, auf welchem Weg er gefunden wurde, als Pfad, Dateiname, Symbol oder bloßes Wort aus dem Fließtext. Diese Herkunft zeigt, wie verlässlich der Bezeichner ist. Ein ausdrücklich genannter Pfad wie \texttt{src/auth/login.ts} bezeichnet fast sicher eine bestimmte Datei, das Wort \emph{login} aus dem Fließtext dagegen vielleicht nur ein Thema. Die zweite Stufe gewichtet Treffer deshalb nach dieser Herkunft.
+
+Die zweite Stufe sucht die Seeds auf vier Wegen, im Folgenden Zweige genannt. Jeder Zweig arbeitet unabhängig von den anderen und liefert eine eigene, nach Relevanz geordnete Liste von Kandidaten.
+
+Der erste, semantische Zweig wandelt die Aufgabenbeschreibung des Agenten mit demselben Modell in einen Vektor um, mit dem \texttt{import.js} die Knoten eingebettet hat. Abgefragt werden die drei Vektorindizes für Dateien, Funktionen und Klassen aus Abschnitt~\ref{sec:codegraph}. Ein Vektorindex speichert zu jedem Knoten dessen Vektor und findet schnell die Knoten, deren Vektor dem Aufgabenvektor am ähnlichsten ist. Als Maß dient die Cosinus-Ähnlichkeit~[KLÄREN: Quelle Cosinus-Ähnlichkeit, Vorschlag: Manning, Raghavan und Schütze 2008, Introduction to Information Retrieval, Cambridge University Press, Kap.~6]. Sie vergleicht, in welche Richtung zwei Vektoren zeigen. Ein Wert von 1 bedeutet gleiche Richtung und damit sehr ähnlichen Inhalt, ein Wert nahe 0 bedeutet keinen inhaltlichen Zusammenhang. Eine Abfrage kostet nur die lokale Einbettung eines kurzen Textes und keine Tokens des Sprachmodells.
+
+Welche Treffer der semantische Zweig behält, entscheidet nicht allein ein fester Mindestwert. Die Grenze richtet sich vor allem nach dem besten Treffer. Ein Knoten bleibt, wenn sein Wert höchstens um einen festen Abstand (Delta) unter dem des besten Treffers liegt und zugleich einen Mindestwert erreicht. Der Grund ist, dass die Werte je nach Aufgabe unterschiedlich hoch ausfallen. Bei manchen Aufgaben liegen alle Treffer hoch, bei anderen alle niedrig. Eine feste Grenze allein würde im einen Fall zu viele und im anderen zu wenige Knoten durchlassen.
+
+Der zweite, exakte Zweig sucht Knoten, deren Name oder Pfad genau mit einem Bezeichner aus der ersten Stufe übereinstimmt. Ein bloßer Dateiname trifft dabei jede Datei mit diesem Namen. Vorher prüft ein Häufigkeitsfilter die Namen, nicht aber die Pfade. Tragen mehr als zwei Knoten im Graphen denselben Namen, wird dieser Name im exakten Zweig nicht verwendet. Ein gewöhnliches Wort, das Dutzende Knoten benennt, sagt nichts darüber aus, welcher Knoten gemeint ist, und würde die Liste nur mit unpassenden Treffern füllen.
+
+Der dritte, lexikalische Zweig sucht die Bezeichner im Volltextindex über Name, Pfad und Beschreibung aus Abschnitt~\ref{sec:codegraph}. Er stellt dabei eine Präfixanfrage. Sie sucht nach Einträgen, die mit dem Bezeichner beginnen. So trifft auch ein Teil eines Namens den vollständigen Knotennamen.
+
+Der vierte Zweig, im Folgenden BM25-Zweig, durchsucht den vollständigen Inhalt aller Dateien des Projekts. Er nutzt dafür BM25, ein stichwortbasiertes Rangverfahren, das seltene Begriffe höher gewichtet als häufige~[KLÄREN: Quelle BM25, Vorschlag: Robertson und Zaragoza 2009, The Probabilistic Relevance Framework: BM25 and Beyond, Foundations and Trends in Information Retrieval 3(4)]. Er ist der einzige Zweig, der den eigentlichen Code innerhalb einer Datei liest. Wie der semantische Zweig bekommt er die ganze Aufgabenbeschreibung und nicht nur die Bezeichner.
+
+Nach den vier Zweigen liegen vier Listen vor, und jede bewertet ihre Treffer auf eigene Weise. Die semantische Liste trägt Ähnlichkeitswerte zwischen 0 und 1, die BM25-Liste Scores ohne feste Obergrenze, die exakte Liste gar keine Werte. Diese Werte lassen sich nicht sinnvoll addieren. Vergleichen lässt sich aber der Rangplatz, den ein Knoten in seiner Liste einnimmt. Die Pipeline führt die Listen deshalb mit Reciprocal Rank Fusion zusammen~[KLÄREN: Quelle RRF, Vorschlag: Cormack, Clarke und Buettcher 2009, Reciprocal Rank Fusion outperforms Condorcet and individual Rank Learning Methods, SIGIR 2009]. Jeder Knoten erhält aus jeder Liste, in der er steht, $1/(60 + r)$ Punkte, wobei $r$ sein Rangplatz in dieser Liste ist. Die Punkte aus allen Listen werden addiert. Ein Knoten auf Platz drei in zwei Listen erhält so $2/63 \approx 0{,}032$ Punkte und liegt vor einem Knoten, der nur in einer Liste auf Platz eins steht und $1/61 \approx 0{,}016$ Punkte erhält.
+
+Die Liste des exakten Zweigs, der nach genau passenden Namen und Pfaden sucht, braucht eine Sonderregel. Sie hat keine eigene Reihenfolge, weil ein Namenstreffer entweder stimmt oder nicht. Ihr Rangplatz richtet sich deshalb danach, in welcher Form der Name in der Nutzeranfrage oder der Aufgabenbeschreibung stand. Das hat die erste Stufe für jeden Bezeichner festgehalten. Ein Pfad zählt als Platz 1, ein Dateiname als Platz 3, ein Symbol als Platz 6 und ein bloßes Wort aus dem Fließtext als Platz 20. Je mehr Knoten im Graphen denselben Namen tragen, desto weiter rückt der Treffer zusätzlich nach hinten. Außerdem zählen die Punkte der exakten Liste 1,2-fach. Ein ausdrücklich genannter Pfad wie \texttt{src/auth/login.ts}, ein Dateiname oder ein Symbol liegt damit vor dem besten Treffer des semantischen Zweigs, denn er verweist mit hoher Sicherheit auf Code. Ein bloßes Wort wie \emph{login} landet dagegen dahinter. Es bezeichnet oft nur ein Thema und soll die semantischen Treffer nicht von den Seed-Plätzen verdrängen.
+
+Aus der fusionierten Liste wählt die Stufe die Seeds in drei Schritten aus. Zuerst rücken Kandidaten aus Testdateien ans Ende der Liste, innerhalb der Testkandidaten und innerhalb der übrigen bleibt die Reihenfolge erhalten. Testdateien erkennt das Werkzeug am Pfad, etwa an einem Verzeichnis \texttt{tests/} oder an einem Namen wie \texttt{login.test.ts}. Ausgenommen ist eine Testdatei, die Nutzeranfrage oder Aufgabenbeschreibung ausdrücklich als Pfad oder Dateinamen nennen. Tests sind für die Suche durchaus nützlich, denn ein Test importiert den Code, den er prüft, und zeigt damit auf ihn. Als Seeds verdrängen sie aber diesen Code selbst. Fehlerberichte sind oft wie Testfälle formuliert, und die Tests eines Projekts beschreiben dasselbe Verhalten wie der gesuchte Code. Testsymbole können deshalb einen Großteil der Seed-Plätze belegen. Die Stufe stellt Testdateien darum nur nach hinten und entfernt sie nicht. Sie bleiben Kandidaten, und die Traversierung der dritten Stufe erreicht die Tests eines Seeds über dessen Importe. Abschnitt~\ref{sec:seed-aenderung} zeigt, wie sich diese Regel auf die Treffer auswirkt. Danach werden Dubletten zusammengefasst. Stehen eine Datei und eigene Funktionen oder Klassen dieser Datei in der Liste, bleibt nur der Knoten mit den meisten Punkten, denn alle führen in dieselbe Datei. Die übrigen belegen keinen Seed-Platz. Zwei Funktionen derselben Datei ohne die Datei selbst gelten nicht als Dubletten. Zuletzt werden die ersten verbleibenden Knoten zu Seeds, im Standard sieben (Tabelle~\ref{tab:abrufparameter}).
+
+Abgelehnte Kandidaten gehen nicht verloren. Die Stufe hält zu jedem den Grund fest: als Dublette zusammengefasst, hinter dem letzten Seed-Platz oder im semantischen Zweig unter dem Schnitt. Von den Knoten unter dem Schnitt werden höchstens 25 festgehalten, und nur solche, die kein anderer Zweig geliefert hat. Die Oberfläche des stufenweisen Modus aus Abschnitt~\ref{sec:betriebsmodi} zeigt diese Kandidaten samt Grund an, und ein Mensch kann sie per Klick wieder zu Seeds machen. Fällt der Einbettungsdienst aus, bleibt die semantische Liste leer, und die Seeds kommen aus den drei übrigen Listen.
+
+Die dritte Stufe geht von den Seeds aus durch den Graphen. Ein Hop ist ein Schritt über eine Kante, und die Traversierung läuft bis zu einer festen Zahl von Hops, im Standard zwei. Bei zwei Hops erreicht sie etwa von einer Seed-Funktion über \texttt{DEFINED\_IN} deren Datei und von dort über \texttt{IMPORTS} die Dateien, die diese Datei einbinden. Die Kanten werden dabei ohne Richtung durchlaufen. Von einer Datei aus erreicht die Traversierung damit sowohl die Dateien, die sie importiert, als auch die, die sie importieren. Die Traversierung folgt acht der neun Kantentypen aus Abschnitt~\ref{sec:codegraph}. \texttt{TESTS} ist nicht darunter. Das schränkt die Erreichbarkeit nicht ein, denn eine \texttt{TESTS}-Kante entsteht beim Import nur zwischen einer Testdatei und einer Datei, die sie importiert, und zwischen diesen beiden liegt bereits eine \texttt{IMPORTS}-Kante. Für jeden erreichten Knoten hält die Stufe den kürzesten Weg fest, den sie von einem Seed aus gefunden hat, als Kette der Knotennamen und Kantentypen, dazu die Hop-Distanz und die Zahl der Seeds, von denen aus er erreicht wurde. Diese Kette ist später die Begründung, warum der Knoten im Kontext steht, und die Grundlage der Darstellung in der Oberfläche. Zusätzlich wird für jeden erreichten Knoten die Cosinus-Ähnlichkeit seines Vektors zum Aufgabenvektor berechnet, die vierte Stufe braucht sie für die Reihenfolge. Im stufenweisen Modus aus Abschnitt~\ref{sec:betriebsmodi} läuft dieselbe Traversierung hopweise, jeder Hop als eigener Aufruf.
+
+Die vierte Stufe bringt die erreichten Knoten in eine Reihenfolge und kürzt die Liste. Die Seeds nehmen daran nicht teil, sie werden nicht sortiert und stehen im Ergebnis vor den Nachbarn. Jeder Nachbar erhält einen Wert aus seiner Cosinus-Ähnlichkeit zur Aufgabe. Je Hop über den ersten hinaus wird dieser Wert mit 0,6 multipliziert, ein Knoten im zweiten Hop behält damit 60~Prozent seines Werts. Die Hop-Distanz wirkt so als Faktor, nicht als Sortierschlüssel. Als Sortierschlüssel würde sie dazu führen, dass die Knoten des ersten Hops die Liste allein füllen, sobald es genug von ihnen gibt, und kein Knoten des zweiten Hops erscheint, egal wie gut er zur Aufgabe passt. Nur bei exakt gleichem Wert liegt der nähere Knoten vorn.
+
+Die Ähnlichkeiten der Nachbarn liegen eng beieinander. In einer Messung über 16.493 Nachbarn aus 19 Aufgaben lagen 90~Prozent der Werte zwischen 0,416 und 0,639~[KLÄREN: Beleg sim-distribution vom 17.08., Kapitel~\ref{chap:vormessungen} oder Anhang]. Damit dieser enge Bereich beim Sortieren Gewicht bekommt, wird er auf die Spanne 0 bis 1 gestreckt. Werte darunter zählen als 0, Werte darüber als 1. Die Grenzen sind fest im Werkzeug hinterlegt und werden bewusst nicht aus dem jeweils vorliegenden Pool berechnet, sonst hinge der Rang eines Knotens davon ab, welche anderen Knoten zufällig mit ihm erreicht wurden. Das wäre vor allem im stufenweisen Modus ein Problem, weil dort nach jedem nachgeladenen Hop neu geordnet wird. Neben der Ähnlichkeit stehen zwei weitere Terme im Code, die Zahl der Commits einer Datei und die Zahl der Seeds, von denen aus ein Knoten erreicht wurde. Beide haben im Standard das Gewicht 0, Kapitel~\ref{chap:vormessungen} begründet das. Fehlt die Einbettung ganz, weil der Dienst ausgefallen ist, entfällt die Ähnlichkeit, und die Reihenfolge richtet sich allein nach der Hop-Distanz.
+
+Der Kontextblock umfasst höchstens 30 Knoten, zuerst die Seeds, dann die bestplatzierten Nachbarn. Bei sieben Seeds sind das 23 Nachbarn. Diese Obergrenze hält den Kontextblock in einer Größe, die das Kontextfenster des Agenten nicht unnötig belastet (vgl.\ Abschnitt~\ref{sec:token-kontextfenster})~[KLÄREN: Quelle, vorhanden in der Bib: liu2023lostmiddle, ggf.\ du2025contextlength]. Für jeden Knoten enthält der Block Name, Typ, Pfad, Zeilenbereich und eine gekürzte Beschreibung. Zu jedem Nachbarn steht außerdem, über welchen Knoten und welche Kanten er erreicht wurde, dazu kommen die Beziehungen zwischen allen enthaltenen Knoten. Damit lässt sich für jeden Knoten im Kontext beantworten, warum er dort steht. Diese Nachvollziehbarkeit war von Anfang an Teil des Entwurfs. Sie ist die Voraussetzung dafür, dass ein Mensch den Kontext prüfen und korrigieren kann, bevor der Agent mit ihm arbeitet. In welcher Form der Block übergeben wird, beschreibt Abschnitt~\ref{sec:betriebsmodi}.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Parameter der Abrufpipeline. Standardwerte des Werkzeugs, mit denen auch die Studie lief. Parameter mit Namen in Großbuchstaben lassen sich je Projekt in \texttt{.env.local} überschreiben, \texttt{hopDepth} gibt der Agent je Aufruf an, Einträge mit dem Zusatz \emph{fest} stehen fest im Code.}
+  \label{tab:abrufparameter}
+  \small
+  \begin{tabularx}{\textwidth}{llc>{\raggedright\arraybackslash}X}
+    \toprule
+    Stufe & Parameter & Wert & Wirkung \\
+    \midrule
+    2 & \texttt{SEED\_SEM\_FLOOR} & 0{,}5 & Mindestähnlichkeit eines semantischen Treffers (älterer Name \texttt{EMBED\_THRESHOLD}) \\
+    2 & \texttt{SEED\_SEM\_DELTA} & 0{,}1 & Abstand zum besten Treffer, bis zu dem der adaptive Schnitt Kandidaten behält \\
+    2 & \texttt{SEED\_SEM\_TOPK} & 25 & Länge der Kandidatenlisten des semantischen, des lexikalischen und des BM25-Zweigs \\
+    2 & \texttt{SEED\_DF\_MAX} & 2 & Häufigkeitsfilter des exakten Zweigs, höchstens so viele Knoten dürfen einen Namen tragen \\
+    2 & Ersatz-Plätze (fest) & 1/3/6/20 & Rangplatz eines exakten Treffers für Pfad, Dateiname, Symbol und Wort aus dem Fließtext, dazu $\log_2(1 + n)$ bei $n$ Knoten mit diesem Namen \\
+    2 & \texttt{SEED\_RRF\_K} & 60 & Konstante der Rangfusion, Punkte je Liste $1/(60 + r)$ bei Rangplatz $r$ \\
+    2 & \texttt{SEED\_W\_EXACT} & 1{,}2 & Gewicht des exakten Zweigs in der Fusion, die drei übrigen Zweige wiegen 1{,}0 \\
+    2 & \texttt{SEED\_TEST\_MODE} & demote & Kandidaten aus Testdateien ans Ende stellen \\
+    2 & \texttt{SEED\_CAP} & 7 & Zahl der Seeds \\
+    3 & \texttt{hopDepth} & 2 & Maximale Zahl der Hops (1 bis 3), je Aufruf \\
+    4 & \texttt{NBR\_BETA} & 0{,}6 & Dämpfungsfaktor je Hop über den ersten hinaus \\
+    4 & Normierungsband (fest) & 0{,}416--0{,}639 & Ähnlichkeitsbereich, der auf 0 bis 1 gestreckt wird \\
+    4 & \texttt{NBR\_W\_PRIOR}, \texttt{NBR\_W\_SUP} & 0 & Gewichte für Commit-Zahl und Seed-Anzahl, im Standard aus \\
+    4 & Obergrenze Kontextblock (fest) & 30 & Knoten gesamt, Seeds zuerst \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\section{Umsetzung: Betriebsmodi, Oberfläche und Rückgabeform}% 2,5 S. — als DRITTES schreiben, bisher 4.4 + 4.5
 \label{sec:betriebsmodi}
-% Inhalt: mit Studienseite; JSON, Entscheidung 24.09.
-%
-% NOTIZEN — die drei Modi:
-% - get_context: automatischer Pfad.
-% - get_context_interactive: One-Shot-Review — Agent blockiert, Mensch
-%   editiert den fertigen Kontext, bestätigt, Agent arbeitet weiter.
-% - get_context_stepwise (August 2026): Eingriff pro Pipeline-Stufe
-%   (Seeds -> Traversierung -> Ranking) statt nur am Ende — als Iteration
-%   aus den Erfahrungen erzählen, nicht als ursprüngliche Konzeption.
-% - Der Nutzer steuert per Prompt, welcher Modus gilt.
-%
-% NOTIZEN — Oberfläche (Review-UI im Browser):
-% - Knoten ab-/zuwählen, manuell per Suche (Name oder semantisch) hinzufügen,
-%   Retrieval-Parameter nachjustieren und neu rechnen lassen,
-%   "Kontext bestätigen"-Schritt.
-% - Timeout mit Countdown und Verlängern-Button; danach automatische
-%   Übernahme des unbearbeiteten Kontexts.
-% - Replay-Timeline: Retrieval-Ablauf Schritt für Schritt nachvollziehen.
-% - open_in_neo4j: Subgraph des gelieferten Kontexts mit einem Klick im
-%   Neo4j Browser öffnen — der Mensch sieht, was der Agent bekommen hat.
-% - Eigener Kontext-Renderer (aus Stepwise-Iteration).
-%
-% NOTIZEN — ein Absatz Technik, der argumentativ tragend ist:
-% - MCP läuft über stdio -> stdout darf nicht verschmutzt werden (Logging
-%   ausschließlich stderr); Blocking über awaited Promise +
-%   In-Memory-Session-Map; MCP-Keepalive über notifications/progress alle
-%   10 s, damit der Client-Timeout nicht zuschlägt — als größtes technisches
-%   Risiko identifiziert und vorab validiert.
-% - GESTRICHEN (zu tief, höchstens Fußnote): node:http statt Express,
-%   Cytoscape vendored ohne Build-Step, SSE statt WebSocket, Zustände als
-%   CSS-Klassen.
-%
-% WERKZEUGTABELLE hier: die 9 MCP-Tools mit Einzeiler-Beschreibung —
-% get_context, get_context_interactive, get_context_stepwise, inspect_graph,
-% find_importers, find_exported_functions, find_reachable_functions,
-% find_issues_for_file, find_prs_for_file, update_graph, open_in_neo4j
-% (Liste beim Schreiben gegen den aktuellen Stand im Repo prüfen).
-%
-% NOTIZEN — Rückgabeform:
-% - Strukturierter Markdown-Kontextblock; Umstellung auf JSON
-%   (Entscheidung 24.09.) — kurz begründen.
+\begin{offen}
+Inhalt: mit Studienseite; JSON, Entscheidung 24.09.\par
+\textbf{NOTIZEN — die drei Modi:}\par
+\textbullet\ get\_context: automatischer Pfad.\par
+\textbullet\ get\_context\_interactive: One-Shot-Review — Agent blockiert, Mensch editiert den fertigen Kontext, bestätigt, Agent arbeitet weiter.\par
+\textbullet\ get\_context\_stepwise (August 2026): Eingriff pro Pipeline-Stufe (Seeds $\rightarrow$ Traversierung $\rightarrow$ Ranking) statt nur am Ende — als Iteration aus den Erfahrungen erzählen, nicht als ursprüngliche Konzeption.\par
+\textbullet\ Der Nutzer steuert per Prompt, welcher Modus gilt.\par
+\textbf{NOTIZEN — Oberfläche (Review-UI im Browser):}\par
+\textbullet\ Knoten ab-/zuwählen, manuell per Suche (Name oder semantisch) hinzufügen, Retrieval-Parameter nachjustieren und neu rechnen lassen, \glqq{}Kontext bestätigen\grqq{}-Schritt.\par
+\textbullet\ Timeout mit Countdown und Verlängern-Button; danach automatische Übernahme des unbearbeiteten Kontexts.\par
+\textbullet\ Replay-Timeline: Retrieval-Ablauf Schritt für Schritt nachvollziehen.\par
+\textbullet\ open\_in\_neo4j: Subgraph des gelieferten Kontexts mit einem Klick im Neo4j Browser öffnen — der Mensch sieht, was der Agent bekommen hat.\par
+\textbullet\ Eigener Kontext-Renderer (aus Stepwise-Iteration).\par
+\textbf{NOTIZEN — ein Absatz Technik, der argumentativ tragend ist:}\par
+\textbullet\ MCP läuft über stdio $\rightarrow$ stdout darf nicht verschmutzt werden (Logging ausschließlich stderr); Blocking über awaited Promise + In-Memory-Session-Map; MCP-Keepalive über notifications/progress alle 10 s, damit der Client-Timeout nicht zuschlägt — als größtes technisches Risiko identifiziert und vorab validiert.\par
+\textbullet\ GESTRICHEN (zu tief, höchstens Fußnote): node:http statt Express, Cytoscape vendored ohne Build-Step, SSE statt WebSocket, Zustände als CSS-Klassen.\par
+\textbf{WERKZEUGTABELLE hier:} die 9 MCP-Tools mit Einzeiler-Beschreibung —\par
+get\_context, get\_context\_interactive, get\_context\_stepwise, inspect\_graph,\par
+find\_importers, find\_exported\_functions, find\_reachable\_functions,\par
+find\_issues\_for\_file, find\_prs\_for\_file, update\_graph, open\_in\_neo4j\par
+(Liste beim Schreiben gegen den aktuellen Stand im Repo prüfen).\par
+\textbf{NOTIZEN — Rückgabeform:}\par
+\textbullet\ Strukturierter Markdown-Kontextblock; Umstellung auf JSON (Entscheidung 24.09.) — kurz begründen.
+\end{offen}
+
+Für diese Arbeit sind zwei Modi des Abrufs maßgeblich, die sich darin unterscheiden, ob ein Mensch eingreift. Im automatischen Modus durchläuft \texttt{get\_context} die vier Stufen aus Abschnitt~\ref{sec:abrufpipeline} ohne Unterbrechung und gibt höchstens 30 Knoten an den Agenten zurück. Zusätzlich öffnet das Werkzeug den gelieferten Teilgraphen im Neo4j Browser, sodass der Nutzer sieht, was der Agent bekommen hat. Im stufenweisen Modus hält \texttt{get\_context\_stepwise} nach jeder Stufe an und wartet auf den Nutzer. Welchen Modus der Agent aufruft, ergibt sich aus der Anfrage des Nutzers. Die Beschreibung des stufenweisen Werkzeugs weist den Agenten an, es zu wählen, wenn der Nutzer den Abruf Schritt für Schritt steuern will.\footnote{Ein dritter Modus, \texttt{get\_context\_interactive}, ist der Vorläufer des stufenweisen. Er rechnet die Pipeline vollständig durch und lässt den Nutzer danach Knoten aus dem fertigen Ergebnis abwählen, verworfene Kandidaten zurückholen und Knoten von Hand hinzufügen. Eine Zeitleiste spielt den Abruf dabei Schritt für Schritt ab, verändert ihn aber nicht. Ein abgewählter Seed ist zu diesem Zeitpunkt bereits traversiert, seine Nachbarn bleiben im Ergebnis. Der Modus ist weiter verfügbar, in der Studie wird er nicht verwendet.} Die Werkzeugbeschreibungen, die der Agent einmal je Sitzung erhält, legen außerdem fest, wie er die beiden Eingabetexte aus Abschnitt~\ref{sec:abrufpipeline} füllt. Die Aufgabenbeschreibung soll den gesuchten Code beschreiben und echte Symbolnamen und Dateipfade enthalten, nicht den Fehlerbericht. Die wörtliche Anfrage des Nutzers gehört samt Wörtern wie \emph{bug} oder \emph{fix} in das zweite Feld, das nach Abschnitt~\ref{sec:abrufpipeline} nur in die Bezeichnersuche eingeht. Die Beschreibung ist damit Teil des Abrufverfahrens und nicht bloß Dokumentation. Neben den Abrufmodi bietet der Server weitere Werkzeuge an, Tabelle~\ref{tab:mcp-werkzeuge} listet alle zwölf auf.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Werkzeuge des MCP-Servers. Die Beschreibungen fassen die Werkzeugbeschreibungen zusammen, die der Agent erhält.}
+  \label{tab:mcp-werkzeuge}
+  \small
+  \begin{tabularx}{\textwidth}{l>{\raggedright\arraybackslash}X}
+    \toprule
+    Werkzeug & Aufgabe \\
+    \midrule
+    \multicolumn{2}{l}{\emph{Kontext abrufen}} \\
+    \texttt{get\_context} & Stellt den Kontext ohne Eingriff zusammen, höchstens 30 Knoten, und öffnet den Teilgraphen im Neo4j Browser \\
+    \texttt{get\_context\_stepwise} & Wie \texttt{get\_context}, der Nutzer steuert jede Stufe in der Oberfläche, der Aufruf wartet auf seine Bestätigung \\
+    \texttt{get\_context\_interactive} & Wie \texttt{get\_context}, der Nutzer prüft das fertige Ergebnis in der Oberfläche, der Aufruf wartet auf seine Bestätigung (Vorläufer, in der Studie nicht verwendet) \\
+    \midrule
+    \multicolumn{2}{l}{\emph{Graph erkunden}} \\
+    \texttt{inspect\_graph} & Liefert die direkten Nachbarn eines Knotens \\
+    \texttt{open\_in\_neo4j} & Öffnet den Neo4j Browser mit dem Teilgraphen zu gegebenen Knoten \\
+    \midrule
+    \multicolumn{2}{l}{\emph{Gezielte Abfragen}} \\
+    \texttt{find\_importers} & Alle Dateien, die eine gegebene Datei importieren \\
+    \texttt{find\_exported\_functions} & Alle exportierten Funktionen einer Datei \\
+    \texttt{find\_reachable\_functions} & Exportierte Funktionen aller Dateien, die eine Datei direkt importiert \\
+    \texttt{find\_issues\_for\_file} & Issues zu einer Datei, direkt verknüpft oder über einen Pull Request \\
+    \texttt{find\_prs\_for\_file} & Pull Requests, die eine Datei geändert haben \\
+    \midrule
+    \multicolumn{2}{l}{\emph{Graph neu aufbauen}} \\
+    \texttt{parse\_codebase} & Schritt 1: Codebasis parsen und die JSON-Datei schreiben \\
+    \texttt{import\_graph} & Schritt 2: JSON-Datei in Neo4j importieren und Einbettungen erzeugen \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+Der stufenweise Modus verschiebt den Zeitpunkt, an dem der Mensch eingreift. Wer in ein fertiges Ergebnis eingreift, kann nur streichen, was die Pipeline bereits berechnet hat. Im stufenweisen Modus sieht der Nutzer dagegen das Ergebnis jeder Stufe, bevor die nächste rechnet. Er wählt Knoten ab oder fügt welche hinzu, und erst wenn er zur nächsten Stufe weitergeht, rechnet der Server weiter, und zwar auf der bearbeiteten Auswahl. Ein hier abgewählter Seed wird deshalb nicht nur ausgeblendet, von ihm aus wird gar nicht erst traversiert. Der Nutzer formt den Kontext, statt ihn nachträglich zu filtern. Zugleich startet die Traversierung erst, nachdem der Nutzer die Seeds bestätigt hat. Der Nutzer kann zu einer früheren Stufe zurückkehren. Ändert er dort etwas, verwirft der Server alle späteren Stufen ausdrücklich, statt sie still neu zu berechnen. Eine Änderung an einer frühen Stufe verändert zwangsläufig alles Spätere, und dieser Zusammenhang soll für den Nutzer sichtbar bleiben.
+
+Die Oberfläche des stufenweisen Modus läuft im Browser und ist um die vier Stufen der Pipeline gebaut. Sie zeigt die Knoten der aktuellen Stufe zugleich als Liste und als Graphen, daneben die Details zum gewählten Knoten. Auf der ersten Stufe sieht der Nutzer die beiden Eingabetexte und die daraus gezogenen Bezeichner. Er kann Bezeichner entfernen oder einen Text ändern und die Bezeichner neu berechnen lassen, bevor die Suche nach Seeds beginnt. Bezeichner, die aus seiner eigenen Anfrage stammen, sind eigens markiert, sodass erkennbar ist, welcher Text welchen Suchbegriff beigesteuert hat. Auf der zweiten Stufe wählt er Seeds ab, sortiert sie um oder fügt Knoten hinzu, die das Werkzeug nicht gefunden hat. Dazu durchsucht er alle Knoten des Projekts, wahlweise nach Namen oder semantisch. Kandidaten, die das Werkzeug verworfen hat, lassen sich ausgegraut im Graphen anzeigen und von dort zurückholen. Außerdem kann er die Zahl der Seeds und die Gewichte der Suchzweige verstellen und die Seeds neu suchen lassen, seine Abwahlen und zurückgeholten Kandidaten bleiben dabei erhalten. Auf der dritten Stufe lädt er die Nachbarn selbst nach, entweder gezielt für einen einzelnen Knoten oder als weiteren Hop für alle Knoten zugleich. So kann er einem einzelnen Pfad in die Tiefe folgen, ohne den ganzen Graphen zu erweitern. Auf der vierten Stufe ordnet er die Liste durch Ziehen und stellt die Obergrenze des Kontexts ein. Auch die Gewichtung, nach der das Werkzeug die Nachbarn ordnet, lässt sich verstellen und neu berechnen. Vom Nutzer verschobene Knoten behalten dabei ihren Platz, neu berechnet wird nur der Rang des Werkzeugs, der neben jedem Knoten steht. Damit bleibt sichtbar, wo der Nutzer von der Reihenfolge des Werkzeugs abweicht. In der Fassung für die Studie sind die Regler für die Parameter ausgeblendet, alle übrigen Eingriffe bleiben.
+
+Klickt der Nutzer einen Knoten in Liste oder Graph an, erscheint dessen Detailansicht mit dem Quellcode des Knotens. Der Graph speichert vom Code nur einen Auszug von höchstens 1200 Zeichen. Den vollständigen Code liest der Server deshalb bei jedem Aufruf direkt aus dem lokalen Projektverzeichnis. Der Code wird so nicht doppelt gehalten, und der Nutzer sieht stets den aktuellen Stand. Bei einer Datei zeigt die Ansicht die ganze Datei, bei einer Funktion oder Klasse deren Zeilen samt Kommentar. Wurde die Datei seit dem letzten Import geändert, können sich die Zeilen verschoben haben, und die Ansicht weist darauf hin. Wörter aus der Aufgabenbeschreibung sind im Code hervorgehoben. Namen anderer Knoten, etwa aufgerufene Funktionen oder importierte Dateien, sind im Code anklickbar und öffnen deren Detailansicht. Darunter stehen die Verbindungen des Knotens zu anderen Knoten. Ein eigener Block erklärt, wie das Werkzeug den Knoten gefunden hat. Er nennt den Suchzweig oder den Weg durch den Graphen, über den der Knoten erreicht wurde, seinen Rang, seine Ähnlichkeit zur Aufgabe und gegebenenfalls, warum das Werkzeug ihn zurückgestuft oder verworfen hatte. Dazu kommt der Text, den das Werkzeug für den Knoten eingebettet hat, ebenfalls mit hervorgehobenen Überschneidungen zur Aufgabe. Auch der Aufgabentext selbst trägt den Hinweis, dass und mit welchem Modell er eingebettet wird. Will der Nutzer wissen, was an einem Knoten hängt, schaltet er den Graphen auf eine Verbindungsansicht um. Sie zeigt nur diesen Knoten, seine Nachbarn bis zu einer wählbaren Tiefe und die Kanten zwischen ihnen, nach Richtung geordnet. Bevor der Nutzer den Kontext mit \glqq{}Kontext bestätigen\grqq{} an den Agenten übergibt, zeigt eine Vorschau ihn so, wie der Agent ihn erhalten wird. Er entscheidet damit nicht über eine Liste von Namen, sondern prüft am Code selbst, was der Agent bekommt und warum.
+
+Technisch ist der stufenweise Modus ein Werkzeugaufruf, der auf einen Menschen wartet. Ruft der Agent \texttt{get\_context\_stepwise} auf, berechnet der Server die erste Stufe, öffnet die Oberfläche im Browser und hält den Aufruf offen, bis der Nutzer den Kontext bestätigt. Die Oberfläche liefert ein lokaler Webserver, der nur auf dem eigenen Rechner unter 127.0.0.1 erreichbar ist. Für jede Sitzung hält der Server fest, auf welcher Stufe der Nutzer steht, was jede Stufe berechnet hat und was der Nutzer abgewählt, verschoben oder hinzugefügt hat. Nur so kann eine Stufe auf dem bearbeiteten Ergebnis der vorigen rechnen. Claude Code, der in dieser Arbeit eingesetzte Agent, verschiebt einen MCP-Aufruf nach 120 Sekunden in den Hintergrund und teilt dem Agenten mit, dass er weiterarbeiten darf. Der Agent würde dann Dateien lesen und ändern, bevor der Nutzer den Kontext bestätigt hat. Die Umgebungsvariable \texttt{CLAUDE\_CODE\_MCP\_AUTO\_BACKGROUND\_MS=0} schaltet das ab, der Aufruf blockiert dann, bis die Bestätigung kommt. Verschiebt ein Client den Aufruf dennoch, weist die Werkzeugbeschreibung den Agenten an, keine Dateien zu lesen oder zu ändern, dem Nutzer zu sagen, dass er auf die Bestätigung wartet, und seinen Zug zu beenden.
+
+Beim Bearbeiten warten zwei Seiten. Der Server wartet auf den Nutzer. Claude Code wartet auf den Server. Beide warten nicht unbegrenzt. Der Server wartet im Standard höchstens 10 Minuten ohne eine Aktion des Nutzers. Diese Wartezeit ist zwischen 1 und 30 Minuten einstellbar. Jede Neuberechnung durch den Nutzer startet sie neu. Der Nutzer kann sie in der Oberfläche auch verlängern. Bleibt der Nutzer so lange untätig, schickt der Server seine aktuelle Auswahl an Claude Code. Die Antwort ist als nicht bestätigt gekennzeichnet. Claude Code wartet höchstens bis zum Wert von \texttt{MCP\_TOOL\_TIMEOUT}. Diese Grenze gilt für den ganzen Aufruf. Danach bricht Claude Code den Aufruf ab. Der Agent bekommt dann keinen Kontext. Darum muss \texttt{MCP\_TOOL\_TIMEOUT} länger sein als die gesamte Bearbeitung durch den Nutzer~[KLÄREN: Wert von MCP\_TOOL\_TIMEOUT in der Studie]. In der Studie begrenzt die Sitzungsleitung die Bearbeitung auf 15 Minuten. Der Server sendet außerdem alle 10 Sekunden eine Fortschrittsmeldung. Manche Clients verlängern damit ihre Wartezeit. Claude Code tut das nicht. Da der Server mit dem Agenten über Standardein- und -ausgabe kommuniziert, bleibt die Standardausgabe allein dem Protokoll vorbehalten, alle übrigen Meldungen gehen auf die Fehlerausgabe. Eine Übersicht der Module mit ihrem Umfang steht in Anhang~\ref{app:module}.
+
+Den Kontext erhält der Agent als JSON, ein Objekt je Knoten in der Reihenfolge der Liste. Im stufenweisen Modus ist das die Reihenfolge, die der Nutzer zuletzt festgelegt hat. Jedes Objekt nennt Name, Typ, Datei, Zeilen und Beschreibung des Knotens, dazu seine Rolle, etwa Seed, Nachbar oder vom Nutzer hinzugefügt, und den Rang, den das Werkzeug ihm gegeben hat. Die Struktur steckt nicht in einer Verschachtelung. Jeder Knoten verweist auf den Knoten, über den er erreicht wurde, und eine Liste nennt die Kanten zwischen den gelieferten Knoten. Der Kopf der Antwort sagt, ob ein Mensch beteiligt war. Er unterscheidet drei Fälle. Kein Mensch hat den Kontext geprüft. Ein Mensch hat ihn bestätigt, und die Reihenfolge gleicht der des Werkzeugs. Die Reihenfolge weicht von der des Werkzeugs ab. Ist die Wartezeit abgelaufen, vermerkt der Kopf das zusätzlich. Was die Felder bedeuten, steht nicht in jeder Antwort, sondern einmal in der Werkzeugbeschreibung. Bis zum 24.09.2026 lieferte das Werkzeug stattdessen Markdown. Darin stand jeder Knoten eingerückt unter dem Knoten, über den er erreicht wurde. Mit diesem Format liefen die Vormessungen in Kapitel~\ref{chap:vormessungen}, es bleibt über einen Parameter wählbar. Für den Wechsel sprach, dass das Format der Eingabe bei leistungsfähigen Modellen kaum einen Unterschied macht~[KLÄREN: Bib-Eintrag McMillan 2026]. Auch die eigene Messung fand zwischen flacher und strukturierter Darstellung keinen Unterschied (Kapitel~\ref{chap:vormessungen}). Stärker wirken Reihenfolge und Position im Kontext~\cite{liu2023lostmiddle}. JSON hält die Reihenfolge des Nutzers ausdrücklich fest und ist für den Agenten eindeutig zu lesen.
 
 \section{Grenzen}% 1 S. — zum Schluss schreiben
 \label{sec:werkzeug-grenzen}
-% Inhalt: dazu Agentenanfrage 08.10. (Trainingswissen).
-% - GRENZE (aus 4.3 verwiesen): keine Kante Methode -> Klasse, Methoden sind
-%   Funktionsknoten der Datei; bei der Entwicklung übersehen.
+\begin{offen}
+Inhalt: dazu Agentenanfrage 08.10. (Trainingswissen).\par
+\textbullet\ GRENZE (aus 4.3 verwiesen): keine Kante Methode $\rightarrow$ Klasse, Methoden sind Funktionsknoten der Datei; bei der Entwicklung übersehen.
+\end{offen}
