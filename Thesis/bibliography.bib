@@ -206,16 +206,18 @@
 % Grenzen langer Kontexte (Modellseite)
 % ===========================================================================
 
-@misc{liu2023lostmiddle,
+% Publizierte Fassung (TACL 2024) statt arXiv-Preprint, geprüft 31.10.2026 in der ACL Anthology
+% (2024.tacl-1.9). Key unverändert, damit bestehende \cite weiter greifen.
+@article{liu2023lostmiddle,
   title         = {{Lost in the Middle: How Language Models Use Long Contexts}},
   author        = {Nelson F. Liu and Kevin Lin and John Hewitt
                    and Ashwin Paranjape and Michele Bevilacqua
                    and Fabio Petroni and Percy Liang},
-  year          = {2023},
-  eprint        = {2307.03172},
-  eprinttype    = {arXiv},
-  eprintclass   = {cs.CL},
-  url           = {https://arxiv.org/abs/2307.03172}
+  journal       = {Transactions of the Association for Computational Linguistics},
+  volume        = {12},
+  pages         = {157--173},
+  year          = {2024},
+  doi           = {10.1162/tacl_a_00638}
 }
 
 @misc{wu2025positionbias,
@@ -327,13 +329,138 @@
 % Ohne arXiv (nicht als arXiv-Preprint verfügbar)
 % ===========================================================================
 
+% Titel und Datum am 31.10.2026 gegen die Ankündigungsseite geprüft. Der frühere Titel
+% "Model Context Protocol: An Open Standard for LLM Tool Integration" kam auf keiner Seite vor.
 @online{anthropic2024mcp,
-  title         = {{Model Context Protocol: An Open Standard for LLM Tool Integration}},
+  title         = {{Introducing the Model Context Protocol}},
   author        = {{Anthropic}},
-  year          = {2024},
-  url           = {https://modelcontextprotocol.io},
-  urldate       = {2026-07-15},
-  note          = {Veröffentlicht November 2024}
+  date          = {2024-11-25},
+  url           = {https://www.anthropic.com/news/model-context-protocol},
+  urldate       = {2026-10-31}
+}
+
+% ===========================================================================
+% Information Retrieval (Kapitel 4.4), geprüft 31.10.2026 gegen Verlag/DOI
+% ===========================================================================
+
+@article{robertson2009bm25,
+  title         = {{The Probabilistic Relevance Framework: BM25 and Beyond}},
+  author        = {Stephen Robertson and Hugo Zaragoza},
+  journal       = {Foundations and Trends in Information Retrieval},
+  volume        = {3},
+  number        = {4},
+  pages         = {333--389},
+  year          = {2009},
+  doi           = {10.1561/1500000019}
+}
+
+@inproceedings{cormack2009rrf,
+  title         = {{Reciprocal Rank Fusion Outperforms Condorcet and Individual Rank Learning Methods}},
+  author        = {Gordon V. Cormack and Charles L. A. Clarke and Stefan B{\"u}ttcher},
+  booktitle     = {Proceedings of the 32nd International ACM SIGIR Conference on Research and Development in Information Retrieval},
+  pages         = {758--759},
+  year          = {2009},
+  publisher     = {ACM},
+  doi           = {10.1145/1571941.1572114}
+}
+
+@book{manning2008ir,
+  title         = {{Introduction to Information Retrieval}},
+  author        = {Christopher D. Manning and Prabhakar Raghavan and Hinrich Sch{\"u}tze},
+  publisher     = {Cambridge University Press},
+  location      = {Cambridge},
+  year          = {2008},
+  isbn          = {978-0-521-86571-5}
+}
+
+% ===========================================================================
+% Modelle (Kapitel 4.3), geprüft 31.10.2026 auf arXiv
+% ===========================================================================
+
+@misc{zhang2025qwen3embedding,
+  title         = {{Qwen3 Embedding: Advancing Text Embedding and Reranking Through Foundation Models}},
+  author        = {Yanzhao Zhang and Mingxin Li and Dingkun Long and Xin Zhang
+                   and Huan Lin and Baosong Yang and Pengjun Xie and An Yang
+                   and Dayiheng Liu and Junyang Lin and Fei Huang and Jingren Zhou},
+  year          = {2025},
+  eprint        = {2506.05176},
+  eprinttype    = {arXiv},
+  eprintclass   = {cs.CL},
+  url           = {https://arxiv.org/abs/2506.05176}
+}
+
+% ===========================================================================
+% Software und Dokumentation (Kapitel 4.3), Seiten am 31.10.2026 aufgerufen
+% Ohne Jahr, wo die Seite kein Veröffentlichungsdatum nennt.
+% ===========================================================================
+
+@software{treesitter,
+  title         = {{Tree-sitter}},
+  author        = {Max Brunsfeld},
+  url           = {https://tree-sitter.github.io/tree-sitter/},
+  urldate       = {2026-10-31},
+  note          = {Parsergenerator und inkrementelle Parserbibliothek}
+}
+
+@online{pythonast,
+  title         = {{ast -- Abstract Syntax Trees}},
+  author        = {{Python Software Foundation}},
+  url           = {https://docs.python.org/3/library/ast.html},
+  urldate       = {2026-10-31},
+  note          = {Python-Dokumentation, Standardbibliothek}
+}
+
+@online{githubrest,
+  title         = {{GitHub REST API Documentation}},
+  author        = {{GitHub}},
+  url           = {https://docs.github.com/en/rest},
+  urldate       = {2026-10-31}
+}
+
+@online{reactdocs,
+  title         = {{Your First Component}},
+  author        = {{React}},
+  url           = {https://react.dev/learn/your-first-component},
+  urldate       = {2026-10-31},
+  note          = {React-Dokumentation}
+}
+
+@software{ollama,
+  title         = {{Ollama}},
+  author        = {{Ollama}},
+  url           = {https://github.com/ollama/ollama},
+  urldate       = {2026-10-31}
+}
+
+@online{neo4jdocs,
+  title         = {{Neo4j Documentation}},
+  author        = {{Neo4j}},
+  url           = {https://neo4j.com/docs/},
+  urldate       = {2026-10-31}
+}
+
+@online{neo4jvector,
+  title         = {{Vector Indexes}},
+  author        = {{Neo4j}},
+  url           = {https://neo4j.com/docs/cypher-manual/current/indexes/semantic-indexes/vector-indexes/},
+  urldate       = {2026-10-31},
+  note          = {Neo4j Cypher Manual}
+}
+
+@online{neo4jfulltext,
+  title         = {{Full-text Indexes}},
+  author        = {{Neo4j}},
+  url           = {https://neo4j.com/docs/cypher-manual/current/indexes/semantic-indexes/full-text-indexes/},
+  urldate       = {2026-10-31},
+  note          = {Neo4j Cypher Manual}
+}
+
+@online{neo4jdbadmin,
+  title         = {{Database Administration}},
+  author        = {{Neo4j}},
+  url           = {https://neo4j.com/docs/operations-manual/current/database-administration/},
+  urldate       = {2026-10-31},
+  note          = {Neo4j Operations Manual}
 }
 
 @article{hevner2004dsr,
