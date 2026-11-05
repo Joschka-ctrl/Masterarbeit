@@ -21,6 +21,28 @@
 % Inhalt: FF1 bis FF6 wie im Exposé; der Wechsel zur Hauptfrage Verständnis
 % wird in 5.6 und 6.1 begründet.
 \label{sec:forschungsfragen}
+% FF1 mit E1 bis E3 am 04.11. wörtlich aus dem Exposé übernommen
+% (Expose_v4/sections/02_forschungsfragen.tex, Unterabschnitt "Gestaltung des Artefakts").
+% Noch nicht überarbeitet: Semikolons und Gedankenstriche aus dem Exposé stehen noch drin.
+% 4.2 (sec:konzeption) greift E1 bis E3 in Kurzform auf und verweist hierher.
+
+Das Transparenzproblem verlangt, dass der Entwickler nicht nur das Ergebnis des Abrufs sieht, sondern dessen Zustandekommen. Daraus folgt:
+
+\begin{quote}
+\textbf{FF1:} Wie ist ein graphbasiertes Retrieval zu gestalten, das zu jedem abgerufenen Knoten den Auswahlgrund offenlegt und die Auswahl vor der Übergabe an den Agenten schrittweise modifizierbar macht?
+\end{quote}
+
+Als Auswahlgrund gelten der Ähnlichkeitswert des Knotens, die wirksame Schnittgrenze, im Ablehnungsfall der Grund der Verwerfung, der eingebettete Beschreibungstext sowie der Traversierungspfad, über den der Knoten erreicht wurde.
+
+Konstruktionsfragen werden nicht über einen Bedingungsvergleich beantwortet. Das gestaltungsorientierte Vorgehen verlangt jedoch, dass ein Artefakt an vorab benannten Entwurfszielen geprüft wird \parencite{hevner2004dsr}; ohne solche Ziele bliebe FF1 eine Anforderungsliste ohne Kriterium für ihre Erfüllung. Für das hier entwickelte System gelten drei:
+
+\begin{description}[leftmargin=2.2em,style=nextline,itemsep=0.2em]
+  \item[E1] Zu jedem Knoten des übergebenen Subgraphen ist der Auswahlgrund im oben genannten Umfang abrufbar, einschließlich der Gründe für verworfene Knoten.
+  \item[E2] Jede Entscheidung des Abrufs --- Einstiegspunkte, verfolgte Kanten, Traversierungstiefe, Auswahl und Gewichtung --- ist vor der Übergabe an den Agenten veränderbar.
+  \item[E3] Die offengelegten Begründungen werden bei der Kuratierung tatsächlich herangezogen.
+\end{description}
+
+E1 und E2 sind Eigenschaften der Konstruktion und werden durch die Beschreibung des Systems belegt. E3 ist es nicht: Ob die Offenlegung genutzt wird oder lediglich vorhanden ist, entscheidet sich am Verhalten der Entwickler. Dieses Ziel wird daher empirisch geprüft, über das Kuratierungsprotokoll, das laute Denken und den Interviewleitfaden der Nutzerstudie. Werden Ähnlichkeitswert und Traversierungspfad durchgängig übergangen, ist E3 verfehlt --- ein Befund, der für die Gestaltung solcher Werkzeuge aufschlussreicher wäre als seine Bestätigung.
 
 \section{Aufbau der Arbeit}% 0,5 S.
 % Inhalt: Rollen von Claude (Entwicklungswerkzeug, gemessener Agent, Schreibhilfe)

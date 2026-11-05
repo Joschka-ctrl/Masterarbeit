@@ -4,11 +4,21 @@ Format: `- [ ] Abschnitt – was` – erledigt: `[x]`.
 
 ## Kapitel 4
 
+- [ ] Kap. 4 – später, eigene Runde: auf ca. 14 Seiten kürzen (Feinheiten in Fußnoten oder Anhang, Doppelungen tree-sitter/Ollama/Tokens nur einmal). Vorschläge der Gutachter vom 04.11.
+- [ ] 1.5 – später, wenn Kapitel 1 dran ist: übernommenen Exposé-Text zu FF1/E1–E3 an die Schreibregeln anpassen (Semikolon, Gedankenstriche, "Entwickler" vs. "Nutzer")
+- [ ] 4.6 – später: Grenze Laufzeit und Größe ergänzen (Build-Dauer, Graphgröße, Dauer je Abruf). Zahlen zusammensuchen: Textnotizen A2 (Neueinbetten 21 Repos ca. 11,5 h), codebase-graph/docs/import-performance-2026-08-16.md, Abrufdauer bisher nicht gemessen (Hinweis Zweitgutachter 04.11.)
+- [ ] Kap. 4 und 5 – später, wenn Anhang C (Messprotokolle) mit Nachweiszeilen steht: in den Fußnoten "Gemessen am …"-Daten durch Messkennung mit Verweis auf Anhang C ersetzen (Hinweis Zweitgutachter 04.11.)
+- [ ] 4.4/4.6 – später entscheiden: Normierungsband 0,416–0,639 wurde mit nomic bestimmt, Werkzeug läuft mit qwen3. Optionen: Nachmessung mit eval/sim-distribution-qwen.js (vorbereitet 02.11., noch nicht gelaufen) und/oder in 4.6 als Grenze nennen (Hinweis beider Gutachter vom 04.11.)
+- [ ] 4.4 – OPTIONAL, später entscheiden: durchlaufendes Beispiel einer Aufgabe durch alle vier Stufen (Vorschlag Zweitgutachter). Erst Bildschirmfoto und JSON-Auszug aus demselben Lauf machen, dann prüfen, ob es noch ein eigenes Beispiel braucht
+- [ ] 4.5 – JSON-Auszug des Kontextblocks als Abbildung: Lauf auswählen (z. B. Export Generalprobe/Pilot oder eigener Testlauf auf dem Studien-Frontend), auf einen Seed, einen Nachbarn mit via und eine Kante kürzen (KLÄREN-Marker im Absatz "Den Kontext erhält der Agent als JSON")
+- [ ] 4.5 – Bildschirmfoto der Oberfläche im stufenweisen Modus aufnehmen (Stufe 2 oder 3, ein Knoten angeklickt, Detailansicht mit Begründungsblock sichtbar), danach beschriften und als Abbildung einbinden (KLÄREN-Marker im Absatz "Die Oberfläche des stufenweisen Modus läuft im Browser")
+- [ ] 4.2 – Quelle für RAG suchen, selbst lesen und eintragen (Absatz "Die Seeds bestimmt eine Suche auf zwei Wegen", KLÄREN-Marker im Text). Kandidat: Lewis u. a. 2020, "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks", NeurIPS 2020
+- [ ] 4.2 – Grund klären, warum der Nutzer die Kantentypen nicht auswählen kann (KLÄREN-Marker im Absatz "In der Umsetzung änderte sich das Konzept an zwei Stellen")
 - [x] 4.3 – "Zwischendatei" an zwei Stellen (Parse-Absatz, Absatz nach der Abbildung) durch "JSON-Datei" ersetzen, passend zum ersten Absatz
 - [x] 4.6 – Grenze aufnehmen: keine Kante Methode -> Klasse, Methoden sind Funktionsknoten der Datei (in 4.3 schon mit Verweis auf 4.6 erwähnt) (erledigt 02.11., in 4.6 geschrieben)
 - [x] 4.4 – Bib-Eintrag BM25: Robertson und Zaragoza 2009, "The Probabilistic Relevance Framework: BM25 and Beyond", Foundations and Trends in Information Retrieval 3(4); dann Marker durch \cite ersetzen
 - [x] 4.4 – Bib-Eintrag RRF: Cormack, Clarke und Buettcher 2009, "Reciprocal Rank Fusion outperforms Condorcet and individual Rank Learning Methods", SIGIR 2009; dann Marker durch \cite ersetzen
-- [ ] 4.2 – Abbildung Pipeline mit Eingriffspunkten unter dem Label fig:pipeline anlegen, 4.4 verweist bereits darauf
+- [x] 4.2 – Abbildung Pipeline mit Eingriffspunkten unter dem Label fig:pipeline anlegen, 4.4 verweist bereits darauf
 - [x] 4.3 – Zitate reactdocs und ollama fehlen in bibliography.bib (Compiler-Warnung)
 - [x] 4.3 – Bib-Eintrag Neo4j allgemein (Neo4j Documentation, neo4j.com/docs); dann Marker durch \cite ersetzen
 - [x] 4.3 – MCP-Marker durch \cite{anthropic2024mcp} ersetzen (Eintrag schon vorhanden) oder Verweis auf Kapitel 2

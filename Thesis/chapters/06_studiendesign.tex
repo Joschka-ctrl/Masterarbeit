@@ -10,6 +10,10 @@
 
 \section{Bedingungen C und D}% 1 S.
 \label{sec:bedingungen}
+% Absatz zur Einstellung von Claude Code am 04.11. aus 4.5 hierher verschoben.
+% Der Rest des Abschnitts (Bedingungen C und D selbst) ist noch zu schreiben.
+
+Im stufenweisen Modus wartet der Werkzeugaufruf auf den Nutzer. Claude Code ist dafür eigens eingestellt. In eigenen Tests verschob Claude Code einen MCP-Aufruf nach 120 Sekunden in den Hintergrund und teilte dem Agenten mit, dass er weiterarbeiten darf~[KLÄREN: Version von Claude Code, mit der das beobachtet wurde. Die Studie nutzt 2.1.251]. Der Agent las und änderte dann Dateien, bevor der Nutzer den Kontext bestätigt hatte. Die Umgebungsvariable \texttt{CLAUDE\_CODE\_MCP\_AUTO\_BACKGROUND\_MS=0} schaltet das ab. Der Aufruf blockiert dann, bis die Bestätigung kommt. Verschiebt ein Client den Aufruf dennoch, weist die Werkzeugbeschreibung den Agenten an, keine Dateien zu lesen oder zu ändern, dem Nutzer zu sagen, dass er auf die Bestätigung wartet, und seinen Zug zu beenden. Außerdem bricht Claude Code einen Aufruf nach der Zeit ab, die \texttt{MCP\_TOOL\_TIMEOUT} festlegt. Der Agent erhält dann keinen Kontext. Dieser Wert muss deshalb über der gesamten Bearbeitungszeit liegen~[KLÄREN: Wert von MCP\_TOOL\_TIMEOUT in der Studie]. In der Studie begrenzt die Sitzungsleitung die Bearbeitung auf 15 Minuten.
 
 \section{Aufgaben auf teamable}% 2 S.
 % Inhalt: Referenzkontext, Spielraum je Aufgabe (13.10.).
