@@ -34,7 +34,7 @@ Format: `- [ ] Abschnitt – was` – erledigt: `[x]`.
 - [x] 4.4 – Marker Kontextfenster: \cite{liu2023lostmiddle} (ggf. du2025contextlength) einsetzen, beide schon in der Bib
 - [x] 4.4 – Marker Normierungsgrenzen: am 31.10. durch Fußnote mit Messdetails ersetzt (17.08., 19 Aufgaben, p5/p95)
 - [ ] 4.4 – "Kapitel 5 begründet das" (Commit- und Seed-Anzahl-Term mit Gewicht 0) beim Schreiben von Kapitel 5 einlösen: Quellen docs/eval-2026-08-17-f29.md und Kommentar in retrieval.js (NBR_W_SUP, NBR_W_PRIOR)
-- [ ] 4.5 – Marker MCP_TOOL_TIMEOUT: auf dem Studienrechner prüfen, ob und wie MCP_TOOL_TIMEOUT gesetzt ist (settings.local.json der Studienbranches im Bare-Repo, Benutzer-Settings, Umgebungsvariablen) und ob der Wert über 10 Minuten liegt; laut Studienplan nicht unter den Einstellungen der Branches
+- [ ] 6.2 (Absatz am 04.11. aus 4.5 verschoben) – Marker MCP_TOOL_TIMEOUT: auf dem Studienrechner prüfen, ob und wie MCP_TOOL_TIMEOUT gesetzt ist (settings.local.json der Studienbranches im Bare-Repo, Benutzer-Settings, Umgebungsvariablen) und ob der Wert über 10 Minuten liegt; laut Studienplan nicht unter den Einstellungen der Branches
 - [ ] 4.5 – Modultabelle für den Anhang anlegen (Label app:module), Zeilenzahlen der Module neu zählen (Stand 09.09. in Textnotizen A5)
 - [x] 4.5 – McMillan 2026 am 31.10. gestrichen (Paper existiert, arXiv 2602.05447, misst aber SQL-Generierung aus Schemata, passt nicht). JSON-Absatz neu mit eigener Messung und Liu
 - [ ] 4.5 – Absatz 3b (Detailansicht) sprachlich überarbeiten, inhaltlich ok
@@ -43,7 +43,28 @@ Format: `- [ ] Abschnitt – was` – erledigt: `[x]`.
 
 - [x] 4.6 – Grenze aufnehmen: Aufrufkanten nur über importierte Symbole (4.3). Aufrufe über Objekte und dynamischer Dispatch, gerade in Java und C#, erzeugen keine CALLS-Kante (erledigt 02.11., in 4.6 geschrieben)
 - [x] 4.6 – Grenze aufnehmen: Ob der Agent die Werkzeugbeschreibung befolgt, liegt beim Modell (4.5). Beleg: Opus-5-Läufe vom 09.10. riefen get_context nur mit task auf, ohne userQuery und ohne Symbolnamen (codebase-graph/eval/results-studie-c-opus-20261009/README.md) (erledigt 02.11., in 4.6 geschrieben)
-- [ ] 4.5 – KLÄREN-Marker Claude Code 120 s: Version nennen, mit der das Verschieben in den Hintergrund beobachtet wurde (Studie: 2.1.251, Quelle bisher docs/tool-beschreibung.md und server.js)
+- [ ] 6.2 (Absatz am 04.11. aus 4.5 verschoben) – KLÄREN-Marker Claude Code 120 s: Version nennen, mit der das Verschieben in den Hintergrund beobachtet wurde (Studie: 2.1.251, Quelle bisher docs/tool-beschreibung.md und server.js)
+- [ ] 6.2 – KLÄREN-Marker (06.11.): ob der Hintergrund-Pfad mit 2.1.251 und CLAUDE_CODE_MCP_AUTO_BACKGROUND_MS=0 geprüft wurde, also ob der Agent die Anweisung der Werkzeugbeschreibung befolgt, wenn der Aufruf doch verschoben wird. Quelle: Prot 20./21.10. oder eigener Test; sonst als ungeprüft stehen lassen
+
+## Kapitel 6
+
+Notizen am 05.11. als Gesamtkonzept neu gefasst (06_nutzerstudie.tex, Kopf des Kapitels); dort stehen Leitgedanke, Kapitelbogen, Begriffe und die Grenzenliste. Offen daraus:
+
+- [x] 6.1 – eingearbeitet 06.11., aus dem ChatGPT-Gutachten (zur alten Fassung): (1) Wirkannahme in den Hauptfrage-Absatz: wer kuratiert, hat sich vor dem Lauf mit den Stellen beschäftigt, die der Agent ändert, und kann die Änderung deshalb einordnen; (2) Verständnis definieren: gemessen werden die Items der Bögen und das Erklären, nicht Verständnis der Codebasis im Ganzen; (3) optional Tabelle FF1/E3 bis FF6 gegen Behandlung in der Studie, entlastet den zweiten Absatz; (4) bei "was als Ergebnis gilt" Halbsatz, dass Sehen und Wählen nicht trennbar sind (6.2, 6.4). Sprachvorschläge des Gutachtens nicht übernehmen (nominaler, länger)
+- [ ] 6.1 – Entscheidung FF-Nummern vor dem Schreiben: Plan-Nummern (FF4 Ausschöpfung, FF5 Aufwand, FF6 explorativ) passen zu keiner Fassung des Exposés v4 (12.08. und 27.10. geprüft). Vorschlag im Kapitelkopf: Frage 1 = FF3 (mit FF2 als Bezug), Frage 2 neu aus FF6-Nebennutzen, Aufwand = FF6, Ergebnis des Agenten = FF4, FF5 entfällt mit Stufe 3
+- [ ] 6.1 – Wortlaut der zwei Studienfragen festlegen (Plan-Fassung oder Haupt- und Nebenfrage)
+- [ ] Kap. 6 – Begriffe festlegen: Teilnehmende, Proband, Sitzungsleitung, Agent; Kapitel 4 sagt "Nutzer"
+- [ ] 6.2 – Wartezeit der Oberfläche in D (Timeout-Pfad liefert die letzte Auswahl als nicht bestätigt): Wert in den D-Branches des Bare-Repos nachsehen und nennen
+- [ ] 6.3 – Zweitableitung des Referenzkontexts (TODO S3b im Werkzeug-Repo) und Markierung durch die zwei Entwickler: Stand klären, sonst als Abweichung vom Exposé und Grenze schreiben; sealedIn in beiden task.md offen (Amendment-Regel seit 11.09.)
+- [ ] 6.3 – Exposé-Eigenschaft 2 (semantisch ähnliche, unbeteiligte Stellen) wurde nicht geprüft: als Lücke nennen oder nachprüfen
+- [ ] 6.4 – Beispielitem für den Text wählen; TLX als Raw TLX benennen; hart1988tlx und brooke1996sus in der Bib prüfen; jian2000trust (Vertrauen) nicht erhoben, als Abweichung nennen
+- [ ] 6.4 – Auslese-Skript für die Bögen: Stand klären (13.10. laut Prüfung noch keines)
+- [ ] 6.4/1.6 – KI-Nutzung in der Auswertung kennzeichnen: lokale Transkription (faster-whisper) und Vorschläge eines lokalen Modells (qwen3:8b) für Erklären und Interview, Wertung bleibt bei der Sitzungsleitung (studie\auswertung\README.md)
+- [ ] 6.5 – Einwilligung: eval/studie/einwilligung.md im Repo trägt noch alle Platzhalter; verschickte Fassung (Institut, Betreuer, Call-Dienst Discord, Löschdaten, Rücktrittsfrist, letzter Termin) sichern und im Anhang verwenden
+- [ ] 6.5 – Entwickler-Sitzungen: ob PG (22.10., alter Ablauf) als Entwickler 1 zählt, ob P01 noch läuft, Termin Entwickler 2 (P02); zweite Gruppe ("Teamprojekt 2, sieben Personen", 16.–27.11.) entscheiden
+- [ ] 6.5 – Plan-Satz "Pseudonym in Reihenfolge des Rücklaufs" an den gefahrenen Stand anpassen (P03 lief am 03.11. vor P01 und P02)
+- [ ] 6.6 – Schwelle für "angesehen" (views ab 300 ms) festlegen, bevor die Exporte ausgewertet werden; Umgang mit PG und den Entwicklern in den Tabellen
+- [ ] Kap. 6 – 30.11.–11.12. auf den gefahrenen Stand bringen: Zeitgrenzen der Bögen (4 und 5 min) wurden bei P03 und P04 nicht gehalten (Nachher-Bogen 5 bis 8 min), Zwischenablage bei P04 defekt; Mitschriebe unter studie\probanden\<Kennung>-sitzung\01-mitschrieb.md
 
 ## Kapitel 2
 
@@ -52,11 +73,17 @@ Format: `- [ ] Abschnitt – was` – erledigt: `[x]`.
 
 ## Kapitel 5
 
+- [ ] 5.6 – schreiben. Trägt seit der Neufassung von 6.1 (06.11.) die Begründung des Wechsels der Hauptfrage: Bilanz der Messungen, AP8 (mit Kontextblock weniger Suchen, gleiche Treffer), Rechnung 13.10. mit Zahlen (Deckung #74 dreimal 7 von 7, E 9, 8, 8 von 9), Folgerung: der Mensch ist der Unterschied, nicht der Kontext. 6.1 verweist nur hierher und nennt die Deckung in einem Satz. Material: Notizen HERKUNFT 1 bis 6 im Kopf von 6.1 (06_nutzerstudie.tex). Keine Chronik im Fließtext, Daten nur als Beleg in Fußnoten
 - [ ] 5/8 (Validität) – Grenzen aus der Parameterherkunft aufnehmen, nicht in 4.6 (Beschluss 02.11.) (Quelle codebase-graph/docs/defaults-gate2-2026-08-26.md): Klasse-M-Werte ohne Holdout (SEED_DF_MAX, Normierungsband), Normierungsband auf nomic-Vektoren erhoben und für qwen3 nicht neu bestimmt, β < 0,6 nicht gemessen, Klasse-E-Werte nie variiert
 - [ ] 5 – Befund Agentenanfrage 08.10. gegenlesen (codebase-graph/docs/vorlaeufiger-befund-agentenanfrage.md, als vorläufig markiert). In 4.6 steht dazu ein KLÄREN-Marker in der Fußnote
 - [ ] 5 – Vor dem Nennen der Seed-Zahlen prüfen, ob der Holdout vom 26.08. (codebase-graph/docs/eval-2026-08-26-holdout-durchfuehrung.md) die PascalCase-Regel (SEED_PASCAL_TIER) und den Häufigkeitsfilter SEED_DF_MAX abdeckt. Laut Kommentar in retrieval.js (Zeilen 217–222) wurden beide auf denselben 21 SWE-bench-Fällen entworfen und geprüft.
 - [ ] 5 – BM25-Vormessung aufnehmen, auf die die fünfte Abweichung in 4.2 verweist (BM25 allein fand Dateien, die der Abruf verfehlte, daraufhin BM25-Zweig ab 13.09.). Quellen codebase-graph/docs/eval-2026-09-11-hard-slice-stufe2-vollstaendig.md und arbeitsprotokoll.md (ca. Z. 1777, 1864). Verstöße gegen die Vorregistrierung dieser Serie mit einordnen
 - [ ] 5 – Messung Vektorindex ggf. aufnehmen (4.3 belegt sie bereits per Fußnote): 24 Graphen in einer Datenbank (mehrere Stände desselben Repositorys), Dateiindex im Schnitt 4,1 von 25 projekteigenen Kandidaten, nach Umbau 25 von 25, 19 Instanzen slice-small. Funktions-/Klassenwerte (3,9/1,8) NICHT zitieren, durch fehlende Symbolvektoren in 3 Graphen verfälscht (Nachtrag). Quelle codebase-graph/docs/eval-2026-08-19-vektorindex.md, ADR 0005
+
+## Kapitel 8
+
+- [ ] 8.1 – Entwicklung der Fragestellung erzählen (Vorgabe Betreuer 13.10.: FF des Exposés stehen lassen, Wechsel begründen, Entwicklung im Fazit). Reihenfolge: Exposé mit vier Stufen und Hauptgewicht auf Stufe 3 → AP8 04.09. → Umstellung auf C gegen D 02.10. → Stufe 3 gestrichen (Kosten 24.09., Entscheidung nach 19.10.) → Rechnung 13.10. → Vorschlag Mail 16.09., Antwort 13.10., Design 19.10. → Messung 08.10. (Vorher-Nachher). Daten und Quellen stehen in den Notizen von 6.1 (HERKUNFT, Quellenkürzel); aus der 6.1-Prosa am 06.11. bewusst entfernt, dort steht nur die sachliche Begründung
+- [ ] 8.1 – Exposé-Kriterium gegen die Annahme der Arbeit (Ausschöpfungsgrad nahe null und kein Vorteil bei den Akzeptanzkriterien; Ex 02_forschungsfragen, letzter Absatz) bei FF2 bis FF4 benennen und sagen, dass es die Arbeit nicht mehr trägt. Am 06.11. aus 6.1 gestrichen, steht sonst nirgends in der Thesis (1.5 hat es nicht)
 
 ## Kapitel 9
 

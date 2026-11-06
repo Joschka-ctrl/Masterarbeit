@@ -1,0 +1,46 @@
+% Kapitel 5 — Budget: 16 Seiten — Schreiben: 26.10.–27.11. (5.1–5.2 bis 13.11., 5.3–5.6 16.–27.11.)
+% Vorgehen und Entwicklung; Ergebnisdarstellung in Kap. 7 (Beschluss 26.10.),
+% volle Tabellen in den Anhang.
+
+\chapter{Evaluation ohne Nutzer: Messungen auf SWE-bench}
+\label{chap:benchmark}
+
+% Vorspann (06.11.): kündigt die zwei Stufen der Evaluation an, damit der Leser
+% die Teilung in Kapitel 5 (ohne Nutzer) und Kapitel 6 (Nutzerstudie) versteht.
+\begin{ungelesen}
+Das Werkzeug aus Kapitel~\ref{chap:werkzeug} wird zweimal geprüft. Die erste Prüfung kommt ohne Menschen aus. Sie läuft auf Aufgaben aus SWE-bench~\parencite{jimenez2024swebench}, bei denen der Gold-Patch festlegt, welche Stellen der Codebasis für die Lösung gebraucht werden, und misst, ob der Abruf diese Stellen findet und wie sich der Agent mit dem gelieferten Kontext verhält. Diese Messungen sind wiederholbar, kosten wenig und ließen sich nach jeder Änderung am Werkzeug neu fahren. Sie haben das Werkzeug über die gesamte Entwicklung begleitet. Dieses Kapitel beschreibt sie, im Folgenden heißen sie Benchmark-Messungen. Die zweite Prüfung ist die Nutzerstudie in Kapitel~\ref{chap:nutzerstudie}, in der Probanden den Kontext mit dem Werkzeug selbst zusammenstellen.
+
+Beide Prüfungen sind nötig, weil keine die andere ersetzt. Ein Benchmark kann nicht messen, ob ein Mensch die Begründungen des Abrufs beim Prüfen nutzt (E3, Abschnitt~\ref{sec:forschungsfragen}) und ob er die Änderung des Agenten hinterher besser versteht. Dafür braucht es Personen. Eine Studie mit acht Personen und zwei Aufgaben kann umgekehrt nicht zeigen, ob der Abruf über viele Aufgaben hinweg die richtigen Stellen findet, und sie lässt sich nicht nach jeder Änderung am Werkzeug wiederholen. Die Benchmark-Messungen haben die Studie außerdem geformt. Ihre Befunde haben die Hauptfrage der Arbeit verschoben und das Design der Studie festgelegt (Abschnitt~\ref{sec:ueberleitung-studie}).
+
+Das Kapitel beschreibt das Vorgehen und die Entwicklung. Die Ergebnisse berichtet Abschnitt~\ref{sec:erg-benchmark}, die vollständigen Tabellen stehen im Anhang. Abschnitt~\ref{sec:wie-gemessen} legt fest, wie gemessen wird: Aufgaben, Bedingungen, Messgrößen, Statistik und Nachweis. Abschnitt~\ref{sec:entwicklung-swebench} zeigt, wie sich der Abruf über die Messungen entwickelt hat. Abschnitt~\ref{sec:agentenverhalten} misst das Verhalten des Agenten mit dem gelieferten Kontext, Abschnitt~\ref{sec:hard-slice} prüft den Abruf auf den Aufgaben, bei denen die gesuchte Stelle weit vom Fehlerbericht entfernt liegt. Abschnitt~\ref{sec:seed-aenderung} beschreibt die letzte Änderung vor der Studie. Abschnitt~\ref{sec:ueberleitung-studie} zieht Bilanz und begründet, warum die Studie eine andere Frage stellt als das Exposé.
+\end{ungelesen}
+
+\section{Wie gemessen wird}% 3 S.
+% Inhalt: Aufgaben (SWE-bench, Gold gleich Patch), Bedingungen, Messgrößen,
+% Statistik (Vorzeichentest, Bootstrap), Vorregistrierung und Holdout, Nachweis
+% (Messbäume, Pfad-Audit, eingefrorenes Binary, Provenance).
+\label{sec:wie-gemessen}
+
+\section{Entwicklung des Abrufs auf SWE-bench}% 3 S.
+% Inhalt: Seed-Fix ausführlich, die übrigen Messungen je ein bis drei Sätze
+% (Frage, Antwort, Änderung am Werkzeug).
+\label{sec:entwicklung-swebench}
+
+\section{Agentenverhalten (AP8)}% 3 S.
+% Inhalt: dazu Agentenläufe auf teamable 05.10. und 09.10. als Entwicklungsmessung.
+\label{sec:agentenverhalten}
+
+\section{Ferne Aufgaben: Hard-Slice}% 3 S.
+% Inhalt: Bestätigungsmessung, alter Default.
+\label{sec:hard-slice}
+
+\section{Seed-Änderung und Tests als Gold}% 2 S.
+% Inhalt: Entwicklungswert, neuer Default, Stand der Studie.
+\label{sec:seed-aenderung}
+
+\section{Zusammenhänge und Überleitung zur Studie}% 2 S.
+% Inhalt: Bilanz, was die Messungen nicht beantworten, Begründung des Wechsels
+% der Hauptfrage.
+\label{sec:ueberleitung-studie}
+% NEU 06.11. (nach Neufassung von 6.1): Die Begründung des Wechsels der Hauptfrage liegt hier, nicht in Kapitel 6. 6.1 verweist auf diesen Abschnitt und nennt die Deckung nur in einem Satz. Hier ausführlich: AP8 (Abschnitt 5.3: mit Kontextblock weniger Suchen, gleiche Treffer), Rechnung 13.10. an den sechs Anfragen der Läufe vom 09.10. (Deckung #74 dreimal 7 von 7, E 9, 8, 8 von 9; Symbolebene #74 5, 6, 5 von 7, E 8, 5, 7 von 9), Folgerung: der automatische Abruf liefert den Referenzkontext fast vollständig, der Unterschied des Werkzeugs ist der Mensch, der sieht und wählt. Daraus die drei Designfolgen, die 6.1 nur nennt: C gegen D, keine automatisierten Mehrfachläufe (Stufe 3), Verständnis statt Kontextgüte als Hauptfrage.
+% Keine Chronik mit Daten im Fließtext; Daten nur als Beleg in Fußnoten. Die Entwicklungsgeschichte (Mails, Treffen, Plan-Umwege) gehört nach 8.1 (Vorgabe Betreuer). Material: Notizen HERKUNFT 1 bis 6 und Quellenkürzel im Kopf von 6.1 (06_nutzerstudie.tex).

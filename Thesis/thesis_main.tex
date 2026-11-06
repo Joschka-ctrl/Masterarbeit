@@ -39,6 +39,18 @@
   before skip=8pt, after skip=8pt, fontupper=\small
 }
 
+% Noch nicht gegengelesener Text (meist von Claude vorgeschrieben). Blau hinterlegt,
+% damit er beim Lesen des PDF auffaellt. Nach dem Lesen nur \begin{ungelesen} und
+% \end{ungelesen} loeschen, der Text bleibt. Fundstellen: grep "begin{ungelesen}".
+% VOR DER ABGABE ENTFERNEN wie bei "offen".
+
+\newtcolorbox{ungelesen}{
+  breakable, parbox=false, colback=blue!6, colframe=blue!55!black, boxrule=0.7pt,
+  left=5pt, right=5pt, top=4pt, bottom=4pt,
+  before skip=8pt, after skip=8pt,
+  title={Ungelesen: noch nicht gegengelesen}, fonttitle=\small\bfseries
+}
+
 \geometry{top=2.5cm, bottom=2.5cm, left=3cm, right=2.5cm}
 
 \hypersetup{
@@ -80,8 +92,8 @@
 \input{chapters/02_grundlagen}
 \input{chapters/03_stand_der_forschung}
 \input{chapters/04_werkzeug}
-\input{chapters/05_vormessungen}
-\input{chapters/06_studiendesign}
+\input{chapters/05_benchmark}
+\input{chapters/06_nutzerstudie}
 \input{chapters/07_ergebnisse}
 \input{chapters/08_diskussion}
 \input{chapters/09_fazit}
