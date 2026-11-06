@@ -55,6 +55,7 @@ Format: `- [ ] Abschnitt – was` – erledigt: `[x]`.
 - [ ] 5/8 (Validität) – Grenzen aus der Parameterherkunft aufnehmen, nicht in 4.6 (Beschluss 02.11.) (Quelle codebase-graph/docs/defaults-gate2-2026-08-26.md): Klasse-M-Werte ohne Holdout (SEED_DF_MAX, Normierungsband), Normierungsband auf nomic-Vektoren erhoben und für qwen3 nicht neu bestimmt, β < 0,6 nicht gemessen, Klasse-E-Werte nie variiert
 - [ ] 5 – Befund Agentenanfrage 08.10. gegenlesen (codebase-graph/docs/vorlaeufiger-befund-agentenanfrage.md, als vorläufig markiert). In 4.6 steht dazu ein KLÄREN-Marker in der Fußnote
 - [ ] 5 – Vor dem Nennen der Seed-Zahlen prüfen, ob der Holdout vom 26.08. (codebase-graph/docs/eval-2026-08-26-holdout-durchfuehrung.md) die PascalCase-Regel (SEED_PASCAL_TIER) und den Häufigkeitsfilter SEED_DF_MAX abdeckt. Laut Kommentar in retrieval.js (Zeilen 217–222) wurden beide auf denselben 21 SWE-bench-Fällen entworfen und geprüft.
+- [ ] 5 – BM25-Vormessung aufnehmen, auf die die fünfte Abweichung in 4.2 verweist (BM25 allein fand Dateien, die der Abruf verfehlte, daraufhin BM25-Zweig ab 13.09.). Quellen codebase-graph/docs/eval-2026-09-11-hard-slice-stufe2-vollstaendig.md und arbeitsprotokoll.md (ca. Z. 1777, 1864). Verstöße gegen die Vorregistrierung dieser Serie mit einordnen
 - [ ] 5 – Messung Vektorindex ggf. aufnehmen (4.3 belegt sie bereits per Fußnote): 24 Graphen in einer Datenbank (mehrere Stände desselben Repositorys), Dateiindex im Schnitt 4,1 von 25 projekteigenen Kandidaten, nach Umbau 25 von 25, 19 Instanzen slice-small. Funktions-/Klassenwerte (3,9/1,8) NICHT zitieren, durch fehlende Symbolvektoren in 3 Graphen verfälscht (Nachtrag). Quelle codebase-graph/docs/eval-2026-08-19-vektorindex.md, ADR 0005
 
 ## Kapitel 9
@@ -63,5 +64,6 @@ Format: `- [ ] Abschnitt – was` – erledigt: `[x]`.
 
 ## Später / sonstiges
 
+- [ ] 4.1 – Sobald 3.5 (sec:abgrenzung) geschrieben ist: 4.1 dagegen abgleichen. Absatz 1 verweist für die Abgrenzung auf 3.5, die Formulierung "Das Besondere liegt in der Verbindung zweier Eigenschaften" muss zu 3.5 passen
 - [ ] 3 – Einordnung der Designentscheidungen gegen verwandte Arbeiten (Gutachten 31.10.): hybride Dense-/BM25-Suche, Einbettung von Beschreibungen statt Rohcode, RepoGraph/CodexGraph als Vergleich für Graphschema und Traversierung (beide schon in der Bib)
 
