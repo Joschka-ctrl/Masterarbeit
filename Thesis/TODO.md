@@ -34,7 +34,7 @@ Format: `- [ ] Abschnitt – was` – erledigt: `[x]`.
 - [x] 4.4 – Marker Kontextfenster: \cite{liu2023lostmiddle} (ggf. du2025contextlength) einsetzen, beide schon in der Bib
 - [x] 4.4 – Marker Normierungsgrenzen: am 31.10. durch Fußnote mit Messdetails ersetzt (17.08., 19 Aufgaben, p5/p95)
 - [ ] 4.4 – "Kapitel 5 begründet das" (Commit- und Seed-Anzahl-Term mit Gewicht 0) beim Schreiben von Kapitel 5 einlösen: Quellen docs/eval-2026-08-17-f29.md und Kommentar in retrieval.js (NBR_W_SUP, NBR_W_PRIOR)
-- [ ] 6.2 (Absatz am 04.11. aus 4.5 verschoben) – Marker MCP_TOOL_TIMEOUT: auf dem Studienrechner prüfen, ob und wie MCP_TOOL_TIMEOUT gesetzt ist (settings.local.json der Studienbranches im Bare-Repo, Benutzer-Settings, Umgebungsvariablen) und ob der Wert über 10 Minuten liegt; laut Studienplan nicht unter den Einstellungen der Branches
+- [x] 6.2 – MCP_TOOL_TIMEOUT (erledigt 06.11.: in keinem Studienbranch, nicht in den Benutzer-Settings und nicht in der Umgebung des Studienrechners gesetzt, es gilt die Voreinstellung von 2.1.251; Exporte PG 74-D 22.10. 15:00 min und P03 E-D 03.11. 15:27 min kamen bestätigt an, so in 6.2 mit Fußnote geschrieben). Ursprünglich: auf dem Studienrechner prüfen, ob und wie MCP_TOOL_TIMEOUT gesetzt ist (settings.local.json der Studienbranches im Bare-Repo, Benutzer-Settings, Umgebungsvariablen) und ob der Wert über 10 Minuten liegt; laut Studienplan nicht unter den Einstellungen der Branches
 - [ ] 4.5 – Modultabelle für den Anhang anlegen (Label app:module), Zeilenzahlen der Module neu zählen (Stand 09.09. in Textnotizen A5)
 - [x] 4.5 – McMillan 2026 am 31.10. gestrichen (Paper existiert, arXiv 2602.05447, misst aber SQL-Generierung aus Schemata, passt nicht). JSON-Absatz neu mit eigener Messung und Liu
 - [ ] 4.5 – Absatz 3b (Detailansicht) sprachlich überarbeiten, inhaltlich ok
@@ -43,8 +43,8 @@ Format: `- [ ] Abschnitt – was` – erledigt: `[x]`.
 
 - [x] 4.6 – Grenze aufnehmen: Aufrufkanten nur über importierte Symbole (4.3). Aufrufe über Objekte und dynamischer Dispatch, gerade in Java und C#, erzeugen keine CALLS-Kante (erledigt 02.11., in 4.6 geschrieben)
 - [x] 4.6 – Grenze aufnehmen: Ob der Agent die Werkzeugbeschreibung befolgt, liegt beim Modell (4.5). Beleg: Opus-5-Läufe vom 09.10. riefen get_context nur mit task auf, ohne userQuery und ohne Symbolnamen (codebase-graph/eval/results-studie-c-opus-20261009/README.md) (erledigt 02.11., in 4.6 geschrieben)
-- [ ] 6.2 (Absatz am 04.11. aus 4.5 verschoben) – KLÄREN-Marker Claude Code 120 s: Version nennen, mit der das Verschieben in den Hintergrund beobachtet wurde (Studie: 2.1.251, Quelle bisher docs/tool-beschreibung.md und server.js)
-- [ ] 6.2 – KLÄREN-Marker (06.11.): ob der Hintergrund-Pfad mit 2.1.251 und CLAUDE_CODE_MCP_AUTO_BACKGROUND_MS=0 geprüft wurde, also ob der Agent die Anweisung der Werkzeugbeschreibung befolgt, wenn der Aufruf doch verschoben wird. Quelle: Prot 20./21.10. oder eigener Test; sonst als ungeprüft stehen lassen
+- [ ] 6.2 – KLÄREN-Marker Claude Code 120 s (Stand 06.11.: Arbeitsprotokoll hat keinen Eintrag, Beobachtung liegt vor Commit 55731a1 vom 02.10. im Werkzeug-Repo; Fußnote in 6.2 trägt den Marker, Version ggf. aus Transkripten in gate-74 vom Ende September nachsehen): Version nennen, mit der das Verschieben in den Hintergrund beobachtet wurde (Studie: 2.1.251, Quelle bisher docs/tool-beschreibung.md und server.js)
+- [x] 6.2 – (erledigt 06.11.: Prot 11.10. Test 3 belegt die Variable auf 2.1.251, Aufruf 13:39:15 bis 13:41:24, erste Dateilesung nach der Bestätigung; ob der Agent die Anweisung bei dennoch verschobenem Aufruf befolgt, ist ungeprüft und steht so in 6.2) Ursprünglich: ob der Hintergrund-Pfad mit 2.1.251 und CLAUDE_CODE_MCP_AUTO_BACKGROUND_MS=0 geprüft wurde, also ob der Agent die Anweisung der Werkzeugbeschreibung befolgt, wenn der Aufruf doch verschoben wird. Quelle: Prot 20./21.10. oder eigener Test; sonst als ungeprüft stehen lassen
 
 ## Kapitel 6
 
@@ -54,9 +54,9 @@ Notizen am 05.11. als Gesamtkonzept neu gefasst (06_nutzerstudie.tex, Kopf des K
 - [ ] 6.1 – Entscheidung FF-Nummern vor dem Schreiben: Plan-Nummern (FF4 Ausschöpfung, FF5 Aufwand, FF6 explorativ) passen zu keiner Fassung des Exposés v4 (12.08. und 27.10. geprüft). Vorschlag im Kapitelkopf: Frage 1 = FF3 (mit FF2 als Bezug), Frage 2 neu aus FF6-Nebennutzen, Aufwand = FF6, Ergebnis des Agenten = FF4, FF5 entfällt mit Stufe 3
 - [ ] 6.1 – Wortlaut der zwei Studienfragen festlegen (Plan-Fassung oder Haupt- und Nebenfrage)
 - [ ] Kap. 6 – Begriffe festlegen: Teilnehmende, Proband, Sitzungsleitung, Agent; Kapitel 4 sagt "Nutzer"
-- [ ] 6.2 – Wartezeit der Oberfläche in D (Timeout-Pfad liefert die letzte Auswahl als nicht bestätigt): Wert in den D-Branches des Bare-Repos nachsehen und nennen
-- [ ] 6.3 – Zweitableitung des Referenzkontexts (TODO S3b im Werkzeug-Repo) und Markierung durch die zwei Entwickler: Stand klären, sonst als Abweichung vom Exposé und Grenze schreiben; sealedIn in beiden task.md offen (Amendment-Regel seit 11.09.)
-- [ ] 6.3 – Exposé-Eigenschaft 2 (semantisch ähnliche, unbeteiligte Stellen) wurde nicht geprüft: als Lücke nennen oder nachprüfen
+- [x] 6.2 – Wartezeit der Oberfläche in D: REVIEW_TIMEOUT_MIN=15 in allen drei D-Branches, Leerlauffrist (jede Aktion startet neu), in 6.2 geschrieben (erledigt 06.11.)
+- [ ] 6.3 – Markierung durch die zwei Entwickler: Stand klären (KLÄREN-Marker im Text, ob PG am 22.10. markiert hat). Zweitableitung durch den Betreuer und sealedIn sind seit 06.11. als Abweichung vom Plan geschrieben (Amendment-Regel seit 11.09.)
+- [x] 6.3 – Exposé-Eigenschaft 2 (semantisch ähnliche, unbeteiligte Stellen) als ungeprüfte Lücke genannt (06.11.); nachprüfen bleibt optional
 - [ ] 6.4 – Beispielitem für den Text wählen; TLX als Raw TLX benennen; hart1988tlx und brooke1996sus in der Bib prüfen; jian2000trust (Vertrauen) nicht erhoben, als Abweichung nennen
 - [ ] 6.4 – Auslese-Skript für die Bögen: Stand klären (13.10. laut Prüfung noch keines)
 - [ ] 6.4/1.6 – KI-Nutzung in der Auswertung kennzeichnen: lokale Transkription (faster-whisper) und Vorschläge eines lokalen Modells (qwen3:8b) für Erklären und Interview, Wertung bleibt bei der Sitzungsleitung (studie\auswertung\README.md)
