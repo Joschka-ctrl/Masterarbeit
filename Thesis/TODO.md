@@ -55,13 +55,13 @@ Notizen am 05.11. als Gesamtkonzept neu gefasst (06_nutzerstudie.tex, Kopf des K
 - [ ] 6.1 – Wortlaut der zwei Studienfragen festlegen (Plan-Fassung oder Haupt- und Nebenfrage)
 - [ ] Kap. 6 – Begriffe festlegen: Teilnehmende, Proband, Sitzungsleitung, Agent; Kapitel 4 sagt "Nutzer"
 - [x] 6.2 – Wartezeit der Oberfläche in D: REVIEW_TIMEOUT_MIN=15 in allen drei D-Branches, Leerlauffrist (jede Aktion startet neu), in 6.2 geschrieben (erledigt 06.11.)
-- [ ] 6.3 – Markierung durch die zwei Entwickler: Stand klären (KLÄREN-Marker im Text, ob PG am 22.10. markiert hat). Zweitableitung durch den Betreuer und sealedIn sind seit 06.11. als Abweichung vom Plan geschrieben (Amendment-Regel seit 11.09.)
+- [ ] 6.3 – Markierung durch die zwei Entwickler: bis 07.11. nicht geschehen (PG 22.10. ohne Markierung, P01/P02 nicht gelaufen), Marker im Text aufgelöst; bleibt für die Entwickler-Sitzungen offen. Zweitableitung durch den Betreuer und sealedIn sind seit 06.11. als Abweichung vom Plan geschrieben (Amendment-Regel seit 11.09.)
 - [x] 6.3 – Exposé-Eigenschaft 2 (semantisch ähnliche, unbeteiligte Stellen) als ungeprüfte Lücke genannt (06.11.); nachprüfen bleibt optional
 - [ ] 6.4 – Beispielitem für den Text wählen; TLX als Raw TLX benennen; hart1988tlx und brooke1996sus in der Bib prüfen; jian2000trust (Vertrauen) nicht erhoben, als Abweichung nennen
-- [ ] 6.4 – Auslese-Skript für die Bögen: Stand klären (13.10. laut Prüfung noch keines)
+- [x] 6.4 – Auslese-Skript für die Bögen: gibt es nicht (07.11. geprüft), Bögen werden von Hand aus den Markdown-Dateien des Sitzungsordners übertragen; so in 6.6 sagen
 - [ ] 6.4/1.6 – KI-Nutzung in der Auswertung kennzeichnen: lokale Transkription (faster-whisper) und Vorschläge eines lokalen Modells (qwen3:8b) für Erklären und Interview, Wertung bleibt bei der Sitzungsleitung (studie\auswertung\README.md)
-- [ ] 6.5 – Einwilligung: eval/studie/einwilligung.md im Repo trägt noch alle Platzhalter; verschickte Fassung (Institut, Betreuer, Call-Dienst Discord, Löschdaten, Rücktrittsfrist, letzter Termin) sichern und im Anhang verwenden
-- [ ] 6.5 – Entwickler-Sitzungen: ob PG (22.10., alter Ablauf) als Entwickler 1 zählt, ob P01 noch läuft, Termin Entwickler 2 (P02); zweite Gruppe ("Teamprojekt 2, sieben Personen", 16.–27.11.) entscheiden
+- [x] 6.5 – Einwilligung: verschickte Fassung am 07.11. aus dem Rücklauf-PDF gesichert, Wortlaut in 06_nutzerstudie.tex (6.5 WORTLAUT); für den Anhang von dort übernehmen
+- [ ] 6.5 – Entwickler-Sitzungen: ob PG (22.10., alter Ablauf) als Entwickler 1 zählt, ob P01 noch läuft, Termin Entwickler 2 (P02). Zweite Gruppe entfällt (29.10. entschieden, nur dieses Teamprojekt)
 - [ ] 6.5 – Plan-Satz "Pseudonym in Reihenfolge des Rücklaufs" an den gefahrenen Stand anpassen (P03 lief am 03.11. vor P01 und P02)
 - [ ] 6.6 – Schwelle für "angesehen" (views ab 300 ms) festlegen, bevor die Exporte ausgewertet werden; Umgang mit PG und den Entwicklern in den Tabellen
 - [ ] Kap. 6 – 30.11.–11.12. auf den gefahrenen Stand bringen: Zeitgrenzen der Bögen (4 und 5 min) wurden bei P03 und P04 nicht gehalten (Nachher-Bogen 5 bis 8 min), Zwischenablage bei P04 defekt; Mitschriebe unter studie\probanden\<Kennung>-sitzung\01-mitschrieb.md
