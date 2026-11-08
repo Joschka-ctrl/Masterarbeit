@@ -5,9 +5,61 @@
 \chapter{Aufgaben}
 \label{app:aufgaben}
 
+Die folgenden Aufgabenblätter enthalten die Texte der Aufwärmaufgabe und der beiden gewerteten Aufgaben.
+
+\section{Prompts für die Bedingungen C und D}
+\label{app:prompts}
+
+Die folgenden Anweisungen stehen jeweils vor dem Aufgabentext. Auf sie folgen eine Leerzeile und der Aufgabentext mit der Einleitung \texttt{Task:}. Für die Aufwärmaufgabe wird nur Bedingung D verwendet.
+
+\paragraph{Bedingung C}
+\begin{quote}
+Call the tool get\_context from the codebase-graph server once with the task below, then solve the task in this repository.
+\end{quote}
+
+\paragraph{Bedingung D}
+\begin{quote}
+Call the tool get\_context\_stepwise from the codebase-graph server once with the task below. Wait until I have confirmed the context in the browser, then solve the task in this repository using the confirmed context.
+\end{quote}
+
+\section{Aufwärmaufgabe: obere Navigation (\#79)}
+
+\begin{quote}
+The top navigation currently shows the plain text ``Teamable Analytics'' on the left. Replace it with the Teamable logo (an SVG file that will be placed under public/), and show next to it, separated by a vertical bar, the name of the course the user is currently in as an outlined badge. Clicking the logo goes to the home page. The navigation should be rendered only inside the layout of the course pages (the ones under a course id), not in the more general layout above it, because the course name is only known there.
+\end{quote}
+
+\section{Studierendentabelle (\#74)}
+
+\begin{quote}
+Two problems on the students page of a course:
+
+1. The table shows a column with the sections a student belongs to. Sections are not populated for students yet, so the column is always empty and confuses users. Hide that column for now, in a way that makes it easy to bring back once sections are supported.
+
+2. After using ``Import students'', the table keeps showing the old list until the browser page is reloaded. After a successful import the student list should refresh on its own.
+\end{quote}
+
+\section{Fehlermeldungen (E)}
+
+\begin{quote}
+When an action fails, for example exporting a team set or importing students in a course that is not connected to Canvas, a red message appears in the corner and disappears by itself after about five seconds. If a second message comes up in the meantime, it replaces the first one instead of appearing next to it. Messages about a failure should stay until I close them, and when there are several messages they should be stacked so that all of them remain visible; other messages may still disappear on their own.
+\end{quote}
+
 \chapter{Fragebögen und Leitfäden}
 \label{app:frageboegen}
 
+\chapter{Technische Einrichtung der Nutzerstudie}
+\label{app:studientechnik}
+\begin{sloppypar}
+
+Für jede Aufgabe und Bedingung hält ein lokales Bare-Repository einen Branch mit einem Commit über dem jeweiligen Ausgangsstand. Jede Aufgabenkopie wird aus dem zugehörigen Branch geklont. In allen Bedingungen wird das eingefrorene Claude-Code-Binary 2.1.251 mit \texttt{claude-opus-5} und \texttt{effort high} verwendet. Automatische Updates sind abgeschaltet. Die gemeinsamen Einstellungen umfassen \texttt{ENABLE\_\allowbreak{}TOOL\_\allowbreak{}SEARCH=false}, \texttt{CLAUDE\_\allowbreak{}CODE\_\allowbreak{}MCP\_\allowbreak{}AUTO\_\allowbreak{}BACKGROUND\_\allowbreak{}MS=0}, \texttt{CLAUDE\_\allowbreak{}CODE\_\allowbreak{}MAX\_\allowbreak{}MCP\_\allowbreak{}DESCRIPTION\_\allowbreak{}LENGTH=6000} und \texttt{MAX\_\allowbreak{}MCP\_\allowbreak{}OUTPUT\_\allowbreak{}TOKENS=60000}. Die längere Werkzeugbeschreibung verhindert, dass die Legende der JSON-Rückgabe durch die sonst geltende Kürzung auf 2048 Zeichen entfällt.
+
+In C sperrt \texttt{permissions.deny} die Werkzeuge \texttt{get\_\allowbreak{}context\_\allowbreak{}stepwise} und \texttt{get\_\allowbreak{}context\_\allowbreak{}interactive}; \texttt{CODEBASE\_\allowbreak{}GRAPH\_\allowbreak{}NO\_\allowbreak{}BROWSER=1} schaltet den Neo4j Browser ab. Die Sperre wurde am 11. und 20. Oktober 2026 mit Version 2.1.251 geprüft: Die Werkzeugliste des Modells enthielt zehn der zwölf Werkzeuge. In D aktiviert \texttt{CODEBASE\_\allowbreak{}GRAPH\_\allowbreak{}STEPWISE\_\allowbreak{}UI=study} die Studienseite; \texttt{EVAL\_\allowbreak{}OUTPUT\_\allowbreak{}DIR} legt den Export ab und \texttt{REVIEW\_\allowbreak{}TIMEOUT\_\allowbreak{}MIN=15} setzt die Leerlauffrist.
+
+Bei einer Vorbeobachtung vor dem 2. Oktober 2026 verschob Claude Code einen wartenden Aufruf nach 120 Sekunden in den Hintergrund und ließ den Agenten weiterarbeiten; die dabei verwendete Version ist nicht dokumentiert. Am 11. Oktober wurde die Einstellung mit Version 2.1.251 und Opus~5 für Aufgabe \#74 geprüft: Der Aufruf begann um 13:39:15 Uhr, das Ergebnis lag um 13:41:24 Uhr vor und die erste Dateilesung erfolgte danach. Die Werkzeugbeschreibung bittet den Agenten zusätzlich, bei einem dennoch verschobenen Aufruf nicht zu arbeiten. Ob er dieser Anweisung folgt, wurde nicht geprüft, da der Fall nicht erneut eintrat.
+
+Die Abbruchfrist \texttt{MCP\_\allowbreak{}TOOL\_\allowbreak{}TIMEOUT}, die durch die Fortschrittsmeldungen des Servers nicht verlängert wird, ist nicht gesetzt. Zwei bestätigte Aufrufe zeigen, dass die Voreinstellung auf dem Studienrechner über 15 Minuten lag: Im Pilot vom 22. Oktober 2026 dauerte ein Aufruf 15:00 Minuten, in der Sitzung vom 3. November 2026 15:27 Minuten.
+
+\end{sloppypar}
 \chapter{Messprotokolle}
 \label{app:messprotokolle}
 
