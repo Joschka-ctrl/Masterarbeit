@@ -1,6 +1,80 @@
 % Kapitel 5 — Budget: 16 Seiten — Schreiben: 26.10.–27.11. (5.1–5.2 bis 13.11., 5.3–5.6 16.–27.11.)
 % Vorgehen und Entwicklung; Ergebnisdarstellung in Kap. 7 (Beschluss 26.10.),
 % volle Tabellen in den Anhang.
+%
+% ===========================================================================
+% GESAMTKONZEPT KAPITEL 5
+% Notizen am 10.11. angelegt, stichpunktartig. Zahlen stammen aus dem Schreibgerüst (Tn) und den Meeting-Notizen (Tr19) und sind NICHT neu gegen die Befunddokumente geprüft. Vor dem Schreiben jedes Abschnitts die Zahlen an der genannten Quelle prüfen.
+% ===========================================================================
+%
+% STAND DER QUELLEN
+% - Tn endet am 11.09. (B1 bis B16). Dort fehlen: Seed-Änderung 11. bis 14.09., Tests als Gold 16.09., Übergabeform JSON 25.09., Agentenläufe teamable 05.10., Agentenanfrage 08.10., C-Läufe 09.10., Rechnung 13.10. Für diese Messungen gibt es nur die Zeilen in Tr19 und die Befunddokumente.
+% - Tn plant 15 bis 20 Seiten allein für die Einzelmessungen. Kapitel 5 hat 16 Seiten für alles, 7.1 hat 2 Seiten. Tn muss auf etwa ein Drittel schrumpfen.
+% - Tn benutzt alte Begriffe (siehe BEGRIFFE).
+%
+% QUELLENKÜRZEL (Werkzeug-Repo codebase-graph, Pfade unter docs/, wenn nicht anders gesagt)
+%   Tn      = textnotizen-2026-09-09-werkzeug-und-vormessungen.md (Teil 0 Grundbegriffe, Teil B Messungen B1 bis B16, Teil C Zusammenhänge, Teil D Überleitung, Teil E Schreibregeln)
+%   Tr19    = notizen/Notizen Meeting 2026-10-19.md (die fünf wichtigsten, alle Messungen der Reihe nach)
+%   N16     = notizen/Notizen Meeting 2026-09-16.md (Messungen im Überblick, Mail 16.09., Antwort 13.10.)
+%   Gl      = notizen/Zeitplan und Gliederung 2026-10-19.md
+%   Gate2   = defaults-gate2-2026-08-26.md (Klassen V, M, E)
+%   AP8     = eval-2026-08-30-neumessung-sauber.md (Endfassung 04.09.)
+%   HS      = eval-2026-09-06-hard-slice-vorregistrierung.md, -stufe0.md, eval-2026-09-07-hard-slice-stufe1-2.md, eval-2026-09-11-hard-slice-stufe2-vollstaendig.md
+%   Seed    = eval-2026-09-11-seedzweige.md
+%   TGold   = eval-2026-09-16-testgold-sensitivitaet.md
+%   AgAnf   = vorlaeufiger-befund-agentenanfrage.md (08.10., vorläufig)
+%   CLauf   = eval/results-studie-c-opus-20261009/README.md (C-Läufe 09.10., Rechnung 13.10.)
+%   Prot    = arbeitsprotokoll.md
+%   Zb      = notizen/Zu besprechen.md (24.09., Stufe 3, AP8 Bedingung C)
+%
+% LEITGEDANKE (roter Faden, den jeder Abschnitt trägt)
+% Die Benchmark-Messungen beantworten die Frage nach dem Abruf so weit, wie sie ohne Menschen beantwortbar ist. Auf Dateiebene ist der Graph nicht besser als eine Stichwortsuche und auf fernen Aufgaben schlechter. Die Traversierung findet fast nichts, was die Seeds nicht schon haben. Ein vorab gelieferter Kontextblock verändert trotzdem den Weg des Agenten (weniger Suchen bis zur richtigen Datei), nicht sein Ergebnis. Auf den Studienaufgaben deckt der automatische Abruf den Referenzkontext fast vollständig. Daraus folgt in 5.6: der Unterschied des Werkzeugs ist der Mensch, der sieht und wählt, und das kann nur die Studie messen.
+%
+% GEWICHTUNG (Vorschlag 10.11., noch nicht entschieden)
+% Ausführlich, weil die Messung eine Forschungsfrage beantwortet oder den Wechsel der Hauptfrage trägt:
+%   5.2  Seed-Fix (B2), ca. 1 S. So im Plan (Gl).
+%   5.2  Nachrechnung der Traversierung (B3), ca. 0,5 S. Nullbefund "Gold über Kante 1 von 21", an dem 5.4 und 5.6 hängen.
+%   5.3  AP8, 891 Läufe (B11). Reaktivitätsproblem belegt, flach gegen strukturiert (FF5), Grundlage für 5.6.
+%   5.4  Hard-Slice (B12 bis B16). Test der Traversierung auf fernen Aufgaben, BM25 19 Punkte vorn.
+%   5.5  Seed-Änderung und Tests als Gold. Stand des Werkzeugs in der Studie.
+%   5.6  C-Läufe 09.10. und Rechnung 13.10. Spielraum des Kuratierens (FF2), Begründung der Hauptfrage.
+% Kurz, je ein bis drei Sätze (Frage, Antwort mit einer Zahl, Änderung am Werkzeug):
+%   5.2  erste Messung (B1), Commit-Zahl im Score (F-29), Budget und Quote (B4), Vektorindex, Symboltext (B5), Qwen3 (B6), Quote auf Qwen3, Kuratier-Spielraum (B7), Nachmessung 22.08., Holdout (B8), Basename-Rückfall, Gate 2 (B9).
+%   5.3  verworfene Serien 27.08., kontaminierte Serie 28.08. (B10), Agentenläufe teamable 05.10. und 09.10., Agentenanfrage 08.10.
+%   5.4  BM25-Vormessung (TODO), Vorprüfung teamable (B15) nur als Verweis auf 6.3.
+%
+% OFFENE FRAGEN (vor dem Schreiben entscheiden)
+% F1  B3 in 5.2 ausführlich neben dem Seed-Fix? Der Plan nennt nur den Seed-Fix. Vorschlag: ja, sonst stehen 5.4 und 5.6 ohne Vorlauf da.
+% F2  Kurzmessungen in 5.2 als Fließtext oder als Tabelle (Messung, Frage, Antwort, Änderung am Werkzeug) mit zwei bis drei verbindenden Absätzen? Vorschlag: Tabelle, spart etwa eine halbe Seite.
+% F3  Welche Zahlen stehen in Kapitel 5, welche in 7.1? Vorschlag: Zahlen, die eine Änderung am Werkzeug ausgelöst haben, stehen hier (Seed-Fix 54,8 auf 76,6 Prozent). 7.1 berichtet nur die fünf Hauptmessungen. Zu klären: stehen die Hauptzahlen von AP8 und Hard-Slice dann nur in 7.1 und 5.3/5.4 beschreiben nur Frage und Aufbau? Bei je 3 Seiten in 5.3 und 5.4 gegen 2 Seiten in 7.1 geht das kaum auf.
+% F4  Agentenanfrage 08.10. steht in Tr19 unter den fünf wichtigsten, ist aber vorläufig und nicht gegengelesen (TODO). Eigener Schwerpunkt oder ein Absatz in 5.3? Vorschlag: ein Absatz in 5.3.
+% F5  Welche fünf Messungen gelten als "die fünf wichtigsten" für 7.1? Tr19 nennt AP8, Hard-Slice, Seed-Änderung mit Tests als Gold, Agentenanfrage, C-Läufe mit Rechnung 13.10. Der Seed-Fix ist dort nicht dabei, steht aber im Plan als ausführlich.
+% F6  Wohin kommt die Belegklassifikation V, M, E (Gate 2)? Kandidaten: 5.1 bei Vorregistrierung und Holdout, oder Ende 5.2. tab:abrufparameter in 4.4 nennt die Klassen schon.
+% F7  Wohin kommt die kontaminierte Serie vom 28.08. (B10)? Kandidaten: 5.1 als Grund für den Nachweis, oder 5.3 als Vorgeschichte von AP8. Nicht an beiden Stellen.
+% F8  Abbildung Auswahlkette 500, 215, 139, 45, 39 in 5.4 (Vorschlag aus Tn E5)? Kostet etwa ein Drittel Seite.
+% F9  Verstöße gegen die Vorregistrierung im Hard-Slice (später Commit, 9 von 20 aus der Vormessung, Stoppregel gebrochen): in 5.4 im Text oder in einer Fußnote mit Verweis auf 8.2?
+% F10 Wird die Vorprüfung der Studien-Codebasis (B15) hier noch gebraucht, oder deckt 6.3 sie ab?
+% F11 Übergabeform JSON 25.09.: 4.5 hat die Messung schon. Hier weglassen?
+%
+% BEGRIFFE (Tn weicht ab, nicht übernehmen)
+% "Benchmark-Messungen" statt "Vormessungen" (Vorspann). "Seeds" statt "Saatknoten" oder "Einstiegspunkte" (Kapitel 4). "Agent" statt "Assistent". "Kontextblock" statt "Auszug". "Aufgabe" statt "Instanz". Bedingungen A, B, C der Agentenmessung beim ersten Auftreten in 5.1 erklären und von C und D der Studie abgrenzen (C der Studie ist nicht C aus AP8). KLÄREN: "Gold über Kante" als fester Begriff einführen oder umschreiben. KLÄREN: "Übungsmenge" (Tn) oder "Entwicklungsmenge".
+%
+% SCHREIBREGELN AUS Tn Teil E (gelten für das ganze Kapitel)
+% - Nicht "der Graph liefert besseren Kontext", sondern andere Granularität bei geringerer Dateiabdeckung.
+% - Nicht "die Traversierung bringt nichts", sondern unter dieser Messanordnung nicht nachweisbar.
+% - Nicht "gleichauf mit BM25". Auf 39 fernen Aufgaben liegt BM25 19 Punkte vorn.
+% - AP8: Richtung über alle Arme statt Zahl signifikanter Zellen. Absolute Zahlen, Prozent nur ergänzend.
+% - Jede nachträglich gerechnete Größe als solche kennzeichnen.
+% - Analyst und Werkzeugautor sind dieselbe Person, einmal deutlich sagen (Vorschlag: 5.1).
+%
+% GRENZEN, die Kapitel 5 je Abschnitt benennt und 8.2 einsammelt
+% 5.1 Gold ist der Patch, nicht der Verständniszusammenhang. Analyst gleich Werkzeugautor. BM25 als eigene Implementierung.
+% 5.2 Seed-Fix auf denselben 21 Aufgaben entworfen und gemessen. Drei Werte der Klasse M. Holdout nur für die Modellwahl, 12 Aufgaben. Normierungsband auf nomic erhoben (TODO).
+% 5.3 60 unkorrigierte Tests, 18 Zellen wechselten die Seite von p = 0,05. Nur Lokalisieren, kein Ändern. Aufteilung der Suchen vor und nach dem Fund nachträglich.
+% 5.4 Verstöße gegen die Vorregistrierung. 35 von 39 Aufgaben aus django. Abstand auf dem eigenen Graphen gerechnet. Symbol-Recall bevorzugt den Graphen bauartbedingt.
+% 5.5 Entwicklungswert, keine Bestätigungsmessung (ferne Aufgaben seit 11.09. erschöpft).
+% 5.6 Sechs Anfragen, zwei Aufgaben, ein Modell.
+% ===========================================================================
 
 \chapter{Evaluation ohne Nutzer: Messungen auf SWE-bench}
 \label{chap:benchmark}
@@ -20,23 +94,112 @@ Das Kapitel beschreibt das Vorgehen und die Entwicklung. Die Ergebnisse berichte
 % Statistik (Vorzeichentest, Bootstrap), Vorregistrierung und Holdout, Nachweis
 % (Messbäume, Pfad-Audit, eingefrorenes Binary, Provenance).
 \label{sec:wie-gemessen}
+% GERÜST 5.1 (Stichpunkte 10.11., Quelle Tn Teil 0.3 bis 0.8)
+% 1 Aufgaben. SWE-bench Verified, 500 echte Fehlerberichte, die angenommene Korrektur ist bekannt. Gold = Dateien und Symbole, die der Patch ändert. Vorteil: die Referenz stammt nicht vom Autor. Einschränkung früh sagen: Gold ist der Patch, nicht der Zusammenhang, den man zum Verstehen braucht. Je Aufgabe ein eigener Graph auf dem Stand vor der Korrektur.
+% 2 Bedingungen des Abrufs, als Tabelle: oracle (Kontrolle der Messkette), bm25 (über dieselbe Dateimenge wie der Parser, Abweichung vom Originalpapier), seeds (ohne Traversierung), graph (Auslieferung), embed-only, dense und dense-budget (Fenster-RAG mit demselben Einbettungsmodell). Ein Satz dazu: seeds ist selbst eine hybride Suche, graph gegen seeds fragt nach dem Beitrag der Kanten.
+% 3 Bedingungen der Agentenmessung: A ohne Kontextblock, B flach, C strukturiert, gleicher Knotensatz und gleiche Kanten in B und C. Abgrenzung zu C und D der Studie.
+% 4 Messgrößen, als Tabelle, nur die im Kapitel benutzten: Recall@10 und @30, Symbol-Recall, Precision@30, Gold über Kante, abgedeckte geänderte Zeilen, Kontext in KiB, Schritte bis zur Gold-Datei, erster Zug ist eine Suche, Gold gefunden.
+% 5 Statistik. Vorzeichentest über gepaarte Aufgaben mit Schreibweise besser:schlechter:gleich. Bootstrap-Intervall der gepaarten Differenzen (2000 Züge, fester Startwert). Warum: 12 bis 39 Aufgaben, keine Verteilungsannahme.
+% 6 Vorregistrierung und Holdout. Was vorab festgelegt wird (Frage, eine Hauptgröße, Entscheidungsregel, Stoppregel). Welche Messungen vorregistriert waren (Modell-Holdout 24.08., Hard-Slice 06.09.), welche Entwicklungsmessungen sind.
+% 7 Nachweis. Messbäume (ein Verzeichnis je Aufgabe, vor und nach jedem Lauf geprüft), Pfad-Audit, eingefrorenes Binary, Provenance je Serie. Verweis auf Anhang C.
+% FRAGEN 5.1
+% - Reichen 3 Seiten für zwei Tabellen (Bedingungen, Messgrößen) und fünf Absätze? Sonst Messgrößen der Agentenmessung nach 5.3 ziehen.
+% - goldLineCoverage (alt) und goldHunkCoverage (neu) dürfen nicht gemischt werden (Tn 0.6). Nur die neue Größe einführen und die alte nur dort nennen, wo sie gebraucht wird?
+% - Steht der Grund für den Nachweis (Serie 28.08.) hier oder in 5.3 (F7)?
+% - Klassen V, M, E hier oder in 5.2 (F6)?
+% - Welche Grundbegriffe erklärt 4.1 schon, damit hier nichts doppelt steht?
 
 \section{Entwicklung des Abrufs auf SWE-bench}% 3 S.
 % Inhalt: Seed-Fix ausführlich, die übrigen Messungen je ein bis drei Sätze
 % (Frage, Antwort, Änderung am Werkzeug).
 \label{sec:entwicklung-swebench}
+% GERÜST 5.2 (Stichpunkte 10.11., Quelle Tn B1 bis B9, Tr19)
+% 1 Ausgangslage, kurz (B1, 16.08.). 21 Aufgaben aus pylint, requests, seaborn, flask. Recall@10: bm25 81,3, graph 54,8, seeds 52,4 Prozent. Der Einbruch liegt auf pylint (800 Dateien): graph 20,0 gegen bm25 60,8 Prozent, auf den kleinen Repos liegt alles beieinander. Folge: Suche nach der Ursache.
+% 2 AUSFÜHRLICH Seed-Fix (B2, 17.08.). Frage: verdrängt der exakte Zweig die semantischen Treffer? Diagnose: 96 von 147 Seed-Plätzen aus dem exakten Zweig, Gold darin in 3 von 21 Aufgaben. Ursache: der Zweig war unbegrenzt und nach Commit-Zahl sortiert, stimmte in der Fusion aber mit vollem Gewicht ab. Änderung: Extraktion und Fusion nach Stufen, strenge Span-Regel, Basename-Rückfall (+13,5 Punkte). Ergebnis: Recall@10 54,8 auf 76,6 Prozent, pylint 20,0 auf 50,8, Gold in den Seeds 12 auf 18 von 21. Grenze: auf denselben 21 Aufgaben entworfen und gemessen.
+% 3 AUSFÜHRLICH (F1) Nachrechnung der Traversierung (B3, 18.08.). Frage: wie viele Gold-Dateien kommen nur über eine Kante? Antwort: in 1 von 21 Aufgaben. Recall@10 graph gleich seeds (76,6), Recall@30 79,0 gegen 76,6. 23 von 30 Plätzen gehen an Nachbarn. 45 Prozent der Nachbarn liegen in einer Datei, die ein Seed schon geliefert hat. Erklärung in einem Satz (Tn C1): in 11 von 21 Aufgaben haben die Seeds schon alles, die Traversierung kann dort nichts zeigen.
+% 4 KURZ, Tabelle oder Fließtext (F2), je Frage, Antwort, Änderung:
+%   - Commit-Zahl im Score (F-29, 17.08.): hilft nicht, Gewicht 0. Löst "Kapitel 5 begründet das" aus 4.4 ein (TODO). Quelle eval-2026-08-17-f29.md.
+%   - Seed-Budget (B4, 19.08.): 12, 20, 30 statt 7 Seeds, Recall@30 79,0 auf höchstens 82,1 Prozent, immer dieselbe eine Aufgabe. Bleibt bei 7.
+%   - Quote je Datei (B4): Precision@30 6,7 auf 4,3 Prozent, verworfen.
+%   - Vektorindex (19.08.): geteilte Datenbank lieferte 4,1 von 25 projekteigenen Kandidaten, seitdem eine Datenbank je Projekt. 4.3 belegt das schon per Fußnote, hier ein Satz oder nur Verweis (TODO).
+%   - Symboltext mit Code (B5, 20.08.): Symbol-Recall 16,7 auf 21,7 Prozent, Precision 13:3 besser. Übernommen.
+%   - Einbettungsmodell Qwen3 (B6, 20.08.): Knoten aus Hop 2 und tiefer in 10 statt 1 von 21 Aufgaben, Precision@30 8,7 auf 11,2, Zeilenabdeckung 84,8 auf 71,6 Prozent. Gold über Kante bewegt sich nicht.
+%   - Kuratier-Spielraum (B7, 21.08.): Recall@100 91,7 gegen Recall@30 80,2 Prozent, der Unterschied sitzt in vier pylint-Aufgaben. Auf den kleinen Repos ist durch Umsortieren nichts zu gewinnen. Verbindung zu FF2 und zu 6.3.
+%   - Holdout (B8, 24./26.08.): Regel vorab eingecheckt, 12 zurückgehaltene Aufgaben (django, sphinx). Der Nachteil von Qwen3 repliziert nicht (Recall@30 0 schlechter, 2 besser, 10 gleich), der Vorteil schon (Precision 11 besser, 0 schlechter). Entscheidung für Qwen3.
+%   - Basename-Rückfall (26.08.): bleibt an.
+%   - Gate 2 (B9, 26.08.): Werte eingefroren, Klassen V, M, E. Löst den TODO-Punkt zu tab:abrufparameter ein.
+% 5 Schluss: Stand nach Gate 2. graph 80,2 gegen bm25 81,3 Prozent auf den 21 Aufgaben, Gold über Kante weiter bei wenigen Aufgaben. Überleitung: Präzision, Symbolebene und Tiefe wurden besser, der Beitrag der Kanten blieb unsichtbar. Zwei Fragen folgen daraus: wirkt der Kontextblock auf den Agenten (5.3), und liegt es an den Aufgaben (5.4).
+% FRAGEN 5.2
+% - F1, F2, F3 aus dem Kopf.
+% - B6 hat zwei Vergleichsreihen (B gegen C: reiner Modelleffekt. A gegen C: Nachmessung 22.08.). Welche wird genannt? Vorschlag: nur der reine Modelleffekt, die Nachmessung in einem Halbsatz.
+% - TODO: deckt der Holdout vom 26.08. die PascalCase-Regel und SEED_DF_MAX ab? Vor dem Nennen der Seed-Zahlen prüfen (retrieval.js, Kommentar Z. 217 bis 222).
+% - Kuratier-Spielraum (B7): hier kurz oder erst in 5.6, wo der Spielraum auf den Studienaufgaben steht?
+% - Wie viele der elf Kurzmessungen dürfen ganz entfallen (Kandidaten: Quote auf Qwen3, Nachmessung 22.08., Basename)?
 
 \section{Agentenverhalten (AP8)}% 3 S.
 % Inhalt: dazu Agentenläufe auf teamable 05.10. und 09.10. als Entwicklungsmessung.
 \label{sec:agentenverhalten}
+% GERÜST 5.3 (Stichpunkte 10.11., Quelle Tn B10, B11, Tr19)
+% 1 Warum. Alle Messungen in 5.2 prüfen den Abruf gegen eine Liste. Das Reaktivitätsproblem (1.2) ist eine Aussage über Verhalten: sucht der Agent mit Kontextblock weniger? Das lässt sich nur messen, wenn der Agent arbeitet und jeder Zug protokolliert wird.
+% 2 Aufbau. Drei Modelle (Haiku 4.5, Sonnet 5, Opus 5), 33 Aufgaben (21 Entwicklung, 12 Holdout), Bedingungen A, B, C, drei Wiederholungen, 891 Läufe. Der Agent darf nur suchen und lesen. Wiederholungen in fester Reihenfolge ohne Blick auf die Zahlen.
+% 3 KURZ Vorgeschichte (F7). Serien vom 27.08. verworfen. Serie vom 28.08. (423 Läufe): in den Arbeitsverzeichnissen lag ein Export des Werkzeugs, in 125 Läufen von der Suche getroffen, in A häufiger als in B und C. Folge: neu gemessen, daraus stammt der Nachweis aus 5.1.
+% 4 Nachweis in einem Satz oder kleiner Tabelle: 891 von 891 Verzeichnissen vor und nach dem Lauf unverändert, 5 Zugriffe nach außen, alle abgelehnt.
+% 5 Befunde (Zahlen hier oder in 7.1, F3):
+%   - Erster Zug seltener eine Suche: in 10 von 12 Vergleichen signifikant, nie umgekehrt.
+%   - Gold-Datei früher erreicht: Richtung in allen 24 Zellen, signifikant in 13.
+%   - Suchen vor der Gold-Datei gehen in allen sechs Armen zurück, je Lauf um 0,5 bis 1,7 Suchen. Suchen danach uneinheitlich. Nachträglich gerechnet. Tabelle der sechs Arme (Tn B11).
+%   - Gefunden wird dasselbe: Gold gefunden bewegt sich in keiner Zelle um mehr als zwei Aufgaben.
+%   - B gegen C: nur bei einem Modell auf der Entwicklungsmenge verschieden, nur im Aufwand. Bezug zu FF5.
+% 6 Grenzen: 60 unkorrigierte Tests, 18 Zellen wechselten zwischen einer und drei Wiederholungen die Seite von p = 0,05. Aussage stützt sich auf Richtung und Konsistenz. Nur Lokalisieren.
+% 7 KURZ Entwicklungsmessungen auf teamable (Plan): 05.10. Agentenläufe E und #74 mit und ohne get_context (E 1 gegen 3 Suchen, #74 1 gegen 5). 09.10. C-Läufe mit Opus 5, sechs Anfragen. Die Deckung gegen den Referenzkontext steht in 5.6.
+% 8 KURZ (F4) Agentenanfrage 08.10.: formuliert der Agent die Anfrage selbst, steht die Gold-Datei in 95,2 statt 79,9 Prozent unter den ersten zehn, vor allem weil er die Pfade aus dem Training kennt. Vorläufig. 4.6 hat dazu einen KLÄREN-Marker.
+% FRAGEN 5.3
+% - F3, F4, F7 aus dem Kopf.
+% - C in AP8 war nicht verschachtelt (Zb Punkt 2, Kommentar in 6.1). Tn 0.5 beschreibt C als verschachtelten Baum. Was stimmt für die 891 Läufe? Vor dem Schreiben in AP8 und Zb prüfen, sonst trägt der Vergleich B gegen C keine Aussage zu FF5.
+% - Tabelle der sechs Arme hier oder im Anhang?
+% - Kosten (157 USD, 15,1 Stunden) nennen?
+% - Reichen 3 Seiten, wenn Punkt 7 und 8 dazukommen? Sonst Punkt 8 nach 4.6 verweisen.
 
 \section{Ferne Aufgaben: Hard-Slice}% 3 S.
 % Inhalt: Bestätigungsmessung, alter Default.
 \label{sec:hard-slice}
+% GERÜST 5.4 (Stichpunkte 10.11., Quelle Tn B12 bis B16, HS)
+% 1 Warum. Nach 5.2 trägt die Traversierung auf den 21 Aufgaben nichts bei. Zwei Erklärungen: das Werkzeug taugt nicht, oder die Aufgaben passen nicht zur Frage. Getrennt wird das über eine Eigenschaft der Aufgabe, gemessen ohne das Werkzeug.
+% 2 Auswahl in zwei Schritten.
+%   - Nennt der Fehlerbericht sein Ziel (B12)? 215 von 500 Aufgaben nennen es nicht (43,0 Prozent, strenger Schnitt). Das Kriterium benutzt nichts aus dem Abruf. Ein Satz gegen den Einwand der Auswahl nach Ergebnis.
+%   - Wie weit liegt das Ziel vom Einstieg (B13)? 139 Aufgaben in den sechs Projekten mit lokaler Kopie, davon 45 mit Ziel mindestens zwei Kanten entfernt (32,4 Prozent). Größte Klasse: kein Einstieg, 39 Aufgaben (28,1 Prozent).
+%   - Nebenbefund: 95 Prozent der kürzesten Wege laufen nur über Import- und Enthaltenseins-Kanten.
+%   - Abbildung Auswahlkette (F8).
+% 3 Vorregistrierung (06.09.): Hypothesen, Hauptgröße Recall@10, Stoppregel. Verstöße (F9): erst am 09.09. committet, 9 von 20 Aufgaben vor der Vorregistrierung gemessen, Abbruch bei 20 von 45. Vervollständigung per Nachtrag vor dem Lauf. Primäranalyse 39 Bestätigungsaufgaben, Pflichtzeilen 35 blind und 25 neu.
+% 4 Befunde auf 39 (Zahlen hier oder in 7.1, F3):
+%   - H1 graph gegen seeds, Recall@10: +5,1 Punkte, 3:36:0, nicht bestätigt. Gold über Kante in 4 von 39.
+%   - H2 graph gegen bm25: -19,2 Punkte [-35,9, -2,6], verworfen. bm25 66,9, graph 47,6 Prozent.
+%   - H3 Symbol-Recall: +32,8 Punkte gegen bm25 und dense-budget, bauartbedingt, weil nur der Graph Symbole liefert.
+%   - H4 geänderte Zeilen gegen dense-budget: -1,6, nicht bestätigt.
+%   - Kontext: graph 211 KiB, bm25 1313 KiB.
+% 5 Diagnose, nachträglich: bei 11 der 12 Aufgaben, die bm25 gewinnt, fehlt die Gold-Datei in der Graph-Liste. Testsymbole belegen die Seed-Plätze. Ohne Testdateien +15,7 Punkte (n = 35). Das ist der Anlass für 5.5.
+% 6 KURZ BM25-Vormessung (TODO): BM25 allein fand Dateien, die der Abruf verfehlte, daraufhin BM25-Zweig ab 13.09. Auf den fünften Punkt in 4.2 abstimmen.
+% 7 Grenzen: 35 von 39 aus django, BM25 eigene Implementierung, Abstand auf dem eigenen Graphen gerechnet (Fehler geht gegen die eigene Hypothese), 30 Dateien gegen 30 Symbole. Die Menge der fernen Aufgaben ist danach erschöpft, alles Weitere ist Entwicklungsmessung.
+% FRAGEN 5.4
+% - F3, F8, F9, F10 aus dem Kopf.
+% - Wird die erste Serie mit 20 Aufgaben (B14, "gleichauf", später zurückgenommen) erwähnt oder nur der Endstand auf 39? Vorschlag: ein Satz, weil die Rücknahme zur Vorregistrierung gehört.
+% - Schichtung nach Abstand (Hop 2 gegen Hop 3 und mehr) nennen oder in den Anhang?
+% - "alter Default" im Plan: heißt das, 5.4 misst den Stand vor der Seed-Änderung? Dann einen Satz dazu am Anfang.
 
 \section{Seed-Änderung und Tests als Gold}% 2 S.
 % Inhalt: Entwicklungswert, neuer Default, Stand der Studie.
 \label{sec:seed-aenderung}
+% GERÜST 5.5 (Stichpunkte 10.11.). Tn hat hierzu nichts. Material nur aus Tr19, alles Weitere aus Seed, TGold und Prot holen.
+% 1 Anlass: Diagnose aus 5.4 (Testsymbole auf den Seed-Plätzen, schmale Liste) und BM25-Vormessung.
+% 2 Änderung: was an den Seed-Zweigen geändert wurde (BM25-Zweig ab 13.09., Umgang mit Testdateien). KLÄREN aus Seed, auf 4.4 abstimmen.
+% 3 Ergebnis gegen den Patch: +25 bzw. +12,5 Punkte (Tr19). KLÄREN: welche zwei Mengen, welche Größe.
+% 4 Tests als Gold (16.09.): zählt man die Tests der Korrektur zum Gold, bleibt fast nichts (+4,1 bzw. -1,3). Was das heißt: der Gewinn kommt aus dem Ausschluss von Testdateien, und ob Tests zum Kontext gehören, hängt von der Aufgabe ab.
+% 5 Einordnung: Entwicklungswert, keine Bestätigung, weil die fernen Aufgaben schon gesehen waren. Neuer Default, Feature-Freeze 14.09., das ist der Stand der Studie. Drift-Kontrolle 09.10. (155 von 155 Knotenlisten gleich wie am 11.09.).
+% FRAGEN 5.5
+% - Was genau ist der neue Default, und stimmt er mit tab:abrufparameter in 4.4 überein?
+% - Gate 2 sagt: wer nach dem Einfrieren einen Wert ändert, entwertet die zitierten Serien. Welche Serien aus 5.2 bis 5.4 gelten für den neuen Default nicht mehr? Das muss hier in einem Satz stehen.
+% - Tests als Gold: Grenze der Messgröße (5.1) oder Ergebnis? Bestimmt, ob es hier oder in 8.2 ausführlich steht.
+% - Reichen die zwei Befunddokumente, oder braucht es vorher ein eigenes Gerüst wie Tn?
 
 \section{Zusammenhänge und Überleitung zur Studie}% 2 S.
 % Inhalt: Bilanz, was die Messungen nicht beantworten, Begründung des Wechsels
@@ -44,3 +207,14 @@ Das Kapitel beschreibt das Vorgehen und die Entwicklung. Die Ergebnisse berichte
 \label{sec:ueberleitung-studie}
 % NEU 06.11. (nach Neufassung von 6.1): Die Begründung des Wechsels der Hauptfrage liegt hier, nicht in Kapitel 6. 6.1 verweist auf diesen Abschnitt und nennt die Deckung nur in einem Satz. Hier ausführlich: AP8 (Abschnitt 5.3: mit Kontextblock weniger Suchen, gleiche Treffer), Rechnung 13.10. an den sechs Anfragen der Läufe vom 09.10. (Deckung #74 dreimal 7 von 7, E 9, 8, 8 von 9; Symbolebene #74 5, 6, 5 von 7, E 8, 5, 7 von 9), Folgerung: der automatische Abruf liefert den Referenzkontext fast vollständig, der Unterschied des Werkzeugs ist der Mensch, der sieht und wählt. Daraus die drei Designfolgen, die 6.1 nur nennt: C gegen D, keine automatisierten Mehrfachläufe (Stufe 3), Verständnis statt Kontextgüte als Hauptfrage.
 % Keine Chronik mit Daten im Fließtext; Daten nur als Beleg in Fußnoten. Die Entwicklungsgeschichte (Mails, Treffen, Plan-Umwege) gehört nach 8.1 (Vorgabe Betreuer). Material: Notizen HERKUNFT 1 bis 6 und Quellenkürzel im Kopf von 6.1 (06_nutzerstudie.tex).
+% GERÜST 5.6 (Stichpunkte 10.11., Quelle Tn Teil C und D, CLauf, Kommentar oben)
+% 1 Bilanz in vier Sätzen (Tn D1): der Kontextblock verändert den Weg des Agenten (5.3). Er verändert nicht, ob die Stelle gefunden wird. Auf Dateiebene ist der Graph nicht besser, auf fernen Aufgaben 19 Punkte hinter BM25 (5.4). Auf Symbolebene liefert er als einzige Bedingung benannte Funktionen.
+% 2 Zusammenhang (Tn C1, C2): warum die Traversierung nichts zeigen konnte. Die Seeds haben auf den 21 Aufgaben meist schon alles, und Gold ist der Patch, nicht der Zusammenhang. Auf den fernen Aufgaben fällt diese Erklärung weg, dort liegt es an den Seeds.
+% 3 Was die Messungen nicht beantworten (Tn D2): Abruf statt Verstehen, Lokalisieren statt Bearbeiten, kein Mensch.
+% 4 AUSFÜHRLICH Rechnung 13.10. an den sechs Anfragen der C-Läufe vom 09.10.: Deckung #74 dreimal 7 von 7, E 9, 8, 8 von 9. Symbolebene #74 5, 6, 5 von 7, E 8, 5, 7 von 9. Folgerung: der automatische Abruf liefert den Referenzkontext fast vollständig.
+% 5 Folgerung für die Hauptfrage: am Kontext ist wenig zu verbessern, der Unterschied des Werkzeugs ist der Mensch, der sieht und wählt. Drei Designfolgen, die 6.1 nur nennt: C gegen D, keine automatisierten Mehrfachläufe, Verständnis statt Kontextgüte.
+% FRAGEN 5.6
+% - Tn D3 (Tabelle Designentscheidung und Herkunft) und Tn D4 (Überleitungsabsatz) stammen vom 09.09. und beschreiben das alte Design (D', Stufe 3, Kontextgüte als Hauptfrage). Was davon gilt noch? Vorschlag: D3 nicht übernehmen, die drei Designfolgen aus Punkt 5 reichen.
+% - Kuratier-Spielraum auf SWE-bench (B7) hier neben der Rechnung 13.10. nennen? Beide sagen dasselbe auf zwei Mengen.
+% - Die Tabelle "Problem laut Exposé gegen eigene Messung" (Tn C5) hier oder in 8.1?
+% - Wie viel von Tn Teil C (sechs Fäden, 3 bis 4 Seiten) passt in 2 Seiten? Vorschlag: nur C1 und C2, der Rest nach 8.1.
