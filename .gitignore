@@ -16,3 +16,11 @@
 
 .claude/
 .agents/
+
+# Lokale Arbeitsordner und Sicherungen
+research_notes/
+reports/
+tmp/
+.vscode/
+*.synctex(busy)
+*.konflikt-sicherung.txt
