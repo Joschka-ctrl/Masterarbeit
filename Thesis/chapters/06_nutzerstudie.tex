@@ -121,7 +121,7 @@ Die Studienfragen knüpfen an die Forschungsfragen aus Abschnitt~\ref{sec:forsch
     Forschungsfrage & In der Studie \\
     \midrule
     FF1, E3 & Mit erhoben: ob die Probanden die offengelegten Begründungen beim Kuratieren heranziehen. E1 und E2 belegt Kapitel~\ref{chap:werkzeug}. \\
-    FF2 & Liefert den Maßstab, den Referenzkontext je Aufgabe. Die optimierte Auswahl wurde nicht gebaut; an ihre Stelle tritt eine Rechnung, die den Spielraum des Kuratierens je Aufgabe bestimmt (Abschnitt~\ref{sec:aufgaben}). \\
+    FF2 & Liefert den Maßstab, den Referenzkontext je Aufgabe. Die optimierte Auswahl wurde nicht gebaut. An ihre Stelle tritt eine Rechnung, die den Spielraum des Kuratierens je Aufgabe bestimmt (Abschnitt~\ref{sec:aufgaben}). \\
     FF3 & Frage 1 der Studie: Veränderung der Kontextgüte gegenüber dem automatischen Abruf, beschreibend und je Aufgabe getrennt. \\
     FF4 & Nebenfrage: Ergebnis des Agenten je Person und Aufgabe aus einem einzelnen Lauf, über eine Prüfliste (Abschnitt~\ref{sec:messung}). \\
     FF5 & Der Vergleich von strukturiertem und flachem Kontext wird nicht untersucht. \\
@@ -136,7 +136,7 @@ Anders als beim automatischen Abruf kann der Proband im stufenweisen Modus den v
 
 Die Studie vergleicht zwei Bedingungen, die sich in der Beteiligung des Probanden unterscheiden. In beiden arbeitet der Agent mit Kontext aus dem Graphen. In C erhält er ihn automatisch, in D kann der Proband ihn vorher ansehen und verändern (Abschnitt~\ref{sec:bedingungen}). Ein Vergleich von D mit einem Lauf ohne Werkzeug würde zusätzlich erfassen, was der Kontextblock selbst bewirkt. Dieser Unterschied wurde bereits in Abschnitt~\ref{sec:agentenverhalten} untersucht: Mit dem Kontextblock sucht der Agent weniger, findet am Ende jedoch dieselben Stellen. Der Vergleich von C und D richtet den Blick stattdessen auf die Beteiligung des Probanden.
 
-Die Nutzerstudie untersucht das Ergebnis des Agenten anhand einzelner Läufe und einer Prüfliste. Mehrfach wiederholte Agentenläufe mit verschiedenen Arten von Kontext werden nicht durchgeführt. Sie hätten zusätzliche Zeit und Tokenkosten erfordert. Die bisherigen Messungen zeigten zudem, dass der automatische Abruf auf den untersuchten Anfragen bereits einen großen Teil des Referenzkontexts abdeckt (Abschnitt~\ref{sec:aufgaben}). Die Arbeit kann deshalb nicht belegen, ob kuratierter Kontext dem Agenten mehr hilft als automatischer. FF4 wird in der Nutzerstudie anhand der Prüfliste betrachtet; der Vergleich zu FF5 wird nicht untersucht (Tabelle~\ref{tab:ff-zuordnung}).
+Die Nutzerstudie untersucht das Ergebnis des Agenten anhand einzelner Läufe und einer Prüfliste. Mehrfach wiederholte Agentenläufe mit verschiedenen Arten von Kontext werden nicht durchgeführt. Sie hätten zusätzliche Zeit und Tokenkosten erfordert. Die bisherigen Messungen zeigten zudem, dass der automatische Abruf auf den untersuchten Anfragen bereits einen großen Teil des Referenzkontexts abdeckt (Abschnitt~\ref{sec:aufgaben}). Die Arbeit kann deshalb nicht belegen, ob kuratierter Kontext dem Agenten mehr hilft als automatischer. FF4 wird in der Nutzerstudie anhand der Prüfliste betrachtet, der Vergleich zu FF5 wird nicht untersucht (Tabelle~\ref{tab:ff-zuordnung}).
 
 Die Studie untersucht ausgewählte Aspekte des Verständnisses der Probanden: welche für die Aufgabe relevanten Stellen zusammenhängen, was der Agent geändert hat und warum (Abschnitt~\ref{sec:messung}). Dazu beantworten die Probanden vor und nach dem Lauf Fragen zu Zusammenhängen in der Codebasis. Aus den Antworten wird der Zuwachs berechnet. Ergänzend erklären sie nach dem Lauf die Änderung des Agenten. Diese Erklärung wird gesondert ausgewertet. Fragen allein nach dem Lauf reichen dafür nicht: Eine Prüfung an vier Agentenläufen zeigte, dass sich solche Fragen aus dem Aufgabentext, dem Diff und der Zusammenfassung des Agenten beantworten ließen, in C und D gleichermaßen. Aufbau und Prüfung der Bögen beschreibt Abschnitt~\ref{sec:messung}.
 
@@ -243,8 +243,8 @@ Aufgabe E betrifft Fehlermeldungen, die nach etwa fünf Sekunden verschwinden un
     \midrule
     Herkunft & Pull Request vom September 2024, Text entschärft & konstruiert, ohne Patch, Text in dritter Fassung \\
     Ausgangsstand & 19 Commits vor dem aktuellen Stand & aktueller Stand \\
-    Einstiege & Studierendenseite & Team-Set- und Studierendenseite; Meldungsanzeige als weitere mögliche Lesart \\
-    Lösungskern & 3 Dateien, ohne Einstiegsdatei 2 & 2 Dateien; außerhalb der Einstiege je nach Lesart 1 oder 2 \\
+    Einstiege & Studierendenseite & Team-Set- und Studierendenseite, Meldungsanzeige als weitere mögliche Lesart \\
+    Lösungskern & 3 Dateien, ohne Einstiegsdatei 2 & 2 Dateien, außerhalb der Einstiege je nach Lesart 1 oder 2 \\
     Verständnisstellen & 5 & 7 \\
     Referenzsymbole & 7 & 9 \\
     Zulässige andere Orte & 2 & 3 \\
@@ -346,13 +346,13 @@ Die Studie erfasst vor und nach jeder Aufgabe, was die Teilnehmenden über die f
 
 \subsection{Fragen zu den Zusammenhängen}
 
-Zu Beginn der Sitzung erfasst ein Vorfragebogen die Erfahrung mit Programmierung, teamable und KI-Werkzeugen sowie das Vorwissen zur Studie. Drei kleine Aufgaben zum Codelesen ergänzen die Selbstauskunft. Die Angaben werden nur je Gruppe berichtet.
+Zu Beginn der Sitzung erfasst ein Vorfragebogen die Erfahrung mit Programmierung, teamable und KI-Werkzeugen sowie das Vorwissen zur Studie. Drei kleine Aufgaben zum Codelesen ergänzen die Selbstauskunft. Die Angaben werden nur für die Gruppe zusammengefasst berichtet, weil der Betreuer dieser Arbeit auch das Teamprojekt bewertet und sich Rolle oder Zahl der Pull Requests bei acht Personen einzelnen zuordnen ließen.
 
 Nach dem Lauf können die Teilnehmenden Informationen aus der Änderung und der Zusammenfassung des Agenten entnehmen. Deshalb beantworten sie Fragen zu den Zusammenhängen sowohl vor als auch nach dem Lauf. Der Vergleich der Antworten soll zeigen, was sie während der Aufgabe hinzugewonnen haben. Beide Bedingungen enthalten eine Zusammenfassung des Agenten. Der Vergleich des Zuwachses soll zeigen, ob das Kuratieren darüber hinaus zu diesem Wissen beiträgt. Da die Fragen beim Kuratieren bereits bekannt sind, könnten die Teilnehmenden gezielt nach Antworten suchen. Zwei zusätzliche Fragen stehen deshalb nur im Nachher-Bogen. Im Interview fragt die Sitzungsleitung auch, ob der Proband beim Kuratieren nach Antworten gesucht hat.
 
 Vor jeder gewerteten Aufgabe liest der Proband das Aufgabenblatt und beantwortet den Vorher-Bogen, bevor er Code sieht. Der Bogen enthält den Aufgabentext und bei \#74 einen Hinweis auf den älteren Stand der Codebasis. Zuerst fragt Teil B nach Zusammenhängen, danach Teil A nach Stellen, die für die Aufgabe eine Rolle spielen. Teil A erfasst das Wiedererkennen und wird nur beschreibend ausgewertet. Teil B fragt, wie Stellen zusammenhängen und warum. Zusammen mit der freien Erklärung trägt er die Messung des Verständnisses.
 
-Ein Beispiel aus Aufgabe E lautet: „Wird die Fehlermeldung beim Export auf der Seite selbst erzeugt oder woanders?“ Zur Wahl stehen ein Baustein, den die Seite benutzt, die Seite selbst und der Server. Eine vierte Antwort lautet „Weiß ich nicht“. Zusätzlich gibt der Proband seine Sicherheit von 1 bis 5 an. Der Proband nennt seine Antworten, und die Sitzungsleitung trägt sie ein. Das gilt für beide Bedingungen. Die Fragen sind in Alltagssprache formuliert und nennen keine Datei- oder Funktionsnamen. Im Nachher-Bogen erscheinen dieselben Fragen erneut. Hinzu kommen Fragen zur Arbeit des Agenten und Skalen zur Beanspruchung. Eine richtige Antwort zählt einen Punkt, eine falsche oder „weiß ich nicht“ null Punkte. Leere Antworten zählen als nicht erreicht; ihre Zahl wird angegeben. Die Ergebnisse werden ohne Ratekorrektur berichtet.
+Ein Beispiel aus Aufgabe E lautet: „Wird die Fehlermeldung beim Export auf der Seite selbst erzeugt oder woanders?“ Zur Wahl stehen ein Baustein, den die Seite benutzt, die Seite selbst und der Server. Eine vierte Antwort lautet „Weiß ich nicht“. Zusätzlich gibt der Proband seine Sicherheit von 1 bis 5 an. Der Proband nennt seine Antworten, und die Sitzungsleitung trägt sie ein. Das gilt für beide Bedingungen. Die Fragen sind in Alltagssprache formuliert und nennen keine Datei- oder Funktionsnamen. Im Nachher-Bogen erscheinen dieselben Fragen erneut. Hinzu kommen Fragen zur Arbeit des Agenten und Skalen zur Beanspruchung. Eine richtige Antwort zählt einen Punkt, eine falsche oder „weiß ich nicht“ null Punkte. Leere Antworten zählen als nicht erreicht, und ihre Zahl wird angegeben. Die Ergebnisse werden ohne Ratekorrektur berichtet.
 
 Zusätzlich enthält jede Aufgabe eine Frage zu einem Detail, das für die geforderte Änderung nicht angepasst werden muss. Bei Aufgabe E geht es darum, wo die bisherige Anzeigedauer festgelegt ist, bei \#74 um die Zahl der Tabellenzeilen. Diese beiden Fragen werden ergänzend ausgewertet und gehen nicht in die Hauptkennzahl ein. Für die Hauptkennzahl werden bei \#74 fünf und bei E vier Fragen berücksichtigt. Da die Aufgaben unterschiedlich viele Fragen enthalten, wird jeweils der Anteil richtiger Antworten berechnet. Der Anteil vor dem Lauf wird vom Anteil nach dem Lauf abgezogen.
 
@@ -360,11 +360,11 @@ Um die Antworten nach dem Lauf einordnen zu können, wird für jede Sitzung vor 
 
 \subsection{Durchsehen und freie Erklärung}
 
-Nach jedem Agentenlauf hat der Proband in beiden Bedingungen fünf Minuten Zeit, die Änderungen im Diff, im Browser und im Editor anzusehen. Anschließend entscheidet er laut, ob er die Änderungen übernehmen, nachbessern oder verwerfen würde, und begründet das Urteil. Danach erklärt er zwei Minuten lang, was geändert wurde, warum es vorher so war und worauf eine Person aus dem Team achten müsste. Dafür werden das Fenster der Arbeitskopie geschlossen und der Browser minimiert. Die Sitzungsleitung wertet die Aufnahme anhand einer vorbereiteten Aussagenliste aus. Gezählt werden Aussagen zu Zusammenhängen, die der Agent bereits genannt hat, und zusätzlich genannte Aussagen. Die Einteilung erfolgt nach dem Lauf und wird beschreibend berichtet. Für zusätzlich genannte Aussagen wird festgehalten, ob sie bereits als Antwortoption im Bogen standen. Die Wertung ist nicht verblindet, da die Sitzungsleitung die Bedingung kennt. Die Aufnahme wird lokal transkribiert. Ein lokales Modell schlägt Zuordnungen zu den Aussagen vor; die Entscheidung bleibt bei der Sitzungsleitung.
+Nach jedem Agentenlauf hat der Proband in beiden Bedingungen fünf Minuten Zeit, die Änderungen im Diff, im Browser und im Editor anzusehen. Anschließend entscheidet er laut, ob er die Änderungen übernehmen, nachbessern oder verwerfen würde, und begründet das Urteil. Danach erklärt er zwei Minuten lang, was geändert wurde, warum es vorher so war und worauf eine Person aus dem Team achten müsste. Dafür werden das Fenster der Arbeitskopie geschlossen und der Browser minimiert. Die Sitzungsleitung wertet die Aufnahme anhand einer vorbereiteten Aussagenliste aus. Gezählt werden Aussagen zu Zusammenhängen, die der Agent bereits genannt hat, und zusätzlich genannte Aussagen. Die Einteilung erfolgt nach dem Lauf und wird beschreibend berichtet. Für zusätzlich genannte Aussagen wird festgehalten, ob sie bereits als Antwortoption im Bogen standen. Die Wertung ist nicht verblindet, da die Sitzungsleitung die Bedingung kennt. Die Aufnahme wird lokal transkribiert. Ein lokales Modell schlägt Zuordnungen zu den Aussagen vor, die Entscheidung bleibt bei der Sitzungsleitung.
 
 \subsection{Kontext und Ergebnis des Agenten}
 
-In D protokolliert die Studienseite, welche Knoten abgewählt, hinzugefügt oder umsortiert werden und wie lange die Auswahl dauert. Sie erfasst auch, welche Detailkarten angesehen wurden. Für die Auswertung zählt eine Anzeige ab 300 Millisekunden; die Aufnahme dient zur Kontrolle. Der automatisch erzeugte Vergleichskontext wird für jede Person mit der Anfrage aus dem Export neu berechnet. Beide Kontexte werden auf Symbolebene und anhand der Deckung mit dem Referenzkontext verglichen (Abschnitt~\ref{sec:aufgaben}).
+In D protokolliert die Studienseite, welche Knoten abgewählt, hinzugefügt oder umsortiert werden und wie lange die Auswahl dauert. Sie erfasst auch, welche Detailkarten angesehen wurden. Für die Auswertung zählt eine Anzeige ab 300 Millisekunden. Die Aufnahme dient zur Kontrolle. Der automatisch erzeugte Vergleichskontext wird für jede Person mit der Anfrage aus dem Export neu berechnet. Beide Kontexte werden auf Symbolebene und anhand der Deckung mit dem Referenzkontext verglichen (Abschnitt~\ref{sec:aufgaben}).
 
 Das Ergebnis des Agenten wird nach jeder Aufgabe anhand einer Prüfliste beurteilt. Sie umfasst Typprüfung und Lint, eine aufgabenspezifische Klickfolge und die Überschneidung der geänderten Stellen mit dem Lösungskern oder zulässigen Alternativen. Das Agententranskript ergänzt Angaben zum Lösungsweg und zu den Werkzeugaufrufen. 
 
@@ -375,7 +375,7 @@ Die Beanspruchung wird nach jeder Aufgabe mit den sechs Skalen des NASA-TLX erho
 Während der Aufgaben denken die Probanden laut. Bildschirm und Ton werden aufgezeichnet. Die Sitzungsleitung hält Zeiten, Urteile und Störungen fest. Im abschließenden Interview fragt die Sitzungsleitung nach Momenten ohne Verständnis, nach der vermuteten Grundlage der Änderungen des Agenten, nach den Entscheidungen beim Kuratieren und nach der Nutzung der Oberfläche.
 
 
-\section{Teilnehmende, Ablauf, Einwilligung, Pilot und Generalprobe}% 1,5 S.
+\section{Teilnehmende, Ablauf, Einwilligung und Pilot}% 1,5 S.
 \label{sec:teilnehmende}
 % ZIEL: Wer teilnimmt, wie zugeteilt wird, wie eine Sitzung läuft, wie die Einwilligung zustande kam, was Pilot und erste Sitzungen am Ablauf geändert haben. Ablauftabelle (Minute, Teil) in den Text; Leitfaden, Ablaufvorlagen, Einwilligung in den Anhang.
 %
@@ -395,6 +395,13 @@ Während der Aufgaben denken die Probanden laut. Bildschirm und Ton werden aufge
 % VERWEISE: 6.2 (Technik je Bedingung), 7.1 (Abweichungen je Sitzung), 8.2, Anhang (Leitfaden, Ablauf, Einwilligung, Vorfragebogen, Anleitung für den Probanden).
 % OFFEN: Entwickler-Sitzungen (P01, P02) und ob PG als Entwickler 1 zählt; zweite Gruppe: entfällt (29.10., nur dieses Teamprojekt); Einwilligung-Fassung: geklärt 07.11. (6.5 WORTLAUT); Reihenfolge der Pseudonyme (P03 lief vor P01 und P02, Plan-Satz "Reihenfolge des Rücklaufs" anpassen).
 
+% FESTLEGUNGEN 10.11. (Angaben des Autors, gelten als Quelle und gehen älteren Notizen vor):
+% - Die acht Studierenden sind das gesamte Team des Teamprojekts.
+% - Das Team befindet sich zum Zeitpunkt der Sitzungen im zweiten Sprint. Nicht bestätigt ist, dass alle die Codebasis erst seit einem Sprint kennen, einzelne könnten sie schon vorher gekannt haben. Im Text deshalb nur der Satz zum zweiten Sprint.
+% - Pseudonyme: einfach durchnummeriert in der Reihenfolge, in der sich die Teilnehmenden für einen Termin eingetragen haben. Die Zuordnung von Aufgabe, Bedingung und Reihenfolge je Pseudonym stand vorher fest (12.10.). Die Angabe "Reihenfolge des Rücklaufs" aus dem Leitfaden gilt nicht.
+% - Die zwei Entwickler als Vergleichsfälle (P01, P02) kommen im Text von 6.5 vorerst nicht vor. Der Pilot-Absatz bleibt: Pilotsitzung mit einem Entwickler außerhalb des Teams, Folge mündliche Antworten, die Daten des Piloten gehören nicht zu denen der acht Studierenden. Getrennt berichtet werden können Pilot und Entwickler trotzdem. Kein Satz im Fließtext, der eine Entscheidung als offen bezeichnet.
+% - Die zwei Sätze zur Autorschaft am Pull Request und zum Ausschluss von der Aufgabe sind gestrichen (keine gezielte Frage belegt, feste Zuordnung, Vorfragebogen erst in der Sitzung).
+%
 % GERÜST 6.5 (noch zu schreiben, 1,5 S.)
 % Absatz 1: Teilnehmende (acht Studierende des Teamprojekts, zweiter Sprint; zwei Entwickler als Vergleichsfälle; Vorabeinschätzung; Vorfragebogen je Gruppe; Ausschlussregel PR-Autor; Bitte um Verschwiegenheit und D1 des Vorfragebogens als Kontrolle). Abweichung 100 statt 60 min in einem Satz mit Grund (Vorher-Nachher und Erklären kamen dazu; Aufwärmen).
 % Absatz 2: Zuteilung (Pseudonym P01 bis P10; Paar A und B; Reihenfolge je Paar dreimal die eine, zweimal die andere; #79 immer zuerst unter D; drei Kopien). Hinweis: Pseudonyme wurden vor den Terminen vergeben, P03 lief vor P01 und P02; den Plan-Satz "Reihenfolge des Rücklaufs" nicht übernehmen, sondern "feste Zuteilung je Pseudonym, Termine in der Reihenfolge der Verfügbarkeit".
@@ -417,80 +424,41 @@ Während der Aufgaben denken die Probanden laut. Bildschirm und Ton werden aufge
 % WORTLAUT 6.5, Pilot PG 22.10. (Mitschrieb): Aufnahme ab 14:14; Vorfragebogen geplant 7; Aufwärmen bis 5 geplant, Schritt 5 (Erklären) nicht durchgeführt, Leitung klickte durch; Aufgabe 1 PG-74-D: Aufgabenblatt 5,5 min (Frontend offen), Vorher-Bogen 5 min, Kuratierzeit nicht festgehalten (Bestätigung etwa 14:49, laut Export 15:00 min), kurze Pause wegen eines medizinischen Notfalls; Aufgabe 2 PG-E-C ohne Zeiten. Interview: 1 im Detail nicht immer klar, oberflächlich schon, git diff als Sicherheit; 2 Aufgabe 1 übergebenen Kontext angeschaut plus ein, zwei Stellen weiter (fetch), Aufgabe 2 unklar, teils MCP, teils eigene Suche; 3 nicht nach den Fragen gesucht, im Frontend überlegt, wo es sein könnte; 4 nichts gestört, man kann weiterklicken; nicht benutzen bei einfachen Aufgaben, gerade Frontend, das man hinterher anschauen kann; eher als automatischer Ablauf; wenn der Agent falsch bezogen hat, selbst Kontext rausstreichen; wichtig, dass man Kontext wegnehmen kann. Streuzeichen in Vorfragebogen und beiden Bögen von Aufgabe 1 (Kreuze neben dem Kästchen, Zeichen im Text), mehrere Antworten nicht eindeutig; Ursache CRLF in den Vorlagen gegen die Positionsrechnung der Markdown-Vorschau, seit 23.10. werden die Dateien mit LF geschrieben.
 % WORTLAUT 6.5, P01 (Entwickler 1): 21./22.10. nur Durchspielen durch den Autor (VS-Code-Fenster je Kopie, Sitzungsordner je Person, unrunde Stellen; Sitzungs-JSONs 21.10. 11:29, 11:48, 15:52 und 22.10. 09:48), Mitschrieb leer, keine Sitzung mit Probanden. P02 (Entwickler 2): Sitzungsordner 23.10., nicht gelaufen. Beide Termine offen.
 
-An der Nutzerstudie nehmen acht Studierende teil, die gemeinsam im Teamprojekt am teamable-Frontend arbeiten. Zum Zeitpunkt der Sitzungen befinden sie sich im zweiten Sprint des Projekts. Ein Vorfragebogen erfasst ihre Rolle im Team, ihre Programmiererfahrung, die Zahl ihrer Pull Requests und ihre Erfahrung im Lesen von Code. Diese Angaben werden nur für die Gruppe zusammengefasst berichtet. Damit die Kenntnis einer eigenen Änderung das Ergebnis nicht beeinflusst, erhält niemand eine Aufgabe zu einem Pull Request, den er selbst verfasst hat. Dies wird im Vorfragebogen überprüft.
+An der Nutzerstudie nimmt das gesamte Team eines Teamprojekts teil: acht Studierende, die gemeinsam am teamable-Frontend arbeiten. Aus dieser Codebasis stammen auch die Aufgaben der Studie (Abschnitt~\ref{sec:aufgaben}). Zum Zeitpunkt der Sitzungen befindet sich das Team im zweiten Sprint. Bei den Fragen zur Codebasis ist „weiß ich nicht“ eine ausdrücklich zugelassene Antwort. Da die Teilnehmenden im selben Team arbeiten, werden sie gebeten, Aufgaben und Fragen bis zum letzten Termin nicht weiterzugeben. Der Vorfragebogen erfasst unter anderem die Programmiererfahrung und die Erfahrung im Lesen von Code und fragt nach Vorwissen zur Studie, damit eine mögliche Weitergabe auffallen kann.
 
-Jede teilnehmende Person erhält ein Pseudonym, dem die Aufgaben und Bedingungen vorab zugeordnet sind. Die acht Studierenden werden auf zwei Paare von Aufgabe und Bedingung verteilt: In Paar A bearbeiten sie Aufgabe \#74 unter C und Aufgabe E unter D, in Paar B Aufgabe \#74 unter D und Aufgabe E unter C. Innerhalb jedes Paars beginnt die Hälfte mit Aufgabe \#74 und die andere Hälfte mit Aufgabe E. Vor den beiden gewerteten Aufgaben bearbeiten alle die Aufwärmaufgabe \#79 unter D. Die Sitzungstermine richten sich nach der Verfügbarkeit der Teilnehmenden.
+Die Zuordnung von Aufgabe und Bedingung wird wie in Abschnitt~\ref{sec:bedingungen} beschrieben gewechselt. Vier Studierende bearbeiten Aufgabe \#74 unter C und Aufgabe E unter D (Paar A), bei den anderen vier ist es umgekehrt (Paar B). Damit auch die Reihenfolge nicht mit der Bedingung zusammenfällt, beginnen in jedem Paar zwei Personen mit \#74 und zwei mit E. Die Zuordnung ist für jedes Pseudonym vorab festgelegt. Die Pseudonyme werden in der Reihenfolge der Terminanmeldung vergeben. Gelost wird nicht, was die Auswertung berücksichtigt (Abschnitt~\ref{sec:auswertung}).
 
-Die Sitzungen finden einzeln per Fernzugriff statt und sind auf jeweils 100 Minuten angelegt. Zu Beginn füllen die Teilnehmenden den Vorfragebogen aus und erhalten eine kurze Einführung in die Codebasis. Anschließend lernen sie die Oberfläche anhand der Aufwärmaufgabe kennen. Es folgen die beiden gewerteten Aufgaben. Den Abschluss bilden der Fragebogen zur Bewertung der Oberfläche und ein Gespräch mit der Sitzungsleitung. Die Sitzungen werden mit Bild und Ton aufgezeichnet.
+Jede Sitzung findet einzeln per Fernzugriff statt. Die Teilnehmenden arbeiten über RustDesk auf dem Studienrechner und sprechen über Discord mit der Sitzungsleitung. Dadurch nutzen alle dieselbe eingefrorene Umgebung (Abschnitt~\ref{sec:bedingungen}). Für jede Aufgabe steht eine eigene Projektkopie bereit, damit die Änderungen des Agenten aus einer Aufgabe die nächste nicht berühren.
+
+Eine Sitzung ist auf 100 Minuten angelegt (Tabelle~\ref{tab:ablauf}). Im Exposé waren 60 Minuten vorgesehen. Die längere Dauer ergibt sich aus den Vorher-Nachher-Bögen und der freien Erklärung, die mit der Hauptfrage hinzukamen, und aus der Aufwärmaufgabe. Unter D kuratiert der Proband bei der gewerteten Aufgabe den Kontext, während der Agent auf die Bestätigung wartet. Eine gewertete Aufgabe ist deshalb unter C mit etwa 21 Minuten und unter D mit bis zu 36 Minuten geplant. Die Aufwärmaufgabe zur oberen Navigation soll verhindern, dass die gewertete Aufgabe unter D zugleich die erste Begegnung mit der Studienseite ist. Der Proband kuratiert dort den Kontext einmal über alle Stufen. Der Lauf des Agenten wird nicht abgewartet, weil es nur um die Bedienung geht.
 
 \begin{table}[htbp]
   \centering
-  \caption{Geplanter Ablauf einer Sitzung}
+  \caption{Geplanter Ablauf einer Sitzung.}
   \label{tab:ablauf}
+  \small
   \begin{tabular}{ll}
-    \hline
+    \toprule
     Minute & Teil \\
-    \hline
+    \midrule
     0--10 & Vorfragebogen und Bestätigung der Einwilligung \\
     10--13 & Einführung in die Codebasis \\
     13--28 & Einführung in das Werkzeug und Aufwärmaufgabe \\
-    28--57 & Erste gewertete Aufgabe \\
-    57--86 & Zweite gewertete Aufgabe \\
+    28--86 & Beide gewerteten Aufgaben \\
     86--90 & Zeitreserve \\
-    90--100 & Fragebogen zur Oberfläche und Gespräch \\
-    \hline
+    90--100 & SUS und Interview \\
+    \bottomrule
   \end{tabular}
 \end{table}
 
-% ROHFASSUNG 6.5 in Stichworten (10.11.). Reihenfolge nach GERÜST 6.5, Quellen in den Notizen oben.
-\begin{ungelesen}
-\begin{itemize}
-\item \textbf{Absatz 1, Teilnehmende}
-  \begin{itemize}
-  \item acht Studierende des Teamprojekts an teamable, zur Zeit der Sitzungen im zweiten Sprint
-  \item Vorabeinschätzung: viel Arbeit mit KI-Agenten, wenig eigene Programmiererfahrung; Vorfragebogen erhebt Rolle, Erfahrung, Zahl der Pull Requests, Codelesen (E1 bis E3); Bericht nur je Gruppe, nie je Pseudonym (der Betreuer bewertet das Teamprojekt)
-  \item Ansage „weiß ich nicht“ ist eine normale Antwort
-  \item Ausschlussregel: wer den Pull Request zu einer Aufgabe selbst geschrieben hat, bekommt diese Aufgabe nicht; Kontrolle über D1 des Vorfragebogens
-  \item Bitte um Verschwiegenheit bis zum letzten Termin 27.11.
-  \item zwei Entwickler außerhalb des Teams als Vergleichsfälle, getrennt berichtet: trennen die Items nach Vorwissen, wie kuratiert jemand mit Erfahrung; einmal D auf \#74, einmal D auf E [KLÄREN: zählt PG als Entwickler 1, laufen P01 und P02 noch]
-  \item Abweichung vom Exposé: 100 statt 60 Minuten, Grund: Vorher-Nachher-Bögen, Erklären und Aufwärmen kamen dazu
-  \end{itemize}
-\item \textbf{Absatz 2, Zuteilung}
-  \begin{itemize}
-  \item Pseudonyme P01 bis P10, feste Zuteilung je Pseudonym (12.10.), Termine in der Reihenfolge der Verfügbarkeit (P03 lief am 03.11. vor P01 und P02); nicht der Plan-Satz „Reihenfolge des Rücklaufs“
-  \item Paar A: \#74 unter C, E unter D (P02, P03, P05, P07, P09); Paar B: \#74 unter D, E unter C (P01, P04, P06, P08, P10); P01 und P02 die Entwickler
-  \item Reihenfolge der gewerteten Aufgaben je Paar: dreimal die eine, zweimal die andere zuerst, unter den acht Studierenden je Paar und Reihenfolge zwei Personen (\#74 zuerst: P01, P03, P04, P07, P08; E zuerst: P02, P05, P06, P09, P10)
-  \item \#79 immer zuerst und immer unter D; drei Kopien je Person
-  \end{itemize}
-\item \textbf{Absatz 3, Ablauf und Umgebung} (Tabelle tab:ablauf: Minute, Teil)
-  \begin{itemize}
-  \item 0 bis 10 Vorfragebogen, Aufnahme läuft, Bestätigung der Einwilligung auf der Aufnahme
-  \item 10 bis 13 Einführung Codebasis: App in drei Sätzen (Seiten Students, Team-Sets, Setup), Explorer nur Ordner, students/ und src/hooks/ bleiben zu (Dateinamen beantworten Items)
-  \item 13 bis 28 Einführung Werkzeug und Aufwärmen \#79: a Aufgabe lesen, b zwei Beispiel-Items mit Auflösung, c Oberfläche bis 5 Minuten, der Proband klickt, je Stufe ein Satz und eine Handlung, nach dem Bestätigen Esc und /exit, Lauf nicht abgewartet, d Anleitung zeigen
-  \item 28 bis 57 Aufgabe 1, 57 bis 86 Aufgabe 2 (Wechsel etwa 1 Minute), 86 bis 90 Reserve, 90 bis 100 SUS und Interview
-  \item je gewertete Aufgabe sechs Schritte (6.2, 6.4): Aufgabenblatt 2, Vorher-Bogen 2 (Schluss bei 4), Lauf, Durchsehen 5, Erklären 2, Nachher-Bogen 3 (Schluss bei 5)
-  \item Umgebung: Fernzugriff RustDesk (seit 19.10. statt TeamViewer, Lizenz), Ton über Discord, der Proband sieht den ganzen Bildschirm und nur das vordere Fenster; OBS mit Bildschirm, Mikrofon, Call-Ton; eigenes Chrome-Profil; VS-Code-Studienprofil ohne Claude-Code-Erweiterung, ein Fenster je Kopie mit Terminal; Neo4j zwischen Probanden nicht neu gestartet
-  \item Bögen als Markdown auf dem Studienrechner, der Proband sagt Antwort und Sicherheit, die Leitung setzt das Kreuz; Dateinamen ohne Aufgabe und Bedingung
-  \item Mitschrieb je Sitzung: Dauer je Teil, Kuratierzeit, Laufzeit, Urteil mit Grund, Störungen; Vor- und Nachbereitung per Skript, Einzelheiten im Anhang (Leitfaden, Ablaufvorlagen)
-  \end{itemize}
-\item \textbf{Absatz 4, Einwilligung}
-  \begin{itemize}
-  \item Inhalt: Bildschirm und Ton, keine Kamera, Export der Oberfläche, Agentenprotokoll, Bögen, Notizen der Leitung; Pseudonym, Zuordnungsliste getrennt bei der Leitung; Erkennbarkeit in der kleinen Gruppe benannt; Zitate als eigener Punkt
-  \item Fristen: Widerruf jederzeit, bis 11.12.2026 ohne Eingang in die Arbeit; Löschung der Aufnahmen bis 16.02.2027, der übrigen Daten bis 30.09.2027; keine Folgen für die Bewertung des Teamprojekts
-  \item Übermittlung in einem Satz: Eingaben an Anthropic (USA, Standardvertragsklauseln Art.~46 DSGVO, kein Training, Löschung nach 30 Tagen, bei Sicherheitsprüfung bis zwei Jahre), Call über Discord (Standardvertragsklauseln und Data Privacy Framework)
-  \item Weg: keine Hochschulvorlage, die Professur entscheidet (13.10.); mündlich zuerst (19.10.); Vorstellung im Team 29.10., etwa 25 Minuten (Ablauf, \#79 live, Datenschutz mündlich), alle Anwesenden stimmten mündlich zu; PDF per Mail, Rücklauf unterschrieben (Scan, Foto) oder Mail „Einverstanden“; Bestätigung zu Beginn auf der Aufnahme; Rückläufe getrennt von den Probandendaten abgelegt
-  \end{itemize}
-\item \textbf{Absatz 5, Pilot, Änderungen, Stand}
-  \begin{itemize}
-  \item Pilot PG am 22.10., eigene Kennung, Paar B, alter Ablauf; Befunde: Aufgabenblatt 5,5 statt 2 Minuten bei offenem Frontend, Vorher-Bogen 5 Minuten (Grenze 4), Erklären am Aufwärmen entfiel, die Leitung klickte die Oberfläche durch (bei \#74 danach die vollen 15 Minuten Kuratieren), Einführung ohne Pfade, Streuzeichen in den Bögen (CRLF), Pause wegen eines Notfalls
-  \item Folgen: Grundwert gestrichen, beim Aufgabenblatt nur der Bogen vorn, Pfade in der Einführung, der Proband klickt selbst, Antworten laut, Vorlagen mit LF
-  \item Kurzpilot PK angelegt, entfallen
-  \item Änderungen 02.11. vor der ersten Sitzung: je Schritt Vorn, Sagen, Handlung, Mitschrieb; Aufwärmen in der Reihenfolge Aufgabe, Items, Oberfläche; Chrome beim Erklären minimiert; Interviewfrage 4 in beide Richtungen; Teil A ans Ende der Bögen, TLX-Anker; Wortlaut der Items unverändert
-  \item [KLÄREN: PG mitzählen; Vorschlag: als Pilot getrennt, nicht in den acht]
-  \item Stand bis 07.11.: P03 (03.11.) und P04 (05.11.) gelaufen; Zeitgrenzen der Bögen nicht gehalten (Nachher-Bogen 5 bis 8 Minuten), Reserve reichte; Dauer und Störungen je Sitzung in 7.2
-  \end{itemize}
-\end{itemize}
-\end{ungelesen}
+Weil der Betreuer dieser Arbeit das Teamprojekt bewertet, hat die Freiwilligkeit besonderes Gewicht. Die Einwilligungserklärung (Anhang~\ref{app:einwilligung}) hält fest, dass die Sitzung jederzeit abgebrochen und die Einwilligung widerrufen werden kann. Ob jemand teilnimmt, die Sitzung abbricht oder die Einwilligung widerruft, hat keinen Einfluss auf die Bewertung des Teamprojekts. Der Betreuer sieht nur pseudonymisierte Daten und keine Aufnahmen. Die Erklärung weist darauf hin, dass in der Gruppe aus acht Personen einzelne erkennbar sein können. Wörtliche Zitate erfordern eine eigene Zustimmung, von der die Teilnahme nicht abhängt. Die Einwilligungserklärung regelt Aufzeichnung, Datenübermittlung und Löschfristen im Einzelnen. Die Teilnehmenden erhalten die Erklärung vor der Sitzung per E-Mail und schicken sie unterschrieben zurück oder bestätigen sie in einer Antwort. Zu Beginn jeder Sitzung hält die Sitzungsleitung auf der Aufnahme fest, dass die Einwilligung vorliegt.
+
+Vor den Sitzungen wurde der Ablauf in einer Pilotsitzung mit einem Entwickler außerhalb des Teams erprobt. Im Pilot füllte der Proband die Bögen selbst über den Fernzugriff aus, wobei uneindeutige Eingaben entstanden. Deshalb gibt der Proband seine Antworten in den regulären Sitzungen mündlich und die Sitzungsleitung trägt sie ein. Die Daten des Piloten gehen nicht in die Auswertung der acht Studierenden ein.
+
+Weil alle acht Teilnehmenden aus einem Team stammen und sich im zweiten Sprint befinden, ist die Übertragbarkeit auf andere Teams und Personen mit anderem Vorwissen zur Codebasis eingeschränkt.
+% NACHZIEHEN (30.11. bis 11.12.): dritte Grenze aus dem Kapitelkopf, "Bögen über der Zeitgrenze". Vorher-Bogen hat 4, Nachher-Bogen 5 Minuten, bei P03 und P04 dauerte der Nachher-Bogen 5 bis 8 Minuten. Als Satz mit Verweis auf Kapitel 7 ergänzen, wenn alle Sitzungen gelaufen sind.
+
+
 
 
 \section{Auswertung}% 1,5 S.

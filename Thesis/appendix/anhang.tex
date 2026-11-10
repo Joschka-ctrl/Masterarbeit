@@ -5,7 +5,7 @@
 \chapter{Aufgaben}
 \label{app:aufgaben}
 
-Die folgenden Aufgabenblätter enthalten die Texte der Aufwärmaufgabe und der beiden gewerteten Aufgaben.
+Dieser Anhang enthält die Prompts für beide Bedingungen und die Texte der Aufwärmaufgabe und der beiden gewerteten Aufgaben.
 
 \section{Prompts für die Bedingungen C und D}
 \label{app:prompts}
@@ -47,15 +47,246 @@ When an action fails, for example exporting a team set or importing students in 
 \chapter{Fragebögen und Leitfäden}
 \label{app:frageboegen}
 
+\section{Einwilligungserklärung}
+\label{app:einwilligung}
+% Wortlaut der verschickten Fassung (PDF im Rücklauf), übernommen aus 06_nutzerstudie.tex, 6.5 WORTLAUT. Anschrift ausgelassen. Aufteilung der Listenpunkte vor der Abgabe gegen das PDF prüfen.
+
+Die Teilnehmenden erhielten vor der Sitzung den folgenden Text per E-Mail. Die Anschrift des Verantwortlichen ist hier ausgelassen.
+
+\begin{quote}
+\setlength{\emergencystretch}{1em}% gegen die Overfull hbox bei "Art. 6 Abs. 1 Buchst. a DSGVO"
+\textbf{Einwilligung zur Teilnahme}
+
+Studie zur Zusammenarbeit mit einem KI-Coding-Agenten am teamable-Frontend. Masterarbeit von Joschka Peeters, Fakultät Informatik, HTWG Konstanz, betreut von Prof.\ Dr.\ Rainer Mueller. Sitzungsleitung: Joschka Peeters, jo741pee@htwg-konstanz.de. Verantwortlich für die Daten: Joschka Peeters, [Anschrift].
+
+Du bekommst diesen Text vor der Sitzung per Mail. Bitte lies ihn, frag bei Unklarheiten nach und schick ihn vor der Sitzung unterschrieben zurück (Scan oder Foto); eine Antwort per Mail mit „Einverstanden“ reicht auch, dann schreib bitte dazu, ob wörtliche Zitate erlaubt sind. Ohne deine Zustimmung findet die Sitzung nicht statt. Zu Beginn der Sitzung hält die Sitzungsleitung auf der Aufnahme fest, dass die Zustimmung vorliegt.
+
+\textbf{Worum es geht}
+
+Du arbeitest etwa 100 Minuten mit einem KI-Coding-Agenten (Claude Code) an kleinen Aufgaben im teamable-Frontend. Bei einem Teil der Aufgaben siehst du im Browser, welche Stellen im Code der Agent bekommt, und kannst die Auswahl verändern. Zwischendurch beantwortest du kurze Fragen zum Code und erklärst mündlich, was geändert wurde. Es geht nicht um Geschwindigkeit und nicht darum, wie gut du programmierst. Untersucht wird, wie Menschen mit einem Coding-Agenten zusammenarbeiten und welche Rolle die Auswahl der Codestellen dabei spielt.
+
+\textbf{Was aufgezeichnet wird}
+
+\begin{itemize}
+\item Der Bildschirm des Studienrechners während der ganzen Sitzung.
+\item Ton während der ganzen Sitzung: deine Stimme und die der Sitzungsleitung über den Call. Du wirst gebeten, laut zu denken. Die Tonaufnahme wird lokal auf dem Studienrechner verschriftet.
+\item Keine Kamera. Schalte die Kamera im Call bitte aus.
+\item Was du in der Oberfläche anklickst und auswählst, mit Zeiten.
+\item Das Protokoll des Agenten: deine Eingaben, seine Antworten, seine Änderungen am Code.
+\item Deine Antworten in den Fragebögen und das Gespräch am Ende.
+\item Notizen der Sitzungsleitung: Zeiten, ihr Urteil über das Ergebnis der Aufgabe, Störungen.
+\end{itemize}
+
+Du arbeitest per Fernzugriff (RustDesk) auf dem Rechner der Sitzungsleitung. Auf deinem eigenen Gerät wird nichts aufgezeichnet; dort laufen nur RustDesk und der Call. Die Fragebögen füllst du auf dem Studienrechner aus. Bildschirm und Eingaben laufen über RustDesk, der Ton über Discord. Was du in Claude Code eintippst, wird zur Verarbeitung an den Anbieter Anthropic in den USA geschickt; gib dort keine persönlichen Daten ein. Die Übermittlung stützt sich auf die Standardvertragsklauseln der EU-Kommission (Art.~46 DSGVO), die Anthropic in seiner Datenschutzerklärung nennt. Die Eingaben werden von Anthropic nicht zum Training von KI-Modellen verwendet; das ist im Studienkonto so eingestellt. Anthropic löscht die Sitzungen dann innerhalb von 30 Tagen; Eingaben, die eine automatische Sicherheitsprüfung auslöst, bis zu zwei Jahre. Für den Call ist Discord Netherlands BV verantwortlich; Discord überträgt Daten auch in die USA und stützt sich dabei auf die Standardvertragsklauseln und das EU-US Data Privacy Framework.
+
+\textbf{Pseudonym und Zugriff}
+
+\begin{itemize}
+\item Deine Daten bekommen ein Pseudonym (zum Beispiel P03). Die Liste, welcher Name zu welchem Pseudonym gehört, liegt getrennt von den Daten nur bei der Sitzungsleitung und wird nach Abgabe der Arbeit gelöscht.
+\item In der Arbeit stehen Werte je Pseudonym, Beschreibungen des Vorgehens und einzelne wörtliche Sätze aus dem Gespräch, nie dein Name. Die Gruppe ist klein, und die Teilnehmenden kommen größtenteils aus demselben Teamprojekt. Wer das Team kennt, kann einzelne Personen daran vermutlich erkennen. Zitate werden so gewählt, dass sie keine Person erkennbar machen.
+\item Die Daten liegen auf dem Studienrechner der Sitzungsleitung. Zugriff auf die Aufnahmen hat nur die Sitzungsleitung. Prof.\ Dr.\ Rainer Mueller sieht pseudonymisierte Daten, keine Aufnahmen und keine Namensliste. Die Angaben aus dem Vorfragebogen (Rolle, Erfahrung, Pull Requests) stehen in der Arbeit nur zusammengefasst je Gruppe, nie je Pseudonym.
+\item Bildschirm- und Tonaufnahmen werden nach der Auswertung gelöscht, spätestens am 16.02.2027. Die übrigen pseudonymisierten Daten werden nach Abschluss des Prüfungsverfahrens gelöscht, spätestens am 30.09.2027.
+\item Rechtsgrundlage ist deine Einwilligung (Art.~6 Abs.~1 Buchst.~a DSGVO). Du hast das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung und Datenübertragbarkeit und kannst dich beim Landesbeauftragten für den Datenschutz und die Informationsfreiheit Baden-Württemberg beschweren.
+\end{itemize}
+
+\textbf{Freiwilligkeit und Rücktritt}
+
+\begin{itemize}
+\item Die Teilnahme ist freiwillig. Du kannst die Sitzung jederzeit ohne Angabe von Gründen abbrechen. Auf Wunsch werden die bis dahin aufgezeichneten Daten sofort gelöscht.
+\item Du kannst deine Einwilligung jederzeit per Mail an jo741pee@htwg-konstanz.de widerrufen, ohne Begründung; dann werden Aufnahmen, Bögen und Protokolle gelöscht. Was bis zum Widerruf verarbeitet wurde, bleibt rechtmäßig. Bis zum 11.12.2026 gehen deine Daten dann auch nicht in die Arbeit ein. Danach bleiben Ergebnisse, die schon in der Arbeit stehen, ohne deinen Namen erhalten.
+\item Ob du teilnimmst, abbrichst oder deine Daten zurückziehst, hat keinen Einfluss auf das Teamprojekt oder eine Bewertung. Wer das Teamprojekt bewertet, bekommt keine Aufnahmen, keine Namensliste und keine Angaben aus dem Vorfragebogen je Person.
+\end{itemize}
+
+\textbf{Eine Bitte}
+
+Bis zum letzten Sitzungstermin, dem 27.11.2026, bitte nichts über die Aufgaben und Fragen an andere Teilnehmende weitergeben.
+
+\textbf{Zustimmung}
+
+Bitte jeden Punkt ankreuzen, dem du zustimmst.
+
+\begin{itemize}
+\item[\fbox{\phantom{x}}] Ich habe den Text gelesen und konnte Fragen stellen.
+\item[\fbox{\phantom{x}}] Ich bin mit der Aufnahme von Bildschirm und Ton einverstanden.
+\item[\fbox{\phantom{x}}] Ich bin damit einverstanden, dass meine Eingaben, die Protokolle des Agenten und meine Antworten gespeichert und unter Pseudonym ausgewertet werden.
+\item[\fbox{\phantom{x}}] Einzelne wörtliche Sätze aus dem Gespräch dürfen ohne Namen in der Arbeit stehen. Die Teilnahme hängt nicht an diesem Punkt.
+\item[\fbox{\phantom{x}}] Ich nehme freiwillig teil und weiß, dass ich jederzeit abbrechen und meine Einwilligung widerrufen kann.
+\end{itemize}
+
+Name, Datum, Unterschrift, Pseudonym (trägt die Sitzungsleitung ein)
+\end{quote}
+
+% QUELLE der folgenden Abschnitte: Markdown-Bögen des Werkzeug-Repos (eval/studie/, eval/tasks/teamable-frontend-74/ und -E/), als LaTeX erzeugt nach appendix/boegen/. Stand der dort vorliegenden Dateien: 26.10. (Bögen, Vorfragebogen, SUS), 23.10. (Prüflisten, Aussagenlisten), 10.11. (Schlüssel).
+% PRÜFEN vor der Abgabe: Der Studien-Commit 628b04f vom 02.11. (Teil A ans Ende der Bögen, Ankertexte der TLX-Skalen, Interviewfrage 4) liegt in dieser Kopie des Repos nicht vor. Die Reihenfolge der Teile und die Ankertexte sind hier nach den Notizen in 06_nutzerstudie.tex (WORTLAUT 6.4) gesetzt, der Wortlaut der Fragen blieb laut Notizen am 02.11. unverändert. Kopftexte der Bögen und Wortlaut der Ankertexte gegen 628b04f prüfen, dann appendix/boegen/ neu erzeugen.
+\providecommand{\kreuz}{\fbox{\rule{0pt}{0.9ex}\hspace{0.9ex}}}
+
+\section{Vorfragebogen}
+\label{app:vorfragebogen}
+
+Der Vorfragebogen steht am Anfang jeder Sitzung. Der Proband nennt seine Antworten, und die Sitzungsleitung trägt sie ein.
+
+\input{appendix/boegen/vorfragebogen}
+
+\section{Vorher- und Nachher-Bogen zu Aufgabe \#74}
+\label{app:bogen74}
+
+Beide Bögen beginnen mit dem Kopf und dem Aufgabentext aus Anhang~\ref{app:aufgaben}. Der Vorher-Bogen enthält Teil B mit den Fragen 1 bis 6 und danach Teil A. Der Nachher-Bogen enthält Teil B mit den Fragen 1 bis 8, danach Teil C, Teil D und zuletzt Teil A. Die gemeinsamen Fragen sind in beiden Bögen wortgleich und stehen hier einmal.
+
+\input{appendix/boegen/bogen-74}
+
+\section{Vorher- und Nachher-Bogen zu Aufgabe E}
+\label{app:bogenE}
+
+Der Aufbau entspricht dem der Bögen zu Aufgabe \#74. Der Vorher-Bogen enthält in Teil B die Fragen 1 bis 5, der Nachher-Bogen die Fragen 1 bis 7.
+
+\input{appendix/boegen/bogen-E}
+
+\section{Schlüssel}
+\label{app:schluessel}
+
+Eine richtige Antwort zählt einen Punkt, eine falsche Antwort und „weiß ich nicht“ zählen null Punkte. Eine Ratekorrektur gibt es nicht. Leer gelassene Fragen gelten als nicht erreicht und zählen null Punkte, ihre Zahl wird je Person angegeben. Tabelle~\ref{tab:schluessel-b} nennt die richtigen Antworten in Teil B und Tabelle~\ref{tab:schluessel-a} die in Teil A. Für Teil C wird der Schlüssel je Sitzung aus dem Diff und dem Transkript des Agenten bestimmt. Im Vorfragebogen sind in Teil E die Antworten a (E1), c (E2) und b (E3) richtig, die Summe von 0 bis 3 dient als Niveau im Lesen von Code.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Richtige Antworten in Teil B der Bögen mit der zugehörigen Stelle im Code.}
+  \label{tab:schluessel-b}
+  \small
+  \begin{tabularx}{\textwidth}{lll>{\raggedright\arraybackslash}X}
+    \toprule
+    Frage & Richtig & Verwendung & Stelle im Code \\
+    \midrule
+    \#74, 1 & b & Hauptkennzahl & \texttt{StudentsProvider}, \texttt{StudentTable}, \texttt{useStudents} \\
+    \#74, 2 & a & Hauptkennzahl & \texttt{StudentsPage} ruft \texttt{useImportStudentsFromLms} außerhalb von \texttt{StudentsProvider} \\
+    \#74, 3 & c & Hauptkennzahl & \texttt{useSetupSteps} als weiterer Aufrufer von \texttt{useImportStudentsFromLms} \\
+    \#74, 4 & b & Hauptkennzahl & \texttt{DataTableToolbar} prüft \texttt{table.getColumn} \\
+    \#74, 5 & a & Hauptkennzahl & \texttt{useStudentsQuery}, \texttt{queryKey} mit \texttt{queryString} \\
+    \#74, 6 & b & Kontrollfrage & Konstante \texttt{INITIAL\_PAGE\_SIZE}, ohne Knoten im Graphen \\
+    \#74, 7 & c & nur nachher & \texttt{DataTableViewOptions}, \texttt{getCanHide} \\
+    \#74, 8 & b & nur nachher & \texttt{useStudentsFilters} in \texttt{StudentsProvider} \\
+    \midrule
+    E, 1 & a & Hauptkennzahl & \texttt{TeamSetDetailPage} ruft \texttt{useExportTeamSetLms} \\
+    E, 2 & b & Hauptkennzahl & \texttt{variant: \textquotedbl{}destructive\textquotedbl{}} in \texttt{useExportTeamSetLms} \\
+    E, 3 & c & Hauptkennzahl & zwei \texttt{toast}-Aufrufe in \texttt{useImportStudentsFromLms} \\
+    E, 4 & b & Hauptkennzahl & fester Text im \texttt{onError} von \texttt{useImportStudentsFromLms} \\
+    E, 5 & b & Kontrollfrage & Voreinstellung von \texttt{@radix-ui/react-toast}, ohne Knoten im Graphen \\
+    E, 6 & c & nur nachher & \texttt{RootLayout} bindet \texttt{Toaster} ein \\
+    E, 7 & a & nur nachher & \texttt{toast} vor \texttt{mutateAsync} in \texttt{useImportStudentsFromLms} \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\begin{table}[htbp]
+  \centering
+  \caption{Richtige Antworten in Teil A der Bögen.}
+  \label{tab:schluessel-a}
+  \small
+  \begin{tabular}{lll}
+    \toprule
+    Aufgabe & Spielt eine Rolle & Spielt keine Rolle \\
+    \midrule
+    \#74 & Stellen 1 bis 4 & Stellen 5 bis 8 \\
+    E & Stellen 1 bis 3 & Stellen 4 bis 7 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\section{Anweisung und Aussagenlisten für die freie Erklärung}
+\label{app:aussagen}
+
+Die Sitzungsleitung liest die Anweisung vor, nachdem das Fenster der Arbeitskopie geschlossen und der Browser minimiert ist. Für Aufgabe \#74 lautet sie:
+
+\begin{quote}
+Stell dir vor, jemand aus deinem Team arbeitet morgen an der Studierendentabelle weiter. Erklär ihm in zwei Minuten: Was wurde geändert, warum war es vorher so, und worauf muss er achten. Es gibt kein richtig oder falsch, sag einfach, was du weißt.
+\end{quote}
+
+Für Aufgabe E heißt es „an den Meldungen weiter“, der übrige Wortlaut ist gleich. Gezählt wird nur die Beziehung, in beliebigen Worten. Ein Datei- oder Knotenname allein zählt nicht. Als genannt gilt bei Aussage A4 zu \#74 zum Beispiel „die Tabelle kriegt die Liste von dem Ding drumherum, das sie lädt“, als nicht genannt „useStudents wurde geändert“. Die Tabellen~\ref{tab:aussagen-74} und~\ref{tab:aussagen-E} enthalten die Aussagen und die Frage, in der die Aussage als Antwortoption vorkommt.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Aussagenliste zu Aufgabe \#74.}
+  \label{tab:aussagen-74}
+  \small
+  \begin{tabularx}{\textwidth}{l>{\raggedright\arraybackslash}Xl}
+    \toprule
+    Nr. & Aussage & Antwortoption \\
+    \midrule
+    A1 & Die Spalten stehen in einer eigenen Liste, die Tabelle bindet sie ein & keine \\
+    A2 & Der Sections-Filter prüft, ob die Spalte existiert, und verschwindet mit ihr & Frage 4 \\
+    A3 & Das View-Menü bietet jede ausblendbare Spalte an. Nur ausblenden reicht nicht, wenn das Menü sie zurückholt & Frage 7 \\
+    A4 & Die Liste wird von einem umschließenden Baustein geholt und weitergegeben, die Tabelle holt sie dort ab & Frage 1 \\
+    A5 & Der Import-Knopf liegt außerhalb dieses Bausteins und kommt deshalb nicht an die Nachladefunktion & Frage 2 \\
+    A6 & Der Schlüssel der Liste enthält die Filter. Neuladen muss alle Varianten treffen & Frage 5 \\
+    A7 & Der Import wird auch vom Einrichtungsassistenten benutzt, eine Änderung im Hook wirkt dort mit & Frage 3 \\
+    A8 & Bei Fehlschlag zeigt der Import nur eine Meldung, neu geladen wird nur bei Erfolg & keine \\
+    A9 & Die Abfrage der Liste startet erst, wenn die Filter aus der Adresse gelesen sind & keine \\
+    A10 & Suche, Seite und Sortierung werden in die Adresse gespiegelt & keine \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\begin{table}[htbp]
+  \centering
+  \caption{Aussagenliste zu Aufgabe E.}
+  \label{tab:aussagen-E}
+  \small
+  \begin{tabularx}{\textwidth}{l>{\raggedright\arraybackslash}Xl}
+    \toprule
+    Nr. & Aussage & Antwortoption \\
+    \midrule
+    A1 & Fehlermeldungen werden in den Bausteinen der Aktionen (Hooks) ausgelöst, nicht auf der Seite & Frage 1 \\
+    A2 & Alle Meldungen laufen über eine gemeinsame Stelle mit der Liste und werden an einer Stelle angezeigt & teils, Frage 6 \\
+    A3 & Die Liste war auf eine Meldung begrenzt, deshalb ersetzte die zweite die erste & keine \\
+    A4 & Die fünf Sekunden sind die Voreinstellung des Bausteins, nicht im Projekt festgelegt & Frage 5 \\
+    A5 & Rot ist eine Art von Meldung, daran hängt das Stehenbleiben & keine \\
+    A6 & Die Wartezeit im Projekt (8000 ms) wirkt erst nach dem Schließen & keine \\
+    A7 & Eine zentrale Änderung gilt für alle Fehlermeldungen, auch Anmelden. Eine Änderung nur am Export erfasst den Import nicht & keine \\
+    A8 & Beim Import kommen Hinweis und Fehlermeldung nacheinander aus derselben Stelle & Fragen 3 und 7 \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\section{Prüfliste zum Ergebnis des Agenten, Aufgabe \#74}
+\label{app:pruefliste74}
+
+\begin{sloppypar}
+\input{appendix/boegen/pruefliste-74}
+\end{sloppypar}
+
+\section{Prüfliste zum Ergebnis des Agenten, Aufgabe E}
+\label{app:prueflisteE}
+
+\begin{sloppypar}
+\input{appendix/boegen/pruefliste-E}
+\end{sloppypar}
+
+\section{Fragebogen zur Gebrauchstauglichkeit (SUS)}
+\label{app:sus}
+
+\input{appendix/boegen/sus}
+
+\section{Fragen des Interviews}
+\label{app:interview}
+
+Das Interview folgt vier Fragen im gleichen Wortlaut. Der Export der Aufgabe unter D und der Mitschrieb liegen dabei offen.
+
+\begin{enumerate}
+\item Gab es einen Moment, in dem du nicht wusstest, was der Agent gerade tut oder warum? Was hast du dann gemacht?
+\item Woher wusste der Agent bei der ersten Aufgabe, wo er ändern muss? Und bei der zweiten?
+\item Du hast in der Auswahl geändert. Woran hast du entschieden, was drinbleibt? Hast du nach den Fragen vom Bogen gesucht? Falls nichts geändert wurde: Warum?
+\item Was hat dich an der Oberfläche aufgehalten oder gestört? Bei welcher Art Aufgabe würdest du sie benutzen, bei welcher nicht?
+\end{enumerate}
+
+Nennt der Proband es bei Frage 4 nicht von selbst, fragt die Sitzungsleitung nach: „Stell dir vor, der Agent hat eine Aufgabe schon einmal falsch gelöst oder sich in der Codebasis verlaufen. Würdest du es beim zweiten Versuch mit der Oberfläche machen? Warum?“
+
 \chapter{Technische Einrichtung der Nutzerstudie}
 \label{app:studientechnik}
 \begin{sloppypar}
 
 Für jede Aufgabe und Bedingung hält ein lokales Bare-Repository einen Branch mit einem Commit über dem jeweiligen Ausgangsstand. Jede Aufgabenkopie wird aus dem zugehörigen Branch geklont. In allen Bedingungen wird das eingefrorene Claude-Code-Binary 2.1.251 mit \texttt{claude-opus-5} und \texttt{effort high} verwendet. Automatische Updates sind abgeschaltet. Die gemeinsamen Einstellungen umfassen \texttt{ENABLE\_\allowbreak{}TOOL\_\allowbreak{}SEARCH=false}, \texttt{CLAUDE\_\allowbreak{}CODE\_\allowbreak{}MCP\_\allowbreak{}AUTO\_\allowbreak{}BACKGROUND\_\allowbreak{}MS=0}, \texttt{CLAUDE\_\allowbreak{}CODE\_\allowbreak{}MAX\_\allowbreak{}MCP\_\allowbreak{}DESCRIPTION\_\allowbreak{}LENGTH=6000} und \texttt{MAX\_\allowbreak{}MCP\_\allowbreak{}OUTPUT\_\allowbreak{}TOKENS=60000}. Die längere Werkzeugbeschreibung verhindert, dass die Legende der JSON-Rückgabe durch die sonst geltende Kürzung auf 2048 Zeichen entfällt.
 
-In C sperrt \texttt{permissions.deny} die Werkzeuge \texttt{get\_\allowbreak{}context\_\allowbreak{}stepwise} und \texttt{get\_\allowbreak{}context\_\allowbreak{}interactive}; \texttt{CODEBASE\_\allowbreak{}GRAPH\_\allowbreak{}NO\_\allowbreak{}BROWSER=1} schaltet den Neo4j Browser ab. Die Sperre wurde am 11. und 20. Oktober 2026 mit Version 2.1.251 geprüft: Die Werkzeugliste des Modells enthielt zehn der zwölf Werkzeuge. In D aktiviert \texttt{CODEBASE\_\allowbreak{}GRAPH\_\allowbreak{}STEPWISE\_\allowbreak{}UI=study} die Studienseite; \texttt{EVAL\_\allowbreak{}OUTPUT\_\allowbreak{}DIR} legt den Export ab und \texttt{REVIEW\_\allowbreak{}TIMEOUT\_\allowbreak{}MIN=15} setzt die Leerlauffrist.
+In C sperrt \texttt{permissions.deny} die Werkzeuge \texttt{get\_\allowbreak{}context\_\allowbreak{}stepwise} und \texttt{get\_\allowbreak{}context\_\allowbreak{}interactive}. Zusätzlich schaltet \texttt{CODEBASE\_\allowbreak{}GRAPH\_\allowbreak{}NO\_\allowbreak{}BROWSER=1} den Neo4j Browser ab. Die Sperre wurde am 11. und 20. Oktober 2026 mit Version 2.1.251 geprüft: Die Werkzeugliste des Modells enthielt zehn der zwölf Werkzeuge. In D aktiviert \texttt{CODEBASE\_\allowbreak{}GRAPH\_\allowbreak{}STEPWISE\_\allowbreak{}UI=study} die Studienseite. Die Variable \texttt{EVAL\_\allowbreak{}OUTPUT\_\allowbreak{}DIR} legt den Export ab und \texttt{REVIEW\_\allowbreak{}TIMEOUT\_\allowbreak{}MIN=15} setzt die Leerlauffrist.
 
-Bei einer Vorbeobachtung vor dem 2. Oktober 2026 verschob Claude Code einen wartenden Aufruf nach 120 Sekunden in den Hintergrund und ließ den Agenten weiterarbeiten; die dabei verwendete Version ist nicht dokumentiert. Am 11. Oktober wurde die Einstellung mit Version 2.1.251 und Opus~5 für Aufgabe \#74 geprüft: Der Aufruf begann um 13:39:15 Uhr, das Ergebnis lag um 13:41:24 Uhr vor und die erste Dateilesung erfolgte danach. Die Werkzeugbeschreibung bittet den Agenten zusätzlich, bei einem dennoch verschobenen Aufruf nicht zu arbeiten. Ob er dieser Anweisung folgt, wurde nicht geprüft, da der Fall nicht erneut eintrat.
+Bei einer Vorbeobachtung vor dem 2. Oktober 2026 verschob Claude Code einen wartenden Aufruf nach 120 Sekunden in den Hintergrund und ließ den Agenten weiterarbeiten. Die dabei verwendete Version ist nicht dokumentiert. Am 11. Oktober wurde die Einstellung mit Version 2.1.251 und Opus~5 für Aufgabe \#74 geprüft: Der Aufruf begann um 13:39:15 Uhr, das Ergebnis lag um 13:41:24 Uhr vor und die erste Dateilesung erfolgte danach. Die Werkzeugbeschreibung bittet den Agenten zusätzlich, bei einem dennoch verschobenen Aufruf nicht zu arbeiten. Ob er dieser Anweisung folgt, wurde nicht geprüft, da der Fall nicht erneut eintrat.
 
 Die Abbruchfrist \texttt{MCP\_\allowbreak{}TOOL\_\allowbreak{}TIMEOUT}, die durch die Fortschrittsmeldungen des Servers nicht verlängert wird, ist nicht gesetzt. Zwei bestätigte Aufrufe zeigen, dass die Voreinstellung auf dem Studienrechner über 15 Minuten lag: Im Pilot vom 22. Oktober 2026 dauerte ein Aufruf 15:00 Minuten, in der Sitzung vom 3. November 2026 15:27 Minuten.
 

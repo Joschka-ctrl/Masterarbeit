@@ -1,0 +1,58 @@
+% Erzeugt aus den Markdown-Bögen des Werkzeug-Repos. Nicht von Hand ändern.
+Füllt die Sitzungsleitung nach der Sitzung aus, je Lauf eine Kopie. Grundlage: Akzeptanzkriterium in task.md. Bestanden heißt: Gate grün und Klickfolgen 2a und 2b wie erwartet.
+
+\noindent Pseudonym:~\rule{2.5em}{0.4pt}\par
+\noindent Bedingung (C oder D):~\rule{2.5em}{0.4pt}\par
+\noindent Branch oder Diff-Datei:~\rule{2.5em}{0.4pt}\par
+\subsection*{1. Gate}
+
+\begin{itemize}[nosep,leftmargin=2.4em]
+\item[\kreuz] \texttt{tsc -{}-noEmit} ohne Fehler
+\item[\kreuz] \texttt{next lint} ohne Fehler und ohne Warnungen
+\end{itemize}
+\subsection*{2. Klickfolge im Browser (Entwicklungsmodus, Konsole offen)}
+
+2a. Seite Students eines Kurses:
+
+\begin{itemize}[nosep,leftmargin=2.4em]
+\item[\kreuz] Die Tabelle zeigt keine Spalte „Sections“
+\item[\kreuz] Das View-Menü über der Tabelle bietet „Sections“ nicht an
+\item[--] Beobachtung, kein Bestehenskriterium: Konsole beim Laden der Seite (ja/nein, Wortlaut). TanStack 8.13.2 schreibt „Column with id 'sections' does not exist“, sobald die Spalte fehlt und die Toolbar \texttt{getColumn(\textquotedbl{}sections\textquotedbl{})} weiter aufruft; das trifft den PR selbst und jede Lösung, die nur die Spaltenliste ändert (Protokoll 12.09., Prüfung 11.10.)
+\item[--] Beobachtung: Lösung berührt die Toolbar (\texttt{student-\allowbreak{}table-\allowbreak{}toolbar.tsx}): ja/nein
+\end{itemize}
+2b. Knopf „Import students“ (Canvas-Mock läuft, \texttt{eval/\allowbreak{}studie/\allowbreak{}canvas-\allowbreak{}mock.py}; er liefert bei jedem Import fünf neue Studierende, die Prüfung ist deshalb unabhängig davon, wie oft vorher importiert wurde):
+
+\begin{itemize}[nosep,leftmargin=2.4em]
+\item[\kreuz] Meldung „Imported students“ erscheint, Seite bleibt bedienbar
+\item[\kreuz] Die Tabelle zeigt ohne Neuladen fünf Studierende mehr als vor dem Klick
+\item[--] Gegenprobe Ausgangsstand (11.10.): Tabelle bleibt stehen, erst Neuladen zeigt die neuen. Genau das muss die Lösung beheben.
+\item[--] Beobachtung: Nachladen hängt an \texttt{onSuccess} beziehungsweise läuft nach \texttt{await importStudentsFromLmsAsync} (eintragen, welche Variante und ob sie nur bei Erfolg greift)
+\end{itemize}
+\subsection*{3. Überschneidung mit Kern und zulässigen Lösungsorten}
+
+Geänderte Dateien (aus dem Diff):
+
+\begin{tabularx}{\linewidth}{Xlll}
+\toprule
+Datei & Kern & zulässiger anderer Ort & keins von beiden \\
+\midrule
+&&& \\
+\bottomrule
+\end{tabularx}
+
+Kern (Patch 5ad8b7f): \texttt{students/\allowbreak{}(hooks)/\allowbreak{}useStudents.tsx} (\texttt{StudentsProvider}), \texttt{students/\allowbreak{}(table)/\allowbreak{}columns.tsx}, \texttt{students/\allowbreak{}page.tsx} (\texttt{StudentsPage}). Zulässige andere Orte (eigene Lösung 12.09., Agentenläufe): \texttt{students/\allowbreak{}(table)/\allowbreak{}student-\allowbreak{}table.tsx} (\texttt{DataTable}, Sichtbarkeit), \texttt{src/\allowbreak{}hooks/\allowbreak{}use-\allowbreak{}import-\allowbreak{}students-\allowbreak{}from-\allowbreak{}lms.ts} (\texttt{useImportStudentsFromLms}, Nachladen im Hook).
+
+\subsection*{4. Aus dem Transkript}
+
+\noindent Aufrufe von \texttt{get\_context} beziehungsweise \texttt{get\_context\_stepwise}:~\rule{2.5em}{0.4pt}\par
+\noindent Arbeitszeit vom Prompt bis zur letzten Antwort (s):~\rule{2.5em}{0.4pt}\par
+\noindent Dateien gelesen:~\rule{2.5em}{0.4pt}\par
+\noindent Dateien geändert:~\rule{2.5em}{0.4pt}\par
+\noindent Lösungsweg (Hook, Umbau der Seite, Sichtbarkeit in der Tabelle, anderes):~\rule{2.5em}{0.4pt}\par
+\noindent Typprüfung oder Lint vom Agenten selbst ausgeführt (ja, nein):~\rule{2.5em}{0.4pt}\par
+\subsection*{Ergebnis}
+
+\begin{itemize}[nosep,leftmargin=2.4em]
+\item[\kreuz] bestanden (1 und 2a vollständig, 2b soweit prüfbar)
+\item[\kreuz] nicht bestanden, Grund:
+\end{itemize}

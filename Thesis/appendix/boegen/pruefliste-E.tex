@@ -1,0 +1,53 @@
+% Erzeugt aus den Markdown-Bögen des Werkzeug-Repos. Nicht von Hand ändern.
+Füllt die Sitzungsleitung nach der Sitzung aus, je Lauf eine Kopie. Grundlage: Akzeptanzkriterium in task.md. Bestanden heißt: Gate grün und beide Klickfolgen wie erwartet.
+
+\noindent Pseudonym:~\rule{2.5em}{0.4pt}\par
+\noindent Bedingung (C oder D):~\rule{2.5em}{0.4pt}\par
+\noindent Branch oder Diff-Datei:~\rule{2.5em}{0.4pt}\par
+\subsection*{1. Gate}
+
+\begin{itemize}[nosep,leftmargin=2.4em]
+\item[\kreuz] \texttt{tsc -{}-noEmit} ohne Fehler
+\item[\kreuz] \texttt{next lint} ohne Fehler und ohne Warnungen
+\end{itemize}
+\subsection*{2. Klickfolge im Browser}
+
+Manage Teams, ein Team-Set öffnen, Export oben rechts (Kurs ohne Canvas-Token):
+
+\begin{itemize}[nosep,leftmargin=2.4em]
+\item[\kreuz] Rote Meldung erscheint unten rechts
+\item[\kreuz] Sie bleibt stehen, bis sie geschlossen wird (mindestens 30 s warten)
+\end{itemize}
+Seite Students, Import:
+
+\begin{itemize}[nosep,leftmargin=2.4em]
+\item[\kreuz] Hinweis und Fehlermeldung stehen gleichzeitig
+\item[\kreuz] Der Hinweis verschwindet von selbst, die Fehlermeldung bleibt
+\end{itemize}
+\subsection*{3. Überschneidung mit Kern und zulässigen Lösungsorten}
+
+Geänderte Dateien (aus dem Diff):
+
+\begin{tabularx}{\linewidth}{Xlll}
+\toprule
+Datei & Kern & zulässiger anderer Ort & keins von beiden \\
+\midrule
+&&& \\
+\bottomrule
+\end{tabularx}
+
+Kern: \texttt{src/\allowbreak{}components/\allowbreak{}ui/\allowbreak{}toaster.tsx} (\texttt{Toaster}), \texttt{src/\allowbreak{}hooks/\allowbreak{}use-\allowbreak{}toast.ts} (\texttt{reducer}, \texttt{TOAST\_LIMIT}). Zulässige andere Orte: \texttt{toast} in \texttt{use-\allowbreak{}toast.ts}; die Hooks mit Fehlermeldung (\texttt{use-\allowbreak{}export-\allowbreak{}team-\allowbreak{}set-\allowbreak{}lms.ts}, \texttt{use-\allowbreak{}import-\allowbreak{}students-\allowbreak{}from-\allowbreak{}lms.ts}, \texttt{use-\allowbreak{}import-\allowbreak{}student-\allowbreak{}gradebook-\allowbreak{}data.ts}, \texttt{use-\allowbreak{}generate-\allowbreak{}teams.tsx}, \texttt{use-\allowbreak{}create-\allowbreak{}opt-\allowbreak{}in-\allowbreak{}quiz.ts}) jeweils mit dem Limit in \texttt{use-\allowbreak{}toast.ts}; \texttt{ToastClose}, \texttt{ToastViewport} in \texttt{toast.tsx} als Ergänzung.
+
+\subsection*{4. Aus dem Transkript}
+
+\noindent Aufrufe von \texttt{get\_context} beziehungsweise \texttt{get\_context\_stepwise}:~\rule{2.5em}{0.4pt}\par
+\noindent Arbeitszeit vom Prompt bis zur letzten Antwort (s):~\rule{2.5em}{0.4pt}\par
+\noindent Dateien gelesen:~\rule{2.5em}{0.4pt}\par
+\noindent Dateien geändert:~\rule{2.5em}{0.4pt}\par
+\noindent Typprüfung oder Lint vom Agenten selbst ausgeführt (ja, nein):~\rule{2.5em}{0.4pt}\par
+\subsection*{Ergebnis}
+
+\begin{itemize}[nosep,leftmargin=2.4em]
+\item[\kreuz] bestanden (1 und 2 vollständig)
+\item[\kreuz] nicht bestanden, Grund:
+\end{itemize}
