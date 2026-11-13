@@ -57,31 +57,115 @@ Notizen am 05.11. als Gesamtkonzept neu gefasst (06_nutzerstudie.tex, Kopf des K
 - [x] 6.1 – eingearbeitet 06.11., aus dem ChatGPT-Gutachten (zur alten Fassung): (1) Wirkannahme in den Hauptfrage-Absatz: wer kuratiert, hat sich vor dem Lauf mit den Stellen beschäftigt, die der Agent ändert, und kann die Änderung deshalb einordnen; (2) Verständnis definieren: gemessen werden die Items der Bögen und das Erklären, nicht Verständnis der Codebasis im Ganzen; (3) optional Tabelle FF1/E3 bis FF6 gegen Behandlung in der Studie, entlastet den zweiten Absatz; (4) bei "was als Ergebnis gilt" Halbsatz, dass Sehen und Wählen nicht trennbar sind (6.2, 6.4). Sprachvorschläge des Gutachtens nicht übernehmen (nominaler, länger)
 - [x] 6.1 – Entscheidung FF-Nummern vor dem Schreiben: Plan-Nummern (FF4 Ausschöpfung, FF5 Aufwand, FF6 explorativ) passen zu keiner Fassung des Exposés v4 (12.08. und 27.10. geprüft). Vorschlag im Kapitelkopf: Frage 1 = FF3 (mit FF2 als Bezug), Frage 2 neu aus FF6-Nebennutzen, Aufwand = FF6, Ergebnis des Agenten = FF4, FF5 entfällt mit Stufe 3 (erledigt 08.11., so in tab:ff-zuordnung in 6.1 umgesetzt)
 - [x] 6.1 – Wortlaut der zwei Studienfragen festlegen (Plan-Fassung oder Haupt- und Nebenfrage) (erledigt 08.11.: Haupt- und Nebenfrage, Wortlaut im ersten Absatz von 6.1; 13.11. neu gefasst: Hauptfrage mit zwei Teilen (Zusammenhänge verstehen, Änderung nachvollziehen) und drei ausformulierte Nebenfragen FF3, FF6, FF4, in 5, 6.4, 7 und 8 nachgezogen)
-- [ ] 6.1/6.4, Kap. 5, 7, 8 – rote Markierungen vom 13.11. (\textcolor{red}) nach der Durchsicht entfernen, auch in den Abschnittstiteln von 7 und 8.1- [ ] 1.5 – beim Schreiben: Zielsetzung ("nicht erst im Nachhinein nachvollziehen"), Leitfrage und FF2 bis FF6 samt Nebennutzen-Absatz bei FF6 aus dem Exposé übernehmen. 6.1 verweist dafür auf sec:forschungsfragen (Notiz im Kopf von 1.5)
-- [ ] 6.6 – beim Schreiben: Folgen der festen Zuteilung ohne Los aufgreifen (Satz "Gelost wird nicht" am 13.11. aus 6.5 gestrichen)
-- [ ] 8.2 – beim Schreiben: die am 13.11. aus Kapitel 6 verschobenen Einschränkungen aufnehmen (einzelne Agentenläufe, acht Personen, Sehen und Wählen, Übertragbarkeit; Wortlaut in den Notizen von 8.2)
+- [ ] 6.1/6.4, Kap. 5, 7, 8 – rote Markierungen vom 13.11. (\textcolor{red}) nach der Durchsicht entfernen, auch in den Abschnittstiteln von 7 und 8.1
+- [ ] **PFLICHT** 1.5 – beim Schreiben (Block "PFLICHT (13.11.)" im Kopf von 1.5): Zielsetzung ("nicht erst im Nachhinein nachvollziehen"), Leitfrage und FF2 bis FF6 samt Nebennutzen-Absatz bei FF6 aus dem Exposé übernehmen. 6.1 verweist dafür auf sec:forschungsfragen (Notiz im Kopf von 1.5)
+- [x] **PFLICHT** 6.6 – beim Schreiben (Block "PFLICHT (13.11.)" im Kopf von 6.6): Folgen der festen Zuteilung ohne Los aufgreifen (Satz "Gelost wird nicht" am 13.11. aus 6.5 gestrichen, steht sonst nirgends) (erledigt 13.11.: 6.6 ist geschrieben. Laut Nachtrag im PFLICHT-Block von 6.6 beschreibt 6.5 die Zuteilung über die Terminliste, "nicht gelost" steht bewusst nicht im Fließtext, der Vorbehalt zum Vorwissen hängt an "vier Personen je Paar". Die Kästchen im Block selbst bleiben offen, bis die roten Stellen gegengelesen sind)
+- [ ] **PFLICHT** 5.6 – beim Schreiben (Block "PFLICHT (13.11.)" in den Notizen von 5.6): Beleg für "bei der Planung für eine kleine Codebasis bereits erwartet" (Exposé 03_methodik, Gültigkeitsgrenzen) und Begründung des Schwerpunkts der Studie, auf die 6.1 verweist
+- [ ] **PFLICHT** 8.2 – beim Schreiben (Block "PFLICHT (13.11.)" im Kopf von 8.2): die am 13.11. aus Kapitel 6 verschobenen Einschränkungen aufnehmen (einzelne Agentenläufe, acht Personen, Sehen und Wählen, Übertragbarkeit; Wortlaut in den Notizen von 8.2)
 - [ ] Kap. 4 – in der Kürzungsrunde: doppelte Hinweise zusammenführen ("GitHub-Schicht nicht befüllt/genutzt" dreimal in 4.3, "in der Studie nicht verwendet" zweimal in 4.5), Aufwandsbegründung bei tree-sitter positiv fassen, "Den konkreten Wert 30 legen diese Befunde nicht fest" und "Messung mit JSON steht noch aus" prüfen (Kontrolllesen 13.11.)
-- [ ] 6.6 – beim Schreiben: Gerüst und tab:auswertung von "Frage 1/2" auf Hauptfrage (Teil 1, Teil 2) und Nebenfragen umstellen (Lesehilfe im Kopf von Kapitel 6)
-- [ ] Kap. 6 – Begriffe festlegen: Teilnehmende, Proband, Sitzungsleitung, Agent; Kapitel 4 sagt "Nutzer"
+- [x] 6.6 – beim Schreiben: Gerüst und tab:auswertung von "Frage 1/2" auf Hauptfrage (Teil 1, Teil 2) und Nebenfragen umstellen (Lesehilfe im Kopf von Kapitel 6) (erledigt 13.11.: Fließtext und tab:auswertung verwenden die neuen Bezeichnungen. Das Gerüst in den Kommentaren sagt noch "Frage 1/2" und ist überholt)
+- [x] Kap. 6 – Begriffe festlegen: Teilnehmende, Proband, Sitzungsleitung, Agent; Kapitel 4 sagt "Nutzer" (erledigt 13.11.: durchgehend Proband/Probanden statt Teilnehmende, Definition in 6.1 um Agent ergänzt, Titel 6.5 und 7.2 angepasst, Festlegung im Kapitelkopf. Offen bleibt "Entwickler" gegen "Nutzer" im Herleitungsabsatz von 6.1, wird mit 1.5 entschieden)
 - [x] 6.2 – Wartezeit der Oberfläche in D: REVIEW_TIMEOUT_MIN=15 in allen drei D-Branches, Leerlauffrist (jede Aktion startet neu), in 6.2 geschrieben (erledigt 06.11.)
-- [ ] 6.3 – Markierung durch die zwei Entwickler: bis 07.11. nicht geschehen (PG 22.10. ohne Markierung, P01/P02 nicht gelaufen), Marker im Text aufgelöst; bleibt für die Entwickler-Sitzungen offen. Zweitableitung durch den Betreuer und sealedIn sind seit 06.11. als Abweichung vom Plan geschrieben (Amendment-Regel seit 11.09.)
-- [x] 6.3 – Exposé-Eigenschaft 2 (semantisch ähnliche, unbeteiligte Stellen) als ungeprüfte Lücke genannt (06.11.); nachprüfen bleibt optional
-- [ ] 6.4 – Beispielitem für den Text gewählt (E Frage 1, steht in 6.4); offen: TLX als Raw TLX benennen; hart1988tlx und brooke1996sus in der Bib prüfen; jian2000trust (Vertrauen) nicht erhoben, als Abweichung genannt (erledigt 13.11., Satz in 6.4 hinter dem SUS)
+- [ ] 6.3 – Referenzkontext, unabhängige Prüfung und Lücken:
+  - [x] KLÄREN-Marker zur Markierung durch die Entwickler im Text aufgelöst (07.11.)
+  - [ ] Markierung der nötigen Stellen durch die zwei Entwickler: bis 07.11. nicht geschehen (PG 22.10. ohne Markierung, P01/P02 nicht gelaufen), bleibt für die Entwickler-Sitzungen offen
+  - [ ] Zweitableitung durch den Betreuer und sealedIn als Abweichung vom Plan nennen (Amendment-Regel seit 11.09.). Stand am 06.11. im Text, steht am 13.11. nicht mehr im Fließtext von 6.3. Vorgemerkt im Nachtrag von 8.2, Punkt 7
+  - [ ] Exposé-Eigenschaft 2 (semantisch ähnliche, unbeteiligte Stellen) als ungeprüfte Lücke nennen. Stand am 06.11. im Text und war hier abgehakt, steht am 13.11. nicht mehr im Fließtext (Nachtrag 8.2, Punkt 7). Nachprüfen bleibt optional
+- [ ] 6.4 – Beispielitem, TLX, SUS, Vertrauen:
+  - [x] Beispielitem für den Text gewählt (E Frage 1, steht in 6.4)
+  - [x] TLX als Rohwerte ohne Gewichtung benannt (Satz in 6.4)
+  - [x] jian2000trust (Vertrauen) nicht erhoben, als Abweichung genannt (13.11., Satz in 6.4 hinter dem SUS)
+  - [ ] hart1988tlx und brooke1996sus in der Bib inhaltlich prüfen. Die Schlüssel sind vorhanden und lösen beim Kompilieren auf (13.11.)
 - [x] 6.4 – Auslese-Skript für die Bögen: gibt es nicht (07.11. geprüft), Bögen werden von Hand aus den Markdown-Dateien des Sitzungsordners übertragen; so in 6.6 sagen
 - [ ] Anhang A – Aufgabentexte #79, #74 und E am Studienrechner mit den tatsächlich verwendeten Aufgabenblättern wortgenau vergleichen und gegebenenfalls korrigieren. Die Texte im Anhang wurden aus den WORTLAUT-Notizen in 06_nutzerstudie.tex übernommen.
 - [ ] 6.4/1.6 – KI-Nutzung in der Auswertung kennzeichnen: lokale Transkription (faster-whisper) und Vorschläge eines lokalen Modells (qwen3:8b) für Erklären und Interview, Wertung bleibt bei der Sitzungsleitung (studie\auswertung\README.md)
 - [x] 6.5 – Einwilligung: verschickte Fassung am 07.11. aus dem Rücklauf-PDF gesichert, Wortlaut in 06_nutzerstudie.tex (6.5 WORTLAUT); für den Anhang von dort übernehmen
 - [ ] 6.5 – Entwickler-Sitzungen: ob PG (22.10., alter Ablauf) als Entwickler 1 zählt, ob P01 noch läuft, Termin Entwickler 2 (P02). Zweite Gruppe entfällt (29.10. entschieden, nur dieses Teamprojekt)
-- [ ] 6.5 – Plan-Satz "Pseudonym in Reihenfolge des Rücklaufs" an den gefahrenen Stand anpassen (P03 lief am 03.11. vor P01 und P02)
-- [ ] 6.6 – Schwelle für "angesehen" (views ab 300 ms) festlegen, bevor die Exporte ausgewertet werden; Umgang mit PG und den Entwicklern in den Tabellen
+- [x] 6.5 – Plan-Satz "Pseudonym in Reihenfolge des Rücklaufs" an den gefahrenen Stand anpassen (P03 lief am 03.11. vor P01 und P02) (geprüft 13.11.: der Fließtext von 6.5 sagt bereits "in der Reihenfolge der Terminanmeldung" und "für jedes Pseudonym vorab festgelegt", das deckt sich mit der Notiz in 6.5; der Plan-Satz steht nur noch in den Notizen)
+- [ ] 6.6 – Schwelle und Tabellen:
+  - [x] Schwelle für "angesehen" festgelegt: Anzeige ab 300 ms, steht in 6.4 (Kontext und Ergebnis des Agenten)
+  - [ ] Umgang mit PG und den Entwicklern in den Tabellen
 - [x] 6.4/6.6 – Hauptkennzahl geändert (08.11., aus der Methodik-Notiz research_notes/Forschungsfragen und Methodik/methodik.md): Zuwachs über alle fünf Vorher/Nachher-Items statt nur über die nicht gelieferten. Grund: die Einteilung geliefert entsteht nach dem Lauf, der Lauf hängt in D vom kuratierten Kontext ab, C und D hätten verschiedene Items erfasst (Selektion nach der Behandlung, Montgomery/Nyhan/Torres 2018, AJPS, DOI 10.1111/ajps.12357). Schichten geliefert/nicht geliefert bleiben als Mechanismus daneben, Markierung je Sitzung wie bisher. In 6.4 geschrieben (zwei Sätze, Grund und Planabweichung kommen in 6.6), teils zählt zu nicht geliefert (6.4), Erklären-Schichtung übernommen/eigenständig als beschreibend gekennzeichnet; 6.6-Gerüst, tab:messgroessen, Kopfzahl-Kommentar 6.1 und Grenzenliste nachgezogen; 6.1 letzter Absatz: Dopplung zur Kontextgüte entfernt, "Richtung je Person" zu "Unterschiede je Person, getrennt nach Abfolge", zwei Semikolons aufgelöst
-- [ ] 6.6/8.2 – Abweichung vom Plan E1 (Hauptkennzahl) beim Schreiben von 6.6 in einem Satz nennen, in 8.2 als Grenze; Plan-Dokument im Werkzeug-Repo mit Datum 08.11. ergänzen; Montgomery 2018 in die Bib, falls in 6.6 oder 8.2 zitiert
+- [ ] 6.6/8.2 – Abweichung vom Plan E1 (Hauptkennzahl):
+  - [x] in 6.6 genannt, mit Datum und Grund (13.11.)
+  - [ ] in 8.2 als Grenze
+  - [ ] Plan-Dokument im Werkzeug-Repo mit Datum 08.11. ergänzen
+  - [ ] Montgomery 2018 in die Bib, falls in 6.6 oder 8.2 zitiert
 - [x] 6.6 – Vorzeichentest mit p-Werten gestrichen (08.11.): die je Aufgabe zentrierten Differenzen teilen die geschätzten Aufgabenmittel und sind nicht unabhängig, die rohen Differenzen enthalten die Aufgabenschwierigkeit mit wechselndem Vorzeichen, die Binomial-Null gilt für beide nicht ohne Nachweis. Berichtet werden die acht D-minus-C-Differenzen roh je Abfolgegruppe (A: 74-C dann E-D, B: 74-D dann E-C), aus den Gruppenmitteln Bedingungseffekt (halbe Summe) und Aufgabeneffekt (halbe Differenz), dazu Punktdiagramm. Keine Zahl der positiven Differenzen als Kennzahl (täuscht unabhängige Evidenz vor, Zweitgutachten 08.11.). Der zum Crossover passende Test ist der Vergleich der Aufgabendifferenz (E minus #74 je Person) zwischen den Abfolgegruppen (4 gegen 4, exakt, kleinstes zweiseitiges p 2/70 ≈ 0,03), steht als Nebenauswertung schon drin. Verweis 5.1 aus 6.6 entfernt; der Vorzeichentest in Kapitel 5 (gepaarte Aufgaben) ist davon nicht betroffen
 - [ ] 6.4 – Vor dem Übertragen der Bögen auszählen, wie oft sich die gelieferten Items zwischen den C- und D-Sitzungen einer Aufgabe unterscheiden (12-/13-geliefert-*.md); entscheidet, wie viel Platz die Abweichung in 8.2 braucht
 - [x] 6.4/6.6/7 – Auswertung am 10.11. festgelegt (Bericht reports/Auswertung Nutzerstudie.md, Abschnitt 9), nach drei gefahrenen Sitzungen und dem Piloten PG. Hauptkennzahl: Anteil richtiger Antworten nachher minus vorher, #74 Fragen 1 bis 5, E Fragen 1 bis 4, ohne Kontrollfragen (ersetzt "alle fünf Items" vom 08.11.). Die Plan-Kennzahl wird nicht gerechnet. Keine Zweitmarkierung von "genannt". Zuwachs zweistufig, dazu Verteilung ja, teils, nein je Bedingung. Kein Test, stattdessen Auslassprobe. Linienbild statt Punktdiagramm. "Paar" und "Reihenfolge" statt "Abfolgegruppe". "genannt" statt "geliefert", "Einordnung" statt "Mechanismus". Übergangstafel in 7.3. Eigener Abschnitt in Kapitel 7 für Aufwand und Bewertung der Oberfläche. Wortlaut der Ausgänge wird nicht vorab festgelegt. In 6.1, 6.4 (Fließtext und Tabelle), den Kommentaren von Kapitel 6 und der Gliederung von Kapitel 7 nachgezogen.
-- [ ] 6.6/8.2 – Beim Schreiben von 6.6 nennen: die Abweichung vom Plan bei der Hauptkennzahl mit Datum und Grund, die Begründung für "kein Test", die Markierung "genannt" ohne Zweitperson (auch in 8.2).
+- [ ] 6.6/8.2 – Beim Schreiben von 6.6 nennen:
+  - [x] die Abweichung vom Plan bei der Hauptkennzahl mit Datum und Grund (6.6, 13.11.)
+  - [x] die Begründung für "kein Test" (6.6, 13.11., bisher nur die kleine Stichprobe. Ausbau steht unten als eigener Punkt)
+  - [x] die Markierung "genannt" durch die Sitzungsleitung in Kenntnis der Bedingung (6.4, 13.11.)
+  - [ ] alle drei auch in 8.2
 - [ ] 6.5/6.6 – Dritte gefahrene Sitzung in den Kommentaren von Kapitel 6 nachtragen (dort stehen nur P03 und P04).
 - [ ] Kap. 6 – 30.11.–11.12. auf den gefahrenen Stand bringen: Zeitgrenzen der Bögen (4 und 5 min) wurden bei P03 und P04 nicht gehalten (Nachher-Bogen 5 bis 8 min), Zwischenablage bei P04 defekt; Mitschriebe unter studie\probanden\<Kennung>-sitzung\01-mitschrieb.md
+
+Aus der Durchsicht von Kapitel 6 am 13.11. (zwei Befundberichte, Gegenprüfung durch Codex):
+
+- [x] 6.1 – Durchsicht 13.11.:
+  - [x] Wiederholungen der Hauptfrage gestrichen (Schlusssatz des Absatzes zur Wirkannahme, Ein-Satz-Absatz zu FF4, Absatz "Die Studie untersucht zwei Dinge")
+  - [x] drei Restsätze im Absatz zur Erwartung gelöscht (stehen in 6.2, 6.3, 6.5)
+  - [x] Zuwachs im Absatz zur Erwartung definiert
+  - [x] Kommafehler im Satz zur fehlenden Erwartung für Teil 2 behoben
+- [ ] 6.2 – Begriffe:
+  - [ ] Vergleichswert unter einem Namen führen (6.2, 6.4, 6.6 sagen drei verschiedene)
+  - [ ] "Studienseite" wird in 4.5 nicht eingeführt
+- [ ] 6.3 – Durchsicht 13.11.:
+  - [x] erklärendes "also" gestrichen
+  - [x] Satz zum Spielraum bei #74 auf die Deckung bezogen
+  - [ ] Zeile zur Symbolebene in tab:aufgaben (#74 5, 6, 5 von 7, E 8, 5, 7 von 9)
+  - [ ] Größe der Codebasis nennen (rund 100 Dateien)
+  - [ ] Schwellen der Auswahlregeln nennen
+  - [ ] "Lösungskern", "Verständnisstellen" und "Referenzsymbole" definieren (3 Dateien und 5 Stellen ergeben 7)
+  - [ ] "Referenzstellen" in 6.1 angleichen
+- [ ] 6.4 – Durchsicht 13.11.:
+  - [x] "Kontrollfrage" eingeführt
+  - [x] "Studienoberfläche" zu "Studienseite"
+  - [x] Zusammenfassung des Agenten erklärt
+  - [x] Zählung der Aussagen der freien Erklärung neu gefasst
+  - [x] Transkript-Prüfung (liest der Agent vor der Bestätigung Dateien) mit Verweis auf 6.2 und 7.2
+  - [x] "bevor er Code sieht" ersetzt durch "bevor der Agent mit der Aufgabe beginnt"
+  - [ ] Begründung für Vorher-Nachher trennen (Vorher-Bogen zieht Vorwissen ab, die Einteilung nach genannt fängt die Zusammenfassung ab)
+  - [ ] "Einordnung" hat zwei Bedeutungen (Aufteilung nach genannt, Zeile in tab:messgroessen)
+  - [ ] die zwei Selbsteinschätzungen in Teil D kommen im Text nicht vor
+  - [ ] Vorfragebogen-Absatz steht unter "Fragen zu den Zusammenhängen"
+  - [ ] kürzen auf 2,5 S.
+- [ ] 6.5 – Durchsicht 13.11.:
+  - [x] Anleitung zur Studienseite und mündliche Antworten der Sitzungsleitung (nur Bedienung, nie Auswahl) im Text (Angabe des Autors 13.11., Notiz FESTLEGUNG 13.11. in 6.5)
+  - [ ] Ablauf einer gewerteten Aufgabe mit Minuten (Aufgabenblatt, Vorher-Bogen, Lauf, Durchsehen, Erklären, Nachher-Bogen) als zweite Hälfte von tab:ablauf oder Ablaufvorlage in Anhang B. 6.2 verspricht "den vollständigen Ablauf" in 6.5
+  - [ ] Präsens gegen tatsächliche Durchführung trennen, Verweis auf 7.2
+  - [ ] Abweichung zwischen Einwilligung ("Fragebögen füllst du aus") und mündlichen Antworten in einem Satz nennen
+  - [ ] erklären, warum die Pseudonyme bei P03 beginnen
+  - [ ] je Sitzung aus dem Transkript festhalten, was die Probanden gefragt und was die Sitzungsleitung geantwortet hat
+- [ ] 6.6 – Durchsicht 13.11.:
+  - [x] nur nachher gestellte Fragen in Text und tab:auswertung, vorsichtig formuliert
+  - [x] FF4 je Aufgabe vier Läufe unter C gegen vier unter D, in Text und tab:auswertung
+  - [ ] Regel für genannt und nicht genannt (Nenner, Zusammenfassung über Personen, leere Gruppen)
+  - [ ] Verfahren der Interviewauswertung
+  - [ ] Umgang mit Aussagen der Liste, die beim tatsächlichen Lösungsweg nicht anwendbar sind
+  - [ ] Hauptkennzahl einheitlich benennen (Zuwachs je Aufgabe, Differenz D minus C je Person, mittlerer Unterschied zwischen den Bedingungen)
+  - [ ] Satz wieder aufnehmen, dass der mittlere Unterschied dem Mittel der acht Differenzen entspricht
+  - [ ] "kein Test" mit mehr als der kleinen Stichprobe begründen
+- [ ] 8.2 – Nachtrag im PFLICHT-Block:
+  - [x] Punkte 7 bis 13 als Kommentar eingetragen (13.11.)
+  - [ ] entscheiden, ob Punkt 13 (mündliche Antworten der Sitzungsleitung) gebraucht wird
+- [ ] 7.3 – Übergangstafel: die 36 Antworten je Bedingung sind 20 aus #74 und 16 aus E, Aufgaben getrennt ausweisen (Codex 13.11.)
+- [ ] Kap. 5 – beim Schreiben:
+  - [ ] entscheiden, ob die Rechnung zur Deckung in 5.6 oder in 6.3 ausführlich steht
+  - [ ] A, B, C der Agentenmessung gegen C, D und Paar A, B der Studie abgrenzen (6.3 sagt "Läufe unter C" mit Verweis auf 5.3)
+  - [ ] Aussage zu AP8 in 6.1 an 5.3 anpassen (SWE-bench, nur Lokalisieren)
+- [ ] PRÜFEN (Autor):
+  - [ ] protokolliert der Export das Aufklappen der Begründung in der Detailkarte? Sonst misst E3 nur angesehene Karten
+  - [ ] Datum der Hauptkennzahl in 6.6 (08.11. erweitert, 10.11. ohne Kontrollfragen), dann in zwei Schritten nennen
+  - [ ] was die "Prüfung an vier Agentenläufen" in 6.4 war
+  - [ ] ob Ortsliste, Urteil beim Durchsehen und Fragen zur Arbeit des Agenten in Kapitel 7 berichtet werden
+  - [ ] Wortlaut "die er am Ende des Laufs im Terminal ausgibt" (6.4) gegen die Sitzungen
+- [ ] Kap. 6 – Kommentare aufräumen:
+  - [ ] "7.1" für die Durchführung heißt jetzt 7.2
+  - [ ] überholte Blöcke löschen (OFFEN in 6.4, Fassung Codex, Fassung vor der Straffung, Feedbackrunde a bis c)
+  - [ ] PFLICHT-Block 6.6 abhaken, wenn die roten Stellen gegengelesen sind
 
 ## Kapitel 2
 
