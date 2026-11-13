@@ -9,7 +9,8 @@ Kapitel 1 bis 3 folgen dem Exposé vom 21.08.2026.
 ## Heute, 13.11.
 
 Meilenstein laut Plan: Kap. 4 und 6 fertig, dazu 5.1 und 5.2. Stand: Kap. 4 geschrieben
-(19 Seiten im PDF, Kürzung offen), 6.1 bis 6.5 geschrieben (11 Seiten), 6.6 fehlt, 5.1 und
+(19 Seiten im PDF, Kürzung offen), 6.1 bis 6.6 geschrieben (13 Seiten im PDF bei 10 Seiten
+Budget, Durchsicht mit zwei Befundberichten am 13.11., offene Punkte in TODO.md), 5.1 und
 5.2 nicht begonnen und nach 16.–27.11. verschoben.
 
 - [ ] 4.5 – Bildschirmfoto der Oberfläche im stufenweisen Modus aufnehmen (Stufe 2 oder 3, ein Knoten angeklickt, Detailansicht mit Begründungsblock sichtbar), beschriften, einbinden (KLÄREN-Marker im Text)
@@ -63,13 +64,13 @@ damit etwas mehr Platz.
 | 5.4 Ferne Aufgaben: Hard-Slice<br>*Inhalt:* Bestätigungsmessung, alter Default | | 3 | 16.–27.11. |
 | 5.5 Seed-Änderung und Tests als Gold<br>*Inhalt:* Entwicklungswert, neuer Default, Stand der Studie | | 2 | 16.–27.11. |
 | 5.6 Zusammenhänge und Überleitung zur Studie<br>*Inhalt:* Bilanz, was die Messungen nicht beantworten, Begründung des Schwerpunkts der Studie (Pflicht-Block in den Notizen von 5.6, 13.11.) | | 2 | 16.–27.11. |
-| **6 Nutzerstudie** (im Plan bisher „Studiendesign“)<br>*Inhalt:* Bögen, Prüflisten und Leitfaden in den Anhang. Stand 13.11.: 6.1 bis 6.5 geschrieben, 11 Seiten im PDF; Hauptfrage am 13.11. neu gefasst | | **10** | 6.6 am 13.11. bzw. als Nächstes; 30.11.–11.12. auf den gefahrenen Stand bringen |
+| **6 Nutzerstudie** (im Plan bisher „Studiendesign“)<br>*Inhalt:* Bögen, Prüflisten und Leitfaden in den Anhang. Stand 13.11.: 6.1 bis 6.6 geschrieben, 13 Seiten im PDF; Hauptfrage am 13.11. neu gefasst; Durchsicht am 13.11., offene Punkte in TODO.md | g | **10** | geschrieben; 30.11.–11.12. auf den gefahrenen Stand bringen und kürzen |
 | 6.1 Fragen der Studie und ihre Herkunft aus den Benchmark-Messungen<br>*Inhalt:* Hauptfrage mit zwei Teilen (Zusammenhänge verstehen, Änderung nachvollziehen), drei Nebenfragen (FF3, FF6, FF4) | g | 1,5 | geschrieben, Abweichungen 30.11.–11.12. |
 | 6.2 Bedingungen C und D | g | 1 | geschrieben, Abweichungen 30.11.–11.12. |
 | 6.3 Aufgaben auf teamable<br>*Inhalt:* Referenzkontext, Spielraum je Aufgabe (13.10.) | g | 2 | geschrieben, Abweichungen 30.11.–11.12. |
 | 6.4 Messung<br>*Inhalt:* Vorfragebogen, Fragen vorher und nachher, Erklären, UI-Export, Prüfliste für das Ergebnis des Agenten, TLX, SUS, Interview | g | 2,5 | geschrieben, Abweichungen 30.11.–11.12. |
 | 6.5 Probanden, Ablauf, Einwilligung und Pilot | g | 1,5 | geschrieben, Abweichungen 30.11.–11.12. |
-| 6.6 Auswertung<br>*Inhalt:* Stand 10.11.: Hauptkennzahl Anteil richtiger Antworten nachher minus vorher, D minus C je Person, dargestellt je Paar; kein Test, stattdessen Auslassprobe; Einordnung nach in der Zusammenfassung genannt und nicht genannt; Kontrollfragen gesondert; Entwickler getrennt. Pflicht-Block im Kopf von 6.6 (feste Zuteilung ohne Los) | | 1,5 | 13.11. bzw. als Nächstes, Abweichungen 30.11.–11.12. |
+| 6.6 Auswertung<br>*Inhalt:* Stand 10.11.: Hauptkennzahl Anteil richtiger Antworten nachher minus vorher, D minus C je Person, dargestellt je Paar; kein Test, stattdessen Auslassprobe; Einordnung nach in der Zusammenfassung genannt und nicht genannt; Kontrollfragen gesondert; Entwickler getrennt. Pflicht-Block im Kopf von 6.6 (Zuteilung über die Terminliste, Nachtrag 13.11.) | g | 1,5 | geschrieben 13.11., Abweichungen 30.11.–11.12. |
 | **7 Ergebnisse**<br>*Inhalt:* Benchmark-Messungen und Studie (Beschluss 26.10.); Tabellen statt Prosa, je Person eine Zeile. Seitenverteilung seit 10.11. | | **14** | 30.11.–11.12. |
 | 7.1 Ergebnisse der Benchmark-Messungen<br>*Inhalt:* aus Kap. 5 hierher gezogen (Beschluss 26.10.); die fünf wichtigsten Messungen ausführlich, die übrigen elf nur kurz (warum, wie, Ergebnis) in einem gemeinsamen Abschnitt; volle Tabellen in den Anhang | | 2 | 30.11.–11.12. |
 | 7.2 Durchführung und Probanden<br>*Inhalt:* was bei der Durchführung vom Plan abwich (Abbrüche, hängende Läufe, fehlende Aufnahmen, Dauer); Zuteilungstabelle je Person | | 1,5 | 30.11.–11.12. |
@@ -114,10 +115,10 @@ vom 26.10. rund 65 neue Seiten (vorher 63, neu dazu 2.2 Token), also 44 Arbeitst
 | --- | --- | --- |
 | 19.–23.10. | Pilot, Generalprobe mit Sascha, Kopien je Proband, RustDesk und OBS | Zeitplan und Gliederung, Entwurf Kap. 6 |
 | **26.10.** | Termin mit Rainer | |
-| 26.10.–13.11. | Vorstellung im Team (Termin über Felix), mündliche Anfrage, schriftliche Einwilligung, Sitzungen Teamprojekt 1; jede Sitzung direkt danach auswerten (Bögen auslesen, „genannt“ markieren, Erklären werten, Export rechnen) | Kap. 4 und 6, dazu 5.1 und 5.2 (Material liegt vor); 13.11. Kap. 4 und 6 fertig (22 S., interner Meilenstein, kein Lesetermin). **Stand 13.11.:** Kap. 4 geschrieben (Kürzung und zwei Abbildungen offen), 6.1 bis 6.5 geschrieben, 6.6 folgt als Nächstes, 5.1 und 5.2 verschoben |
+| 26.10.–13.11. | Vorstellung im Team (Termin über Felix), mündliche Anfrage, schriftliche Einwilligung, Sitzungen Teamprojekt 1; jede Sitzung direkt danach auswerten (Bögen auslesen, „genannt“ markieren, Erklären werten, Export rechnen) | Kap. 4 und 6, dazu 5.1 und 5.2 (Material liegt vor); 13.11. Kap. 4 und 6 fertig (22 S., interner Meilenstein, kein Lesetermin). **Stand 13.11.:** Kap. 4 geschrieben (Kürzung und zwei Abbildungen offen), 6.1 bis 6.6 geschrieben (13 S.), 5.1 und 5.2 verschoben |
 | **09.11.** | Termin mit Rainer, 10:30 | |
 | 16.–27.11. | Restliche Sitzungen Teamprojekt 1 (Termine bis 27.11.), direkt ausgewertet; Entwickler-Sitzungen offen (TODO.md). Teamprojekt 2 entfällt (Entscheidung 29.10.) | Kap. 5 ganz, 5.1 bis 5.6 (16 S. in 10 Arbeitstagen, 1,6 S. je Tag) |
-| 30.11.–11.12. | Auswertung abschließen (Verbindung Knotenstatus zu Antwort, Entwickler getrennt) | Kap. 7; Kap. 6 auf den gefahrenen Stand bringen (was Generalprobe, Pilot und Sitzungen am Design geändert haben); 11.12. Kap. 5 und 7 fertig (30 S., interner Meilenstein, kein Lesetermin) |
+| 30.11.–11.12. | Auswertung abschließen (Verbindung Knotenstatus zu Antwort, Entwickler getrennt) | Kap. 7; Kap. 6 auf den gefahrenen Stand bringen (was Generalprobe, Pilot und Sitzungen am Design geändert haben), dabei die offenen Punkte der Durchsicht vom 13.11. aus TODO.md und die Kürzung von 13 auf 10 S.; 11.12. Kap. 5 und 7 fertig (30 S., interner Meilenstein, kein Lesetermin) |
 | 14.–23.12. | | Kap. 8 und 9; Kap. 1–3 aus dem Exposé übernehmen und aktualisieren, dabei Grundlagen als eigenes Kapitel herausziehen und 2.2 Token neu schreiben; Einleitung nachziehen |
 | 24.12.–06.01. | | Eigene Durchsicht des ganzen Texts, Kürzungsrunde Kap. 4 (von 19 auf ca. 14 Seiten), Abbildungen, Anhang, Kurzfassung; rote Markierungen vom 13.11. entfernen; Rainer bekommt nichts |
 | 07.–16.01. | | **07.01. Gesamtentwurf an Rainer** — sein einziger Lesetermin: er liest einmal etwa 30 min und meldet innerhalb von 24 h zurück (08.01.); Überarbeitung nach Rückmeldung, Korrekturlesen durch Dritte anstoßen; **16.01. druckfertig** |
