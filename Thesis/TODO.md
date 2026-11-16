@@ -188,13 +188,16 @@ Aus der Durchsicht von Kapitel 6 am 13.11. (zwei Befundberichte, Gegenprüfung d
 
 - [x] 5.1 – Abschnitt geschrieben, gegengelesen und im PDF auf Tabellen, Umbrüche und Verweise geprüft. Laufzeiten und Definition der fernen Aufgaben mit dem Werkzeug-Repo abgeglichen.
 - [ ] 5.1 – Umfang nach dem Schreiben von 5.3 und 5.4 prüfen und bei Bedarf kürzen (derzeit etwa 3,5 statt 3 Seiten).
-- [ ] Anhang Messprotokolle (app:messprotokolle) – Entwurf vom 16.11. mit drei Tabellen, noch nicht gegengelesen (OFFEN-Liste im Kommentar von anhang.tex):
-  - [ ] Einleitungstext und Tabellen gegenlesen, danach ungelesen-Kasten entfernen
-  - [ ] Vektorindex 19.08. fehlt in der Tabelle, kein Serienordner gefunden (docs/eval-2026-08-19-vektorindex.md)
-  - [ ] Seed-Fix 17.08.: Commit, über dem der Arbeitsbaum lag, aus PROVENANCE.md der Serie nachtragen
-  - [ ] Agentenanfrage 08.10.: PROVENANCE.md nennt HEAD 4538f01, der Befund nennt d2f5d24. Klären, welcher Stand zitiert wird
-  - [ ] Agentenmessung: PROVENANCE.md der sechs Serien nennt 1d8c6ea, der Befund nennt für die erste Wiederholung bd5cfc6. Klären, welcher Stand in der Tabelle steht
-  - [ ] entscheiden, ob die Dateinamen der Befunddokumente (interne Namen des Werkzeug-Repos) im Anhang stehen bleiben
+- [x] Anhang Messprotokolle (app:messprotokolle) – Entwurf vom 16.11. mit drei Tabellen, gelesen und am Werkzeug-Repo geklärt am 16.11. (Notizen im Kommentar von anhang.tex):
+  - [x] Einleitungstext und Tabellen gegenlesen, danach ungelesen-Kasten entfernen (16.11.)
+  - [x] Vektorindex 19.08. fehlt in der Tabelle, kein Serienordner gefunden (docs/eval-2026-08-19-vektorindex.md) (16.11.: kein Serienlauf, als Zeile ohne Serienordner in D.1)
+  - [x] Seed-Fix 17.08.: Commit, über dem der Arbeitsbaum lag, aus PROVENANCE.md der Serie nachtragen (16.11.: über 0df4188, in D.1)
+  - [x] Agentenanfrage 08.10.: PROVENANCE.md nennt HEAD 4538f01, der Befund nennt d2f5d24. Klären, welcher Stand zitiert wird (16.11.: gemessen über 4538f01, danach committet als d2f5d24, beide in D.2)
+  - [x] Agentenmessung: PROVENANCE.md der sechs Serien nennt 1d8c6ea, der Befund nennt für die erste Wiederholung bd5cfc6. Klären, welcher Stand in der Tabelle steht (16.11.: erste Wiederholung Sonnet und Haiku auf bd5cfc6, Rest auf 1d8c6ea, in der Bildunterschrift von D.3)
+  - [x] entscheiden, ob die Dateinamen der Befunddokumente (interne Namen des Werkzeug-Repos) im Anhang stehen bleiben (16.11.: aus D.1 und D.2 genommen, stehen als Kommentar vor Tabelle D.1. Im Fließtext zur Agentenmessung stehen noch zwei)
+- [ ] 5.2 – beim Schreiben des Seed-Fix entscheiden, wie die Zahlen belegt werden. Die Serie vom 17.08. liegt in keinem Commit (PROVENANCE.md nennt sie Zwischenstand). Geprüft 16.11.: der Nachher-Wert 76,6 Prozent steht ebenso in der Kontrollzeile der Budget-Serie vom 19.08. (results-budget-20260819/A-kontrolle, Commit 643c77e, Arbeitsbaum in den messrelevanten Dateien sauber, MRR 0,549 wie am 17.08.). Der Vorher-Wert 54,8 Prozent steht in der ersten Messung vom 16.08. und in Lauf A vom 17.08., beide ohne festgehaltenen Codestand
+- [ ] Anhang Messprotokolle – wenn 5.2 bis 5.6 geschrieben sind: prüfen, ob jede dort berichtete Messung in D.1 bis D.3 steht (Einleitung sagt seit 16.11. "zu den Messungen" statt "zu jeder Messung")
+- [ ] Anhang Messprotokolle – nach dem Kompilieren im PDF ansehen: neue Zeile Vektorindex in D.1, längere Bildunterschrift von D.3, Spaltenbreiten Datum und Aufgaben
 
 - [ ] 5.6 – schreiben. Trägt seit der Neufassung von 6.1 (06.11.) die Begründung des Wechsels der Hauptfrage: Bilanz der Messungen, AP8 (mit Kontextblock weniger Suchen, gleiche Treffer), Rechnung 13.10. mit Zahlen (Deckung #74 dreimal 7 von 7, E 9, 8, 8 von 9), Folgerung: der Mensch ist der Unterschied, nicht der Kontext. 6.1 verweist nur hierher und nennt die Deckung in einem Satz. Material: Notizen HERKUNFT 1 bis 6 im Kopf von 6.1 (06_nutzerstudie.tex). Keine Chronik im Fließtext, Daten nur als Beleg in Fußnoten
 - [ ] 5/8 (Validität) – Grenzen aus der Parameterherkunft aufnehmen, nicht in 4.6 (Beschluss 02.11.) (Quelle codebase-graph/docs/defaults-gate2-2026-08-26.md): Klasse-M-Werte ohne Holdout (SEED_DF_MAX, Normierungsband), Normierungsband auf nomic-Vektoren erhoben und für qwen3 nicht neu bestimmt, β < 0,6 nicht gemessen, Klasse-E-Werte nie variiert

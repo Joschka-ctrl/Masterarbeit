@@ -293,41 +293,65 @@ Die Abbruchfrist \texttt{MCP\_\allowbreak{}TOOL\_\allowbreak{}TIMEOUT}, die durc
 \end{sloppypar}
 \chapter{Messprotokolle}
 \label{app:messprotokolle}
-% ENTWURF 16.11., noch nicht gegengelesen. Quellen: PROVENANCE.md bzw. README.md je Serienordner im Werkzeug-Repo (eval/results-*), Zahl der Aufgaben und Läufe an den Dateien der Serien gezählt, Agentenmessung dazu aus docs/eval-2026-08-30-neumessung-sauber.md (Nachweistabelle, Zeile 273 Kosten und Dauer).
-% OFFEN:
-% - Vektorindex 19.08. (docs/eval-2026-08-19-vektorindex.md) fehlt in der Tabelle, kein Serienordner gefunden.
-% - Seed-Fix 17.08.: der Commit, über dem der Arbeitsbaum lag, steht nicht in der Tabelle (PROVENANCE.md der Serie nachlesen).
-% - Agentenanfrage 08.10.: PROVENANCE.md nennt HEAD 4538f01, der Befund nennt Commit d2f5d24. Klären, welcher Stand zitiert wird.
-% - Agentenmessung: PROVENANCE.md der sechs Serien nennt 1d8c6ea (Stand beim Auffüllen am 04.09.), der Befund nennt für die erste Wiederholung bd5cfc6 mit identischem Messcode.
-% - Die Dateinamen der Befunddokumente sind interne Namen des Werkzeug-Repos. Entscheiden, ob sie im Anhang stehen bleiben.
+% ENTWURF 16.11., vom Autor gelesen am 16.11. Quellen: PROVENANCE.md bzw. README.md je Serienordner im Werkzeug-Repo (eval/results-*), Zahl der Aufgaben und Läufe an den Dateien der Serien gezählt, Agentenmessung dazu aus docs/eval-2026-08-30-neumessung-sauber.md (Nachweistabelle, Zeile 273 Kosten und Dauer).
+% GEKLÄRT 16.11. am Werkzeug-Repo (vorher OFFEN):
+% - Vektorindex 19.08.: docs/eval-2026-08-19-vektorindex.md sagt selbst "Kein Serienlauf". Einzelne Abfrage über slice-small (19 der 21 Aufgaben), Skript steht im Befunddokument, kein Commit genannt. Als Zeile in D.1 ohne Serienordner.
+% - Seed-Fix 17.08.: PROVENANCE.md der Serie nennt einen nicht committeten Arbeitsbaum über 0df4188, der gemessene Stand liegt in keinem Commit, d1fb221 enthält den Fix. In D.1 eingetragen.
+% - Agentenanfrage 08.10.: gemessen am 08.10. um 22:13 Uhr aus geändertem Arbeitsbaum über 4538f01 (PROVENANCE.md), sieben Minuten später committet als d2f5d24 (git log). Beide Angaben stimmen, in D.2 stehen beide.
+% - Agentenmessung: docs/eval-2026-08-30-neumessung-sauber.md, Kopf. Erste Wiederholung der vier Serien mit Sonnet und Haiku am 29./30.08. auf bd5cfc6. Opus (02.09.) und die zweite und dritte Wiederholung (04.09.) auf 1d8c6ea, messrelevanter Code identisch. Bildunterschrift von D.3 angepasst.
+% - Dateinamen der Befunddokumente: aus D.1 und D.2 genommen, siehe Kommentar vor D.1.
 
-\begin{ungelesen}
-Dieser Anhang führt zu jeder Messung aus Kapitel~\ref{chap:benchmark} auf, wo ihre Daten liegen und mit welchem Stand des Codes sie entstanden ist. Alle Serienordner liegen im Repository des Werkzeugs unter \path{eval/}, die Befunddokumente unter \path{docs/}. Ein Serienordner enthält die gelieferten Listen je Aufgabe und Bedingung und in der Regel eine Datei \path{PROVENANCE.md}. Sie nennt den Commit, den Zustand des Arbeitsbaums, die Prüfsummen der messrelevanten Dateien und den Befehl, mit dem sich die Serie wiederholen lässt. Die Spalte Codestand nennt den Commit und vermerkt, wenn der Arbeitsbaum beim Lauf davon abwich. In diesem Fall lässt sich die Serie nachrechnen, aber nicht aus einem Commit heraus wiederholen.
+Dieser Anhang führt zu den Messungen aus Kapitel~\ref{chap:benchmark} auf, wo ihre Daten liegen und mit welchem Stand des Codes sie entstanden ist. Alle Serienordner liegen im Repository des Werkzeugs unter \path{eval/}, die Befunddokumente unter \path{docs/}. Die Namen der Serienordner beginnen mit \texttt{results-}, die Tabellen lassen diesen Anfang weg. Ein Serienordner enthält die gelieferten Listen je Aufgabe und Bedingung und in der Regel eine Datei \path{PROVENANCE.md}. Sie nennt den Commit und den Zustand des Arbeitsbaums, in den meisten Serien dazu die Prüfsummen der messrelevanten Dateien. Die Spalte Codestand nennt den Commit. Steht dort „über“ vor dem Commit, enthielt der Arbeitsbaum beim Lauf Änderungen, die noch nicht committet waren. In diesem Fall lässt sich die Serie nachrechnen, aber nicht aus einem Commit heraus wiederholen.
 
 Tabelle~\ref{tab:prot-entwicklung} enthält die Abrufmessungen bis zum Einfrieren der Standardwerte am 26.08.2026 (Abschnitt~\ref{sec:entwicklung-swebench}), Tabelle~\ref{tab:prot-fern} die Abrufmessungen danach (Abschnitte~\ref{sec:hard-slice} bis~\ref{sec:ueberleitung-studie}). Tabelle~\ref{tab:prot-agent} führt die sechs Serien der Agentenmessung auf (Abschnitt~\ref{sec:agentenverhalten}).
-\end{ungelesen}
 
+% 16.11.: Tabellen D.1 und D.2 umgebaut, weil Ordner- und Dateinamen im PDF in die Nachbarspalten liefen. Dateinamen der Befunddokumente aus den Tabellen genommen, Anfang results- der Serienordner weggelassen, Vermerke im Codestand gekürzt ("über" im Einleitungstext erklärt).
+% Befunddokumente je Messung (standen bis 16.11. in der Tabelle, alle unter docs/):
+% 16.08. Erste Messung: eval-2026-08-16-swebench.md
+% 17.08. Seed-Fix: eval-2026-08-17-seed-fix.md
+% 17.08. Commit-Zahl im Score: eval-2026-08-17-f29.md
+% 19.08. Seed-Budget: eval-2026-08-19-budget.md
+% 19.08. Quote je Datei: eval-2026-08-19-quota.md
+% 20.08. Symboltext und Einbettungsmodell: eval-2026-08-20-symboltext.md, eval-2026-08-20-embedmodell.md
+% 21.08. Quote je Datei mit Qwen3: eval-2026-08-21-quotaqwen.md
+% 21.08. Spielraum des Kuratierens: eval-2026-08-21-spielraum.md
+% 22.08. Nachmessung zum Einbettungsmodell: eval-2026-08-22-nachmessung.md
+% 26.08. Holdout: eval-2026-08-24-holdout-vorregistrierung.md, eval-2026-08-26-holdout-durchfuehrung.md, eval-2026-08-26-holdout-auswertung.md
+% 26.08. Basename-Rückfall: eval-2026-08-26-basename.md
+% 26.08. Eingefrorene Standardwerte: defaults-gate2-2026-08-26.md
+% 06.09. Vormessung ferne Aufgaben: eval-2026-09-07-hard-slice-stufe1-2.md
+% 06.09. bis 07.09. Ferne Aufgaben, erste Serie: eval-2026-09-06-hard-slice-vorregistrierung.md, eval-2026-09-07-hard-slice-stufe1-2.md
+% 10.09. Ferne Aufgaben, Vervollständigung: eval-2026-09-11-hard-slice-stufe2-vollstaendig.md
+% 11.09. Seed-Änderung: eval-2026-09-11-seedzweige.md
+% 16.09. Tests als Gold: eval-2026-09-16-testgold-sensitivitaet.md
+% 25.09. Übergabe als JSON: eval-2026-09-25-uebergabeform-json.md
+% 08.10. Agentenanfrage: vorlaeufiger-befund-agentenanfrage.md
+% 09.10. Kontrolle des Abrufs: arbeitsprotokoll.md
+% 09.10. Läufe auf den Studienaufgaben: README.md im Serienordner
+% Codestand, alter Wortlaut der gekürzten Zellen: 06.09./07.09. "Arbeitsbaum über 0506a85, am 09.09. committet als 367f0a2", 25.09. "Arbeitsbaum über 27f628d, Stand committet als d2537f9", 17.08. Seed-Fix "Arbeitsbaum nicht committet, der Fix steht in d1fb221".
 \begin{table}[H]
   \centering
   \caption{Abrufmessungen bis zum 26.08.2026. Alle Daten aus dem Jahr 2026.}
   \label{tab:prot-entwicklung}
   \footnotesize
-  \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{1.0cm}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}p{1.3cm}>{\raggedright\arraybackslash}p{4.2cm}>{\raggedright\arraybackslash}p{2.9cm}}
+  \setlength{\tabcolsep}{4pt}
+  \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{1.1cm}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}p{1.5cm}>{\raggedright\arraybackslash}p{4.2cm}>{\raggedright\arraybackslash}p{3.0cm}}
     \toprule
-    Datum & Messung und Befunddokument & Aufgaben & Serienordner & Codestand \\
+    Datum & Messung & Aufgaben & Serienordner & Codestand \\
     \midrule
-    16.08. & Erste Messung. \path{eval-2026-08-16-swebench.md} & 21 & \path{results-baseline-20260816} & \texttt{b6b9958}, Arbeitsbaum nicht festgehalten \\
-    17.08. & Seed-Fix. \path{eval-2026-08-17-seed-fix.md} & 21 & \path{results-20260817-seedfix} & Arbeitsbaum nicht committet, der Fix steht in \texttt{d1fb221} \\
-    17.08. & Commit-Zahl im Score. \path{eval-2026-08-17-f29.md} & 21 & \path{results-f29-20260817} & Arbeitsbaum nicht festgehalten \\
-    19.08. & Seed-Budget. \path{eval-2026-08-19-budget.md} & 21 & \path{results-budget-20260819} & \texttt{643c77e} \\
-    19.08. & Quote je Datei. \path{eval-2026-08-19-quota.md} & 21 & \path{results-quota-20260819} & \texttt{04e7e50} \\
-    20.08. & Symboltext mit Code und Einbettungsmodell. \path{eval-2026-08-20-symboltext.md}, \path{eval-2026-08-20-embedmodell.md} & 21 & \path{results-embedtext-20260819} & \texttt{d1f1f7b} \\
-    21.08. & Quote je Datei mit Qwen3. \path{eval-2026-08-21-quotaqwen.md} & 21 & \path{results-quotaqwen-20260821} & \texttt{86fbcdf} \\
-    21.08. & Spielraum des Kuratierens. \path{eval-2026-08-21-spielraum.md} & 21 & \path{results-spielraum-20260821} & \texttt{98c097b} \\
-    22.08. & Nachmessung zum Einbettungsmodell. \path{eval-2026-08-22-nachmessung.md} & 21 & \path{results-embedtext-20260822} & \texttt{f63d7d7} \\
-    26.08. & Wahl des Einbettungsmodells auf der Holdout-Menge, vorregistriert am 24.08. \path{eval-2026-08-24-holdout-vorregistrierung.md}, \path{eval-2026-08-26-holdout-durchfuehrung.md}, \path{eval-2026-08-26-holdout-auswertung.md} & 12 & \path{results-holdout-20260824} & \texttt{1475dde} \\
-    26.08. & Basename-Rückfall. \path{eval-2026-08-26-basename.md} & 21 & \path{results-basename-20260826} & \texttt{d2964a2} \\
-    26.08. & Eingefrorene Standardwerte. \path{defaults-gate2-2026-08-26.md} & 12 und 21 & \path{results-defaults-20260826}, \path{results-defaultsmess-20260826} & \texttt{d13f15c}, \texttt{93ea757} \\
+    16.08. & Erste Messung & 21 & \path{baseline-20260816} & \texttt{b6b9958}, Arbeitsbaum nicht festgehalten \\
+    17.08. & Seed-Fix & 21 & \path{20260817-seedfix} & über \texttt{0df4188}, Fix in \texttt{d1fb221} \\
+    17.08. & Commit-Zahl im Score & 21 & \path{f29-20260817} & Arbeitsbaum nicht festgehalten \\
+    19.08. & Seed-Budget & 21 & \path{budget-20260819} & \texttt{643c77e} \\
+    19.08. & Quote je Datei & 21 & \path{quota-20260819} & \texttt{04e7e50} \\
+    19.08. & Vektorindex ohne Trennung nach Projekt, einzelne Abfrage ohne Serienlauf & 19 & kein Serienordner & nicht festgehalten \\
+    20.08. & Symboltext mit Code und Einbettungsmodell & 21 & \path{embedtext-20260819} & \texttt{d1f1f7b} \\
+    21.08. & Quote je Datei mit Qwen3 & 21 & \path{quotaqwen-20260821} & \texttt{86fbcdf} \\
+    21.08. & Spielraum des Kuratierens & 21 & \path{spielraum-20260821} & \texttt{98c097b} \\
+    22.08. & Nachmessung zum Einbettungsmodell & 21 & \path{embedtext-20260822} & \texttt{f63d7d7} \\
+    26.08. & Wahl des Einbettungsmodells auf der Holdout-Menge, vorregistriert am 24.08. & 12 & \path{holdout-20260824} & \texttt{1475dde} \\
+    26.08. & Basename-Rückfall & 21 & \path{basename-20260826} & \texttt{d2964a2} \\
+    26.08. & Eingefrorene Standardwerte & 12 und 21 & \path{defaults-20260826}, \path{defaultsmess-20260826} & \texttt{d13f15c}, \texttt{93ea757} \\
     \bottomrule
   \end{tabularx}
 \end{table}
@@ -337,44 +361,43 @@ Tabelle~\ref{tab:prot-entwicklung} enthält die Abrufmessungen bis zum Einfriere
   \caption{Abrufmessungen nach dem 26.08.2026. Alle Daten aus dem Jahr 2026.}
   \label{tab:prot-fern}
   \footnotesize
-  \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{1.0cm}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}p{1.3cm}>{\raggedright\arraybackslash}p{4.2cm}>{\raggedright\arraybackslash}p{2.9cm}}
+  \setlength{\tabcolsep}{4pt}
+  \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{1.1cm}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}p{1.5cm}>{\raggedright\arraybackslash}p{4.2cm}>{\raggedright\arraybackslash}p{3.0cm}}
     \toprule
-    Datum & Messung und Befunddokument & Aufgaben & Serienordner & Codestand \\
+    Datum & Messung & Aufgaben & Serienordner & Codestand \\
     \midrule
-    06.09. & Vormessung zu den fernen Aufgaben, nicht vorregistriert. \path{eval-2026-09-07-hard-slice-stufe1-2.md} & 9 und 14 & \path{results-vormessung-20260906}, \path{results-vormessung14-20260906} & Arbeitsbaum über \texttt{0506a85} \\
-    06.09. bis 07.09. & Ferne Aufgaben, erste Serie. \path{eval-2026-09-06-hard-slice-vorregistrierung.md}, \path{eval-2026-09-07-hard-slice-stufe1-2.md} & 20 & \path{results-fern20-20260907} & Arbeitsbaum über \texttt{0506a85}, am 09.09. committet als \texttt{367f0a2} \\
-    10.09. & Ferne Aufgaben, Vervollständigung auf 45. \path{eval-2026-09-11-hard-slice-stufe2-vollstaendig.md} & 25 & \path{results-fern45-20260910} & \texttt{d6af5d1}, Messcode gleich \texttt{367f0a2} \\
-    11.09. & Seed-Änderung. \path{eval-2026-09-11-seedzweige.md} & 155 & \path{results-fern45-hebel-20260911} & Arbeitsbaum über \texttt{df12c87} \\
-    16.09. & Tests als Gold. Keine neuen Läufe, bewertet werden die Listen der Serie vom 11.09. \path{eval-2026-09-16-testgold-sensitivitaet.md} & 155 & \path{results-fern45-hebel-20260911} & wie Serie vom 11.09. \\
-    25.09. & Größe der Übergabe als JSON. \path{eval-2026-09-25-uebergabeform-json.md} & 21 & \path{results-format-20260925} & Arbeitsbaum über \texttt{27f628d}, Stand committet als \texttt{d2537f9} \\
-    08.10. & Anfrage vom Agenten formuliert. \path{vorlaeufiger-befund-agentenanfrage.md} & 155 & \path{results-agentquery-20261008} & Arbeitsbaum über \texttt{4538f01} \\
-    09.10. & Kontrolle, ob der Abruf gegenüber dem 11.09. unverändert ist. \path{arbeitsprotokoll.md} & 155 & \path{results-drift-20261009} & ohne Nachweisdatei \\
-    09.10. & Läufe mit automatischem Abruf auf den beiden Studienaufgaben, je drei Anfragen. \path{README.md} im Serienordner & 2 & \path{results-studie-c-opus-20261009} & \texttt{5793557} \\
+    06.09. & Vormessung zu den fernen Aufgaben, nicht vorregistriert & 9 und 14 & \path{vormessung-20260906}, \path{vormessung14-20260906} & über \texttt{0506a85} \\
+    06.09. & Ferne Aufgaben, erste Serie, bis 07.09. & 20 & \path{fern20-20260907} & über \texttt{0506a85}, am 09.09. committet als \texttt{367f0a2} \\
+    10.09. & Ferne Aufgaben, Vervollständigung auf 45 & 25 & \path{fern45-20260910} & \texttt{d6af5d1}, Messcode wie \texttt{367f0a2} \\
+    11.09. & Seed-Änderung & 155 & \path{fern45-hebel-20260911} & über \texttt{df12c87} \\
+    16.09. & Tests als Gold, keine neuen Läufe, bewertet werden die Listen vom 11.09. & 155 & \path{fern45-hebel-20260911} & wie 11.09. \\
+    25.09. & Größe der Übergabe als JSON & 21 & \path{format-20260925} & über \texttt{27f628d}, committet als \texttt{d2537f9} \\
+    08.10. & Anfrage vom Agenten formuliert & 155 & \path{agentquery-20261008} & über \texttt{4538f01}, committet als \texttt{d2f5d24} \\
+    09.10. & Kontrolle, ob der Abruf gegenüber dem 11.09. unverändert ist & 155 & \path{drift-20261009} & ohne Nachweisdatei \\
+    09.10. & Läufe mit automatischem Abruf auf den beiden Studienaufgaben, je drei Anfragen & 2 & \path{studie-c-opus-20261009} & \texttt{5793557} \\
     \bottomrule
   \end{tabularx}
 \end{table}
 
-\begin{ungelesen}
-Die Agentenmessung besteht aus sechs Serien, je eine für jedes der drei Modelle auf der Messmenge und auf der Holdout-Menge (Tabelle~\ref{tab:prot-agent}). Jede Aufgabe läuft unter den Bedingungen A, B und C je dreimal. Das ergibt 189 Läufe je Serie auf den 21 Aufgaben der Messmenge und 108 Läufe je Serie auf den 12 Aufgaben der Holdout-Menge, zusammen 891. Die erste Wiederholung lief am 29.08.2026 und 30.08.2026, für Opus~5 am 02.09.2026. Die zweite und dritte Wiederholung liefen am 04.09.2026 für alle Serien in fester Reihenfolge. Alle Läufe verwenden Claude Code in der Version 2.1.251 mit derselben Programmdatei (SHA-256 beginnt mit \texttt{8d1229a28128}), den Werkzeugen \texttt{Glob}, \texttt{Grep} und \texttt{Read} und höchstens 40 Zügen. Die Kontextblöcke unter B und C stammen aus dem Knotensatz der Serie \path{results-basename-20260826}. Zusammen entsprechen die 891 Läufe Kosten von 157~USD und einer Laufzeit von 15,1~Stunden. Der Befund steht in \path{eval-2026-08-30-neumessung-sauber.md}.
+Die Agentenmessung besteht aus sechs Serien, je eine für jedes der drei Modelle auf der Messmenge und auf der Holdout-Menge (Tabelle~\ref{tab:prot-agent}). Jede Aufgabe läuft unter den Bedingungen A, B und C je dreimal. Das ergibt 189 Läufe je Serie auf den 21 Aufgaben der Messmenge und 108 Läufe je Serie auf den 12 Aufgaben der Holdout-Menge, zusammen 891. Die erste Wiederholung lief am 29.08.2026 und 30.08.2026, für Opus~5 am 02.09.2026. Die zweite und dritte Wiederholung liefen am 04.09.2026 für alle Serien in fester Reihenfolge. Alle Läufe verwenden Claude Code in der Version 2.1.251 mit derselben Programmdatei (SHA-256 beginnt mit \texttt{8d1229a28128}), den Werkzeugen \texttt{Glob}, \texttt{Grep} und \texttt{Read} und höchstens 40 Zügen. Die Kontextblöcke unter B und C stammen aus dem Knotensatz der Serie \path{basename-20260826}. Zusammen entsprechen die 891 Läufe Kosten von 157~USD und einer Laufzeit von 15,1~Stunden. Der Befund steht in \path{eval-2026-08-30-neumessung-sauber.md}.
 
 Zwei frühere Fassungen dieser Messung gehen nicht in die Ergebnisse ein. Die Serien vom 27.08.2026 wurden verworfen (Ordner mit der Endung \texttt{-20260827}). Die Serien vom 28.08.2026 gelten als Vormessung (Endung \texttt{-20260828}, Befund in \path{eval-2026-08-29-neumessung-agentenverhalten.md}). Den Anlass beschreibt Abschnitt~\ref{sec:agentenverhalten}.
-\end{ungelesen}
 
 \begin{table}[H]
   \centering
-  \caption{Serien der Agentenmessung vom 29.08.2026 bis 04.09.2026. Der Codestand aller sechs Serien ist \texttt{1d8c6ea} bei sauberem Arbeitsbaum.}
+  \caption{Serien der Agentenmessung vom 29.08.2026 bis 04.09.2026. Die erste Wiederholung mit Sonnet~5 und Haiku~4.5 lief auf dem Codestand \texttt{bd5cfc6}, alle übrigen Läufe auf \texttt{1d8c6ea}, dort ohne Abweichung des Arbeitsbaums in den messrelevanten Dateien. Der messrelevante Code ist in beiden Ständen gleich.}
   \label{tab:prot-agent}
   \footnotesize
   \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{2.0cm}>{\raggedright\arraybackslash}p{2.6cm}>{\raggedright\arraybackslash}X>{\raggedleft\arraybackslash}p{1.2cm}}
     \toprule
     Modell & Aufgabenmenge & Serienordner & Läufe \\
     \midrule
-    Sonnet~5 & Messmenge & \path{results-tracesonnet-20260829} & 189 \\
-    Haiku~4.5 & Messmenge & \path{results-tracehaiku-20260829} & 189 \\
-    Opus~5 & Messmenge & \path{results-trace-20260902} & 189 \\
-    Sonnet~5 & Holdout-Menge & \path{results-traceholdoutsonnet-20260829} & 108 \\
-    Haiku~4.5 & Holdout-Menge & \path{results-traceholdouthaiku-20260829} & 108 \\
-    Opus~5 & Holdout-Menge & \path{results-traceholdoutopus-20260902} & 108 \\
+    Sonnet~5 & Messmenge & \path{tracesonnet-20260829} & 189 \\
+    Haiku~4.5 & Messmenge & \path{tracehaiku-20260829} & 189 \\
+    Opus~5 & Messmenge & \path{trace-20260902} & 189 \\
+    Sonnet~5 & Holdout-Menge & \path{traceholdoutsonnet-20260829} & 108 \\
+    Haiku~4.5 & Holdout-Menge & \path{traceholdouthaiku-20260829} & 108 \\
+    Opus~5 & Holdout-Menge & \path{traceholdoutopus-20260902} & 108 \\
     \midrule
     Summe & & & 891 \\
     \bottomrule
