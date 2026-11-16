@@ -87,15 +87,15 @@ Notizen am 05.11. als Gesamtkonzept neu gefasst (06_nutzerstudie.tex, Kopf des K
   - [ ] Umgang mit PG und den Entwicklern in den Tabellen
 - [x] 6.4/6.6 – Hauptkennzahl geändert (08.11., aus der Methodik-Notiz research_notes/Forschungsfragen und Methodik/methodik.md): Zuwachs über alle fünf Vorher/Nachher-Items statt nur über die nicht gelieferten. Grund: die Einteilung geliefert entsteht nach dem Lauf, der Lauf hängt in D vom kuratierten Kontext ab, C und D hätten verschiedene Items erfasst (Selektion nach der Behandlung, Montgomery/Nyhan/Torres 2018, AJPS, DOI 10.1111/ajps.12357). Schichten geliefert/nicht geliefert bleiben als Mechanismus daneben, Markierung je Sitzung wie bisher. In 6.4 geschrieben (zwei Sätze, Grund und Planabweichung kommen in 6.6), teils zählt zu nicht geliefert (6.4), Erklären-Schichtung übernommen/eigenständig als beschreibend gekennzeichnet; 6.6-Gerüst, tab:messgroessen, Kopfzahl-Kommentar 6.1 und Grenzenliste nachgezogen; 6.1 letzter Absatz: Dopplung zur Kontextgüte entfernt, "Richtung je Person" zu "Unterschiede je Person, getrennt nach Abfolge", zwei Semikolons aufgelöst
 - [ ] 6.6/8.2 – Abweichung vom Plan E1 (Hauptkennzahl):
-  - [x] in 6.6 genannt, mit Datum und Grund (13.11.)
-  - [ ] in 8.2 als Grenze
+  - [x] entschieden 16.11.: 6.6 nennt nur den Stand der Hauptkennzahl, ohne Datum und Planabweichung (alter Wortlaut als Kommentar in 6.6)
+  - [ ] in 8.2 als Grenze, mit Datum (einzige Stelle seit 16.11.)
   - [ ] Plan-Dokument im Werkzeug-Repo mit Datum 08.11. ergänzen
   - [ ] Montgomery 2018 in die Bib, falls in 6.6 oder 8.2 zitiert
 - [x] 6.6 – Vorzeichentest mit p-Werten gestrichen (08.11.): die je Aufgabe zentrierten Differenzen teilen die geschätzten Aufgabenmittel und sind nicht unabhängig, die rohen Differenzen enthalten die Aufgabenschwierigkeit mit wechselndem Vorzeichen, die Binomial-Null gilt für beide nicht ohne Nachweis. Berichtet werden die acht D-minus-C-Differenzen roh je Abfolgegruppe (A: 74-C dann E-D, B: 74-D dann E-C), aus den Gruppenmitteln Bedingungseffekt (halbe Summe) und Aufgabeneffekt (halbe Differenz), dazu Punktdiagramm. Keine Zahl der positiven Differenzen als Kennzahl (täuscht unabhängige Evidenz vor, Zweitgutachten 08.11.). Der zum Crossover passende Test ist der Vergleich der Aufgabendifferenz (E minus #74 je Person) zwischen den Abfolgegruppen (4 gegen 4, exakt, kleinstes zweiseitiges p 2/70 ≈ 0,03), steht als Nebenauswertung schon drin. Verweis 5.1 aus 6.6 entfernt; der Vorzeichentest in Kapitel 5 (gepaarte Aufgaben) ist davon nicht betroffen
 - [ ] 6.4 – Vor dem Übertragen der Bögen auszählen, wie oft sich die gelieferten Items zwischen den C- und D-Sitzungen einer Aufgabe unterscheiden (12-/13-geliefert-*.md); entscheidet, wie viel Platz die Abweichung in 8.2 braucht
 - [x] 6.4/6.6/7 – Auswertung am 10.11. festgelegt (Bericht reports/Auswertung Nutzerstudie.md, Abschnitt 9), nach drei gefahrenen Sitzungen und dem Piloten PG. Hauptkennzahl: Anteil richtiger Antworten nachher minus vorher, #74 Fragen 1 bis 5, E Fragen 1 bis 4, ohne Kontrollfragen (ersetzt "alle fünf Items" vom 08.11.). Die Plan-Kennzahl wird nicht gerechnet. Keine Zweitmarkierung von "genannt". Zuwachs zweistufig, dazu Verteilung ja, teils, nein je Bedingung. Kein Test, stattdessen Auslassprobe. Linienbild statt Punktdiagramm. "Paar" und "Reihenfolge" statt "Abfolgegruppe". "genannt" statt "geliefert", "Einordnung" statt "Mechanismus". Übergangstafel in 7.3. Eigener Abschnitt in Kapitel 7 für Aufwand und Bewertung der Oberfläche. Wortlaut der Ausgänge wird nicht vorab festgelegt. In 6.1, 6.4 (Fließtext und Tabelle), den Kommentaren von Kapitel 6 und der Gliederung von Kapitel 7 nachgezogen.
 - [ ] 6.6/8.2 – Beim Schreiben von 6.6 nennen:
-  - [x] die Abweichung vom Plan bei der Hauptkennzahl mit Datum und Grund (6.6, 13.11.)
+  - [x] die Abweichung vom Plan bei der Hauptkennzahl: entschieden 16.11., steht nicht in 6.6, nur in 8.2
   - [x] die Begründung für "kein Test" (6.6, 13.11., bisher nur die kleine Stichprobe. Ausbau steht unten als eigener Punkt)
   - [x] die Markierung "genannt" durch die Sitzungsleitung in Kenntnis der Bedingung (6.4, 13.11.)
   - [ ] alle drei auch in 8.2
@@ -128,7 +128,7 @@ Aus der Durchsicht von Kapitel 6 am 13.11. (zwei Befundberichte, Gegenprüfung d
   - [x] Transkript-Prüfung (liest der Agent vor der Bestätigung Dateien) mit Verweis auf 6.2 und 7.2
   - [x] "bevor er Code sieht" ersetzt durch "bevor der Agent mit der Aufgabe beginnt"
   - [ ] Begründung für Vorher-Nachher trennen (Vorher-Bogen zieht Vorwissen ab, die Einteilung nach genannt fängt die Zusammenfassung ab)
-  - [ ] "Einordnung" hat zwei Bedeutungen (Aufteilung nach genannt, Zeile in tab:messgroessen)
+  - [x] "Einordnung" hatte zwei Bedeutungen (Aufteilung nach genannt, Zeile in tab:messgroessen): erledigt 16.11., die Zeile entfällt mit der Tabelle
   - [ ] die zwei Selbsteinschätzungen in Teil D kommen im Text nicht vor
   - [ ] Vorfragebogen-Absatz steht unter "Fragen zu den Zusammenhängen"
   - [ ] kürzen auf 2,5 S.
@@ -151,6 +151,18 @@ Aus der Durchsicht von Kapitel 6 am 13.11. (zwei Befundberichte, Gegenprüfung d
 - [ ] 8.2 – Nachtrag im PFLICHT-Block:
   - [x] Punkte 7 bis 13 als Kommentar eingetragen (13.11.)
   - [ ] entscheiden, ob Punkt 13 (mündliche Antworten der Sitzungsleitung) gebraucht wird
+- [ ] Kap. 6 – Rückmeldung des Autors nach dem Lesen im PDF (16.11.):
+  - [x] eine Tabelle statt drei: tab:ff-zuordnung, tab:messgroessen und tab:auswertung zu tab:studienfragen in 6.1 zusammengelegt (Frage, Erhebung, Kennzahl und Vergleich, Abschnitt mit dem Ergebnis). Die zwei alten Tabellen in 6.4 und 6.6 stehen auskommentiert in \iffalse
+  - [x] Tabellen stehen mit [H] zwischen zwei Absätzen und trennen keinen Satz mehr (tab:studienfragen, tab:ablauf)
+  - [x] "Nebenfrage" steht nicht mehr in jeder Tabellenzeile. FF2 und FF5 stehen als zwei Sätze im Absatz vor der Tabelle
+  - [x] 6.1: "beträfe" ersetzt durch "gilt für"
+  - [x] 6.4: Wiederholung zu Teil A und Teil B gestrichen, Satz "Teil B trägt den ersten Teil der Hauptfrage ..." entfällt
+  - [x] 6.6: Satz mit Datum und Planabweichung der Hauptkennzahl gestrichen
+  - [x] tab:studienfragen im PDF geprüft (16.11.): passt in der Breite. Stand direkt nach dem Verweis mit einer halben leeren Seite, steht deshalb zwei Absätze später auf S. 27 zwischen zwei Absätzen
+  - [ ] tab:ablauf (6.5) im PDF ansehen, ob [H] dort eine Lücke am Seitenende lässt
+  - [ ] Satz "Den Vergleich von strukturiertem und flachem Kontext (FF5) behandelt Abschnitt 5.3" gegen 5.3 prüfen, sobald es geschrieben ist (TODO-Zeile dazu in den Notizen von 5.3, 05_benchmark.tex)
+  - [x] Nennungen des Exposés aus dem Fließtext genommen: Vertrauensskala in 6.4, 60 Minuten in 6.5 (alter Wortlaut als Kommentar in 6.4 und in den Notizen von 8.1)
+  - [ ] entscheiden, ob auch "wie es bei der Planung für eine kleine Codebasis bereits erwartet war" in 6.1 entfällt. Dann entfällt auch Punkt 1 im PFLICHT-Block von 5.6
 - [ ] 7.3 – Übergangstafel: die 36 Antworten je Bedingung sind 20 aus #74 und 16 aus E, Aufgaben getrennt ausweisen (Codex 13.11.)
 - [ ] Kap. 5 – beim Schreiben:
   - [ ] entscheiden, ob die Rechnung zur Deckung in 5.6 oder in 6.3 ausführlich steht
@@ -158,7 +170,7 @@ Aus der Durchsicht von Kapitel 6 am 13.11. (zwei Befundberichte, Gegenprüfung d
   - [ ] Aussage zu AP8 in 6.1 an 5.3 anpassen (SWE-bench, nur Lokalisieren)
 - [ ] PRÜFEN (Autor):
   - [ ] protokolliert der Export das Aufklappen der Begründung in der Detailkarte? Sonst misst E3 nur angesehene Karten
-  - [ ] Datum der Hauptkennzahl in 6.6 (08.11. erweitert, 10.11. ohne Kontrollfragen), dann in zwei Schritten nennen
+  - [ ] Datum der Hauptkennzahl für 8.2 (08.11. erweitert, 10.11. ohne Kontrollfragen), dort in zwei Schritten nennen
   - [ ] was die "Prüfung an vier Agentenläufen" in 6.4 war
   - [ ] ob Ortsliste, Urteil beim Durchsehen und Fragen zur Arbeit des Agenten in Kapitel 7 berichtet werden
   - [ ] Wortlaut "die er am Ende des Laufs im Terminal ausgibt" (6.4) gegen die Sitzungen

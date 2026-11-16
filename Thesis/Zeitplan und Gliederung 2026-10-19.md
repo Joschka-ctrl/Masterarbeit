@@ -6,16 +6,18 @@ Thesis-Ordner, vorher im Werkzeug-Repo unter docs/notizen. Vorheriger Stand 26.1
 Gliederung und Zeitplan nach dem Termin mit Rainer angepasst, Notizen am Ende der Datei.
 Kapitel 1 bis 3 folgen dem Exposé vom 21.08.2026.
 
-## Heute, 13.11.
+## Heute, 16.11.
 
-Meilenstein laut Plan: Kap. 4 und 6 fertig, dazu 5.1 und 5.2. Stand: Kap. 4 geschrieben
-(19 Seiten im PDF, Kürzung offen), 6.1 bis 6.6 geschrieben (13 Seiten im PDF bei 10 Seiten
-Budget, Durchsicht mit zwei Befundberichten am 13.11., offene Punkte in TODO.md), 5.1 und
-5.2 nicht begonnen und nach 16.–27.11. verschoben.
+Block 16.–27.11. laut Plan: Kap. 5 ganz, 5.1 bis 5.6 (16 S. in 10 Arbeitstagen). Stand:
+Kap. 4 geschrieben (19 Seiten im PDF, Kürzung offen), 6.1 bis 6.6 geschrieben (13 Seiten im
+PDF bei 10 Seiten Budget) und gegengelesen (Stand 16.11.), die offenen Punkte der Durchsicht
+vom 13.11. bleiben für 30.11.–11.12. (TODO.md). Von Kap. 5 stehen die Kapiteleinleitung und
+5.1 (geschrieben und gegengelesen am 16.11., 3,6 Seiten im PDF bei 3 Seiten Budget, Kürzung
+nach 5.3 und 5.4).
 
-- [ ] 4.5 – Bildschirmfoto der Oberfläche im stufenweisen Modus aufnehmen (Stufe 2 oder 3, ein Knoten angeklickt, Detailansicht mit Begründungsblock sichtbar), beschriften, einbinden (KLÄREN-Marker im Text)
-- [ ] 4.5 – JSON-Auszug des Kontextblocks als Abbildung: Lauf auswählen, auf einen Seed, einen Nachbarn mit via und eine Kante kürzen (KLÄREN-Marker im Text)
-- [x] 6.6 Auswertung schreiben (1,5 S.), Pflicht-Block im Kopf von 6.6 beachten
+- [x] 5.1 Wie gemessen wird – beginnen (3 S.)
+- [ ] 4.5 – Bildschirmfoto der Oberfläche im stufenweisen Modus aufnehmen (Stufe 2 oder 3, ein Knoten angeklickt, Detailansicht mit Begründungsblock sichtbar), beschriften, einbinden (KLÄREN-Marker im Text) (vom 13.11. mitgenommen)
+- [ ] 4.5 – JSON-Auszug des Kontextblocks als Abbildung: Lauf auswählen, auf einen Seed, einen Nachbarn mit via und eine Kante kürzen (KLÄREN-Marker im Text) (vom 13.11. mitgenommen)
 
 Vorhanden sind in Kap. 4 die Abbildungen Pipeline mit Eingriffspunkten (fig:pipeline) und
 Graphschema (fig:graphschema).
@@ -57,8 +59,8 @@ damit etwas mehr Platz.
 | 4.4 Umsetzung: Abrufpipeline in vier Stufen<br>*Inhalt:* bisher 4.3 | g | 2,5 | geschrieben |
 | 4.5 Umsetzung: Betriebsmodi, Oberfläche und Rückgabeform<br>*Inhalt:* bisher 4.4 und 4.5 zusammengelegt; mit Studienseite; JSON, Entscheidung 24.09. | g | 2,5 | geschrieben; Abbildungen 13.11. |
 | 4.6 Grenzen<br>*Inhalt:* dazu Agentenanfrage 08.10. (Trainingswissen) | g | 1 | geschrieben |
-| **5 Evaluation ohne Nutzer: Messungen auf SWE-bench** (im Plan bisher „Vormessungen“, im Text „Benchmark-Messungen“)<br>*Inhalt:* Vorgehen und Entwicklung; Ergebnisdarstellung in Kap. 7 (Beschluss 26.10.), volle Tabellen in den Anhang. Stand 13.11.: nur Kapiteleinleitung geschrieben | | **16** | 16.–27.11. |
-| 5.1 Wie gemessen wird<br>*Inhalt:* Aufgaben (SWE-bench, Gold gleich Patch), Bedingungen, Messgrößen, Statistik (Vorzeichentest, Bootstrap), Vorregistrierung und Holdout, Nachweis (Messbäume, Pfad-Audit, eingefrorenes Binary, Provenance) | | 3 | 16.–27.11. (verschoben 13.11., war 26.10.–13.11.) |
+| **5 Evaluation ohne Nutzer: Messungen auf SWE-bench** (im Plan bisher „Vormessungen“, im Text „Benchmark-Messungen“)<br>*Inhalt:* Vorgehen und Entwicklung; Ergebnisdarstellung in Kap. 7 (Beschluss 26.10.), volle Tabellen in den Anhang. Stand 16.11.: Kapiteleinleitung und 5.1 geschrieben | | **16** | 16.–27.11. |
+| 5.1 Wie gemessen wird<br>*Inhalt:* Aufgaben (SWE-bench, Gold gleich Patch), Bedingungen, Messgrößen, Statistik (Vorzeichentest, Bootstrap), Vorregistrierung und Holdout, Nachweis (Messbäume, Pfad-Audit, eingefrorenes Binary, Provenance) | g | 3 | geschrieben 16.11. (3,6 S. im PDF), Kürzung 30.11.–11.12. |
 | 5.2 Entwicklung des Abrufs auf SWE-bench<br>*Inhalt:* Seed-Fix ausführlich, die übrigen Messungen je ein bis drei Sätze (Frage, Antwort, Änderung am Werkzeug) | | 3 | 16.–27.11. (verschoben 13.11., war 26.10.–13.11.) |
 | 5.3 Agentenverhalten (AP8)<br>*Inhalt:* dazu Agentenläufe auf teamable 05.10. und 09.10. als Entwicklungsmessung | | 3 | 16.–27.11. |
 | 5.4 Ferne Aufgaben: Hard-Slice<br>*Inhalt:* Bestätigungsmessung, alter Default | | 3 | 16.–27.11. |
