@@ -109,7 +109,7 @@ Das Kapitel beschreibt das Vorgehen und die Entwicklung. Die Ergebnisse berichte
 % - Klassen V, M, E hier oder in 5.2 (F6)?
 % - Welche Grundbegriffe erklärt 4.1 schon, damit hier nichts doppelt steht?
 %
-% ENTWURF 5.1 (16.11.), noch nicht gegengelesen. Quellen: Tn Teil 0.3 bis 0.8 und E, AP8, eval/README.md, Vorregistrierungen 24.08. und 06.09., Zb Punkt 2 und 3, arbeitsweise-messungen.md, research_notes (benchmark.md, methodik.md, gesamtarbeit.md).
+% ENTWURF 5.1 (16.11.), gegengelesen 16.11. Quellen: Tn Teil 0.3 bis 0.8 und E, AP8, eval/README.md, Vorregistrierungen 24.08. und 06.09., Zb Punkt 2 und 3, arbeitsweise-messungen.md, research_notes (benchmark.md, methodik.md, gesamtarbeit.md).
 % Entscheidungen im Entwurf (aus den FRAGEN oben und dem Kapitelkopf):
 % - Drei Tabellen: Aufgabenmengen (neu, Vorschlag research_notes), Bedingungen des Abrufs, Messgrößen. Die Bedingungen A, B, C stehen im Text, nicht in der Tabelle.
 % - Nur die neue Zeilengröße (goldHunkCoverage) eingeführt. Die alte (goldLineCoverage) kommt nur dort vor, wo 5.2 sie braucht.
@@ -134,6 +134,14 @@ Das Kapitel beschreibt das Vorgehen und die Entwicklung. Die Ergebnisse berichte
 % - Seed-Änderung (eval-2026-09-11-seedzweige.md): aus den Fehltreffern der 39 abgeleitet, Kontrolle auf nah110 (+12,5 Punkte, keine Aufgabe schlechter), auf den 39 Recall@10 72,6 gegen 47,6 Prozent vorher. Das Dokument nennt sich selbst Entwicklungsmessung. Damit sind die "+25 bzw. +12,5" im Gerüst 5.5 zugeordnet.
 % - ACHTUNG Schreibweise: AP8 schreibt besser:schlechter:gleich (12:4:5), seedzweige und das Gerüst 5.4 ("3:36:0") schreiben besser:gleich:schlechter. 5.1 legt besser:schlechter:gleich fest, die Zahlen in 5.4 und 5.5 beim Schreiben umstellen.
 % - Jimenez-Zitat im zweiten Absatz am Paper geprüft: Abschnitt 4.1, Oracle-Retrieval; geänderte Dateien müssen nicht den gesamten zum Verstehen nötigen Kontext enthalten.
+%
+% GEGENGELESEN 16.11. (zwei Runden, Befunde an den Unterlagen geprüft):
+% - BM25: Paper Abschnitt 4.1 und Anhang D.1 im Wortlaut gelesen. Belegt sind BM25 über Dateien, Pfad vor dem Inhalt und Auffüllen bis zur Kontextgröße. Welche Dateien indiziert werden, steht dort nicht. Der Code des Benchmarks (swebench/inference/make_datasets, list_files) nimmt nur *.py ohne Testdateien. Die eigene Dateimenge enthält Testdateien und .js. Nicht im Text, weil die Abweichung gegen bm25 geht. Gegebenenfalls ein Halbsatz in 5.4.
+% - Einheiten je Bedingung (results-fern45-20260910, 25 Aufgaben): graph, embed-only, bm25, dense je 30, seeds 7, dense-budget 23 bis 383. Verschiedene Dateien: graph 7 bis 16, bm25 30.
+% - Hard-Slice (Nachtrag 2 der Vorregistrierung): 4 der 39 vor der Vorregistrierung gemessen, Abbruch nach 20 in Kenntnis der Ergebnisse, H3 und H4 erst am 10.09. Später Commit (09.09.) gehört nach 5.4.
+% - Holdout 24.08.: Vorregistrierung vor der Serie committet, ein protokollierter Ausführungsfehler (leerer SEED_SEM_FLOOR), alle vier Zeilen neu gemessen.
+% - Nicht eingetragen: Ausnahme zur Anfrage (Agentenanfrage 08.10.), hängt an F4.
+% - Umfang: 3,6 Seiten im PDF, Kürzung nach 5.3 und 5.4.
 
 \begin{ungelesen}
 Mit Ausnahme einzelner Läufe auf den Aufgaben der Nutzerstudie (Abschnitte~\ref{sec:agentenverhalten} und~\ref{sec:ueberleitung-studie}) laufen die Messungen dieses Kapitels auf Aufgaben aus SWE-bench Verified, einer von Menschen geprüften Teilmenge von SWE-bench mit 500 Aufgaben~\parencite{openai2024sweverified}. Jede Aufgabe besteht aus einem echten Fehlerbericht eines Open-Source-Projekts in Python und aus der Korrektur, die das Projekt dafür angenommen hat. Diese Korrektur heißt Gold-Patch. Als Referenz dienen die Dateien, die der Gold-Patch ändert, und die Funktionen und Klassen, deren Zeilen er berührt. Sie heißen im Folgenden Gold-Dateien und Gold-Symbole. Als Anfrage erhält der Abruf den unveränderten Fehlerbericht. Der Codegraph einer Aufgabe wird auf dem Stand der Codebasis unmittelbar vor der Korrektur gebaut.

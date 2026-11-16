@@ -26,7 +26,7 @@ Graphschema (fig:graphschema).
 
 Umfang: 90 Seiten Haupttext ohne Verzeichnisse und Anhang. Kapitelzeilen tragen die Summe,
 9 Seiten bleiben als Reserve und gehen am Ende dahin, wo die Studie sie braucht. „Text“:
-x = liegt vor (aus dem Exposé vom 21.08.2026), g = geschrieben (Stand 13.11.).
+x = liegt vor (aus dem Exposé vom 21.08.2026), g = geschrieben (Stand 16.11.).
 
 Zeilenabstand: Die Budgets wurden für 1,5-zeiligen Satz aufgestellt. Seit der Umstellung
 auf einfachen Zeilenabstand (12 pt, Vorgabe Betreuer) passt auf eine Seite etwa 13 Prozent
