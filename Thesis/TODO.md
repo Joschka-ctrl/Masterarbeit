@@ -186,6 +186,16 @@ Aus der Durchsicht von Kapitel 6 am 13.11. (zwei Befundberichte, Gegenprüfung d
 
 ## Kapitel 5
 
+- [x] 5.1 – Abschnitt geschrieben, gegengelesen und im PDF auf Tabellen, Umbrüche und Verweise geprüft. Laufzeiten und Definition der fernen Aufgaben mit dem Werkzeug-Repo abgeglichen.
+- [ ] 5.1 – Umfang nach dem Schreiben von 5.3 und 5.4 prüfen und bei Bedarf kürzen (derzeit etwa 3,5 statt 3 Seiten).
+- [ ] Anhang Messprotokolle (app:messprotokolle) – Entwurf vom 16.11. mit drei Tabellen, noch nicht gegengelesen (OFFEN-Liste im Kommentar von anhang.tex):
+  - [ ] Einleitungstext und Tabellen gegenlesen, danach ungelesen-Kasten entfernen
+  - [ ] Vektorindex 19.08. fehlt in der Tabelle, kein Serienordner gefunden (docs/eval-2026-08-19-vektorindex.md)
+  - [ ] Seed-Fix 17.08.: Commit, über dem der Arbeitsbaum lag, aus PROVENANCE.md der Serie nachtragen
+  - [ ] Agentenanfrage 08.10.: PROVENANCE.md nennt HEAD 4538f01, der Befund nennt d2f5d24. Klären, welcher Stand zitiert wird
+  - [ ] Agentenmessung: PROVENANCE.md der sechs Serien nennt 1d8c6ea, der Befund nennt für die erste Wiederholung bd5cfc6. Klären, welcher Stand in der Tabelle steht
+  - [ ] entscheiden, ob die Dateinamen der Befunddokumente (interne Namen des Werkzeug-Repos) im Anhang stehen bleiben
+
 - [ ] 5.6 – schreiben. Trägt seit der Neufassung von 6.1 (06.11.) die Begründung des Wechsels der Hauptfrage: Bilanz der Messungen, AP8 (mit Kontextblock weniger Suchen, gleiche Treffer), Rechnung 13.10. mit Zahlen (Deckung #74 dreimal 7 von 7, E 9, 8, 8 von 9), Folgerung: der Mensch ist der Unterschied, nicht der Kontext. 6.1 verweist nur hierher und nennt die Deckung in einem Satz. Material: Notizen HERKUNFT 1 bis 6 im Kopf von 6.1 (06_nutzerstudie.tex). Keine Chronik im Fließtext, Daten nur als Beleg in Fußnoten
 - [ ] 5/8 (Validität) – Grenzen aus der Parameterherkunft aufnehmen, nicht in 4.6 (Beschluss 02.11.) (Quelle codebase-graph/docs/defaults-gate2-2026-08-26.md): Klasse-M-Werte ohne Holdout (SEED_DF_MAX, Normierungsband), Normierungsband auf nomic-Vektoren erhoben und für qwen3 nicht neu bestimmt, β < 0,6 nicht gemessen, Klasse-E-Werte nie variiert
 - [ ] 5 – Befund Agentenanfrage 08.10. gegenlesen (codebase-graph/docs/vorlaeufiger-befund-agentenanfrage.md, als vorläufig markiert). In 4.6 steht dazu ein KLÄREN-Marker in der Fußnote
