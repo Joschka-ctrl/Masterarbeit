@@ -166,7 +166,7 @@ Aus der Durchsicht von Kapitel 6 am 13.11. (zwei Befundberichte, Gegenprüfung d
 - [ ] 7.3 – Übergangstafel: die 36 Antworten je Bedingung sind 20 aus #74 und 16 aus E, Aufgaben getrennt ausweisen (Codex 13.11.)
 - [ ] Kap. 5 – beim Schreiben:
   - [ ] entscheiden, ob die Rechnung zur Deckung in 5.6 oder in 6.3 ausführlich steht
-  - [ ] A, B, C der Agentenmessung gegen C, D und Paar A, B der Studie abgrenzen (6.3 sagt "Läufe unter C" mit Verweis auf 5.3)
+  - [ ] A, B, C der Agentenmessung gegen C, D und Paar A, B der Studie abgrenzen (6.3 sagt seit 17.11. "Läufe mit automatischem Abruf" statt "Läufe unter C", der Verweis auf 5.3 bleibt. 5.1 grenzt A, B, C schon gegen C und D der Studie ab, offen ist Paar A, B)
   - [ ] Aussage zu AP8 in 6.1 an 5.3 anpassen (SWE-bench, nur Lokalisieren)
 - [ ] PRÜFEN (Autor):
   - [ ] protokolliert der Export das Aufklappen der Begründung in der Detailkarte? Sonst misst E3 nur angesehene Karten
@@ -187,7 +187,12 @@ Aus der Durchsicht von Kapitel 6 am 13.11. (zwei Befundberichte, Gegenprüfung d
 ## Kapitel 5
 
 - [x] 5.1 – Abschnitt geschrieben, gegengelesen und im PDF auf Tabellen, Umbrüche und Verweise geprüft. Laufzeiten und Definition der fernen Aufgaben mit dem Werkzeug-Repo abgeglichen.
-- [ ] 5.1 – Umfang nach dem Schreiben von 5.3 und 5.4 prüfen und bei Bedarf kürzen (derzeit etwa 3,5 statt 3 Seiten).
+- [ ] 5.1 – Umfang nach dem Schreiben von 5.3 und 5.4 prüfen und bei Bedarf kürzen (derzeit 3,6 statt 3 Seiten).
+- [x] F3 entschieden 17.11.: Zahlen in Kapitel 5, 7.1 als Übersicht der fünf Hauptmessungen (Notiz im Kopf von 05_benchmark.tex und bei 7.1 in 07_ergebnisse.tex, Gliederung nachgezogen)
+- [ ] 5.1 – Auswahl der 21 Aufgaben der Messmenge und der 12 der Holdout-Menge in einem Satz begründen (Quelle klären, Kandidaten: Tn Teil 0.3, B1 und B8, Vorregistrierung 24.08.)
+- [ ] 5.1/5.3 – Feld des Fehlerberichts in den Abrufmessungen am Messskript prüfen (Aufgabenbeschreibung oder Nutzeranfrage), danach Halbsatz in 5.1 (Notiz im Gerüst von 5.3)
+- [ ] Kap. 5/7.1 – Betreuer in zwei Sätzen mitteilen: Die Ergebnisse der Benchmark-Messungen stehen bei der jeweiligen Messung in Kapitel 5, 7.1 ist eine Übersicht der fünf Hauptmessungen auf 2 Seiten. Die übrigen Messungen stehen kurz in Kapitel 5 (die Notiz vom 26.10. sah beides in Kapitel 7 vor)
+- [ ] 5.1 und 6.3 – rote Stellen vom 17.11. lesen und Markierung entfernen (Kapiteleinleitung, vier Stellen in 5.1, ein Satz in 6.3)
 - [x] Anhang Messprotokolle (app:messprotokolle) – Entwurf vom 16.11. mit drei Tabellen, gelesen und am Werkzeug-Repo geklärt am 16.11. (Notizen im Kommentar von anhang.tex):
   - [x] Einleitungstext und Tabellen gegenlesen, danach ungelesen-Kasten entfernen (16.11.)
   - [x] Vektorindex 19.08. fehlt in der Tabelle, kein Serienordner gefunden (docs/eval-2026-08-19-vektorindex.md) (16.11.: kein Serienlauf, als Zeile ohne Serienordner in D.1)
@@ -216,6 +221,11 @@ Aus der Durchsicht von Kapitel 6 am 13.11. (zwei Befundberichte, Gegenprüfung d
 - [ ] 9 – Ausblick: Graph über Projektgrenzen hinweg (projektübergreifendes Wissen). Setzt Filterung im Vektorindex voraus, z. B. SEARCH ... WHERE ab Neo4j 2026.02 (Quelle schon in der Bib: neo4jvector), statt eigener Datenbank je Projekt
 
 ## Später / sonstiges
+
+- [ ] Budget – Überschreitungen vor Kürzung, zusammen 10,6 Seiten bei 9 Seiten Reserve (Stand 17.11.):
+  - [ ] Kap. 4: 19 statt 12 Seiten, Ziel 14
+  - [ ] Kap. 6: 13 statt 10 Seiten
+  - [ ] 5.1: 3,6 statt 3 Seiten
 
 - [ ] 4.1 – Sobald 3.5 (sec:abgrenzung) geschrieben ist: 4.1 dagegen abgleichen. Absatz 1 verweist für die Abgrenzung auf 3.5, die Formulierung "Das Besondere liegt in der Verbindung zweier Eigenschaften" muss zu 3.5 passen
 - [ ] 3 – Einordnung der Designentscheidungen gegen verwandte Arbeiten (Gutachten 31.10.): hybride Dense-/BM25-Suche, Einbettung von Beschreibungen statt Rohcode, RepoGraph/CodexGraph als Vergleich für Graphschema und Traversierung (beide schon in der Bib)

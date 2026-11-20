@@ -6,6 +6,10 @@ Thesis-Ordner, vorher im Werkzeug-Repo unter docs/notizen. Vorheriger Stand 26.1
 Gliederung und Zeitplan nach dem Termin mit Rainer angepasst, Notizen am Ende der Datei.
 Kapitel 1 bis 3 folgen dem Exposé vom 21.08.2026.
 
+Nachtrag 17.11.2026: Die Ergebnisse der Benchmark-Messungen stehen je Messung in Kap. 5,
+7.1 ist nur noch die Übersicht (Zeilen zu Kap. 5, Kap. 7 und 7.1 in der Tabelle, Nachtrag
+unter den Notizen vom 26.10.).
+
 ## Heute, 16.11.
 
 Block 16.–27.11. laut Plan: Kap. 5 ganz, 5.1 bis 5.6 (16 S. in 10 Arbeitstagen). Stand:
@@ -59,7 +63,7 @@ damit etwas mehr Platz.
 | 4.4 Umsetzung: Abrufpipeline in vier Stufen<br>*Inhalt:* bisher 4.3 | g | 2,5 | geschrieben |
 | 4.5 Umsetzung: Betriebsmodi, Oberfläche und Rückgabeform<br>*Inhalt:* bisher 4.4 und 4.5 zusammengelegt; mit Studienseite; JSON, Entscheidung 24.09. | g | 2,5 | geschrieben; Abbildungen 13.11. |
 | 4.6 Grenzen<br>*Inhalt:* dazu Agentenanfrage 08.10. (Trainingswissen) | g | 1 | geschrieben |
-| **5 Evaluation ohne Nutzer: Messungen auf SWE-bench** (im Plan bisher „Vormessungen“, im Text „Benchmark-Messungen“)<br>*Inhalt:* Vorgehen und Entwicklung; Ergebnisdarstellung in Kap. 7 (Beschluss 26.10.), volle Tabellen in den Anhang. Stand 16.11.: Kapiteleinleitung und 5.1 geschrieben | | **16** | 16.–27.11. |
+| **5 Evaluation ohne Nutzer: Messungen auf SWE-bench** (im Plan bisher „Vormessungen“, im Text „Benchmark-Messungen“)<br>*Inhalt:* Vorgehen, Entwicklung und Ergebnis je Messung (Entscheidung 17.11., ersetzt in diesem Punkt den Beschluss vom 26.10.); Übersicht in 7.1, volle Tabellen in den Anhang. Stand 16.11.: Kapiteleinleitung und 5.1 geschrieben | | **16** | 16.–27.11. |
 | 5.1 Wie gemessen wird<br>*Inhalt:* Aufgaben (SWE-bench, Gold gleich Patch), Bedingungen, Messgrößen, Statistik (Vorzeichentest, Bootstrap), Vorregistrierung und Holdout, Nachweis (Messbäume, Pfad-Audit, eingefrorenes Binary, Provenance) | g | 3 | geschrieben 16.11. (3,6 S. im PDF), Kürzung 30.11.–11.12. |
 | 5.2 Entwicklung des Abrufs auf SWE-bench<br>*Inhalt:* Seed-Fix ausführlich, die übrigen Messungen je ein bis drei Sätze (Frage, Antwort, Änderung am Werkzeug) | | 3 | 16.–27.11. (verschoben 13.11., war 26.10.–13.11.) |
 | 5.3 Agentenverhalten (AP8)<br>*Inhalt:* dazu Agentenläufe auf teamable 05.10. und 09.10. als Entwicklungsmessung | | 3 | 16.–27.11. |
@@ -73,8 +77,8 @@ damit etwas mehr Platz.
 | 6.4 Messung<br>*Inhalt:* Vorfragebogen, Fragen vorher und nachher, Erklären, UI-Export, Prüfliste für das Ergebnis des Agenten, TLX, SUS, Interview | g | 2,5 | geschrieben, Abweichungen 30.11.–11.12. |
 | 6.5 Probanden, Ablauf, Einwilligung und Pilot | g | 1,5 | geschrieben, Abweichungen 30.11.–11.12. |
 | 6.6 Auswertung<br>*Inhalt:* Stand 10.11.: Hauptkennzahl Anteil richtiger Antworten nachher minus vorher, D minus C je Person, dargestellt je Paar; kein Test, stattdessen Auslassprobe; Einordnung nach in der Zusammenfassung genannt und nicht genannt; Kontrollfragen gesondert; Entwickler getrennt. Pflicht-Block im Kopf von 6.6 (Zuteilung über die Terminliste, Nachtrag 13.11.) | g | 1,5 | geschrieben 13.11., Abweichungen 30.11.–11.12. |
-| **7 Ergebnisse**<br>*Inhalt:* Benchmark-Messungen und Studie (Beschluss 26.10.); Tabellen statt Prosa, je Person eine Zeile. Seitenverteilung seit 10.11. | | **14** | 30.11.–11.12. |
-| 7.1 Ergebnisse der Benchmark-Messungen<br>*Inhalt:* aus Kap. 5 hierher gezogen (Beschluss 26.10.); die fünf wichtigsten Messungen ausführlich, die übrigen elf nur kurz (warum, wie, Ergebnis) in einem gemeinsamen Abschnitt; volle Tabellen in den Anhang | | 2 | 30.11.–11.12. |
+| **7 Ergebnisse**<br>*Inhalt:* Benchmark-Messungen und Studie (Beschluss 26.10.; seit 17.11. ist 7.1 nur die Übersicht, Zahlen in Kap. 5); Tabellen statt Prosa, je Person eine Zeile. Seitenverteilung seit 10.11. | | **14** | 30.11.–11.12. |
+| 7.1 Ergebnisse der Benchmark-Messungen<br>*Inhalt:* Übersicht der fünf wichtigsten Messungen als Tabelle mit drei bis vier Absätzen (Entscheidung 17.11.); jede Zahl steht schon in Kap. 5; die übrigen Messungen stehen kurz in Kap. 5, hier nur ein Verweis; volle Tabellen in den Anhang | | 2 | 30.11.–11.12. |
 | 7.2 Durchführung und Probanden<br>*Inhalt:* was bei der Durchführung vom Plan abwich (Abbrüche, hängende Läufe, fehlende Aufnahmen, Dauer); Zuteilungstabelle je Person | | 1,5 | 30.11.–11.12. |
 | 7.3 Verständnis der Zusammenhänge unter D gegen C<br>*Inhalt:* Hauptfrage Teil 1; mit Interviewzitaten | | 3 | 30.11.–11.12. |
 | 7.4 Freie Erklärung der Änderung<br>*Inhalt:* Hauptfrage Teil 2 | | 1,5 | 30.11.–11.12. |
@@ -168,3 +172,5 @@ Gliederung:
   Die Vormessungen sind Teil der Studie und werden nicht getrennt behandelt. Fokus auf
   die fünf wichtigsten Messungen, die kommen ausführlich; die übrigen elf nur kurz
   (warum, wie, Ergebnis) in einem gemeinsamen Abschnitt.
+  Geändert 17.11.: Ergebnisse je Messung in Kap. 5, 7.1 nur Übersicht (siehe Tabelle oben),
+  dem Betreuer mitteilen (TODO.md).
