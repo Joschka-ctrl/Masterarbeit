@@ -10,16 +10,28 @@ Nachtrag 17.11.2026: Die Ergebnisse der Benchmark-Messungen stehen je Messung in
 7.1 ist nur noch die Übersicht (Zeilen zu Kap. 5, Kap. 7 und 7.1 in der Tabelle, Nachtrag
 unter den Notizen vom 26.10.).
 
-## Heute, 16.11.
+## Heute, 22.11.
 
 Block 16.–27.11. laut Plan: Kap. 5 ganz, 5.1 bis 5.6 (16 S. in 10 Arbeitstagen). Stand:
 Kap. 4 geschrieben (19 Seiten im PDF, Kürzung offen), 6.1 bis 6.6 geschrieben (13 Seiten im
 PDF bei 10 Seiten Budget) und gegengelesen (Stand 16.11.), die offenen Punkte der Durchsicht
 vom 13.11. bleiben für 30.11.–11.12. (TODO.md). Von Kap. 5 stehen die Kapiteleinleitung und
 5.1 (geschrieben und gegengelesen am 16.11., 3,6 Seiten im PDF bei 3 Seiten Budget, Kürzung
-nach 5.3 und 5.4).
+nach 5.3 und 5.4) sowie 5.2 (geschrieben 20.11., am 22.11. im PDF gelesen und überarbeitet,
+rund 4,3 Seiten im PDF bei 3 Seiten Budget, davon gut eine halbe Seite Leerraum auf S. 31,
+kein ungelesen-Kasten mehr). 4.4 am 20.11. um den Dateinamen-Rückfall ergänzt (Satz und Zeile in
+tab:abrufparameter). Rückstand etwa 3 Arbeitstage: offen 5.3 bis 5.6 (10 S.) in den
+fünf Arbeitstagen 23.–27.11., also 2 S. je Tag statt 1,6.
 
 - [x] 5.1 Wie gemessen wird – beginnen (3 S.)
+- [x] 5.2 Entwicklung des Abrufs auf SWE-bench – schreiben (3 S.)
+- [x] 5.2 – im PDF lesen, Rückmeldung einarbeiten (Gutachter-Lesung vom 20.11. liegt vor)
+  - [x] im PDF gelesen, Gegenlesung eingearbeitet (22.11.)
+  - [x] Holdout-Regel als Tabelle tab:holdout-regel, Begründung der Modellwahl ergänzt (22.11.)
+  - [x] Tabelle tab:kurzmessungen neu in Zahlenform mit drei Gruppen, Umbruch und leere Seite behoben (22.11.)
+  - [x] restliche ungelesen-Kästen aufgelöst (Überleitung zur Tabelle neu, Marker vor tab:kurzmessungen entfernt, 22.11.)
+- [ ] 5.2 – Leerraum auf S. 31 (Tabelle tab:kurzmessungen mit [H]), ggf. [tbp]
+- [ ] 5.3 Agentenverhalten (AP8) – schreiben (3 S.)
 - [ ] 4.5 – Bildschirmfoto der Oberfläche im stufenweisen Modus aufnehmen (Stufe 2 oder 3, ein Knoten angeklickt, Detailansicht mit Begründungsblock sichtbar), beschriften, einbinden (KLÄREN-Marker im Text) (vom 13.11. mitgenommen)
 - [ ] 4.5 – JSON-Auszug des Kontextblocks als Abbildung: Lauf auswählen, auf einen Seed, einen Nachbarn mit via und eine Kante kürzen (KLÄREN-Marker im Text) (vom 13.11. mitgenommen)
 
@@ -30,7 +42,7 @@ Graphschema (fig:graphschema).
 
 Umfang: 90 Seiten Haupttext ohne Verzeichnisse und Anhang. Kapitelzeilen tragen die Summe,
 9 Seiten bleiben als Reserve und gehen am Ende dahin, wo die Studie sie braucht. „Text“:
-x = liegt vor (aus dem Exposé vom 21.08.2026), g = geschrieben (Stand 16.11.).
+x = liegt vor (aus dem Exposé vom 21.08.2026), g = geschrieben (Stand 22.11.).
 
 Zeilenabstand: Die Budgets wurden für 1,5-zeiligen Satz aufgestellt. Seit der Umstellung
 auf einfachen Zeilenabstand (12 pt, Vorgabe Betreuer) passt auf eine Seite etwa 13 Prozent
@@ -63,9 +75,9 @@ damit etwas mehr Platz.
 | 4.4 Umsetzung: Abrufpipeline in vier Stufen<br>*Inhalt:* bisher 4.3 | g | 2,5 | geschrieben |
 | 4.5 Umsetzung: Betriebsmodi, Oberfläche und Rückgabeform<br>*Inhalt:* bisher 4.4 und 4.5 zusammengelegt; mit Studienseite; JSON, Entscheidung 24.09. | g | 2,5 | geschrieben; Abbildungen 13.11. |
 | 4.6 Grenzen<br>*Inhalt:* dazu Agentenanfrage 08.10. (Trainingswissen) | g | 1 | geschrieben |
-| **5 Evaluation ohne Nutzer: Messungen auf SWE-bench** (im Plan bisher „Vormessungen“, im Text „Benchmark-Messungen“)<br>*Inhalt:* Vorgehen, Entwicklung und Ergebnis je Messung (Entscheidung 17.11., ersetzt in diesem Punkt den Beschluss vom 26.10.); Übersicht in 7.1, volle Tabellen in den Anhang. Stand 16.11.: Kapiteleinleitung und 5.1 geschrieben | | **16** | 16.–27.11. |
+| **5 Evaluation ohne Nutzer: Messungen auf SWE-bench** (im Plan bisher „Vormessungen“, im Text „Benchmark-Messungen“)<br>*Inhalt:* Vorgehen, Entwicklung und Ergebnis je Messung (Entscheidung 17.11., ersetzt in diesem Punkt den Beschluss vom 26.10.); Übersicht in 7.1, volle Tabellen in den Anhang. Stand 22.11.: Kapiteleinleitung, 5.1 und 5.2 geschrieben, 5.2 im PDF gelesen | | **16** | 16.–27.11. |
 | 5.1 Wie gemessen wird<br>*Inhalt:* Aufgaben (SWE-bench, Gold gleich Patch), Bedingungen, Messgrößen, Statistik (Vorzeichentest, Bootstrap), Vorregistrierung und Holdout, Nachweis (Messbäume, Pfad-Audit, eingefrorenes Binary, Provenance) | g | 3 | geschrieben 16.11. (3,6 S. im PDF), Kürzung 30.11.–11.12. |
-| 5.2 Entwicklung des Abrufs auf SWE-bench<br>*Inhalt:* Seed-Fix ausführlich, die übrigen Messungen je ein bis drei Sätze (Frage, Antwort, Änderung am Werkzeug) | | 3 | 16.–27.11. (verschoben 13.11., war 26.10.–13.11.) |
+| 5.2 Entwicklung des Abrufs auf SWE-bench<br>*Inhalt:* Seed-Fix ausführlich, die übrigen Messungen je ein bis drei Sätze (Frage, Antwort, Änderung am Werkzeug); weitere Versuche als Tabelle tab:kurzmessungen (Entscheidung 20.11.), Holdout-Regel als Tabelle tab:holdout-regel (22.11.) | g | 3 | geschrieben 20.11., im PDF gelesen und überarbeitet 22.11. |
 | 5.3 Agentenverhalten (AP8)<br>*Inhalt:* dazu Agentenläufe auf teamable 05.10. und 09.10. als Entwicklungsmessung | | 3 | 16.–27.11. |
 | 5.4 Ferne Aufgaben: Hard-Slice<br>*Inhalt:* Bestätigungsmessung, alter Default | | 3 | 16.–27.11. |
 | 5.5 Seed-Änderung und Tests als Gold<br>*Inhalt:* Entwicklungswert, neuer Default, Stand der Studie | | 2 | 16.–27.11. |
