@@ -160,7 +160,7 @@ Aus der Durchsicht von Kapitel 6 am 13.11. (zwei Befundberichte, Gegenprüfung d
   - [x] 6.6: Satz mit Datum und Planabweichung der Hauptkennzahl gestrichen
   - [x] tab:studienfragen im PDF geprüft (16.11.): passt in der Breite. Stand direkt nach dem Verweis mit einer halben leeren Seite, steht deshalb zwei Absätze später auf S. 27 zwischen zwei Absätzen
   - [ ] tab:ablauf (6.5) im PDF ansehen, ob [H] dort eine Lücke am Seitenende lässt
-  - [ ] Satz "Den Vergleich von strukturiertem und flachem Kontext (FF5) behandelt Abschnitt 5.3" gegen 5.3 prüfen, sobald es geschrieben ist (TODO-Zeile dazu in den Notizen von 5.3, 05_benchmark.tex)
+  - [x] Satz "Den Vergleich von strukturiertem und flachem Kontext (FF5) behandelt Abschnitt 5.3" gegen 5.3 prüfen, sobald es geschrieben ist (TODO-Zeile dazu in den Notizen von 5.3, 05_benchmark.tex) (23.11.: 6.1, 5.3 und 4.5 sagen jetzt gleich, B gegen C beantwortet FF5 nicht)
   - [x] Nennungen des Exposés aus dem Fließtext genommen: Vertrauensskala in 6.4, 60 Minuten in 6.5 (alter Wortlaut als Kommentar in 6.4 und in den Notizen von 8.1)
   - [ ] entscheiden, ob auch "wie es bei der Planung für eine kleine Codebasis bereits erwartet war" in 6.1 entfällt. Dann entfällt auch Punkt 1 im PFLICHT-Block von 5.6
 - [ ] 7.3 – Übergangstafel: die 36 Antworten je Bedingung sind 20 aus #74 und 16 aus E, Aufgaben getrennt ausweisen (Codex 13.11.)
@@ -205,6 +205,17 @@ Aus der Durchsicht von Kapitel 6 am 13.11. (zwei Befundberichte, Gegenprüfung d
 - [ ] Anhang Messprotokolle – nach dem Kompilieren im PDF ansehen: neue Zeile Vektorindex in D.1, längere Bildunterschrift von D.3, Spaltenbreiten Datum und Aufgaben
 
 - [ ] 5.6 – schreiben. Trägt seit der Neufassung von 6.1 (06.11.) die Begründung des Wechsels der Hauptfrage: Bilanz der Messungen, AP8 (mit Kontextblock weniger Suchen, gleiche Treffer), Rechnung 13.10. mit Zahlen (Deckung #74 dreimal 7 von 7, E 9, 8, 8 von 9), Folgerung: der Mensch ist der Unterschied, nicht der Kontext. 6.1 verweist nur hierher und nennt die Deckung in einem Satz. Material: Notizen HERKUNFT 1 bis 6 im Kopf von 6.1 (06_nutzerstudie.tex). Keine Chronik im Fließtext, Daten nur als Beleg in Fußnoten
+- [ ] 5.3/6.1 – FF5-Messung richtig nachholen, NACH der Studiensitzung (Plan 23.11.). Anlass: in AP8 fehlte B und C der Weg je Knoten, weil eval/render-probe.js die Nachbarn aus eingefrorenen Knotensätzen ohne `nodeIdChain` baute (Z. 176–186). Der Baum-Renderer fand keine Eltern, "Included via:" nannte nur den Knoten selbst. Vor den 891 Läufen hat niemand einen Block angesehen. Kern von AP8 (A gegen B/C) ist nicht betroffen
+  - Stand 23.11. abends: Code gebaut, geprüft und wieder verworfen (Studienwerkzeug war geändert worden). Neuer Anlauf nur mit Kopien, Einzelheiten in Thesis/Plan FF5-Messung.md
+  - Eigene Messung, keine Korrektur von AP8: heutiger Abruf (Seeds seit 13.09. anders), andere Knoten, ohne A. In 5.3 mit eigenem Datum und Werkzeugstand berichten, Zahlen nicht mit AP8-B/C zusammenlegen. Entwicklungsmessung nach docs/arbeitsweise-messungen.md (alle Läufe berichten, Reihenfolge sagen)
+  - Bedingungen (entschieden 23.11.): F = flach (renderFlatContext, Weg je Knoten ausgeschrieben), T = Baum (renderTreeContext, eingerückt), J = JSON mit JSON_CONTEXT_LEGEND davor. Alle aus demselben echten Abruf je Aufgabe
+  - [ ] eval/freeze-handover.js neu: runRetrieval je Aufgabe (Hilfsfunktionen aus format-probe-live.js, dort nur module.exports und require.main-Schutz), F/T/J nach handover/<aufgabe>.json einfrieren, Prüfung mit Abbruch: T hat eingerückte Knotenzeilen, jede "Included via:" in F nennt mehr als den Knoten selbst, jeder Nachbar in J hat via oder inFile, gleiche Knoten- und Kantenzahl. Ergebnis in CHECK.md
+  - [ ] eval/agent-trace.js: Option --handover <serie>, dann Bedingungen F/T/J aus den eingefrorenen Blöcken statt render-probe.js, Paare F-T, F-J, T-J im Bericht. Ohne --handover Verhalten wie bisher
+  - [ ] Unit-Suite test-agent-trace.js grün, kleiner Test: AP8-artiger Block fällt durch, echter Block besteht
+  - [ ] zwei bis drei Blöcke selbst ansehen, dann erst laufen lassen
+  - [ ] Vorlauf: Sonnet, 33 Aufgaben (slice-small 21, slice-holdout 12), 1 Wiederholung, 99 Läufe, etwa 17 USD und 2 Stunden. Bei Bedarf mit --reps 3 in dieselbe Serie nachziehen, im Befund sagen, wann welche Wiederholung lief
+  - [ ] prüfen, ob die Agentenläufe über das eigene Abo-Kontingent laufen oder über einen API-Schlüssel (dann nicht vor einer Studiensitzung starten)
+  - [ ] Ergebnis in 5.3 als eigene Messung, danach 6.1 und 4.5 anpassen (siehe VOR DER ABGABE PRÜFEN unter "Später / sonstiges"), Zeile in Anhang D.3
 - [ ] 5/8 (Validität) – Grenzen aus der Parameterherkunft aufnehmen, nicht in 4.6 (Beschluss 02.11.) (Quelle codebase-graph/docs/defaults-gate2-2026-08-26.md): Klasse-M-Werte ohne Holdout (SEED_DF_MAX, Normierungsband), Normierungsband auf nomic-Vektoren erhoben und für qwen3 nicht neu bestimmt, β < 0,6 nicht gemessen, Klasse-E-Werte nie variiert
 - [ ] 5 – Befund Agentenanfrage 08.10. gegenlesen (codebase-graph/docs/vorlaeufiger-befund-agentenanfrage.md, als vorläufig markiert). In 4.6 steht dazu ein KLÄREN-Marker in der Fußnote
 - [ ] 5 – Vor dem Nennen der Seed-Zahlen prüfen, ob der Holdout vom 26.08. (codebase-graph/docs/eval-2026-08-26-holdout-durchfuehrung.md) die PascalCase-Regel (SEED_PASCAL_TIER) und den Häufigkeitsfilter SEED_DF_MAX abdeckt. Laut Kommentar in retrieval.js (Zeilen 217–222) wurden beide auf denselben 21 SWE-bench-Fällen entworfen und geprüft.
@@ -221,6 +232,8 @@ Aus der Durchsicht von Kapitel 6 am 13.11. (zwei Befundberichte, Gegenprüfung d
 - [ ] 9 – Ausblick: Graph über Projektgrenzen hinweg (projektübergreifendes Wissen). Setzt Filterung im Vektorindex voraus, z. B. SEARCH ... WHERE ab Neo4j 2026.02 (Quelle schon in der Bib: neo4jvector), statt eigener Datenbank je Projekt
 
 ## Später / sonstiges
+
+- [ ] **VOR DER ABGABE PRÜFEN – FF5 in 6.1:** Der Absatz zu FF5 in 6.1 (06_nutzerstudie.tex, Absatz "Die Studienfragen knüpfen an", eingesetzt 23.11.) endet mit "Mit einer flachen Fassung verglichen wurde es nicht. FF5 bleibt damit unbeantwortet." Falls die optionale JSON-Messung (Kapitel 5, "Agentenmessung mit JSON") doch gelaufen ist, diese beiden Sätze durch das Ergebnis ersetzen und nachziehen: 5.3 (FF5-Absatz, "Der Vergleich von B und C beantwortet FF5 deshalb nicht"), 4.5 ("Ob dieser Verweis, den das JSON trägt, dem Agenten nützt, zeigt der Vergleich deshalb nicht. Für JSON ist bisher nur die Größe gemessen.") und 7.1. An allen drei Stellen steht ein Kommentar mit ACHTUNG oder Datum 23.11.
 
 - [ ] Budget – Überschreitungen vor Kürzung, zusammen 10,6 Seiten bei 9 Seiten Reserve (Stand 17.11.):
   - [ ] Kap. 4: 19 statt 12 Seiten, Ziel 14
