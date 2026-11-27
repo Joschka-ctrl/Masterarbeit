@@ -62,6 +62,14 @@
 }
 
 \addbibresource{bibliography.bib}
+
+% Gleitobjekte: eigene Tabellen-/Abbildungsseite erst ab 70 % Fuellung (Standard 50 %),
+% damit mittelgrosse Tabellen oben auf eine Textseite kommen; reine Gleitobjektseiten
+% oben ausrichten statt senkrecht zentrieren.
+\renewcommand{\floatpagefraction}{0.7}
+\makeatletter
+\setlength{\@fptop}{0pt}
+\makeatother
 \singlespacing % Vorgabe Prof. Mueller: 12 pt, einfacher Zeilenabstand
 
 \begin{document}
